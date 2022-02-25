@@ -466,7 +466,7 @@ show_behind_parent = true
 position = Vector2( 165.195, 235.455 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 959.493, -1115 )
+position = Vector2( 1029.18, -433.419 )
 texture = ExtResource( 3 )
 color = Color( 0.878431, 0.0745098, 0.0745098, 1 )
 shadow_enabled = true
