@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/UI/Fonts/LargeFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/UI Script/SoundOptions.gd" type="Script" id=2]
+
+[node name="SoundOptions" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -300.0
+margin_right = 200.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 400, 600 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Gamevolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_top = 24.0
+margin_right = 400.0
+margin_bottom = 64.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Game-volume[/center]"
+text = "Game-volume"
+fit_content_height = true
+
+[node name="GameVolumeSlider" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+margin_top = 68.0
+margin_right = 400.0
+margin_bottom = 84.0
+max_value = 1.0
+step = 0.05
+
+[node name="MarginContainer2" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+margin_top = 88.0
+margin_right = 400.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Musicvolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_top = 112.0
+margin_right = 400.0
+margin_bottom = 152.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Music-volume[/center]"
+text = "Music-volume"
+fit_content_height = true
+
+[node name="MusicVolumeSlider" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+margin_top = 156.0
+margin_right = 400.0
+margin_bottom = 172.0
+max_value = 1.0
+step = 0.05
+
+[node name="MarginContainer3" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+margin_top = 176.0
+margin_right = 400.0
+margin_bottom = 196.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="SFXvolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_top = 200.0
+margin_right = 400.0
+margin_bottom = 240.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]SFX-volume[/center]"
+text = "SFX-volume"
+fit_content_height = true
+
+[node name="SFXVolumeSlider" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+margin_top = 244.0
+margin_right = 400.0
+margin_bottom = 260.0
+max_value = 1.0
+step = 0.05
+
+[node name="MarginContainer4" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+margin_top = 264.0
+margin_right = 400.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Othervolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_top = 288.0
+margin_right = 400.0
+margin_bottom = 328.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Other(?)[/center]"
+text = "Other(?)"
+fit_content_height = true
+
+[node name="Othervolumeslider4" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+margin_top = 332.0
+margin_right = 400.0
+margin_bottom = 348.0
+max_value = 1.0
+step = 0.05
+
+[node name="MarginContainer5" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+margin_top = 352.0
+margin_right = 400.0
+margin_bottom = 372.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Other2volume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+margin_top = 376.0
+margin_right = 400.0
+margin_bottom = 416.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Other(?)[/center]"
+text = "Other(?)"
+fit_content_height = true
+
+[node name="Other2volumeslider5" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+margin_top = 420.0
+margin_right = 400.0
+margin_bottom = 436.0
+max_value = 1.0
+step = 0.05
+
+[node name="BackButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -40.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="NinePatchRect/VBoxContainer/GameVolumeSlider" to="." method="_on_GameVolumeSlider_value_changed"]
+[connection signal="value_changed" from="NinePatchRect/VBoxContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="value_changed" from="NinePatchRect/VBoxContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

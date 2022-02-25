@@ -1,0 +1,152 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Characters/OTTO.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.47896, 15.3791 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle_E"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 7 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle_W"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk_E"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Walk_W"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "Idle_E"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Walk_E"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Walk_W"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/Idle_E/node = SubResource( 6 )
+states/Idle_E/position = Vector2( 175, 109 )
+states/Walk_E/node = SubResource( 7 )
+states/Walk_E/position = Vector2( 540, 85 )
+states/Walk_W/node = SubResource( 8 )
+states/Walk_W/position = Vector2( 540, 133 )
+transitions = [ "Idle_E", "Walk_E", SubResource( 9 ), "Walk_E", "Idle_E", SubResource( 10 ), "Walk_E", "Walk_W", SubResource( 11 ), "Walk_W", "Walk_E", SubResource( 12 ), "Walk_W", "Idle_E", SubResource( 13 ), "Idle_E", "Walk_W", SubResource( 14 ) ]
+start_node = "Idle_E"
+graph_offset = Vector2( -505, -7 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+speed = 150
+jump_speed = -950
+gravity = 3800
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 8
+frame = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 16.282 )
+shape = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 21.1037
+margin_top = -17.3239
+margin_right = 61.1037
+margin_bottom = -3.32392
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 41.9196, 67.4875 )
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle_E = SubResource( 2 )
+anims/Idle_W = SubResource( 3 )
+anims/Walk_E = SubResource( 4 )
+anims/Walk_W = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 15 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 16 )
