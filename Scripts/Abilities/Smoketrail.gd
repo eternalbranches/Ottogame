@@ -44,7 +44,7 @@ func _process(delta):
 			# Performance wise it's slower than the variant without this part, but it looks much better for glowing
 			# trails like rockets with a longer life time
 			#gradient.offsets[2] = clamp(gradient.offsets[2]+0.04, 0.0, 0.99)
-			#gradient.offsets[1] = clamp(gradient.offsets[1]+0.04, 0.0, 0.98)
+			gradient.offsets[1] = clamp(gradient.offsets[1]+0.04, 0.0, 0.98)
 			#gradient.colors[2] = lerp(gradient.colors[2], gradient.colors[1], 0.1 )
 			#gradient.colors[3] = lerp(gradient.colors[3], gradient.colors[0], 0.2 )
 			#width += 3

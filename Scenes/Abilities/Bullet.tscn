@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Abilities/Bullet.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Abilities/Smoketrail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Effects/light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.2986
@@ -37,8 +38,15 @@ shape = SubResource( 2 )
 width = 5.0
 default_color = Color( 0, 0, 0, 1 )
 limited_lifetime = true
+gravity = Vector2( 0, 0 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.5
+shadow_enabled = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="dead" from="Smoketrail" to="." method="_on_Smoketrail_dead"]

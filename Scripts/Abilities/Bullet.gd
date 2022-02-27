@@ -41,6 +41,7 @@ func _on_Area2D_body_entered(body):
 	$AudioStreamPlayer2D.play()
 	get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
 	self.hide()
+	$Light2D.enabled = false
 	dead = true
 	print(body)
 	#body.OnHit(damage, origin)
