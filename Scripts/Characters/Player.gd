@@ -39,6 +39,7 @@ func _physics_process(delta):
 		"idle":
 			animation_mode.travel("Idle_E")
 			get_input()
+			shooting()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if Input.is_action_just_pressed("Up"):
@@ -56,6 +57,7 @@ func _physics_process(delta):
 				
 		"moving":
 			get_input()
+			shooting()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if Input.is_action_just_pressed("Up"):
@@ -77,6 +79,7 @@ func _physics_process(delta):
 				state = "moving"
 		"crawling":
 			get_input_crawl()
+			shooting()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity/2, Vector2.UP)
 			if velocity == Vector2.ZERO:
@@ -107,3 +110,12 @@ func change_standing():
 	$CollisionCrawling.disabled = true
 
 
+func shooting():
+	if Input.is_action_just_pressed("Shoot"):
+		var skill = load("res://Scenes/Abilities/Bullet.tscn")
+		var skill_instance = skill.instance()
+		skill_instance.rotation = get_angle_to(get_global_mouse_position())
+		skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
+		skill_instance.origin = "Player"
+		#skill_instance.node_reference = get_path()
+		get_parent().add_child(skill_instance)

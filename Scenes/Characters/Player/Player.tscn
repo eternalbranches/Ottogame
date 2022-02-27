@@ -8,7 +8,7 @@ extents = Vector2( 10, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=3]
 resource_name = "Crawl_E"
 length = 2.0
 loop = true
@@ -49,46 +49,6 @@ tracks/2/keys = {
 "values": [ 3, 7 ]
 }
 
-[sub_resource type="Animation" id=3]
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 3, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.0851225 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.0851225 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-
 [sub_resource type="Animation" id=4]
 length = 0.4
 loop = true
@@ -104,22 +64,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 3, 7 ]
 }
-
-[sub_resource type="Animation" id=5]
-length = 1.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:scale")
 tracks/1/interp = 1
@@ -127,7 +71,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.0851225 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
@@ -139,10 +83,26 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.0851225 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 7 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -160,22 +120,58 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
-[sub_resource type="AnimationNodeAnimation" id=20]
-animation = "Crawl_E"
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "Idle_E"
+[sub_resource type="Animation" id=7]
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=8]
-animation = "Walk_E"
+animation = "Crawl_E"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Idle_E"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Walk_E"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Walk_W"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=10]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=11]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
@@ -185,28 +181,32 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
-[sub_resource type="AnimationNodeStateMachine" id=16]
-states/Crawl_E/node = SubResource( 20 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachine" id=21]
+states/Crawl_E/node = SubResource( 8 )
 states/Crawl_E/position = Vector2( 300, 203 )
-states/Idle_E/node = SubResource( 7 )
+states/Idle_E/node = SubResource( 9 )
 states/Idle_E/position = Vector2( 175, 109 )
-states/Walk_E/node = SubResource( 8 )
+states/Walk_E/node = SubResource( 10 )
 states/Walk_E/position = Vector2( 540, 85 )
-states/Walk_W/node = SubResource( 9 )
+states/Walk_W/node = SubResource( 11 )
 states/Walk_W/position = Vector2( 540, 133 )
-transitions = [ "Idle_E", "Walk_E", SubResource( 10 ), "Walk_E", "Idle_E", SubResource( 11 ), "Walk_E", "Walk_W", SubResource( 12 ), "Walk_W", "Walk_E", SubResource( 13 ), "Walk_W", "Idle_E", SubResource( 14 ), "Idle_E", "Walk_W", SubResource( 15 ), "Walk_W", "Crawl_E", SubResource( 21 ), "Walk_E", "Crawl_E", SubResource( 22 ), "Crawl_E", "Idle_E", SubResource( 23 ) ]
+transitions = [ "Idle_E", "Walk_E", SubResource( 12 ), "Walk_E", "Idle_E", SubResource( 13 ), "Walk_E", "Walk_W", SubResource( 14 ), "Walk_W", "Walk_E", SubResource( 15 ), "Walk_W", "Idle_E", SubResource( 16 ), "Idle_E", "Walk_W", SubResource( 17 ), "Walk_W", "Crawl_E", SubResource( 18 ), "Walk_E", "Crawl_E", SubResource( 19 ), "Crawl_E", "Idle_E", SubResource( 20 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -514, 35 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 12.2145, 10 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -219,7 +219,7 @@ gravity = 3800
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 8
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 16 )
@@ -245,22 +245,26 @@ position = Vector2( -0.0329895, -0.685471 )
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Crawl_E = SubResource( 19 )
-anims/Idle_E = SubResource( 3 )
-anims/Idle_W = SubResource( 4 )
-anims/Walk_E = SubResource( 5 )
-anims/Walk_W = SubResource( 6 )
+anims/Crawl_E = SubResource( 3 )
+anims/Idle_E = SubResource( 4 )
+anims/Idle_W = SubResource( 5 )
+anims/Walk_E = SubResource( 6 )
+anims/Walk_W = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 16 )
+tree_root = SubResource( 21 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 17 )
+parameters/playback = SubResource( 22 )
 
 [node name="Ceilingcheck" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceilingcheck"]
 position = Vector2( 0, 2 )
-shape = SubResource( 18 )
+shape = SubResource( 23 )
+
+[node name="Position2D" type="Position2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="Position2D"]
