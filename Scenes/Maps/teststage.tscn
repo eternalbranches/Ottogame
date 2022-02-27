@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://teststage.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Abilities/Smoketrail.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Effects/trail.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.00555556, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 0.994444, 0.136364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.0536913, 0.516779, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1 )
+
+[node name="teststage" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Smoketrail" parent="." instance=ExtResource( 2 )]
+points = PoolVector2Array( 6.26384, -0.849028 )
+width = 20.0
+width_curve = SubResource( 1 )
+gradient = SubResource( 2 )
+texture = ExtResource( 3 )
+texture_mode = 2
+wildness = 5.0
+min_spawn_distance = 10.0
