@@ -14,6 +14,7 @@ var previous_state = "idle"
 var velocity = Vector2.ZERO
 
 var ceiling = false
+var climbable = false
 
 func get_input():
 	velocity.x = 0
@@ -40,6 +41,7 @@ func _physics_process(delta):
 			animation_mode.travel("Idle_E")
 			get_input()
 			shooting()
+			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if Input.is_action_just_pressed("Up"):
@@ -58,6 +60,7 @@ func _physics_process(delta):
 		"moving":
 			get_input()
 			shooting()
+			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if Input.is_action_just_pressed("Up"):
@@ -71,8 +74,10 @@ func _physics_process(delta):
 			elif Input.is_action_just_pressed("Crawl"):
 				change_crawling()
 				state = "crawling"
+			
 		"midair":
 			get_input()
+			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if is_on_floor():
@@ -80,6 +85,7 @@ func _physics_process(delta):
 		"crawling":
 			get_input_crawl()
 			shooting()
+			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity/2, Vector2.UP)
 			if velocity == Vector2.ZERO:
@@ -99,6 +105,23 @@ func _physics_process(delta):
 			else:
 				ceiling = true
 				
+		"climbing":
+			shooting()
+			if Input.is_action_pressed("Up"):
+				if velocity.y > -100:
+				 velocity.y -= 5
+			if Input.is_action_pressed("Down"):
+				if velocity.y < 100:
+				 velocity.y += 5
+			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
+			if Input.is_action_just_pressed("ActionButton"):
+					velocity.y = jump_speed
+					state = "midair"
+			if climbable == false:
+				velocity.y = jump_speed
+				state = "midair"
+			
+			
 			
 			
 func change_crawling():
@@ -109,7 +132,12 @@ func change_standing():
 	$CollisionStanding.disabled = false
 	$CollisionCrawling.disabled = true
 
-
+func action():
+	if Input.is_action_just_pressed("ActionButton"):
+		if climbable == true:
+			velocity = Vector2.ZERO
+			#global_position.y -= 8
+			state = "climbing"
 func shooting():
 	if Input.is_action_just_pressed("Shoot"):
 		var skill = load("res://Scenes/Abilities/Bullet.tscn")
@@ -119,3 +147,4 @@ func shooting():
 		skill_instance.origin = "Player"
 		#skill_instance.node_reference = get_path()
 		get_parent().add_child(skill_instance)
+		

@@ -43,8 +43,8 @@ func _on_Area2D_body_entered(body):
 	self.hide()
 	$Light2D.enabled = false
 	dead = true
-	print(body)
-	#body.OnHit(damage, origin)
+	if body.is_in_group("Enemies"):
+		body.OnHit(damage, origin)
 
 
 func _on_Smoketrail_dead():
