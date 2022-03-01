@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://Assets/Tiles/wall tile 3 (64x64).png" type="Texture" id=15]
 [ext_resource path="res://Assets/Tiles/wall tile 4 (64x64).png" type="Texture" id=16]
 [ext_resource path="res://Scenes/Objects/Ladder.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Soundtrack/Music/The Escape Room Full Version.wav" type="AudioStream" id=18]
+[ext_resource path="res://Assets/Soundtrack/Ambience/Atmosphere Loop 10.wav" type="AudioStream" id=19]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -536,7 +538,7 @@ tile_data = PoolIntArray( 131070, 1, 0, 131071, 1, 0, 65536, 1, 0, 65537, 1, 0, 
 tile_set = SubResource( 27 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -786411, 1, 0, -786410, 1, 0, -786409, 1, 0, -786408, 1, 0, -786407, 1, 0, -720875, 1, 0, -720871, 1, 0, -655339, 1, 0, -655335, 1, 0, -589803, 1, 0, -589799, 1, 0, -524267, 1, 0, -524263, 1, 0, -458731, 2, 0, -458730, 1, 0, -458728, 1, 0, -458727, 2, 0, -393195, 2, 0, -393191, 2, 0, -327659, 2, 0, -327655, 2, 0, -262123, 2, 0, -262119, 2, 0, -196587, 2, 0, -196583, 2, 0, -131071, 3, 0, -131070, 3, 0, -131069, 3, 0, -131068, 3, 0, -131067, 3, 0, -131066, 3, 0, -131065, 3, 0, -131051, 2, 0, -131047, 2, 0, -65535, 3, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 3, 0, -65515, 2, 0, -65511, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 3, 0, 7, 3, 0, 21, 2, 0, 25, 2, 0, 65561, 2, 0, 131097, 2, 0, 196633, 2, 0, 262166, 3, 0, 262167, 1, 0, 262168, 1, 0, 262169, 3, 0 )
+tile_data = PoolIntArray( -2490332, 5, 0, -786411, 1, 0, -786410, 1, 0, -786409, 1, 0, -786408, 1, 0, -786407, 1, 0, -720875, 1, 0, -720871, 1, 0, -655339, 1, 0, -655335, 1, 0, -589803, 1, 0, -589799, 1, 0, -524267, 1, 0, -524263, 1, 0, -458731, 2, 0, -458730, 1, 0, -458728, 1, 0, -458727, 2, 0, -393195, 2, 0, -393191, 2, 0, -327659, 2, 0, -327655, 2, 0, -262123, 2, 0, -262119, 2, 0, -196587, 2, 0, -196583, 2, 0, -131071, 3, 0, -131070, 3, 0, -131069, 3, 0, -131068, 3, 0, -131067, 3, 0, -131066, 3, 0, -131065, 3, 0, -131051, 2, 0, -131047, 2, 0, -65535, 3, 0, -65534, 1, 0, -65533, 1, 0, -65532, 1, 0, -65531, 1, 0, -65530, 1, 0, -65529, 3, 0, -65515, 2, 0, -65511, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 3, 0, 7, 3, 0, 21, 2, 0, 25, 2, 0, 65561, 2, 0, 131097, 2, 0, 196633, 2, 0, 262166, 3, 0, 262167, 1, 0, 262168, 1, 0, 262169, 3, 0 )
 
 [node name="Light2D2" type="Light2D" parent="."]
 position = Vector2( 309.725, -1784.91 )
@@ -619,3 +621,14 @@ scale = Vector2( 0.6, 0.9 )
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1434.1, 201.973 )
 speed = 125
+jump_speed = -900
+gravity = 3000
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+bus = "Music"
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+autoplay = true
+bus = "Ambience"

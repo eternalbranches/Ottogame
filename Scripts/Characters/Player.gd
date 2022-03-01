@@ -1,23 +1,30 @@
 extends KinematicBody2D
 
-export (int) var speed = 300
-export (int) var crawl_speed = 150
-export (int) var jump_speed = -1000
-export (int) var gravity = 3000
+export (int) var speed := 300
+export (int) var crawl_speed := 150
+export (int) var jump_speed := -1000
+export (int) var gravity := 3000
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
-var state = "idle"
-var previous_state = "idle"
+var state := "idle"
+var previous_state := "idle"
 
-var velocity = Vector2.ZERO
+var velocity := Vector2.ZERO
 
-var ceiling = false
-var climbable = false
+var ceiling := false
+var climbable := false
+
+var dash := 0
 
 func get_input():
 	velocity.x = 0
+	if Input.is_action_just_pressed("Right"):
+		$"Dash-timer".start()
+		if dash == 1:
+			velocity.x += speed*10
+		dash += 1
 	if Input.is_action_pressed("Right"):
 		animation_mode.travel("Walk_E")
 		velocity.x += speed
@@ -108,11 +115,9 @@ func _physics_process(delta):
 		"climbing":
 			shooting()
 			if Input.is_action_pressed("Up"):
-				if velocity.y > -100:
-				 velocity.y -= 5
+				velocity.y = -100
 			if Input.is_action_pressed("Down"):
-				if velocity.y < 100:
-				 velocity.y += 5
+				velocity.y = 100
 			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
 			if Input.is_action_just_pressed("ActionButton"):
 					velocity.y = jump_speed
@@ -148,3 +153,7 @@ func shooting():
 		#skill_instance.node_reference = get_path()
 		get_parent().add_child(skill_instance)
 		
+
+
+func _on_Dashtimer_timeout():
+	dash = 0

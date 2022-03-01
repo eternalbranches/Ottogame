@@ -106,17 +106,17 @@ margin_right = 400.0
 margin_bottom = 284.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="Othervolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
+[node name="Ambiencevolume" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
 margin_top = 288.0
 margin_right = 400.0
 margin_bottom = 328.0
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Other(?)[/center]"
-text = "Other(?)"
+bbcode_text = "[center]Ambience-Volume[/center]"
+text = "Ambience-Volume"
 fit_content_height = true
 
-[node name="Othervolumeslider4" type="HSlider" parent="NinePatchRect/VBoxContainer"]
+[node name="Ambiencevolumeslider" type="HSlider" parent="NinePatchRect/VBoxContainer"]
 margin_top = 332.0
 margin_right = 400.0
 margin_bottom = 348.0
@@ -161,4 +161,5 @@ __meta__ = {
 [connection signal="value_changed" from="NinePatchRect/VBoxContainer/GameVolumeSlider" to="." method="_on_GameVolumeSlider_value_changed"]
 [connection signal="value_changed" from="NinePatchRect/VBoxContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
 [connection signal="value_changed" from="NinePatchRect/VBoxContainer/SFXVolumeSlider" to="." method="_on_SFXVolumeSlider_value_changed"]
+[connection signal="changed" from="NinePatchRect/VBoxContainer/Ambiencevolumeslider" to="." method="_on_Ambiencevolumeslider_changed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]

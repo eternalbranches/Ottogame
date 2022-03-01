@@ -3,18 +3,13 @@ extends Control
 var volumebus := AudioServer.get_bus_index("Master")
 var musicbus := AudioServer.get_bus_index("Music")
 var sfxbus := AudioServer.get_bus_index("SFX")
+var ambiencebus := AudioServer.get_bus_index("Ambience")
 var weatherbus := AudioServer.get_bus_index("Weather")
 
-#var safedvolumevalue = 1
-#var safedmusicvalue = 1
-#var safedsoundvalue = 1
-#var weathervalue = 1
-var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxvalue" : 1, "safedweathervalue" : 1}
+var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxvalue" : 1,  "safedambiencevalue": 1, "safedweathervalue" : 1}
 
 
 func _ready():
-
-
 	#$VolumeSlider.value = db2linear(AudioServer.get_bus_volume_db(volumebus))
 	#$MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(musicbus))
 	#$SoundeffectSlider.value = db2linear(AudioServer.get_bus_volume_db(effectbus))
@@ -24,6 +19,7 @@ func _ready():
 	$NinePatchRect/VBoxContainer/GameVolumeSlider.value = soundvaluearray["safedvolumevalue"]
 	$NinePatchRect/VBoxContainer/MusicVolumeSlider.value = soundvaluearray["safedmusicvalue"]
 	$NinePatchRect/VBoxContainer/SFXVolumeSlider.value = soundvaluearray["safedsfxvalue"]
+	$NinePatchRect/VBoxContainer/Ambiencevolumeslider.value = soundvaluearray["safedambiencevalue"]
 	#$NinePatchRect/VBoxContainer/WeatherVolumeSlider.value = soundvaluearray["safedweathervalue"]
 	
 func _on_GameVolumeSlider_value_changed(value):
@@ -38,11 +34,14 @@ func _on_SFXVolumeSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(sfxbus, linear2db(value))
 	soundvaluearray["safedsfxvalue"] = value
 	SaveGameVolumen("safedsfxvalue", value)
+func _on_Ambiencevolumeslider_changed(value):
+	AudioServer.set_bus_volume_db(ambiencebus, linear2db(value))
+	soundvaluearray["safedambiencevalue"] = value
+	SaveGameVolumen("safedambiencevalue", value)
 func _on_WeatherVolumeSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(weatherbus, linear2db(value))
 	soundvaluearray["safedweathervalue"] = value
 	SaveGameVolumen("safedweathervalue", value)
-
 
 
 func SaveGameVolumen(volumentype, value):
@@ -63,3 +62,6 @@ func load_volume():
 
 func _on_BackButton_pressed():
 	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
+
+
+

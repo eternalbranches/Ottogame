@@ -3,8 +3,9 @@ extends Control
 var volumebus := AudioServer.get_bus_index("Master")
 var musicbus := AudioServer.get_bus_index("Music")
 var sfxbus := AudioServer.get_bus_index("SFX")
+var ambiencebus := AudioServer.get_bus_index("Ambience")
 #var weatherbus := AudioServer.get_bus_index("Weather")
-var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxvalue" : 1, "safedweathervalue" : 1}
+var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxvalue" : 1, "safedambiencevalue" : 1, "safedweathervalue" : 1}
 
 
 func _ready():
@@ -34,3 +35,4 @@ func load_volume():
 	AudioServer.set_bus_volume_db(volumebus, linear2db(soundvaluearray["safedvolumevalue"]))
 	AudioServer.set_bus_volume_db(musicbus, linear2db(soundvaluearray["safedmusicvalue"]))
 	AudioServer.set_bus_volume_db(sfxbus, linear2db(soundvaluearray["safedsfxvalue"]))
+	AudioServer.set_bus_volume_db(ambiencebus, linear2db(soundvaluearray["safedambiencevalue"]))
