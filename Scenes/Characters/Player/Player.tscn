@@ -1,8 +1,8 @@
 [gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Assets/Characters/otto arms.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Characters/OttoSpriteSheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Characters/Otto no arms.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Characters/Ottos arms.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 16 )
@@ -89,6 +89,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Spritemesh/Arms:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 7 ]
+}
 
 [sub_resource type="Animation" id=5]
 length = 0.4
@@ -104,6 +116,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 3, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Spritemesh/Body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -155,7 +191,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2, 3, 4, 5, 6, 7, 8 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -184,6 +220,30 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Spritemesh/Body:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Spritemesh/Body:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=8]
@@ -218,16 +278,16 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachine" id=21]
 states/Crawl_E/node = SubResource( 8 )
-states/Crawl_E/position = Vector2( 300, 203 )
+states/Crawl_E/position = Vector2( 295, 226 )
 states/Idle_E/node = SubResource( 9 )
 states/Idle_E/position = Vector2( 175, 109 )
 states/Walk_E/node = SubResource( 10 )
 states/Walk_E/position = Vector2( 540, 85 )
 states/Walk_W/node = SubResource( 11 )
-states/Walk_W/position = Vector2( 540, 133 )
+states/Walk_W/position = Vector2( 540, 175 )
 transitions = [ "Idle_E", "Walk_E", SubResource( 12 ), "Walk_E", "Idle_E", SubResource( 13 ), "Walk_E", "Walk_W", SubResource( 14 ), "Walk_W", "Walk_E", SubResource( 15 ), "Walk_W", "Idle_E", SubResource( 16 ), "Idle_E", "Walk_W", SubResource( 17 ), "Walk_W", "Crawl_E", SubResource( 18 ), "Walk_E", "Crawl_E", SubResource( 19 ), "Crawl_E", "Idle_E", SubResource( 20 ) ]
 start_node = "Idle_E"
-graph_offset = Vector2( -514, 35 )
+graph_offset = Vector2( -633, 77 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -244,17 +304,16 @@ gravity = 3800
 [node name="Spritemesh" type="Node2D" parent="."]
 
 [node name="Body" type="Sprite" parent="Spritemesh"]
-texture = ExtResource( 3 )
-hframes = 8
-vframes = 2
-frame = 3
-
-[node name="Arms" type="Sprite" parent="Spritemesh"]
-position = Vector2( -18.7288, -0.46822 )
 texture = ExtResource( 1 )
 hframes = 8
-vframes = 2
-frame = 13
+vframes = 3
+frame = 7
+
+[node name="Arms" type="Sprite" parent="Spritemesh"]
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 16 )
@@ -267,10 +326,10 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="Label" type="Label" parent="."]
-margin_left = -20.0061
-margin_top = -27.3438
-margin_right = 19.9939
-margin_bottom = -13.3438
+margin_left = -24.3197
+margin_top = -29.0985
+margin_right = 15.6803
+margin_bottom = -15.0985
 __meta__ = {
 "_edit_use_anchors_": false
 }

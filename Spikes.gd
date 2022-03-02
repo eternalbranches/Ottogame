@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 
 # Declare member variables here. Examples:
@@ -16,9 +16,5 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
-	body.climbable = true
-
-
-func _on_Area2D_body_exited(body):
-	body.climbable = false
+func _on_Spikes_body_entered(body):
+	body.on_hit(1, global_position.x)

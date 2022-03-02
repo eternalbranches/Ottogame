@@ -15,8 +15,13 @@ var velocity := Vector2.ZERO
 
 var ceiling := false
 var climbable := false
+var invulnerable := false
+
+var current_hp := 3
+var max_hp := 3
 
 var dash := 0
+var knockback := false
 
 func get_input():
 	velocity.x = 0
@@ -63,6 +68,9 @@ func _physics_process(delta):
 			elif Input.is_action_just_pressed("Crawl"):
 				change_crawling()
 				state = "crawling"
+			elif Input.is_action_just_pressed("ActionButton"):
+				Engine.time_scale = 0.5
+
 				
 		"moving":
 			get_input()
@@ -125,10 +133,19 @@ func _physics_process(delta):
 			if climbable == false:
 				velocity.y = jump_speed
 				state = "midair"
-			
-			
-			
-			
+				
+		"knockback":
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if knockback == false:
+				knockback = true
+				yield(get_tree().create_timer(1), "timeout")
+				knockback = false
+				invulnerable = false
+				state = "midair"
+		"death":
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
 func change_crawling():
 	$CollisionStanding.disabled = true
 	$CollisionCrawling.disabled = false
@@ -157,3 +174,22 @@ func shooting():
 
 func _on_Dashtimer_timeout():
 	dash = 0
+
+func on_hit(damage, enemy_posx):
+	if state != "death" and invulnerable == false:
+		current_hp -= damage
+		
+			
+	if position.x < enemy_posx:
+		velocity.x = -200
+	else:
+		velocity.x = +200
+	velocity.y = 0
+	velocity.y -= 1000
+	state = "knockback"
+	invulnerable = true
+	if current_hp <= 0:
+			on_death()
+		
+func on_death():
+	state = "death"
