@@ -129,6 +129,7 @@ func _physics_process(delta):
 				ceiling = true
 				
 		"climbing":
+			animation_mode.travel("Climbing")
 			shooting()
 			if Input.is_action_pressed("Up"):
 				velocity.y = -100

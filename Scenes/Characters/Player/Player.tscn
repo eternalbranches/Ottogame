@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Assets/Characters/OttoSpriteSheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
@@ -8,6 +8,35 @@
 extents = Vector2( 10, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
+
+[sub_resource type="Animation" id=24]
+resource_name = "Climbing"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "Crawl_E"
@@ -246,6 +275,9 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Climbing"
+
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Crawl_E"
 
@@ -276,18 +308,30 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
 [sub_resource type="AnimationNodeStateMachine" id=21]
+states/Climbing/node = SubResource( 25 )
+states/Climbing/position = Vector2( 698, 115.749 )
 states/Crawl_E/node = SubResource( 8 )
-states/Crawl_E/position = Vector2( 295, 226 )
+states/Crawl_E/position = Vector2( 540, 296 )
 states/Idle_E/node = SubResource( 9 )
 states/Idle_E/position = Vector2( 175, 109 )
 states/Walk_E/node = SubResource( 10 )
-states/Walk_E/position = Vector2( 540, 85 )
+states/Walk_E/position = Vector2( 540, 70 )
 states/Walk_W/node = SubResource( 11 )
-states/Walk_W/position = Vector2( 540, 175 )
-transitions = [ "Idle_E", "Walk_E", SubResource( 12 ), "Walk_E", "Idle_E", SubResource( 13 ), "Walk_E", "Walk_W", SubResource( 14 ), "Walk_W", "Walk_E", SubResource( 15 ), "Walk_W", "Idle_E", SubResource( 16 ), "Idle_E", "Walk_W", SubResource( 17 ), "Walk_W", "Crawl_E", SubResource( 18 ), "Walk_E", "Crawl_E", SubResource( 19 ), "Crawl_E", "Idle_E", SubResource( 20 ) ]
+states/Walk_W/position = Vector2( 540, 195 )
+transitions = [ "Idle_E", "Walk_E", SubResource( 12 ), "Walk_E", "Idle_E", SubResource( 13 ), "Walk_E", "Walk_W", SubResource( 14 ), "Walk_W", "Walk_E", SubResource( 15 ), "Walk_W", "Idle_E", SubResource( 16 ), "Idle_E", "Walk_W", SubResource( 17 ), "Walk_W", "Crawl_E", SubResource( 18 ), "Walk_E", "Crawl_E", SubResource( 19 ), "Crawl_E", "Idle_E", SubResource( 20 ), "Walk_W", "Climbing", SubResource( 26 ), "Walk_E", "Climbing", SubResource( 27 ), "Climbing", "Walk_W", SubResource( 28 ), "Climbing", "Walk_E", SubResource( 29 ), "Climbing", "Idle_E", SubResource( 30 ) ]
 start_node = "Idle_E"
-graph_offset = Vector2( -633, 77 )
+graph_offset = Vector2( -633, -100.251 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -307,13 +351,13 @@ gravity = 3800
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 3
-frame = 7
+frame = 16
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 3
-frame = 7
+frame = 16
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 16 )
@@ -339,6 +383,7 @@ position = Vector2( -0.0329895, -0.685471 )
 current = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Climbing = SubResource( 24 )
 anims/Crawl_E = SubResource( 3 )
 anims/Idle_E = SubResource( 4 )
 anims/Idle_W = SubResource( 5 )
