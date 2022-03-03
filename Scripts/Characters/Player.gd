@@ -22,6 +22,7 @@ var max_hp := 3
 
 var dash := 0
 var knockback := false
+var bullettime := false
 
 func get_input():
 	velocity.x = 0
@@ -36,7 +37,15 @@ func get_input():
 	if Input.is_action_pressed("Left"):
 		animation_mode.travel("Walk_W")
 		velocity.x -= speed
-		
+	
+	if Input.is_action_just_pressed("Timeslow"):
+				if bullettime == false:
+					Engine.time_scale = 0.5
+					bullettime = true
+				else:
+					Engine.time_scale = 1.0
+					bullettime = false
+
 func get_input_crawl():
 	velocity.x = 0
 	if Input.is_action_pressed("Right"):
@@ -65,11 +74,10 @@ func _physics_process(delta):
 					state = "moving"
 				else:
 					state = "midair"
-			elif Input.is_action_just_pressed("Crawl"):
+			if Input.is_action_just_pressed("Crawl"):
 				change_crawling()
 				state = "crawling"
-			elif Input.is_action_just_pressed("ActionButton"):
-				Engine.time_scale = 0.5
+			
 
 				
 		"moving":
@@ -138,6 +146,9 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if knockback == false:
+				invulnerable = true
+				Engine.time_scale = 1.0
+				bullettime = false
 				knockback = true
 				yield(get_tree().create_timer(1), "timeout")
 				knockback = false
@@ -187,7 +198,6 @@ func on_hit(damage, enemy_posx):
 	velocity.y = 0
 	velocity.y -= 1000
 	state = "knockback"
-	invulnerable = true
 	if current_hp <= 0:
 			on_death()
 		
