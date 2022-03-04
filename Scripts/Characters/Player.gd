@@ -16,6 +16,7 @@ var velocity := Vector2.ZERO
 var ceiling := false
 var climbable := false
 var invulnerable := false
+var last_direction := "right"
 
 var current_hp := 3
 var max_hp := 3
@@ -23,6 +24,8 @@ var max_hp := 3
 var dash := 0
 var knockback := false
 var bullettime := false
+var can_jump := false
+var started := false
 
 func get_input():
 	velocity.x = 0
@@ -32,11 +35,15 @@ func get_input():
 			velocity.x += speed*10
 		dash += 1
 	if Input.is_action_pressed("Right"):
-		animation_mode.travel("Walk_E")
+		if state == "moving":
+			animation_mode.travel("Walk_E")
 		velocity.x += speed
+		last_direction = "right"
 	if Input.is_action_pressed("Left"):
-		animation_mode.travel("Walk_W")
+		if state == "moving":
+			animation_mode.travel("Walk_W")
 		velocity.x -= speed
+		last_direction = "left"
 	
 	if Input.is_action_just_pressed("Timeslow"):
 				if bullettime == false:
@@ -49,17 +56,38 @@ func get_input():
 func get_input_crawl():
 	velocity.x = 0
 	if Input.is_action_pressed("Right"):
-		animation_mode.travel("Crawl_E")
+		animation_mode.travel("Crawling_E")
 		velocity.x += crawl_speed
 	if Input.is_action_pressed("Left"):
-		animation_mode.travel("Crawl_E")
+		animation_mode.travel("Crawling_W")
 		velocity.x -= crawl_speed
+		
+func get_input_midair():
+	velocity.x = 0
+	if Input.is_action_pressed("Right"):
+		animation_mode.travel("Jumping_E")
+		velocity.x += speed
+		last_direction = "right"
+		if is_on_wall() and Input.is_action_just_pressed("Up"):
+			state = "walljump"
+			velocity = Vector2.ZERO
+	if Input.is_action_pressed("Left"):
+		animation_mode.travel("Jumping_W")
+		velocity.x -= speed
+		last_direction = "left"
+		if is_on_wall() and Input.is_action_just_pressed("Up"):
+			state = "walljump"
+			velocity = Vector2.ZERO
+	
 
 func _physics_process(delta):
 	$Label.text = state
 	match state:
 		"idle":
-			animation_mode.travel("Idle_E")
+			if last_direction == "right":
+				animation_mode.travel("Idle_E")
+			else:
+				animation_mode.travel("Idle_W")
 			get_input()
 			shooting()
 			action()
@@ -99,7 +127,11 @@ func _physics_process(delta):
 				state = "crawling"
 			
 		"midair":
-			get_input()
+			if last_direction == "right":
+				animation_mode.travel("Jumping_E")
+			else:
+				animation_mode.travel("Jumping_W")
+			get_input_midair()
 			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -112,7 +144,7 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity/2, Vector2.UP)
 			if velocity == Vector2.ZERO:
-				animation_mode.travel("Crawl_E")
+				animation_mode.travel("Crawling_E")
 			if Input.is_action_just_pressed("Up") and ceiling == false:
 					change_standing()
 					velocity.y = jump_speed
@@ -155,6 +187,28 @@ func _physics_process(delta):
 				knockback = false
 				invulnerable = false
 				state = "midair"
+				
+		"walljump":
+			velocity.y -= 15
+			if last_direction == "left":
+				velocity.x += 20
+			else:
+				velocity.x -= 20
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if started == false:
+				if last_direction == "left":
+					velocity.x = 200
+					animation_mode.travel("Jumping_E")
+				else:
+					velocity.x = -200
+					animation_mode.travel("Jumping_W")
+				started = true
+				yield(get_tree().create_timer(0.5), "timeout")
+				started = false
+				state = "midair"
+			
+			
+			
 		"death":
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
