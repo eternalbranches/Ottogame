@@ -79,7 +79,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=5]
 resource_name = "Crawling_W"
 length = 0.8
 loop = true
@@ -120,7 +120,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -160,7 +160,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -200,8 +200,7 @@ tracks/2/keys = {
 "values": [ 10, 13 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "Jumping_E"
+[sub_resource type="Animation" id=8]
 length = 0.8
 loop = true
 step = 0.05
@@ -230,7 +229,7 @@ tracks/1/keys = {
 "values": [ 40, 41, 42, 43, 44, 45, 46, 47 ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=9]
 resource_name = "Jumping_W"
 length = 0.8
 loop = true
@@ -260,7 +259,7 @@ tracks/1/keys = {
 "values": [ 48, 49, 50, 51, 52, 53, 54, 55 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=10]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -300,7 +299,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=11]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -340,32 +339,40 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Climbing"
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Crawling_E"
 
-[sub_resource type="AnimationNodeAnimation" id=40]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Crawling_W"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "Idle_E"
 
-[sub_resource type="AnimationNodeAnimation" id=50]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Idle_W"
 
-[sub_resource type="AnimationNodeAnimation" id=62]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Jumping_E"
 
-[sub_resource type="AnimationNodeAnimation" id=63]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Jumping_W"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Walk_E"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "Walk_W"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
@@ -377,9 +384,35 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
@@ -389,66 +422,32 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=55]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=56]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=51]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=54]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=57]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=58]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=64]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=65]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=66]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=67]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=69]
-
-[sub_resource type="AnimationNodeStateMachine" id=35]
-states/Climbing/node = SubResource( 10 )
+[sub_resource type="AnimationNodeStateMachine" id=49]
+states/Climbing/node = SubResource( 12 )
 states/Climbing/position = Vector2( 175, -45 )
-states/Crawling_E/node = SubResource( 39 )
+states/Crawling_E/node = SubResource( 13 )
 states/Crawling_E/position = Vector2( -86, 228.749 )
-states/Crawling_W/node = SubResource( 40 )
+states/Crawling_W/node = SubResource( 14 )
 states/Crawling_W/position = Vector2( 438, 228.749 )
-states/Idle_E/node = SubResource( 13 )
+states/Idle_E/node = SubResource( 15 )
 states/Idle_E/position = Vector2( 86, 109 )
-states/Idle_W/node = SubResource( 50 )
+states/Idle_W/node = SubResource( 16 )
 states/Idle_W/position = Vector2( 266, 109 )
-states/Jumping_E/node = SubResource( 62 )
+states/Jumping_E/node = SubResource( 17 )
 states/Jumping_E/position = Vector2( -86, -64.251 )
-states/Jumping_W/node = SubResource( 63 )
+states/Jumping_W/node = SubResource( 18 )
 states/Jumping_W/position = Vector2( 438, -64.251 )
-states/Walk_E/node = SubResource( 14 )
+states/Walk_E/node = SubResource( 19 )
 states/Walk_E/position = Vector2( -86, 109 )
-states/Walk_W/node = SubResource( 15 )
+states/Walk_W/node = SubResource( 20 )
 states/Walk_W/position = Vector2( 438, 109 )
-transitions = [ "Walk_W", "Climbing", SubResource( 25 ), "Walk_E", "Climbing", SubResource( 26 ), "Climbing", "Walk_W", SubResource( 27 ), "Climbing", "Walk_E", SubResource( 28 ), "Climbing", "Idle_E", SubResource( 29 ), "Walk_E", "Crawling_E", SubResource( 41 ), "Walk_W", "Crawling_W", SubResource( 42 ), "Crawling_W", "Walk_W", SubResource( 45 ), "Crawling_E", "Walk_E", SubResource( 46 ), "Crawling_E", "Crawling_W", SubResource( 47 ), "Crawling_W", "Crawling_E", SubResource( 48 ), "Idle_E", "Climbing", SubResource( 53 ), "Idle_E", "Walk_E", SubResource( 55 ), "Walk_E", "Idle_E", SubResource( 56 ), "Idle_E", "Walk_W", SubResource( 59 ), "Crawling_E", "Idle_E", SubResource( 61 ), "Idle_W", "Climbing", SubResource( 51 ), "Climbing", "Idle_W", SubResource( 52 ), "Idle_W", "Walk_W", SubResource( 54 ), "Walk_W", "Idle_W", SubResource( 57 ), "Idle_W", "Walk_E", SubResource( 58 ), "Crawling_W", "Idle_W", SubResource( 60 ), "Walk_W", "Jumping_W", SubResource( 64 ), "Walk_E", "Jumping_E", SubResource( 65 ), "Jumping_E", "Idle_E", SubResource( 66 ), "Jumping_W", "Idle_W", SubResource( 67 ), "Jumping_E", "Climbing", SubResource( 68 ), "Jumping_W", "Climbing", SubResource( 69 ) ]
+transitions = [ "Walk_W", "Climbing", SubResource( 21 ), "Walk_E", "Climbing", SubResource( 22 ), "Climbing", "Walk_W", SubResource( 23 ), "Climbing", "Walk_E", SubResource( 24 ), "Climbing", "Idle_E", SubResource( 25 ), "Walk_E", "Crawling_E", SubResource( 26 ), "Walk_W", "Crawling_W", SubResource( 27 ), "Crawling_W", "Walk_W", SubResource( 28 ), "Crawling_E", "Walk_E", SubResource( 29 ), "Crawling_E", "Crawling_W", SubResource( 30 ), "Crawling_W", "Crawling_E", SubResource( 31 ), "Idle_E", "Climbing", SubResource( 32 ), "Idle_E", "Walk_E", SubResource( 33 ), "Walk_E", "Idle_E", SubResource( 34 ), "Idle_E", "Walk_W", SubResource( 35 ), "Crawling_E", "Idle_E", SubResource( 36 ), "Idle_W", "Climbing", SubResource( 37 ), "Climbing", "Idle_W", SubResource( 38 ), "Idle_W", "Walk_W", SubResource( 39 ), "Walk_W", "Idle_W", SubResource( 40 ), "Idle_W", "Walk_E", SubResource( 41 ), "Crawling_W", "Idle_W", SubResource( 42 ), "Walk_W", "Jumping_W", SubResource( 43 ), "Walk_E", "Jumping_E", SubResource( 44 ), "Jumping_E", "Idle_E", SubResource( 45 ), "Jumping_W", "Idle_W", SubResource( 46 ), "Jumping_E", "Climbing", SubResource( 47 ), "Jumping_W", "Climbing", SubResource( 48 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -633, -100.251 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=36]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
-[sub_resource type="RectangleShape2D" id=37]
+[sub_resource type="RectangleShape2D" id=51]
 extents = Vector2( 12.2145, 10 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -497,27 +496,27 @@ current = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Climbing = SubResource( 3 )
 anims/Crawling_E = SubResource( 4 )
-anims/Crawling_W = SubResource( 38 )
-anims/Idle_E = SubResource( 5 )
-anims/Idle_W = SubResource( 6 )
-anims/Jumping_E = SubResource( 7 )
-anims/Jumping_W = SubResource( 49 )
-anims/Walk_E = SubResource( 8 )
-anims/Walk_W = SubResource( 9 )
+anims/Crawling_W = SubResource( 5 )
+anims/Idle_E = SubResource( 6 )
+anims/Idle_W = SubResource( 7 )
+anims/Jumping_E = SubResource( 8 )
+anims/Jumping_W = SubResource( 9 )
+anims/Walk_E = SubResource( 10 )
+anims/Walk_W = SubResource( 11 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 35 )
+tree_root = SubResource( 49 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 36 )
+parameters/playback = SubResource( 50 )
 
 [node name="Ceilingcheck" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceilingcheck"]
 position = Vector2( 0.890892, -4.7931 )
-shape = SubResource( 37 )
+shape = SubResource( 51 )
 
 [node name="Position2D" type="Position2D" parent="."]
 

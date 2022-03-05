@@ -4,6 +4,7 @@ export (int) var speed := 300
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
+export (int) var walljump_power := 300
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
@@ -68,15 +69,19 @@ func get_input_midair():
 		animation_mode.travel("Jumping_E")
 		velocity.x += speed
 		last_direction = "right"
-		if is_on_wall() and Input.is_action_just_pressed("Up"):
-			state = "walljump"
+		#if is_on_wall() and Input.is_action_just_pressed("Up"):
+		#	state = "walljump"
+		if is_on_wall():
+			state = "wallslide"
 			velocity = Vector2.ZERO
 	if Input.is_action_pressed("Left"):
 		animation_mode.travel("Jumping_W")
 		velocity.x -= speed
 		last_direction = "left"
-		if is_on_wall() and Input.is_action_just_pressed("Up"):
-			state = "walljump"
+		#if is_on_wall() and Input.is_action_just_pressed("Up"):
+		#	state = "walljump"
+		if is_on_wall():
+			state = "wallslide"
 			velocity = Vector2.ZERO
 	
 
@@ -191,23 +196,34 @@ func _physics_process(delta):
 		"walljump":
 			velocity.y -= 15
 			if last_direction == "left":
-				velocity.x += 20
+				velocity.x += 15
 			else:
-				velocity.x -= 20
+				velocity.x -= 15
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if started == false:
+				velocity.y = -200
 				if last_direction == "left":
-					velocity.x = 200
+					velocity.x = 300
 					animation_mode.travel("Jumping_E")
 				else:
-					velocity.x = -200
+					velocity.x = -300
 					animation_mode.travel("Jumping_W")
 				started = true
 				yield(get_tree().create_timer(0.5), "timeout")
 				started = false
 				state = "midair"
 			
-			
+		"wallslide":
+			if is_on_floor():
+				state = "idle"
+			elif velocity.y > 180:
+				state = "midair"
+			velocity.y += 100 *delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if Input.is_action_just_pressed("Down"):
+				state = "midair"
+			if Input.is_action_just_pressed("Up"):
+				state = "walljump"
 			
 		"death":
 			velocity.y += gravity * delta
