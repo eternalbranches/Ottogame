@@ -27,6 +27,7 @@ var knockback := false
 var bullettime := false
 var can_jump := false
 var started := false
+var can_wallslide := true
 
 func get_input():
 	velocity.x = 0
@@ -65,13 +66,14 @@ func get_input_crawl():
 		
 func get_input_midair():
 	velocity.x = 0
+		
 	if Input.is_action_pressed("Right"):
 		animation_mode.travel("Jumping_E")
 		velocity.x += speed
 		last_direction = "right"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
 		#	state = "walljump"
-		if is_on_wall():
+		if is_on_wall() and can_wallslide == true:
 			state = "wallslide"
 			velocity = Vector2.ZERO
 	if Input.is_action_pressed("Left"):
@@ -80,9 +82,10 @@ func get_input_midair():
 		last_direction = "left"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
 		#	state = "walljump"
-		if is_on_wall():
+		if is_on_wall() and can_wallslide == true:
 			state = "wallslide"
 			velocity = Vector2.ZERO
+			
 	
 
 func _physics_process(delta):
@@ -194,34 +197,48 @@ func _physics_process(delta):
 				state = "midair"
 				
 		"walljump":
-			velocity.y -= 15
-			if last_direction == "left":
+			velocity.y += gravity/10 * delta
+			var airdrag = 5
+			#velocity.y -= 5 * airdrag
+			airdrag -= 1
+			if last_direction == "right":
 				velocity.x += 15
 			else:
 				velocity.x -= 15
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if started == false:
-				velocity.y = -200
-				if last_direction == "left":
-					velocity.x = 300
+				velocity.y = -400
+				if $Wallcheck_W.is_colliding() == true:
+					velocity.x = 340
+					last_direction = "right"
 					animation_mode.travel("Jumping_E")
-				else:
-					velocity.x = -300
+				elif $Wallcheck_E.is_colliding() == true:
+					velocity.x = -340
+					last_direction = "left"
 					animation_mode.travel("Jumping_W")
 				started = true
-				yield(get_tree().create_timer(0.5), "timeout")
+				yield(get_tree().create_timer(0.4), "timeout")
 				started = false
 				state = "midair"
 			
 		"wallslide":
+			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
+				state = "midair"
 			if is_on_floor():
 				state = "idle"
 			elif velocity.y > 180:
+				can_wallslide = false
 				state = "midair"
-			velocity.y += 100 *delta
+				yield(get_tree().create_timer(1), "timeout")
+				can_wallslide = true
+			
+			velocity.y += 140 *delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if Input.is_action_just_pressed("Down"):
 				state = "midair"
+				can_wallslide = false
+				yield(get_tree().create_timer(1), "timeout")
+				can_wallslide = true
 			if Input.is_action_just_pressed("Up"):
 				state = "walljump"
 			

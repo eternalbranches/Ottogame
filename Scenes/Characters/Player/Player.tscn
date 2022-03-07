@@ -462,13 +462,13 @@ jump_speed = 500
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 7
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 7
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 16.3317 )
@@ -525,5 +525,19 @@ shape = SubResource( 51 )
 [node name="Dash-timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Wallcheck_E" type="RayCast2D" parent="."]
+position = Vector2( 1, 0 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( 10, 0 )
+collide_with_areas = true
+
+[node name="Wallcheck_W" type="RayCast2D" parent="."]
+position = Vector2( -1, 0 )
+enabled = true
+exclude_parent = false
+cast_to = Vector2( -10, 0 )
+collide_with_areas = true
 
 [connection signal="timeout" from="Dash-timer" to="." method="_on_Dashtimer_timeout"]
