@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export (int) var speed := 300
+export (int) var dash_speed := 500
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
@@ -29,12 +30,18 @@ var can_jump := false
 var started := false
 var can_wallslide := true
 
+var possible_targets = []
+var current_target = null
+var controller := false
+
+
+
 func get_input():
 	velocity.x = 0
 	if Input.is_action_just_pressed("Right"):
 		$"Dash-timer".start()
 		if dash == 1:
-			velocity.x += speed*10
+			state = "running"
 		dash += 1
 	if Input.is_action_pressed("Right"):
 		if state == "moving":
@@ -54,6 +61,44 @@ func get_input():
 				else:
 					Engine.time_scale = 1.0
 					bullettime = false
+					
+	if Input.is_action_just_pressed("Aim_assist"):
+		if possible_targets.empty() == false:
+			current_target = possible_targets[0]
+			possible_targets.push_back(current_target)
+			possible_targets.erase(current_target)
+
+func get_input_running():
+	velocity.x = 0
+	if Input.is_action_just_pressed("Right"):
+		$"Dash-timer".start()
+		if dash == 1:
+			velocity.x += dash_speed
+		dash += 1
+	if Input.is_action_pressed("Right"):
+		if state == "moving":
+			animation_mode.travel("Walk_E")
+		velocity.x += speed
+		last_direction = "right"
+	if Input.is_action_pressed("Left"):
+		if state == "moving":
+			animation_mode.travel("Walk_W")
+		velocity.x -= speed
+		last_direction = "left"
+	
+	if Input.is_action_just_pressed("Timeslow"):
+				if bullettime == false:
+					Engine.time_scale = 0.5
+					bullettime = true
+				else:
+					Engine.time_scale = 1.0
+					bullettime = false
+					
+	if Input.is_action_just_pressed("Aim_assist"):
+		if possible_targets.empty() == false:
+			current_target = possible_targets[0]
+			possible_targets.push_back(current_target)
+			possible_targets.erase(current_target)
 
 func get_input_crawl():
 	velocity.x = 0
@@ -133,6 +178,25 @@ func _physics_process(delta):
 			elif Input.is_action_just_pressed("Crawl"):
 				change_crawling()
 				state = "crawling"
+				
+		"running":
+			get_input_running()
+			shooting()
+			action()
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if Input.is_action_just_pressed("Up"):
+					velocity.y = jump_speed
+					#if is_on_floor() == false: double jump
+					#	state = "midair"
+			if is_on_floor() == false:
+				state = "midair"
+			elif velocity == Vector2.ZERO:
+				state = "idle"
+			elif Input.is_action_just_pressed("Crawl"):
+				change_crawling()
+				state = "crawling"
+			
 			
 		"midair":
 			if last_direction == "right":
@@ -197,7 +261,7 @@ func _physics_process(delta):
 				state = "midair"
 				
 		"walljump":
-			velocity.y += gravity/10 * delta
+			velocity.y += gravity/3 * delta
 			var airdrag = 5
 			#velocity.y -= 5 * airdrag
 			airdrag -= 1
@@ -207,7 +271,7 @@ func _physics_process(delta):
 				velocity.x -= 15
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if started == false:
-				velocity.y = -400
+				velocity.y = -600
 				if $Wallcheck_W.is_colliding() == true:
 					velocity.x = 340
 					last_direction = "right"
@@ -263,7 +327,11 @@ func shooting():
 	if Input.is_action_just_pressed("Shoot"):
 		var skill = load("res://Scenes/Abilities/Bullet.tscn")
 		var skill_instance = skill.instance()
-		skill_instance.rotation = get_angle_to(get_global_mouse_position())
+		if controller == false:
+			skill_instance.rotation = get_angle_to(get_global_mouse_position())
+		else:
+			if current_target != null:
+				skill_instance.rotation = get_angle_to(current_target.get_global_position())
 		skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
 		skill_instance.origin = "Player"
 		#skill_instance.node_reference = get_path()
@@ -291,3 +359,22 @@ func on_hit(damage, enemy_posx):
 		
 func on_death():
 	state = "death"
+
+
+func _on_Aim_Assist_body_entered(body):
+	print(possible_targets)
+	possible_targets.push_front(body)
+
+func _on_Aim_Assist_body_exited(body):
+	possible_targets.remove(body)
+	print(possible_targets)
+
+
+func _on_Aim_Assist_area_entered(area):
+	possible_targets.push_front(area)
+	print(possible_targets)
+
+
+func _on_Aim_Assist_area_exited(area):
+	possible_targets.erase(area)
+	print(possible_targets)

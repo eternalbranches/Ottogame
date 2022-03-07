@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=2]
+[gd_scene load_steps=135 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Assets/Tiles/tileset 1.2.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/Objects/Spikes.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Tiles/tileset1.4.png" type="Texture" id=22]
+[ext_resource path="res://Scripts/UI Script/MonitorPerformance.gd" type="Script" id=23]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -1347,8 +1348,60 @@ autoplay = true
 bus = "Ambience"
 
 [node name="Spikes" parent="." instance=ExtResource( 21 )]
-position = Vector2( 752.591, 326.828 )
+position = Vector2( 753.091, 327.828 )
+
+[node name="Spikes2" parent="." instance=ExtResource( 21 )]
+position = Vector2( 818.091, 64.828 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 2497.43, -711.922 )
 texture = ExtResource( 22 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="GUI/Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonitorPerformance" type="MarginContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = -40.0
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MonitorPerformance"]
+margin_right = 1024.0
+margin_bottom = 550.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MonitorPerformance/HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 550.0
+alignment = 2
+
+[node name="Stat1" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 518.0
+margin_right = 26.0
+margin_bottom = 532.0
+text = "FPS"
+
+[node name="Stat2" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 536.0
+margin_right = 26.0
+margin_bottom = 550.0
+text = "CPU"
