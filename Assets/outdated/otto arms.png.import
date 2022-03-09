@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/otto arms.png-abc026773066498806762f492e288e58.stex"
+path="res://.import/otto arms.png-a07e46eded4b4ca7f2f5c6b9baf3f591.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/otto arms.png"
-dest_files=[ "res://.import/otto arms.png-abc026773066498806762f492e288e58.stex" ]
+source_file="res://Assets/outdated/otto arms.png"
+dest_files=[ "res://.import/otto arms.png-a07e46eded4b4ca7f2f5c6b9baf3f591.stex" ]
 
 [params]
 
