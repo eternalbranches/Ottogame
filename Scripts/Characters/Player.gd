@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
 export (int) var speed := 300
-export (int) var dash_speed := 500
+export (int) var dash_speed := 450
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
 export (int) var walljump_power := 300
+
+export (float, 0, 1.0) var friction = 0.3
+export (float, 0, 1.0) var acceleration = 0.1
 
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
@@ -23,7 +26,8 @@ var last_direction := "right"
 var current_hp := 3
 var max_hp := 3
 
-var dash := 0
+var dash_l := 0
+var dash_r := 0
 var knockback := false
 var bullettime := false
 var can_jump := false
@@ -36,63 +40,115 @@ var controller := false
 
 
 
+
+
 func get_input():
-	velocity.x = 0
+	var dir = 0
 	if Input.is_action_just_pressed("Right"):
 		$"Dash-timer".start()
-		if dash == 1:
+		if dash_r == 1:
 			state = "running"
-		dash += 1
+		dash_r += 1
+	if Input.is_action_just_pressed("Left"):
+		$"Dash-timer".start()
+		if dash_l == 1:
+			state = "running"
+		dash_l += 1
 	if Input.is_action_pressed("Right"):
-		if state == "moving":
-			animation_mode.travel("Walk_E")
-		velocity.x += speed
 		last_direction = "right"
+		animation_mode.travel("Walk_E")
+		dir += 1
+		
+		
 	if Input.is_action_pressed("Left"):
-		if state == "moving":
-			animation_mode.travel("Walk_W")
-		velocity.x -= speed
 		last_direction = "left"
-	
+		animation_mode.travel("Walk_W")
+		dir -= 1
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+		
+		
+		
 	if Input.is_action_just_pressed("Timeslow"):
-				if bullettime == false:
-					Engine.time_scale = 0.5
-					bullettime = true
-				else:
-					Engine.time_scale = 1.0
-					bullettime = false
-					
+		if bullettime == false:
+			Engine.time_scale = 0.5
+			bullettime = true
+		else:
+			Engine.time_scale = 1.0
+			bullettime = false
+			
 	if Input.is_action_just_pressed("Aim_assist"):
 		if possible_targets.empty() == false:
 			current_target = possible_targets[0]
 			possible_targets.push_back(current_target)
 			possible_targets.erase(current_target)
 
-func get_input_running():
-	velocity.x = 0
-	if Input.is_action_just_pressed("Right"):
-		$"Dash-timer".start()
-		if dash == 1:
-			velocity.x += dash_speed
-		dash += 1
-	if Input.is_action_pressed("Right"):
-		if state == "moving":
-			animation_mode.travel("Walk_E")
-		velocity.x += speed
-		last_direction = "right"
-	if Input.is_action_pressed("Left"):
-		if state == "moving":
-			animation_mode.travel("Walk_W")
-		velocity.x -= speed
-		last_direction = "left"
+#func get_input():
+#	velocity.x = 0
+#	if Input.is_action_just_pressed("Right"):
+#		$"Dash-timer".start()
+#		if dash == 1:
+#			state = "running"
+#		dash += 1
+#	if Input.is_action_pressed("Right"):
+#		if state == "moving":
+#			animation_mode.travel("Walk_E")
+#		velocity.x += speed
+#		last_direction = "right"
+#	if Input.is_action_pressed("Left"):
+#		if state == "moving":
+#			animation_mode.travel("Walk_W")
+#		velocity.x -= speed
+#		last_direction = "left"
 	
+#	if Input.is_action_just_pressed("Timeslow"):
+#				if bullettime == false:
+#					Engine.time_scale = 0.5
+#					bullettime = true
+#				else:
+#					Engine.time_scale = 1.0
+#					bullettime = false
+					
+#	if Input.is_action_just_pressed("Aim_assist"):
+#		if possible_targets.empty() == false:
+#			current_target = possible_targets[0]
+#			possible_targets.push_back(current_target)
+#			possible_targets.erase(current_target)
+
+func get_input_running():
+	var dir = 0
+	if Input.is_action_pressed("Right"):
+		last_direction = "right"
+		animation_mode.travel("Run_E")
+		dir += 1
+	if Input.is_action_pressed("Left"):
+		last_direction = "left"
+		animation_mode.travel("Run_W")
+		dir -= 1
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * dash_speed, acceleration)
+	else:
+		velocity.x = lerp(velocity.x, 0, friction)
+	if Input.is_action_just_released("Right"):
+		state = "moving"
+	if Input.is_action_just_released("Left"):
+		state = "moving"
+		
 	if Input.is_action_just_pressed("Timeslow"):
-				if bullettime == false:
-					Engine.time_scale = 0.5
-					bullettime = true
-				else:
-					Engine.time_scale = 1.0
-					bullettime = false
+		if bullettime == false:
+			Engine.time_scale = 0.5
+			bullettime = true
+		else:
+			Engine.time_scale = 1.0
+			bullettime = false
+			
+	if Input.is_action_just_pressed("Aim_assist"):
+		if possible_targets.empty() == false:
+			current_target = possible_targets[0]
+			possible_targets.push_back(current_target)
+			possible_targets.erase(current_target)
 					
 	if Input.is_action_just_pressed("Aim_assist"):
 		if possible_targets.empty() == false:
@@ -150,7 +206,8 @@ func _physics_process(delta):
 				#if is_on_floor():
 					velocity.y = jump_speed
 					state = "midair"
-			if velocity != Vector2.ZERO:
+			#if velocity != Vector2.ZERO:
+			elif (round(velocity.x)) != 0:
 				if is_on_floor():
 					state = "moving"
 				else:
@@ -173,7 +230,9 @@ func _physics_process(delta):
 					#	state = "midair"
 			if is_on_floor() == false:
 				state = "midair"
-			elif velocity == Vector2.ZERO:
+			#elif velocity == Vector2.ZERO:
+			#elif velocity.x > 0.1 and velocity.x < -0.1:
+			elif (round(velocity.x)) == 0:
 				state = "idle"
 			elif Input.is_action_just_pressed("Crawl"):
 				change_crawling()
@@ -307,6 +366,7 @@ func _physics_process(delta):
 				state = "walljump"
 			
 		"death":
+			animation_mode.travel("Death_" +last_direction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 func change_crawling():
@@ -340,7 +400,8 @@ func shooting():
 
 
 func _on_Dashtimer_timeout():
-	dash = 0
+	dash_l = 0
+	dash_r = 0
 
 func on_hit(damage, enemy_posx):
 	if state != "death" and invulnerable == false:

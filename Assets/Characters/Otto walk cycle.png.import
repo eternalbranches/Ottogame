@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OSS.png-c8eae35b3b70b8b407969665db71fc3e.stex"
+path="res://.import/Otto walk cycle.png-428152d3b2a2e4d640d9fcee728c490f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/OSS.png"
-dest_files=[ "res://.import/OSS.png-c8eae35b3b70b8b407969665db71fc3e.stex" ]
+source_file="res://Assets/Characters/Otto walk cycle.png"
+dest_files=[ "res://.import/Otto walk cycle.png-428152d3b2a2e4d640d9fcee728c490f.stex" ]
 
 [params]
 

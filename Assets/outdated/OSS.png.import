@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OttoSpriteSheet.png-0ca2f5d7f358def2498a57d691c54c3c.stex"
+path="res://.import/OSS.png-3491398af0383d3c9418cd308eb63747.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/OttoSpriteSheet.png"
-dest_files=[ "res://.import/OttoSpriteSheet.png-0ca2f5d7f358def2498a57d691c54c3c.stex" ]
+source_file="res://Assets/outdated/OSS.png"
+dest_files=[ "res://.import/OSS.png-3491398af0383d3c9418cd308eb63747.stex" ]
 
 [params]
 

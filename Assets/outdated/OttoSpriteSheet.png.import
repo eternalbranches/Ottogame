@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ottos arms.png-a3fb7f5ffcf1ca6f07fdd6b888a33285.stex"
+path="res://.import/OttoSpriteSheet.png-fb9f230f5346e83cefe041395eeb8ac1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Ottos arms.png"
-dest_files=[ "res://.import/Ottos arms.png-a3fb7f5ffcf1ca6f07fdd6b888a33285.stex" ]
+source_file="res://Assets/outdated/OttoSpriteSheet.png"
+dest_files=[ "res://.import/OttoSpriteSheet.png-fb9f230f5346e83cefe041395eeb8ac1.stex" ]
 
 [params]
 

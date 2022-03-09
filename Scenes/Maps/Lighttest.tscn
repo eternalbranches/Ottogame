@@ -1334,7 +1334,7 @@ position = Vector2( 1498.66, -69.8535 )
 scale = Vector2( 2, 10 )
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1834.24, -495.983 )
+position = Vector2( 827.378, 191.74 )
 speed = 125
 jump_speed = -900
 
