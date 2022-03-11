@@ -1,11 +1,12 @@
 extends RigidBody2D
 
 var projectile_speed = 800
-var damage
+var damage := 1
 var origin
 var direction
 var life_time = 20
 var dead := false
+var enemyposx
 #var node_reference
 
 var SFX_Impact
@@ -43,8 +44,10 @@ func _on_Area2D_body_entered(body):
 	self.hide()
 	$Light2D.enabled = false
 	dead = true
-	if body.is_in_group("Enemies"):
-		body.OnHit(damage, origin)
+	if body.is_in_group("Enemy"):
+		body.on_hit(damage, origin, position.x)
+	elif body.is_in_group("Player"):
+		body.on_hit(damage, origin, enemyposx)
 
 
 func _on_Smoketrail_dead():

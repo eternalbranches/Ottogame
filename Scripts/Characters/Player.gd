@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (int) var speed := 300
-export (int) var dash_speed := 450
+export (int) var speed := 450
+export (int) var dash_speed := 600
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
@@ -166,21 +166,32 @@ func get_input_crawl():
 		velocity.x -= crawl_speed
 		
 func get_input_midair():
-	velocity.x = 0
-		
+	var dir = 0
 	if Input.is_action_pressed("Right"):
-		animation_mode.travel("Jumping_E")
-		velocity.x += speed
 		last_direction = "right"
+		animation_mode.travel("Jumping_E")
+		dir += 1
+	if Input.is_action_pressed("Left"):
+		last_direction = "left"
+		animation_mode.travel("Jumping_W")
+		dir -= 1
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * speed, acceleration)
+	#velocity.x = 0
+		
+	#if Input.is_action_pressed("Right"):
+	#	animation_mode.travel("Jumping_E")
+	#	velocity.x += speed
+	#	last_direction = "right"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
 		#	state = "walljump"
-		if is_on_wall() and can_wallslide == true:
-			state = "wallslide"
-			velocity = Vector2.ZERO
-	if Input.is_action_pressed("Left"):
-		animation_mode.travel("Jumping_W")
-		velocity.x -= speed
-		last_direction = "left"
+	if is_on_wall() and can_wallslide == true:
+		state = "wallslide"
+		velocity = Vector2.ZERO
+	#if Input.is_action_pressed("Left"):
+	#	animation_mode.travel("Jumping_W")
+	#	velocity.x -= speed
+	#	last_direction = "left"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
 		#	state = "walljump"
 		if is_on_wall() and can_wallslide == true:
@@ -263,6 +274,7 @@ func _physics_process(delta):
 			else:
 				animation_mode.travel("Jumping_W")
 			get_input_midair()
+			shooting()
 			action()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -343,8 +355,10 @@ func _physics_process(delta):
 				yield(get_tree().create_timer(0.4), "timeout")
 				started = false
 				state = "midair"
+			shooting()
 			
 		"wallslide":
+			shooting()
 			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
 				state = "midair"
 			if is_on_floor():
@@ -403,7 +417,8 @@ func _on_Dashtimer_timeout():
 	dash_l = 0
 	dash_r = 0
 
-func on_hit(damage, enemy_posx):
+func on_hit(damage, origin, enemy_posx):
+	print(position.x, " ",enemy_posx)
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
 		
@@ -427,7 +442,7 @@ func _on_Aim_Assist_body_entered(body):
 	possible_targets.push_front(body)
 
 func _on_Aim_Assist_body_exited(body):
-	possible_targets.remove(body)
+	possible_targets.erase(body)
 	print(possible_targets)
 
 
