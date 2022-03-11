@@ -39,8 +39,9 @@ func _process(delta):
 	
 func sightcheck():
 	var space_state = get_world_2d().direct_space_state
-	var sight_check = space_state.intersect_ray(global_position, player.global_position, [self], collision_mask)
+	var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
 	if sight_check:
+		#print(sight_check)
 		if sight_check.collider.name == "Player":
 			if state != "shoot":
 				state = "shoot"

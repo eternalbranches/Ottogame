@@ -289,7 +289,7 @@ func _physics_process(delta):
 			if velocity == Vector2.ZERO:
 				animation_mode.travel("Crawling_E")
 			if Input.is_action_just_pressed("Up") and ceiling == false:
-					change_standing()
+					#change_standing()
 					velocity.y = jump_speed
 			if is_on_floor() == false:
 				change_standing()
@@ -361,8 +361,8 @@ func _physics_process(delta):
 			shooting()
 			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
 				state = "midair"
-			if is_on_floor():
-				state = "idle"
+			#if is_on_floor():
+			#	state = "idle"
 			elif velocity.y > 180:
 				can_wallslide = false
 				state = "midair"
