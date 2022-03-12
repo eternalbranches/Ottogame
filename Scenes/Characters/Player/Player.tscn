@@ -4,10 +4,11 @@
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Characters/otto arm spritesheet.png.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 20.25 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Climbing"
@@ -619,7 +620,6 @@ radius = 191.426
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
 ]]
-position = Vector2( 0, -33 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 2 )
@@ -629,38 +629,40 @@ jump_speed = 500
 [node name="Spritemesh" type="Node2D" parent="."]
 
 [node name="Body" type="Sprite" parent="Spritemesh"]
+position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
 frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
+position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
 frame = 7
 
+[node name="CollisionStanding" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3.78055 )
+shape = SubResource( 1 )
+
 [node name="CollisionCrawling" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.878431, 0.0235294, 1, 1 )
-position = Vector2( 0, 23 )
+position = Vector2( 0, 0.0113525 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="CollisionStanding" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 16.3317 )
-shape = SubResource( 1 )
-
 [node name="Label" type="Label" parent="."]
 margin_left = -24.3197
-margin_top = -29.0985
+margin_top = -41.6496
 margin_right = 15.6803
-margin_bottom = -15.0985
+margin_bottom = -27.6496
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -0.0329895, -0.685471 )
+position = Vector2( -0.0329895, -13.2366 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 4.0
@@ -688,6 +690,7 @@ process_mode = 0
 parameters/playback = SubResource( 74 )
 
 [node name="Ceilingcheck" type="Area2D" parent="."]
+position = Vector2( 0, -12.5511 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceilingcheck"]
@@ -695,6 +698,7 @@ position = Vector2( 0.890892, -4.7931 )
 shape = SubResource( 75 )
 
 [node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, -12.5511 )
 
 [node name="Position2D" type="Position2D" parent="Position2D"]
 
@@ -703,20 +707,21 @@ wait_time = 0.25
 one_shot = true
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]
-position = Vector2( 1, 0 )
+position = Vector2( 1, -12.5511 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( 10, 0 )
 collide_with_areas = true
 
 [node name="Wallcheck_W" type="RayCast2D" parent="."]
-position = Vector2( -1, 0 )
+position = Vector2( -1, -12.5511 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( -10, 0 )
 collide_with_areas = true
 
 [node name="Aim_Assist" type="Area2D" parent="."]
+position = Vector2( 0, -12.5511 )
 collision_layer = 0
 collision_mask = 4
 

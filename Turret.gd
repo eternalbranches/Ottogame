@@ -38,6 +38,7 @@ func _process(delta):
 				can_shoot = false
 	
 func sightcheck():
+	#var raycasting_player = player.position - Vector2(0, 0)
 	var space_state = get_world_2d().direct_space_state
 	var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
 	if sight_check:
@@ -51,17 +52,30 @@ func sightcheck():
 			$ShootCD.stop()
 
 func _on_Range_body_entered(body):
-	player_in_range = true
-	if state != "death":
+	if state == "idle":
 		state = "sight"
+		player_in_range = true
 
 
 func _on_Range_body_exited(body):
-	player_in_range = false
-	initialized = false
-	if state != "death":
-		state = "idle"
-	$ShootCD.stop()
+	if state == "shoot":
+		var space_state = get_world_2d().direct_space_state
+		var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
+		if sight_check:
+			if sight_check.collider.name == "Player":
+				pass
+		else:
+			print(sight_check)
+			state = "idle"
+			$ShootCD.stop()
+			player_in_range = false
+			initialized = false
+	else:
+		player_in_range = false
+		initialized = false
+		if state != "death":
+			state = "idle"
+		$ShootCD.stop()
 
 func _on_ShootCD_timeout():
 	can_shoot = true
