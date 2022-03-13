@@ -12,7 +12,7 @@ func _ready():
 	load_volume()
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+	get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")
 
 
 func _on_OptionsButton_pressed():

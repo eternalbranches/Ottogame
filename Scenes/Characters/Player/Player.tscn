@@ -8,7 +8,7 @@
 extents = Vector2( 10, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 20.25 )
+extents = Vector2( 10, 14 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Climbing"
@@ -633,14 +633,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3.78055 )
@@ -648,7 +648,7 @@ shape = SubResource( 1 )
 
 [node name="CollisionCrawling" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.878431, 0.0235294, 1, 1 )
-position = Vector2( 0, 0.0113525 )
+position = Vector2( 0, 6 )
 shape = SubResource( 2 )
 disabled = true
 

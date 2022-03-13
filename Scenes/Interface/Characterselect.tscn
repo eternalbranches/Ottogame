@@ -1,0 +1,503 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Interface/Characterselect.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="Singleplayer_Characterselect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="N" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="Popup" parent="N"]
+visible = true
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -448.0
+margin_top = -136.0
+margin_right = 8.0
+margin_bottom = 112.0
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="N/Popup"]
+margin_left = 48.0
+margin_top = 72.0
+margin_right = 368.0
+margin_bottom = 200.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/Popup/TextureRect"]
+margin_left = 48.0
+margin_top = 32.0
+margin_right = 296.0
+margin_bottom = 66.0
+text = "Do you want to delete"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="charname" type="Label" parent="N/Popup/TextureRect"]
+margin_left = 40.0
+margin_top = 64.0
+margin_right = 180.0
+margin_bottom = 98.0
+text = "Mokkla?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConfirmDelete" type="TextureButton" parent="N/Popup/TextureRect"]
+margin_left = 180.0
+margin_top = 64.0
+margin_right = 210.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="N/Popup/TextureRect/ConfirmDelete"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 26, 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StopDelete" type="TextureButton" parent="N/Popup/TextureRect"]
+margin_left = 232.0
+margin_top = 64.0
+margin_right = 262.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 30, 30 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/Popup/TextureRect/StopDelete"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -19.5
+margin_right = 15.0
+margin_bottom = 19.5
+rect_min_size = Vector2( 30, 30 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="H" type="HBoxContainer" parent="N"]
+margin_left = 64.4709
+margin_top = 182.863
+margin_right = 1248.47
+margin_bottom = 272.863
+custom_constants/separation = 44
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="N/H"]
+margin_top = 38.0
+margin_right = 96.0
+margin_bottom = 52.0
+text = "New Character:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="N/H"]
+margin_left = 140.0
+margin_top = 20.0
+margin_right = 510.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 370, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+align = 1
+max_length = 14
+placeholder_text = "Name + Enter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/H"]
+margin_left = 554.0
+margin_top = 38.0
+margin_right = 648.0
+margin_bottom = 52.0
+text = "Ironman Mode"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanMode" type="CheckButton" parent="N/H"]
+margin_left = 692.0
+margin_right = 782.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 90, 90 )
+pressed = true
+align = 1
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="H1" type="HBoxContainer" parent="N"]
+margin_left = 3.88489
+margin_top = 265.542
+margin_right = 1188.88
+margin_bottom = 345.542
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete1" type="TextureButton" parent="N/H1"]
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="Label" type="Label" parent="N/H1/Delete1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -55.0
+margin_right = 40.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 80, 80 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Charactername" type="Label" parent="N/H1"]
+margin_left = 130.0
+margin_top = 33.0
+margin_right = 585.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 455, 0 )
+text = "                                   -  Empty Characterslot    -"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/H1"]
+margin_left = 635.0
+margin_top = 33.0
+margin_right = 755.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="Label" parent="N/H1"]
+margin_left = 805.0
+margin_top = 33.0
+margin_right = 895.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 90, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanMode" type="TextureRect" parent="N/H1"]
+margin_left = 945.0
+margin_right = 1025.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+expand = true
+
+[node name="PlayChar1" type="TextureButton" parent="N/H1/IronmanMode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanTexture" type="TextureRect" parent="N/H1/IronmanMode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.7937
+margin_top = -25.0
+margin_right = 24.2063
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="H2" type="HBoxContainer" parent="N"]
+margin_left = 7.95441
+margin_top = 330.152
+margin_right = 1192.95
+margin_bottom = 410.152
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete2" type="TextureButton" parent="N/H2"]
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="Label" type="Label" parent="N/H2/Delete2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -55.0
+margin_right = 40.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 80, 80 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Charactername" type="Label" parent="N/H2"]
+margin_left = 130.0
+margin_top = 33.0
+margin_right = 585.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 455, 0 )
+size_flags_horizontal = 4
+text = "                                   -  Empty Characterslot    -"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/H2"]
+margin_left = 635.0
+margin_top = 33.0
+margin_right = 755.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="Label" parent="N/H2"]
+margin_left = 805.0
+margin_top = 33.0
+margin_right = 895.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 90, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanMode" type="TextureRect" parent="N/H2"]
+margin_left = 945.0
+margin_right = 1025.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+expand = true
+
+[node name="PlayChar2" type="TextureButton" parent="N/H2/IronmanMode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -0.793701
+margin_bottom = -0.793701
+rect_min_size = Vector2( 50, 50 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanTexture" type="TextureRect" parent="N/H2/IronmanMode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="H3" type="HBoxContainer" parent="N"]
+margin_left = 9.61395
+margin_top = 404.041
+margin_right = 1194.61
+margin_bottom = 484.041
+custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete3" type="TextureButton" parent="N/H3"]
+margin_right = 80.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="Label" type="Label" parent="N/H3/Delete3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -56.0
+margin_right = 40.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 80, 80 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "X"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Charactername" type="Label" parent="N/H3"]
+margin_left = 130.0
+margin_top = 33.0
+margin_right = 585.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 455, 0 )
+text = "                                   -  Empty Characterslot    -"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/H3"]
+margin_left = 635.0
+margin_top = 33.0
+margin_right = 755.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 120, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin2" type="Label" parent="N/H3"]
+margin_left = 805.0
+margin_top = 33.0
+margin_right = 895.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 90, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanMode" type="TextureRect" parent="N/H3"]
+margin_left = 945.0
+margin_right = 1025.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+expand = true
+
+[node name="PlayChar3" type="TextureButton" parent="N/H3/IronmanMode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 50, 50 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IronmanTexture" type="TextureRect" parent="N/H3/IronmanMode"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 50, 50 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="N"]
+margin_left = 1720.0
+margin_top = 976.0
+margin_right = 1912.0
+margin_bottom = 1064.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="N/BackButton"]
+margin_left = -882.996
+margin_top = -481.803
+margin_right = -746.996
+margin_bottom = -423.803
+text = "Back"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="N/Popup/TextureRect/ConfirmDelete" to="." method="_on_ConfirmDelete_pressed"]
+[connection signal="pressed" from="N/Popup/TextureRect/StopDelete" to="." method="_on_StopDelete_pressed"]
+[connection signal="text_entered" from="N/H/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="toggled" from="N/H/IronmanMode" to="." method="_on_IronmanMode_toggled"]
+[connection signal="pressed" from="N/H1/Delete1" to="." method="_on_Delete1_pressed"]
+[connection signal="pressed" from="N/H1/IronmanMode/PlayChar1" to="." method="_on_PlayChar1_pressed"]
+[connection signal="pressed" from="N/H2/Delete2" to="." method="_on_Delete2_pressed"]
+[connection signal="pressed" from="N/H2/IronmanMode/PlayChar2" to="." method="_on_PlayChar2_pressed"]
+[connection signal="pressed" from="N/H3/Delete3" to="." method="_on_Delete3_pressed"]
+[connection signal="pressed" from="N/H3/IronmanMode/PlayChar3" to="." method="_on_PlayChar3_pressed"]
+[connection signal="pressed" from="N/BackButton" to="." method="_on_BackButton_pressed"]

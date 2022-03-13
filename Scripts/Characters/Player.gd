@@ -40,7 +40,8 @@ var controller := false
 
 
 
-
+func _ready():
+	print(CharacterSave.character_name)
 
 func get_input():
 	var dir = 0
@@ -382,6 +383,8 @@ func _physics_process(delta):
 		"death":
 			animation_mode.travel("Death_" +last_direction)
 			velocity.y += gravity * delta
+			if is_on_floor():
+				velocity.x = lerp(velocity.x, 0, friction)
 			velocity = move_and_slide(velocity, Vector2.UP)
 func change_crawling():
 	$CollisionStanding.disabled = true

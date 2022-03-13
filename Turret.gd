@@ -81,7 +81,6 @@ func _on_ShootCD_timeout():
 	can_shoot = true
 	
 func on_hit(damage, origin, enemyposx):
-	print("hit")
 	if state != "death":
 		current_hp -= damage
 	if current_hp <= 0:
