@@ -4,8 +4,8 @@ var delete_array = []
 var charslot_dict = {"Charslot1": ["empty", "empty"], "Charslot2" : ["empty", "empty"], "Charslot3" : ["empty", "empty"] }
 var progress_dict = {}
 
-# ironman_texture = preload("res://assets/UI/UI_Icon/2773431.png")
-#const bunny_texture = preload("res://assets/UI/UI_Icon/Rabbit_ff00c8.png")
+const ironman_texture = preload("res://icon.png")
+const bunny_texture = preload("res://icon.png")
 func _ready():
 	LoadSlots()
 
@@ -31,14 +31,14 @@ func LoadSlots():
 func _on_IronmanMode_toggled(button_pressed):
 	if button_pressed:
 		ironman = true
-		#get_node("N/H1/IronmanMode/PlayChar1").texture_normal = ironman_texture
-		#get_node("N/H2/IronmanMode/PlayChar2").texture_normal = ironman_texture
-		#get_node("N/H3/IronmanMode/PlayChar3").texture_normal = ironman_texture
+		get_node("N/H1/IronmanMode/PlayChar1").texture_normal = ironman_texture
+		get_node("N/H2/IronmanMode/PlayChar2").texture_normal = ironman_texture
+		get_node("N/H3/IronmanMode/PlayChar3").texture_normal = ironman_texture
 	else:
 		ironman = false
-		#get_node("N/H1/IronmanMode/PlayChar1").texture_normal = bunny_texture
-		#get_node("N/H2/IronmanMode/PlayChar2").texture_normal = bunny_texture
-		#get_node("N/H3/IronmanMode/PlayChar3").texture_normal = bunny_texture
+		get_node("N/H1/IronmanMode/PlayChar1").texture_normal = bunny_texture
+		get_node("N/H2/IronmanMode/PlayChar2").texture_normal = bunny_texture
+		get_node("N/H3/IronmanMode/PlayChar3").texture_normal = bunny_texture
 		
 func _on_LineEdit_text_entered(new_text):
 	var counter = 1
@@ -91,6 +91,7 @@ func _on_PlayChar1_pressed():
 			savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.READ)
 			progress_dict = savefile.get_var()
 			CharacterSave.load_progress(progress_dict)
+			print(progress_dict)
 			savefile.close()
 			$SFXStreamPlayer.play()
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -99,8 +100,8 @@ func _on_PlayChar1_pressed():
 			print("this path")
 			savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.WRITE)
 			savefile.close()
-			CharacterSave.character_name = charslot_dict["Charslot1"][0]
-			CharacterSave.ironman = charslot_dict["Charslot1"][1]
+			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot1"][0]
+			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot1"][1]
 			CharacterSave.save_progress()
 			$SFXStreamPlayer.play()
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -121,8 +122,8 @@ func _on_PlayChar2_pressed():
 		else:
 			savefile.open("user://save_file"+ charslot_dict["Charslot2"][0] +".dat", File.WRITE)
 			savefile.close()
-			CharacterSave.character_name = charslot_dict["Charslot2"][0]
-			CharacterSave.ironman = charslot_dict["Charslot2"][1]
+			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot2"][0]
+			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot2"][1]
 			CharacterSave.save_progress()
 			$SFXStreamPlayer.play()
 			yield(get_tree().create_timer(0.5), "timeout")
@@ -142,8 +143,8 @@ func _on_PlayChar3_pressed():
 		else:
 			savefile.open("user://save_file"+ charslot_dict["Charslot3"][0] +".dat", File.WRITE)
 			savefile.close()
-			CharacterSave.character_name = charslot_dict["Charslot3"][0]
-			CharacterSave.ironman = charslot_dict["Charslot3"][1]
+			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot3"][0]
+			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot3"][1]
 			CharacterSave.save_progress()
 			$SFXStreamPlayer.play()
 			yield(get_tree().create_timer(0.5), "timeout")

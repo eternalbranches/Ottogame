@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
@@ -27,6 +27,11 @@
 [ext_resource path="res://Scenes/Characters/Enemies/Guard.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Scenes/Maps/Lighttest.gd" type="Script" id=26]
 [ext_resource path="res://Scenes/Objects/Checkpoint.tscn" type="PackedScene" id=27]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Walljump_Unlock.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Timeslow_Unlock.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Crawling_Unlock.tscn" type="PackedScene" id=30]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Running_Unlock.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Gun_Unlock.tscn" type="PackedScene" id=32]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -1316,6 +1321,12 @@ texture = ExtResource( 2 )
 [node name="Lamp3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 757.184, 102.583 )
 
+[node name="Lamp16" parent="." instance=ExtResource( 12 )]
+position = Vector2( 2089.37, -1574.67 )
+
+[node name="Lamp17" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1390.75, -1561.95 )
+
 [node name="Lamp4" parent="." instance=ExtResource( 12 )]
 position = Vector2( 759.652, 287.229 )
 
@@ -1344,7 +1355,7 @@ position = Vector2( 3459.89, -799.702 )
 flickering = true
 
 [node name="Lamp11" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1513.12, -507.79 )
+position = Vector2( 1380.26, -516.199 )
 flickering = true
 
 [node name="Lamp15" parent="." instance=ExtResource( 12 )]
@@ -1490,7 +1501,8 @@ text = "CPU"
 [node name="Player" parent="YSort/Player" instance=ExtResource( 5 )]
 position = Vector2( 1086.56, -1534.79 )
 speed = 125
-jump_speed = -900
+jump_speed = -500
+gravity = 1000
 
 [node name="Enemy" type="YSort" parent="YSort"]
 
@@ -1522,3 +1534,26 @@ position = Vector2( 41.2572, 254.591 )
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 27 )]
 position = Vector2( 1862.05, -466.828 )
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource( 27 )]
+position = Vector2( 2136.5, -1508.08 )
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource( 27 )]
+position = Vector2( 1372.72, -1515.46 )
+
+[node name="Powerups" type="Node" parent="."]
+
+[node name="Walljump_Unlock" parent="Powerups" instance=ExtResource( 28 )]
+position = Vector2( 1376.78, -481.328 )
+
+[node name="Timeslow_Unlock" parent="Powerups" instance=ExtResource( 29 )]
+position = Vector2( 2071.14, -1498.09 )
+
+[node name="Crawling_Unlock" parent="Powerups" instance=ExtResource( 30 )]
+position = Vector2( 933.258, 189.767 )
+
+[node name="Running_Unlock" parent="Powerups" instance=ExtResource( 31 )]
+position = Vector2( 281.126, 243.939 )
+
+[node name="Gun_Unlock" parent="Powerups" instance=ExtResource( 32 )]
+position = Vector2( 1806.32, -477.638 )

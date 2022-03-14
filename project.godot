@@ -153,6 +153,7 @@ Aim_assist={
 2d_render/layer_4="Projectiles"
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_6="Hitbox"
+2d_physics/layer_7="Pickups"
 
 [physics]
 

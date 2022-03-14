@@ -5,7 +5,7 @@ export (int) var dash_speed := 600
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
-export (int) var walljump_power := 300
+export (int) var walljump_power := -300
 
 export (float, 0, 1.0) var friction = 0.3
 export (float, 0, 1.0) var acceleration = 0.1
@@ -31,6 +31,7 @@ var dash_r := 0
 var knockback := false
 var bullettime := false
 var can_jump := false
+var can_doublejump := false
 var started := false
 var can_wallslide := true
 
@@ -41,20 +42,21 @@ var controller := false
 
 
 func _ready():
-	print(CharacterSave.character_name)
+	pass
 
 func get_input():
 	var dir = 0
-	if Input.is_action_just_pressed("Right"):
-		$"Dash-timer".start()
-		if dash_r == 1:
-			state = "running"
-		dash_r += 1
-	if Input.is_action_just_pressed("Left"):
-		$"Dash-timer".start()
-		if dash_l == 1:
-			state = "running"
-		dash_l += 1
+	if CharacterSave.save_dict["running"] == true:
+		if Input.is_action_just_pressed("Right"):
+			$"Dash-timer".start()
+			if dash_r == 1:
+				state = "running"
+			dash_r += 1
+		if Input.is_action_just_pressed("Left"):
+			$"Dash-timer".start()
+			if dash_l == 1:
+				state = "running"
+			dash_l += 1
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
 		animation_mode.travel("Walk_E")
@@ -71,14 +73,15 @@ func get_input():
 		velocity.x = lerp(velocity.x, 0, friction)
 		
 		
-		
-	if Input.is_action_just_pressed("Timeslow"):
-		if bullettime == false:
-			Engine.time_scale = 0.5
-			bullettime = true
-		else:
-			Engine.time_scale = 1.0
-			bullettime = false
+	
+	if CharacterSave.save_dict["timeslow"] == true:
+		if Input.is_action_just_pressed("Timeslow"):
+			if bullettime == false:
+				Engine.time_scale = 0.5
+				bullettime = true
+			else:
+				Engine.time_scale = 1.0
+				bullettime = false
 			
 	if Input.is_action_just_pressed("Aim_assist"):
 		if possible_targets.empty() == false:
@@ -137,13 +140,15 @@ func get_input_running():
 	if Input.is_action_just_released("Left"):
 		state = "moving"
 		
-	if Input.is_action_just_pressed("Timeslow"):
-		if bullettime == false:
-			Engine.time_scale = 0.5
-			bullettime = true
-		else:
-			Engine.time_scale = 1.0
-			bullettime = false
+	
+	if CharacterSave.save_dict["running"] == true:
+		if Input.is_action_just_pressed("Timeslow"):
+			if bullettime == false:
+				Engine.time_scale = 0.5
+				bullettime = true
+			else:
+				Engine.time_scale = 1.0
+				bullettime = false
 			
 	if Input.is_action_just_pressed("Aim_assist"):
 		if possible_targets.empty() == false:
@@ -186,23 +191,21 @@ func get_input_midair():
 	#	last_direction = "right"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
 		#	state = "walljump"
-	if is_on_wall() and can_wallslide == true:
-		state = "wallslide"
-		velocity = Vector2.ZERO
+	if CharacterSave.save_dict["walljump"] == true:
+		if is_on_wall() and can_wallslide == true:
+			state = "wallslide"
+			velocity = Vector2.ZERO
 	#if Input.is_action_pressed("Left"):
 	#	animation_mode.travel("Jumping_W")
 	#	velocity.x -= speed
 	#	last_direction = "left"
 		#if is_on_wall() and Input.is_action_just_pressed("Up"):
-		#	state = "walljump"
-		if is_on_wall() and can_wallslide == true:
-			state = "wallslide"
-			velocity = Vector2.ZERO
+		#	state = "walljump
 			
 	
 
 func _physics_process(delta):
-	$Label.text = state
+	$DebugState.text = state
 	match state:
 		"idle":
 			if last_direction == "right":
@@ -224,9 +227,11 @@ func _physics_process(delta):
 					state = "moving"
 				else:
 					state = "midair"
-			if Input.is_action_just_pressed("Crawl"):
-				change_crawling()
-				state = "crawling"
+			
+			if CharacterSave.save_dict["crawling"] == true:
+				if Input.is_action_just_pressed("Crawl"):
+					change_crawling()
+					state = "crawling"
 			
 
 				
@@ -246,9 +251,10 @@ func _physics_process(delta):
 			#elif velocity.x > 0.1 and velocity.x < -0.1:
 			elif (round(velocity.x)) == 0:
 				state = "idle"
-			elif Input.is_action_just_pressed("Crawl"):
-				change_crawling()
-				state = "crawling"
+			if CharacterSave.save_dict["crawling"] == true:
+				if Input.is_action_just_pressed("Crawl"):
+					change_crawling()
+					state = "crawling"
 				
 		"running":
 			get_input_running()
@@ -334,16 +340,13 @@ func _physics_process(delta):
 				
 		"walljump":
 			velocity.y += gravity/3 * delta
-			var airdrag = 5
-			#velocity.y -= 5 * airdrag
-			airdrag -= 1
 			if last_direction == "right":
 				velocity.x += 15
 			else:
 				velocity.x -= 15
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if started == false:
-				velocity.y = -600
+				velocity.y = walljump_power
 				if $Wallcheck_W.is_colliding() == true:
 					velocity.x = 340
 					last_direction = "right"
@@ -401,18 +404,19 @@ func action():
 			#global_position.y -= 8
 			state = "climbing"
 func shooting():
-	if Input.is_action_just_pressed("Shoot"):
-		var skill = load("res://Scenes/Abilities/Bullet.tscn")
-		var skill_instance = skill.instance()
-		if controller == false:
-			skill_instance.rotation = get_angle_to(get_global_mouse_position())
-		else:
-			if current_target != null:
-				skill_instance.rotation = get_angle_to(current_target.get_global_position())
-		skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
-		skill_instance.origin = "Player"
-		#skill_instance.node_reference = get_path()
-		get_parent().add_child(skill_instance)
+	if CharacterSave.save_dict["gun"] == true:
+		if Input.is_action_just_pressed("Shoot"):
+			var skill = load("res://Scenes/Abilities/Bullet.tscn")
+			var skill_instance = skill.instance()
+			if controller == false:
+				skill_instance.rotation = get_angle_to(get_global_mouse_position())
+			else:
+				if current_target != null:
+					skill_instance.rotation = get_angle_to(current_target.get_global_position())
+			skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
+			skill_instance.origin = "Player"
+			#skill_instance.node_reference = get_path()
+			get_parent().add_child(skill_instance)
 		
 
 
@@ -457,3 +461,9 @@ func _on_Aim_Assist_area_entered(area):
 func _on_Aim_Assist_area_exited(area):
 	possible_targets.erase(area)
 	print(possible_targets)
+
+func collect_powerup(PText):
+	$Powerup.visible = true
+	$Powerup.text = PText
+	yield(get_tree().create_timer(5), "timeout")
+	$Powerup.visible = false

@@ -633,14 +633,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3.78055 )
@@ -652,11 +652,20 @@ position = Vector2( 0, 6 )
 shape = SubResource( 2 )
 disabled = true
 
-[node name="Label" type="Label" parent="."]
+[node name="DebugState" type="Label" parent="."]
 margin_left = -24.3197
 margin_top = -41.6496
 margin_right = 15.6803
 margin_bottom = -27.6496
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="Label" parent="."]
+margin_left = -52.707
+margin_top = -45.6652
+margin_right = -4.70699
+margin_bottom = -29.6652
 __meta__ = {
 "_edit_use_anchors_": false
 }

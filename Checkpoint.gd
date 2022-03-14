@@ -7,5 +7,5 @@ func _ready():
 
 
 func _on_Checkpoint_body_entered(body):
-	CharacterSave.current_checkpoint = checkpoint_number
+	CharacterSave.save_dict["current_checkpoint"] = checkpoint_number
 	CharacterSave.save_progress()

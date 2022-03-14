@@ -17,6 +17,6 @@ func assign_checkpoints():
 		
 func checkpoint_load():
 	var keys = checkpoints.keys()
-	var key  = keys[CharacterSave.current_checkpoint]
+	var key  = keys[CharacterSave.save_dict["current_checkpoint"]]
 	print("keys:", keys, "key:", key)
 	$YSort/Player/Player.global_position = checkpoints[key]
