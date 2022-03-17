@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
-export (int) var speed := 450
-export (int) var dash_speed := 600
+export (int) var speed := 350
+export (int) var dash_speed := 500
+export (int) var dash_jump_speed := 425
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
 export (int) var walljump_power := -300
+export (int) var knockback_power := 300
+
 
 export (float, 0, 1.0) var friction = 0.3
 export (float, 0, 1.0) var acceleration = 0.1
@@ -31,7 +34,7 @@ var dash_r := 0
 var knockback := false
 var bullettime := false
 var can_jump := false
-var can_doublejump := false
+var can_doublejump := true
 var started := false
 var can_wallslide := true
 
@@ -183,26 +186,39 @@ func get_input_midair():
 		dir -= 1
 	if dir != 0:
 		velocity.x = lerp(velocity.x, dir * speed, acceleration)
-	#velocity.x = 0
-		
-	#if Input.is_action_pressed("Right"):
-	#	animation_mode.travel("Jumping_E")
-	#	velocity.x += speed
-	#	last_direction = "right"
-		#if is_on_wall() and Input.is_action_just_pressed("Up"):
-		#	state = "walljump"
 	if CharacterSave.save_dict["walljump"] == true:
 		if is_on_wall() and can_wallslide == true:
 			state = "wallslide"
+			can_doublejump = true
 			velocity = Vector2.ZERO
-	#if Input.is_action_pressed("Left"):
-	#	animation_mode.travel("Jumping_W")
-	#	velocity.x -= speed
-	#	last_direction = "left"
-		#if is_on_wall() and Input.is_action_just_pressed("Up"):
-		#	state = "walljump
+	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Up"):
+			velocity.y = jump_speed
+			can_doublejump = false
 			
-	
+			
+
+func get_input_midair_run():
+	var dir = 0
+	if Input.is_action_pressed("Right"):
+		last_direction = "right"
+		animation_mode.travel("Jumping_E")
+		dir += 1
+	if Input.is_action_pressed("Left"):
+		last_direction = "left"
+		animation_mode.travel("Jumping_W")
+		dir -= 1
+	if dir != 0:
+		velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
+	if CharacterSave.save_dict["walljump"] == true:
+		if is_on_wall() and can_wallslide == true:
+			state = "wallslide"
+			can_doublejump = true
+			velocity = Vector2.ZERO
+	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Up"):
+			velocity.y = jump_speed
+			can_doublejump = false
 
 func _physics_process(delta):
 	$DebugState.text = state
@@ -267,7 +283,7 @@ func _physics_process(delta):
 					#if is_on_floor() == false: double jump
 					#	state = "midair"
 			if is_on_floor() == false:
-				state = "midair"
+				state = "midair_run"
 			elif velocity == Vector2.ZERO:
 				state = "idle"
 			elif Input.is_action_just_pressed("Crawl"):
@@ -286,7 +302,23 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			if is_on_floor():
+				can_doublejump = true
 				state = "moving"
+
+		"midair_run":
+			if last_direction == "right":
+				animation_mode.travel("Jumping_E")
+			else:
+				animation_mode.travel("Jumping_W")
+			get_input_midair_run()
+			shooting()
+			action()
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if is_on_floor():
+				can_doublejump = true
+				state = "moving"
+		
 		"crawling":
 			get_input_crawl()
 			shooting()
@@ -333,7 +365,7 @@ func _physics_process(delta):
 				Engine.time_scale = 1.0
 				bullettime = false
 				knockback = true
-				yield(get_tree().create_timer(1), "timeout")
+				yield(get_tree().create_timer(0.3), "timeout")
 				knockback = false
 				invulnerable = false
 				state = "midair"
@@ -356,9 +388,9 @@ func _physics_process(delta):
 					last_direction = "left"
 					animation_mode.travel("Jumping_W")
 				started = true
-				yield(get_tree().create_timer(0.4), "timeout")
+				yield(get_tree().create_timer(0.28), "timeout")
 				started = false
-				state = "midair"
+				state = "midair_run"
 			shooting()
 			
 		"wallslide":
@@ -435,7 +467,7 @@ func on_hit(damage, origin, enemy_posx):
 	else:
 		velocity.x = +200
 	velocity.y = 0
-	velocity.y -= 1000
+	velocity.y -= knockback_power
 	state = "knockback"
 	if current_hp <= 0:
 			on_death()

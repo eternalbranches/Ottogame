@@ -48,3 +48,4 @@ __meta__ = {
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
+[connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]

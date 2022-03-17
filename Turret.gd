@@ -59,17 +59,7 @@ func _on_Range_body_entered(body):
 
 func _on_Range_body_exited(body):
 	if state == "shoot":
-		var space_state = get_world_2d().direct_space_state
-		var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
-		if sight_check:
-			if sight_check.collider.name == "Player":
-				pass
-		else:
-			print(sight_check)
-			state = "idle"
-			$ShootCD.stop()
-			player_in_range = false
-			initialized = false
+		$ChangeState.start()
 	else:
 		player_in_range = false
 		initialized = false
@@ -88,3 +78,12 @@ func on_hit(damage, origin, enemyposx):
 			
 func on_death():
 	state = "death"
+
+
+func _on_ChangeState_timeout():
+	if $Range.get_overlapping_bodies().empty():
+		if state != "death":
+			state = "idle"
+			$ShootCD.stop()
+			player_in_range = false
+			initialized = false
