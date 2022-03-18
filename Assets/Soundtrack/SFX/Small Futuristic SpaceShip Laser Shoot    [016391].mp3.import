@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-4247f47fd773dd3f5222c41ff16a4105.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3"
+dest_files=[ "res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-4247f47fd773dd3f5222c41ff16a4105.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

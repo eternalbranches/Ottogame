@@ -188,9 +188,17 @@ func get_input_midair():
 		velocity.x = lerp(velocity.x, dir * speed, acceleration)
 	if CharacterSave.save_dict["walljump"] == true:
 		if is_on_wall() and can_wallslide == true:
-			state = "wallslide"
-			can_doublejump = true
-			velocity = Vector2.ZERO
+			if $Wallcheck_W.is_colliding() == true:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "left"
+			elif $Wallcheck_E.is_colliding() == true:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "right"
+				
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
@@ -212,9 +220,16 @@ func get_input_midair_run():
 		velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
 	if CharacterSave.save_dict["walljump"] == true:
 		if is_on_wall() and can_wallslide == true:
-			state = "wallslide"
-			can_doublejump = true
-			velocity = Vector2.ZERO
+			if $Wallcheck_W.is_colliding() == true:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "left"
+			elif $Wallcheck_E.is_colliding() == true:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "right"
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
@@ -397,8 +412,10 @@ func _physics_process(delta):
 			shooting()
 			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
 				state = "midair"
-			#if is_on_floor():
-			#	state = "idle"
+			if is_on_floor():
+				yield(get_tree().create_timer(0.2), "timeout")
+				if state != "death":
+					state = "idle"
 			elif velocity.y > 180:
 				can_wallslide = false
 				state = "midair"
@@ -447,6 +464,7 @@ func shooting():
 					skill_instance.rotation = get_angle_to(current_target.get_global_position())
 			skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
 			skill_instance.origin = "Player"
+			$SFXPLayer.play()
 			#skill_instance.node_reference = get_path()
 			get_parent().add_child(skill_instance)
 		

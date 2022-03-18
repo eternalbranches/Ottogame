@@ -1,25 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Abilities/Smoketrail.gd" type="Script" id=1]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 1.4, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0.248322, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1 )
-
-[sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0.592357, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1 )
+offsets = PoolRealArray( 0.898089, 0.949045 )
+colors = PoolColorArray( 0.359375, 0.359375, 0.359375, 1, 1, 0, 0, 1 )
 
 [node name="Smoketrail" type="Line2D"]
-width_curve = SubResource( 2 )
-gradient = SubResource( 3 )
+width_curve = SubResource( 1 )
+default_color = Color( 0, 0, 0, 1 )
 end_cap_mode = 2
-antialiased = true
 script = ExtResource( 1 )
-gradient_col = SubResource( 4 )
+gradient_col = SubResource( 3 )
 
 [node name="Decay" type="Tween" parent="."]
 

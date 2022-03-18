@@ -34,6 +34,7 @@ func _process(delta):
 				skill_instance.enemyposx = position.x
 				skill_instance.origin = "Enemy"
 				#skill_instance.node_reference = get_path()
+				$SFXPLayer.play()
 				get_parent().add_child(skill_instance)
 				can_shoot = false
 	

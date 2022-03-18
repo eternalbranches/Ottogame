@@ -55,6 +55,7 @@ func _physics_process(delta):
 				skill_instance.enemyposx = position.x
 				skill_instance.origin = "Enemy"
 				#skill_instance.node_reference = get_path()
+				$SFXPLayer.play()
 				get_parent().add_child(skill_instance)
 				can_shoot = false
 		"death":
@@ -66,7 +67,8 @@ func _physics_process(delta):
 				knockback = true
 				yield(get_tree().create_timer(1), "timeout")
 				knockback = false
-				state = "sight"
+				if state != "death":
+					state = "sight"
 		"chase":
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -103,6 +105,8 @@ func on_hit(damage, origin, enemy_posx):
 		
 func on_death():
 	state = "death"
+	animation_mode.travel("Death_" + current_direction)
+	
 	
 func sightcheck():
 	var space_state = get_world_2d().direct_space_state

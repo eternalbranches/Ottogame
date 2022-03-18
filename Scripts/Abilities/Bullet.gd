@@ -23,8 +23,8 @@ func _ready():
 	SelfDestruct()
 
 	
-	#var SFX = load("res://assets/sfx/"+skill_name+".wav")
-	#SFX_Impact = load("res://assets/sfx/"+skill_name+"_Impact.wav")
+	#var SFX = load()
+	SFX_Impact = load("res://Assets/Soundtrack/SFX/Futuristic Crossbow Shoot - Arrow Fly Zap Swish - 01    [002605].mp3")
 	#get_node("AudioStreamPlayer2D").stream = SFX
 	$AudioStreamPlayer2D.play()
 	apply_impulse(Vector2(), Vector2(projectile_speed, 0).rotated(rotation))

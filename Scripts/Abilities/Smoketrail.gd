@@ -2,15 +2,15 @@ extends Line2D
 signal dead
 
 export var limited_lifetime := false
-export var wildness := 3.0
+export var wildness := 5.0
 export var min_spawn_distance := 5.0
 export var gravity := Vector2.UP
 export var gradient_col : Gradient = Gradient.new()
 
-var lifetime := [1.2, 1.6]
+var lifetime := [1.2, 1.8]
 var tick_speed := 0.05
 var tick := 0.0
-var wild_speed := 0.1
+var wild_speed := 0.2
 var point_age := [0.0]
 var stopped := false
 
@@ -37,7 +37,7 @@ func _process(delta):
 			point_age[p] += 5*delta
 			var rand_vector := Vector2( rand_range(-wild_speed, wild_speed), rand_range(-wild_speed, wild_speed) )
 			points[p] += gravity + ( rand_vector * wildness * point_age[p] )
-		#if stopped:
+		if stopped:
 			# This part is optional and only servers visual polishing purposes.
 			# If a trail is stopped, and a very intense gradient is used, this part can be left in to change the
 			# gradient of the line slowly towards a softer end.

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Futuristic Crossbow Shoot - Arrow Fly Zap Swish - 01    [002605].mp3-a17db34dccc0087a090cc31367e9362b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/Futuristic Crossbow Shoot - Arrow Fly Zap Swish - 01    [002605].mp3"
+dest_files=[ "res://.import/Futuristic Crossbow Shoot - Arrow Fly Zap Swish - 01    [002605].mp3-a17db34dccc0087a090cc31367e9362b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

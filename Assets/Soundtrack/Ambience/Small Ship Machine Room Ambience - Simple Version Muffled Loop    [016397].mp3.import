@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Small Ship Machine Room Ambience - Simple Version Muffled Loop    [016397].mp3-75fb8e8f05bbfcc5a8f0891d0ddc5dd6.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/Ambience/Small Ship Machine Room Ambience - Simple Version Muffled Loop    [016397].mp3"
+dest_files=[ "res://.import/Small Ship Machine Room Ambience - Simple Version Muffled Loop    [016397].mp3-75fb8e8f05bbfcc5a8f0891d0ddc5dd6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fire Burning Loop 01.wav-dff2633c93978e4714008ab62b1d2bb2.sample"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/Fire Burning Loop 01.wav"
+dest_files=[ "res://.import/Fire Burning Loop 01.wav-dff2633c93978e4714008ab62b1d2bb2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
