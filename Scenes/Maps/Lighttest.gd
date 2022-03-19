@@ -45,3 +45,11 @@ func _on_Player_death():
 	#$YSort/Player/Player.global_position = checkpoints[key]
 	#$CanvasModulate.color = Color(0.27,0.27,0.27)
 	
+
+
+func _on_Cameratrigger_body_entered(body):
+	$Camera2D.current = true
+
+
+func _on_Cameratrigger_body_exited(body):
+	$YSort/Player/Player/Camera2D.current = true
