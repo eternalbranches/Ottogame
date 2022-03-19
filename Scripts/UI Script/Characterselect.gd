@@ -1,8 +1,9 @@
 extends Control
-var ironman = false
+var ironman := false
 var delete_array = []
 var charslot_dict = {"Charslot1": ["empty", "empty"], "Charslot2" : ["empty", "empty"], "Charslot3" : ["empty", "empty"] }
 var progress_dict = {}
+var pressed_loading := false
 
 const ironman_texture = preload("res://icon.png")
 const bunny_texture = preload("res://icon.png")
@@ -83,72 +84,75 @@ func CharacterSlots():
 			get_node("N/H"+ str(slot) +"/IronmanMode").visible = false
 			
 func _on_PlayChar1_pressed():
-	if charslot_dict["Charslot1"][0] != "empty":
-		var savefile = File.new()
+	if pressed_loading == false:
+		pressed_loading = true
+		if charslot_dict["Charslot1"][0] != "empty":
+			var savefile = File.new()
 		
-		if savefile.file_exists("user://save_file"+ charslot_dict["Charslot1"][0] +".dat"):
-			print("that path")
-			savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.READ)
-			progress_dict = savefile.get_var()
-			CharacterSave.load_progress(progress_dict)
-			print(progress_dict)
-			savefile.close()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
-		else:
-			print("this path")
-			savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.WRITE)
-			savefile.close()
-			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot1"][0]
-			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot1"][1]
-			CharacterSave.save_progress()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			if savefile.file_exists("user://save_file"+ charslot_dict["Charslot1"][0] +".dat"):
+				savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.READ)
+				progress_dict = savefile.get_var()
+				CharacterSave.load_progress(progress_dict)
+				savefile.close()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			else:
+				savefile.open("user://save_file"+ charslot_dict["Charslot1"][0] +".dat", File.WRITE)
+				savefile.close()
+				CharacterSave.save_dict["character_name"] = charslot_dict["Charslot1"][0]
+				CharacterSave.save_dict["ironman"] = charslot_dict["Charslot1"][1]
+				CharacterSave.save_progress()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 
 
 func _on_PlayChar2_pressed():
-	if charslot_dict["Charslot2"][0] != "empty":
-		var savefile = File.new()
-		if savefile.file_exists("user://save_file"+ charslot_dict["Charslot2"][0] +".dat"):
-			savefile.open("user://save_file"+ charslot_dict["Charslot2"][0] +".dat", File.READ)
-			progress_dict = savefile.get_var()
-			CharacterSave.load_progress(progress_dict)
-			savefile.close()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
-		else:
-			savefile.open("user://save_file"+ charslot_dict["Charslot2"][0] +".dat", File.WRITE)
-			savefile.close()
-			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot2"][0]
-			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot2"][1]
-			CharacterSave.save_progress()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+	if pressed_loading == false:
+		pressed_loading = true
+		if charslot_dict["Charslot2"][0] != "empty":
+			var savefile = File.new()
+			if savefile.file_exists("user://save_file"+ charslot_dict["Charslot2"][0] +".dat"):
+				savefile.open("user://save_file"+ charslot_dict["Charslot2"][0] +".dat", File.READ)
+				progress_dict = savefile.get_var()
+				CharacterSave.load_progress(progress_dict)
+				savefile.close()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			else:
+				savefile.open("user://save_file"+ charslot_dict["Charslot2"][0] +".dat", File.WRITE)
+				savefile.close()
+				CharacterSave.save_dict["character_name"] = charslot_dict["Charslot2"][0]
+				CharacterSave.save_dict["ironman"] = charslot_dict["Charslot2"][1]
+				CharacterSave.save_progress()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 
 func _on_PlayChar3_pressed():
-	if charslot_dict["Charslot3"][0] != "empty":
-		var savefile = File.new()
-		if savefile.file_exists("user://save_file"+ charslot_dict["Charslot3"][0] +".dat"):
-			savefile.open("user://save_file"+ charslot_dict["Charslot3"][0] +".dat", File.READ)
-			progress_dict = savefile.get_var()
-			CharacterSave.load_progress(progress_dict)
-			savefile.close()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
-		else:
-			savefile.open("user://save_file"+ charslot_dict["Charslot3"][0] +".dat", File.WRITE)
-			savefile.close()
-			CharacterSave.save_dict["character_name"] = charslot_dict["Charslot3"][0]
-			CharacterSave.save_dict["ironman"] = charslot_dict["Charslot3"][1]
-			CharacterSave.save_progress()
-			$SFXStreamPlayer.play()
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+	if pressed_loading == false:
+		pressed_loading = true
+		if charslot_dict["Charslot3"][0] != "empty":
+			var savefile = File.new()
+			if savefile.file_exists("user://save_file"+ charslot_dict["Charslot3"][0] +".dat"):
+				savefile.open("user://save_file"+ charslot_dict["Charslot3"][0] +".dat", File.READ)
+				progress_dict = savefile.get_var()
+				CharacterSave.load_progress(progress_dict)
+				savefile.close()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			else:
+				savefile.open("user://save_file"+ charslot_dict["Charslot3"][0] +".dat", File.WRITE)
+				savefile.close()
+				CharacterSave.save_dict["character_name"] = charslot_dict["Charslot3"][0]
+				CharacterSave.save_dict["ironman"] = charslot_dict["Charslot3"][1]
+				CharacterSave.save_progress()
+				$SFXStreamPlayer.play()
+				yield(get_tree().create_timer(0.5), "timeout")
+				get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 			
 			
 func _on_ConfirmDelete_pressed():

@@ -51,5 +51,9 @@ color = Color( 1, 0, 0, 1 )
 energy = 0.5
 shadow_enabled = true
 
+[node name="DestructTimer" type="Timer" parent="."]
+wait_time = 20.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="dead" from="Smoketrail" to="." method="_on_Smoketrail_dead"]
+[connection signal="timeout" from="DestructTimer" to="." method="_on_DestructTimer_timeout"]

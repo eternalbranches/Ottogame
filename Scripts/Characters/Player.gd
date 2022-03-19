@@ -37,11 +37,13 @@ var can_jump := false
 var can_doublejump := true
 var started := false
 var can_wallslide := true
+var can_shoot := true
 
 var possible_targets = []
 var current_target = null
 var controller := false
 
+signal death
 
 
 func _ready():
@@ -381,6 +383,7 @@ func _physics_process(delta):
 				bullettime = false
 				knockback = true
 				yield(get_tree().create_timer(0.3), "timeout")
+				set_collision_mask_bit(2, 1)
 				knockback = false
 				invulnerable = false
 				state = "midair"
@@ -453,7 +456,7 @@ func action():
 			#global_position.y -= 8
 			state = "climbing"
 func shooting():
-	if CharacterSave.save_dict["gun"] == true:
+	if CharacterSave.save_dict["gun"] == true and can_shoot == true:
 		if Input.is_action_just_pressed("Shoot"):
 			var skill = load("res://Scenes/Abilities/Bullet.tscn")
 			var skill_instance = skill.instance()
@@ -465,6 +468,8 @@ func shooting():
 			skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
 			skill_instance.origin = "Player"
 			$SFXPLayer.play()
+			can_shoot = false
+			$GunTimer.start()
 			#skill_instance.node_reference = get_path()
 			get_parent().add_child(skill_instance)
 		
@@ -475,23 +480,24 @@ func _on_Dashtimer_timeout():
 	dash_r = 0
 
 func on_hit(damage, origin, enemy_posx):
-	print(position.x, " ",enemy_posx)
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
-		
-			
 	if position.x < enemy_posx:
 		velocity.x = -200
 	else:
 		velocity.x = +200
 	velocity.y = 0
 	velocity.y -= knockback_power
-	state = "knockback"
-	if current_hp <= 0:
+	
+	if state != "death":
+		state = "knockback"
+		set_collision_mask_bit(2, 0)
+	if current_hp <= 0 and state != "death":
 			on_death()
 		
 func on_death():
 	state = "death"
+	emit_signal("death")
 
 
 func _on_Aim_Assist_body_entered(body):
@@ -517,3 +523,7 @@ func collect_powerup(PText):
 	$Powerup.text = PText
 	yield(get_tree().create_timer(5), "timeout")
 	$Powerup.visible = false
+
+
+func _on_GunTimer_timeout():
+	can_shoot = true

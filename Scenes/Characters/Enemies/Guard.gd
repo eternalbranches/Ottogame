@@ -8,6 +8,7 @@ var velocity := Vector2.ZERO
 export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
 export (int) var speed := 200
+export (int) var touch_damage := 1
 var initialized := false
 var knockback := false
 var can_shoot := true
@@ -75,20 +76,21 @@ func _physics_process(delta):
 			var space_state = get_world_2d().direct_space_state
 			var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
 			if sight_check:
-				if sight_check.collider.name == "Player":
-					if player.position.x > position.x:
+				if sight_check.collider.name == "Player" and player_in_range == true:
+					state = "shoot"
+				elif sight_check.collider.name == "Player" and player_in_range == false:
+					if last_seen.x > position.x:
 						velocity.x = speed
-					if player.position.x < position.x:
+					if last_seen.x < position.x:
 						velocity.x = -speed
-			else:
-				if last_seen.x > position.x:
-					velocity.x = speed
-				if last_seen.x < position.x:
-					velocity.x = -speed
+				else:
+					if last_seen.x > position.x:
+						velocity.x = speed
+					if last_seen.x < position.x:
+						velocity.x = -speed
 			
 			
 func on_hit(damage, origin, enemy_posx):
-	print(position.x, " ",enemy_posx)
 	if state != "death":
 		current_hp -= damage
 		
@@ -106,6 +108,9 @@ func on_hit(damage, origin, enemy_posx):
 func on_death():
 	state = "death"
 	animation_mode.travel("Death_" + current_direction)
+	set_collision_layer_bit(2, 0)
+	set_collision_mask_bit(1,0)
+	$Hurtbox.queue_free()
 	
 	
 func sightcheck():
@@ -118,7 +123,7 @@ func sightcheck():
 				state = "shoot"
 		else:
 			initialized = false
-			state = "sight"
+			state = "chase"
 			$ShootCD.stop()
 
 func _on_ShootCD_timeout():
@@ -140,3 +145,7 @@ func _on_Range_body_exited(body):
 		if state != "death":
 			state = "chase"
 		$ShootCD.stop()
+
+
+func _on_Hurtbox_body_entered(body):
+	body.on_hit(touch_damage, "enemy", position.x)

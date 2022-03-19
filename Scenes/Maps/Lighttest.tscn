@@ -1592,3 +1592,5 @@ position = Vector2( 2385.69, -1570.02 )
 visible = false
 position = Vector2( 2271.6, -1537.41 )
 scale = Vector2( 3.2, 3.2 )
+
+[connection signal="death" from="YSort/Player/Player" to="." method="_on_Player_death"]

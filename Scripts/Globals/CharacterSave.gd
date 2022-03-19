@@ -13,7 +13,6 @@ func save_progress():
 	
 	
 func load_progress(loadeddata):
-	print(loadeddata)
 	save_dict = loadeddata
 	
 	

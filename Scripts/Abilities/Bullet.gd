@@ -34,8 +34,7 @@ func _process(delta):
 	if dead == false:
 		$Smoketrail.add_point(global_position)
 func SelfDestruct():
-	yield(get_tree().create_timer(life_time), "timeout")
-	queue_free()
+	$DestructTimer.start()
 
 func _on_Area2D_body_entered(body):
 	get_node("AudioStreamPlayer2D").stream = SFX_Impact
@@ -52,3 +51,7 @@ func _on_Area2D_body_entered(body):
 
 func _on_Smoketrail_dead():
 	dead = true
+
+
+func _on_DestructTimer_timeout():
+	queue_free()
