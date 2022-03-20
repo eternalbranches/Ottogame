@@ -8,6 +8,7 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 [sub_resource type="CapsuleShape2D" id=77]
+height = 10.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "Climbing"
@@ -632,14 +633,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -647,7 +648,7 @@ shape = SubResource( 1 )
 
 [node name="CollisionCrawling" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.878431, 0.0235294, 1, 1 )
-position = Vector2( 0, 0.6 )
+position = Vector2( 0, 5.6 )
 shape = SubResource( 77 )
 disabled = true
 
