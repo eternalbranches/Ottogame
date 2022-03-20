@@ -260,9 +260,8 @@ func _physics_process(delta):
 					state = "moving"
 				else:
 					state = "midair"
-			
-			if CharacterSave.save_dict["crawling"] == true:
-				if Input.is_action_just_pressed("Crawl"):
+			if Input.is_action_just_pressed("Crawl"):
+				if CharacterSave.save_dict["crawling"] == true:
 					change_crawling()
 					state = "crawling"
 			
@@ -348,6 +347,7 @@ func _physics_process(delta):
 					#change_standing()
 					velocity.y = jump_speed
 			if is_on_floor() == false:
+				print("crawl")
 				change_standing()
 				state = "midair"
 			if Input.is_action_just_released("Crawl") and ceiling == false:

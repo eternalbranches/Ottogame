@@ -5,10 +5,9 @@
 [ext_resource path="res://Assets/Characters/otto arm spritesheet.png.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=4]
 
-[sub_resource type="CapsuleShape2D" id=77]
+[sub_resource type="CapsuleShape2D" id=1]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 14 )
+[sub_resource type="CapsuleShape2D" id=77]
 
 [sub_resource type="Animation" id=3]
 resource_name = "Climbing"
@@ -633,23 +632,23 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
-shape = SubResource( 77 )
+shape = SubResource( 1 )
 
 [node name="CollisionCrawling" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.878431, 0.0235294, 1, 1 )
-position = Vector2( 0, 6 )
-shape = SubResource( 2 )
+position = Vector2( 0, 0.6 )
+shape = SubResource( 77 )
 disabled = true
 
 [node name="DebugState" type="Label" parent="."]
