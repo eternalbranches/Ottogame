@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=2]
+[gd_scene load_steps=154 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://Scenes/Abilities/Unlocks/Orange_Keycard.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Assets/Effects/floaty_64.png" type="Texture" id=37]
 [ext_resource path="res://Scenes/Characters/Player/Mothgirl.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Scenes/Objects/PushableBlock.tscn" type="PackedScene" id=39]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -1713,6 +1714,9 @@ lifetime = 3.0
 randomness = 1.0
 process_material = SubResource( 114 )
 texture = ExtResource( 37 )
+
+[node name="PushableBlock" parent="." instance=ExtResource( 39 )]
+position = Vector2( 3221.71, 19.9602 )
 
 [connection signal="death" from="YSort/Player/Player" to="." method="_on_Player_death"]
 [connection signal="body_entered" from="Cameratrigger" to="." method="_on_Cameratrigger_body_entered"]

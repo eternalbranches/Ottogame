@@ -682,14 +682,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -768,18 +768,22 @@ one_shot = true
 wait_time = 0.5
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]
-position = Vector2( 1, -12.5511 )
+position = Vector2( 1, 0 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( 10, 0 )
 collide_with_areas = true
 
 [node name="Wallcheck_W" type="RayCast2D" parent="."]
-position = Vector2( -1, -12.5511 )
+position = Vector2( -1, 0 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( -10, 0 )
 collide_with_areas = true
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2( 0, 18 )
+cast_to = Vector2( 0, 9 )
 
 [node name="Aim_Assist" type="Area2D" parent="."]
 position = Vector2( 0, -12.5511 )

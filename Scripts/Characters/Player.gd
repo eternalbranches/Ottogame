@@ -8,6 +8,7 @@ export (int) var jump_speed := -1000
 export (int) var gravity := 3000
 export (int) var walljump_power := -300
 export (int) var knockback_power := 300
+export (int, 0, 200) var push = 100
 
 
 export (float, 0, 1.0) var friction = 0.3
@@ -253,7 +254,14 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			#velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
+			for index in get_slide_count():
+				var collision = get_slide_collision(index)
+				if collision.collider.is_in_group("Pushable"):
+					collision.collider.apply_central_impulse(-collision.normal * push)
+
 			if Input.is_action_just_pressed("Up"):
 				#if is_on_floor():
 					velocity.y = jump_speed
@@ -276,7 +284,12 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
+			for index in get_slide_count():
+				var collision = get_slide_collision(index)
+				if collision.collider.is_in_group("Pushable"):
+					collision.collider.apply_central_impulse(-collision.normal * push)
 			if Input.is_action_just_pressed("Up"):
 					velocity.y = jump_speed
 					#if is_on_floor() == false: double jump
@@ -297,7 +310,12 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
+			for index in get_slide_count():
+				var collision = get_slide_collision(index)
+				if collision.collider.is_in_group("Pushable"):
+					collision.collider.apply_central_impulse(-collision.normal * push)
 			if Input.is_action_just_pressed("Up"):
 					velocity.y = jump_speed
 					#if is_on_floor() == false: double jump
@@ -320,7 +338,8 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			if is_on_floor():
 				can_doublejump = true
 				state = "moving"
@@ -334,7 +353,8 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			if is_on_floor():
 				can_doublejump = true
 				state = "moving"
@@ -344,7 +364,8 @@ func _physics_process(delta):
 			shooting()
 			action()
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity/2, Vector2.UP)
+			velocity = move_and_slide(velocity /2, Vector2.UP,
+					false, 4, PI/4, false)
 			if velocity == Vector2.ZERO:
 				animation_mode.travel("Crawling_E")
 			if Input.is_action_just_pressed("Up") and ceiling == false:
@@ -379,7 +400,8 @@ func _physics_process(delta):
 				
 		"knockback":
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			if knockback == false:
 				invulnerable = true
 				Engine.time_scale = 1.0
@@ -397,7 +419,8 @@ func _physics_process(delta):
 				velocity.x += 15
 			else:
 				velocity.x -= 15
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			if started == false:
 				velocity.y = walljump_power
 				if $Wallcheck_W.is_colliding() == true:
@@ -429,7 +452,8 @@ func _physics_process(delta):
 				can_wallslide = true
 			
 			velocity.y += 140 *delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			if Input.is_action_just_pressed("Down"):
 				state = "midair"
 				can_wallslide = false
@@ -443,11 +467,13 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			if is_on_floor():
 				velocity.x = lerp(velocity.x, 0, friction)
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 			
 		"rise":
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
 func change_crawling():
 	$CollisionStanding.disabled = true
 	$CollisionCrawling.disabled = false

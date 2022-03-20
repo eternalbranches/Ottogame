@@ -177,7 +177,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 3
-frame = 16
+frame = 6
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 2 )
