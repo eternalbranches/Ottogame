@@ -7,6 +7,8 @@ var checkpoint_count := 0
 func _ready():
 	assign_checkpoints()
 	checkpoint_load()
+	if CharacterSave.first_spawn == false:
+		respawn_animation()
 
 func assign_checkpoints():
 	while checkpoint_count !=  $Checkpoints.get_child_count():
@@ -32,6 +34,7 @@ func music_change(track):
 
 
 func _on_Player_death():
+	CharacterSave.first_spawn = false
 	yield(get_tree().create_timer(1), "timeout")
 	$CanvasModulate.color = Color(0,0,0)
 	#var savefile = File.new()
@@ -53,3 +56,13 @@ func _on_Cameratrigger_body_entered(body):
 
 func _on_Cameratrigger_body_exited(body):
 	$YSort/Player/Player/Camera2D.current = true
+	
+func respawn_animation():
+	var keys = checkpoints.keys()
+	var key  = keys[CharacterSave.save_dict["current_checkpoint"]]
+	$YSort/Player/Mothgirl.global_position = checkpoints[key] - Vector2 (40, 15)
+	$YSort/Player/Mothgirl.heal_animation()
+	yield(get_tree().create_timer(3), "timeout")
+	$YSort/Player/Mothgirl.stop_flying()
+	$YSort/Player/Mothgirl.position = Vector2(3700,500)
+	

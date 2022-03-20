@@ -134,10 +134,7 @@ func _on_Range_body_entered(body):
 		state = "sight"
 		player_in_range = true
 	elif state == "chase":
-		yield(get_tree().create_timer(0.2), "timeout")
-		state = "sight"
-		player_in_range = true
-
+		$PositionTimer.start()
 
 func _on_Range_body_exited(body):
 		player_in_range = false
@@ -149,3 +146,8 @@ func _on_Range_body_exited(body):
 
 func _on_Hurtbox_body_entered(body):
 	body.on_hit(touch_damage, "enemy", position.x)
+
+
+func _on_PositionTimer_timeout():
+	state = "sight"
+	player_in_range = true

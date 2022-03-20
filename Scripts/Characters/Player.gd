@@ -47,7 +47,11 @@ signal death
 
 
 func _ready():
-	pass
+	if CharacterSave.first_spawn == false:
+		state = "rise"
+		animation_mode.travel("Rise")
+		
+		
 
 func get_input():
 	var dir = 0
@@ -347,7 +351,6 @@ func _physics_process(delta):
 					#change_standing()
 					velocity.y = jump_speed
 			if is_on_floor() == false:
-				print("crawl")
 				change_standing()
 				state = "midair"
 			if Input.is_action_just_released("Crawl") and ceiling == false:
@@ -441,6 +444,10 @@ func _physics_process(delta):
 			if is_on_floor():
 				velocity.x = lerp(velocity.x, 0, friction)
 			velocity = move_and_slide(velocity, Vector2.UP)
+			
+		"rise":
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
 func change_crawling():
 	$CollisionStanding.disabled = true
 	$CollisionCrawling.disabled = false
@@ -527,3 +534,6 @@ func collect_powerup(PText):
 
 func _on_GunTimer_timeout():
 	can_shoot = true
+
+func on_rise_finished():
+	state = "idle"

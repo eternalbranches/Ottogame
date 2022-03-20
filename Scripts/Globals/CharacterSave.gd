@@ -1,5 +1,5 @@
 extends Node
-
+var first_spawn := true
 var save_dict = {"character_name" : "character_name", "ironman" : false, "current_checkpoint" : 0, 
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
 					"orange_keycard": false}

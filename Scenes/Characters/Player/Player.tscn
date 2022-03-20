@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://Assets/Characters/Otto walk cycle.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
@@ -313,6 +313,48 @@ tracks/1/keys = {
 "values": [ 48, 49, 50, 51, 52, 53, 54, 55 ]
 }
 
+[sub_resource type="Animation" id=78]
+resource_name = "Rise"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 59, 42 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 59, 42 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_rise_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=12]
 resource_name = "Run_E"
 length = 0.6
@@ -478,6 +520,9 @@ animation = "Jumping_E"
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Jumping_W"
 
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "Rise"
+
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "Run_E"
 
@@ -517,8 +562,6 @@ animation = "Walk_W"
 [sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
@@ -578,6 +621,10 @@ animation = "Walk_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=72]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+
 [sub_resource type="AnimationNodeStateMachine" id=73]
 states/Climbing/node = SubResource( 16 )
 states/Climbing/position = Vector2( 175, -45 )
@@ -586,9 +633,9 @@ states/Crawling_E/position = Vector2( -86, 228.749 )
 states/Crawling_W/node = SubResource( 18 )
 states/Crawling_W/position = Vector2( 438, 228.749 )
 states/Death_left/node = SubResource( 19 )
-states/Death_left/position = Vector2( 588, 109 )
+states/Death_left/position = Vector2( 643, 116 )
 states/Death_right/node = SubResource( 20 )
-states/Death_right/position = Vector2( -280, 109 )
+states/Death_right/position = Vector2( -285, 109 )
 states/Idle_E/node = SubResource( 21 )
 states/Idle_E/position = Vector2( 86, 109 )
 states/Idle_W/node = SubResource( 22 )
@@ -597,6 +644,8 @@ states/Jumping_E/node = SubResource( 23 )
 states/Jumping_E/position = Vector2( -86, -64.251 )
 states/Jumping_W/node = SubResource( 24 )
 states/Jumping_W/position = Vector2( 438, -64.251 )
+states/Rise/node = SubResource( 80 )
+states/Rise/position = Vector2( 204, 185.749 )
 states/Run_E/node = SubResource( 25 )
 states/Run_E/position = Vector2( -280, 228.749 )
 states/Run_W/node = SubResource( 26 )
@@ -605,7 +654,7 @@ states/Walk_E/node = SubResource( 27 )
 states/Walk_E/position = Vector2( -86, 109 )
 states/Walk_W/node = SubResource( 28 )
 states/Walk_W/position = Vector2( 438, 109 )
-transitions = [ "Walk_W", "Climbing", SubResource( 29 ), "Walk_E", "Climbing", SubResource( 30 ), "Climbing", "Walk_W", SubResource( 31 ), "Climbing", "Walk_E", SubResource( 32 ), "Climbing", "Idle_E", SubResource( 33 ), "Walk_E", "Crawling_E", SubResource( 34 ), "Walk_W", "Crawling_W", SubResource( 35 ), "Crawling_W", "Walk_W", SubResource( 36 ), "Crawling_E", "Walk_E", SubResource( 37 ), "Crawling_E", "Crawling_W", SubResource( 38 ), "Crawling_W", "Crawling_E", SubResource( 39 ), "Idle_E", "Climbing", SubResource( 40 ), "Idle_E", "Walk_E", SubResource( 41 ), "Walk_E", "Idle_E", SubResource( 42 ), "Idle_E", "Walk_W", SubResource( 43 ), "Crawling_E", "Idle_E", SubResource( 44 ), "Idle_W", "Climbing", SubResource( 45 ), "Climbing", "Idle_W", SubResource( 46 ), "Idle_W", "Walk_W", SubResource( 47 ), "Walk_W", "Idle_W", SubResource( 48 ), "Idle_W", "Walk_E", SubResource( 49 ), "Crawling_W", "Idle_W", SubResource( 50 ), "Walk_W", "Jumping_W", SubResource( 51 ), "Walk_E", "Jumping_E", SubResource( 52 ), "Jumping_E", "Idle_E", SubResource( 53 ), "Jumping_W", "Idle_W", SubResource( 54 ), "Jumping_E", "Climbing", SubResource( 55 ), "Jumping_W", "Climbing", SubResource( 56 ), "Walk_W", "Death_left", SubResource( 57 ), "Jumping_W", "Death_left", SubResource( 58 ), "Crawling_W", "Death_left", SubResource( 59 ), "Idle_W", "Death_left", SubResource( 60 ), "Crawling_E", "Death_right", SubResource( 61 ), "Walk_E", "Death_right", SubResource( 62 ), "Jumping_E", "Death_right", SubResource( 63 ), "Idle_E", "Death_right", SubResource( 64 ), "Climbing", "Death_right", SubResource( 65 ), "Climbing", "Death_left", SubResource( 66 ), "Walk_W", "Run_W", SubResource( 67 ), "Run_W", "Walk_W", SubResource( 68 ), "Run_E", "Walk_E", SubResource( 69 ), "Walk_E", "Run_E", SubResource( 70 ), "Run_E", "Death_right", SubResource( 71 ), "Run_W", "Death_left", SubResource( 72 ) ]
+transitions = [ "Walk_W", "Climbing", SubResource( 29 ), "Walk_E", "Climbing", SubResource( 30 ), "Climbing", "Walk_W", SubResource( 31 ), "Climbing", "Walk_E", SubResource( 32 ), "Climbing", "Idle_E", SubResource( 33 ), "Walk_E", "Crawling_E", SubResource( 34 ), "Walk_W", "Crawling_W", SubResource( 35 ), "Crawling_W", "Walk_W", SubResource( 36 ), "Crawling_E", "Walk_E", SubResource( 37 ), "Crawling_E", "Crawling_W", SubResource( 38 ), "Crawling_W", "Crawling_E", SubResource( 39 ), "Idle_E", "Climbing", SubResource( 40 ), "Idle_E", "Walk_E", SubResource( 41 ), "Walk_E", "Idle_E", SubResource( 42 ), "Crawling_E", "Idle_E", SubResource( 44 ), "Idle_W", "Climbing", SubResource( 45 ), "Climbing", "Idle_W", SubResource( 46 ), "Idle_W", "Walk_W", SubResource( 47 ), "Walk_W", "Idle_W", SubResource( 48 ), "Idle_W", "Walk_E", SubResource( 49 ), "Crawling_W", "Idle_W", SubResource( 50 ), "Walk_W", "Jumping_W", SubResource( 51 ), "Walk_E", "Jumping_E", SubResource( 52 ), "Jumping_E", "Idle_E", SubResource( 53 ), "Jumping_W", "Idle_W", SubResource( 54 ), "Jumping_E", "Climbing", SubResource( 55 ), "Jumping_W", "Climbing", SubResource( 56 ), "Walk_W", "Death_left", SubResource( 57 ), "Jumping_W", "Death_left", SubResource( 58 ), "Crawling_W", "Death_left", SubResource( 59 ), "Idle_W", "Death_left", SubResource( 60 ), "Crawling_E", "Death_right", SubResource( 61 ), "Walk_E", "Death_right", SubResource( 62 ), "Jumping_E", "Death_right", SubResource( 63 ), "Idle_E", "Death_right", SubResource( 64 ), "Climbing", "Death_right", SubResource( 65 ), "Climbing", "Death_left", SubResource( 66 ), "Walk_W", "Run_W", SubResource( 67 ), "Run_W", "Walk_W", SubResource( 68 ), "Run_E", "Walk_E", SubResource( 69 ), "Walk_E", "Run_E", SubResource( 70 ), "Run_E", "Death_right", SubResource( 71 ), "Run_W", "Death_left", SubResource( 72 ), "Death_left", "Idle_W", SubResource( 79 ), "Rise", "Idle_E", SubResource( 81 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -633, -100.251 )
 
@@ -685,6 +734,7 @@ anims/Idle_E = SubResource( 8 )
 anims/Idle_W = SubResource( 9 )
 anims/Jumping_E = SubResource( 10 )
 anims/Jumping_W = SubResource( 11 )
+anims/Rise = SubResource( 78 )
 anims/Run_E = SubResource( 12 )
 anims/Run_W = SubResource( 13 )
 anims/Walk_E = SubResource( 14 )
