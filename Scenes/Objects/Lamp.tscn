@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Effects/light.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Objects/Lamp.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Objects/Lamp.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flashing"
@@ -51,7 +50,6 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -18.4998, -15.1362 )
-texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Flashing = SubResource( 1 )

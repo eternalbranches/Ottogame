@@ -10,6 +10,11 @@ func _ready():
 	if CharacterSave.first_spawn == false:
 		respawn_animation()
 
+
+func _process(delta):
+	if Input.is_action_just_pressed("ESC"):
+		$GUI/Pausemenu.visible = true
+		get_tree().paused = true
 func assign_checkpoints():
 	while checkpoint_count !=  $Checkpoints.get_child_count():
 		$Checkpoints.get_child(checkpoint_count).checkpoint_number = checkpoint_count
@@ -65,4 +70,24 @@ func respawn_animation():
 	yield(get_tree().create_timer(3), "timeout")
 	$YSort/Player/Mothgirl.stop_flying()
 	$YSort/Player/Mothgirl.position = Vector2(3700,500)
+
+
+
+
+func _on_MainMenuButton_pressed():
+	$GUI/Pausemenu/Popup.visible = true
+
+func _on_BackButton_pressed():
+	$GUI/Pausemenu.visible = false
+	get_tree().paused = false
 	
+func _on_YesButton_pressed():
+	get_tree().paused = false
+	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
+
+
+func _on_NoButton_pressed():
+	$GUI/Pausemenu/Popup.visible = false
+
+func _on_OptionsButton_pressed():
+	$GUI/Options.visible = true

@@ -3,6 +3,7 @@
 [ext_resource path="res://Scenes/Interface/SoundOptions.tscn" type="PackedScene" id=1]
 
 [node name="Options" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

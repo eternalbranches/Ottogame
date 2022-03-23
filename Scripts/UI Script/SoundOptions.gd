@@ -61,7 +61,9 @@ func load_volume():
 
 
 func _on_BackButton_pressed():
-	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
-
+	if CharacterSave.ingame == false:
+		get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
+	else:
+		get_parent().get_parent().visible = false
 
 

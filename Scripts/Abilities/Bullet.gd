@@ -47,6 +47,8 @@ func _on_Area2D_body_entered(body):
 		body.on_hit(damage, origin, position.x)
 	elif body.is_in_group("Player"):
 		body.on_hit(damage, origin, enemyposx)
+	elif body.is_in_group("Destructable"):
+		body.on_hit(damage)
 
 
 func _on_Smoketrail_dead():

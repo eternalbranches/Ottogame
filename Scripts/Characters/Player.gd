@@ -48,6 +48,7 @@ signal death
 
 
 func _ready():
+	CharacterSave.ingame = true
 	if CharacterSave.first_spawn == false:
 		state = "rise"
 		animation_mode.travel("Rise")
@@ -81,7 +82,9 @@ func get_input():
 		velocity.x = lerp(velocity.x, dir * speed, acceleration)
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
-		
+	if Input.is_action_just_pressed("Down"):
+		set_collision_mask_bit(7,0)
+		$PlatformTimer.start()
 		
 	
 	if CharacterSave.save_dict["timeslow"] == true:
@@ -99,37 +102,7 @@ func get_input():
 			possible_targets.push_back(current_target)
 			possible_targets.erase(current_target)
 
-#func get_input():
-#	velocity.x = 0
-#	if Input.is_action_just_pressed("Right"):
-#		$"Dash-timer".start()
-#		if dash == 1:
-#			state = "running"
-#		dash += 1
-#	if Input.is_action_pressed("Right"):
-#		if state == "moving":
-#			animation_mode.travel("Walk_E")
-#		velocity.x += speed
-#		last_direction = "right"
-#	if Input.is_action_pressed("Left"):
-#		if state == "moving":
-#			animation_mode.travel("Walk_W")
-#		velocity.x -= speed
-#		last_direction = "left"
-	
-#	if Input.is_action_just_pressed("Timeslow"):
-#				if bullettime == false:
-#					Engine.time_scale = 0.5
-#					bullettime = true
-#				else:
-#					Engine.time_scale = 1.0
-#					bullettime = false
-					
-#	if Input.is_action_just_pressed("Aim_assist"):
-#		if possible_targets.empty() == false:
-#			current_target = possible_targets[0]
-#			possible_targets.push_back(current_target)
-#			possible_targets.erase(current_target)
+
 
 func get_input_running():
 	var dir = 0
@@ -165,12 +138,10 @@ func get_input_running():
 			current_target = possible_targets[0]
 			possible_targets.push_back(current_target)
 			possible_targets.erase(current_target)
-					
-	if Input.is_action_just_pressed("Aim_assist"):
-		if possible_targets.empty() == false:
-			current_target = possible_targets[0]
-			possible_targets.push_back(current_target)
-			possible_targets.erase(current_target)
+	
+	if Input.is_action_just_pressed("Down"):
+		set_collision_mask_bit(7,0)
+		$PlatformTimer.start()
 
 func get_input_crawl():
 	velocity.x = 0
@@ -290,6 +261,8 @@ func _physics_process(delta):
 				var collision = get_slide_collision(index)
 				if collision.collider.is_in_group("Pushable"):
 					collision.collider.apply_central_impulse(-collision.normal * push)
+				elif collision.collider.is_in_group("Falling"):
+					collision.collider.fall()
 			if Input.is_action_just_pressed("Up"):
 					velocity.y = jump_speed
 					#if is_on_floor() == false: double jump
@@ -316,6 +289,8 @@ func _physics_process(delta):
 				var collision = get_slide_collision(index)
 				if collision.collider.is_in_group("Pushable"):
 					collision.collider.apply_central_impulse(-collision.normal * push)
+				elif collision.collider.is_in_group("Falling"):
+					collision.collider.fall()
 			if Input.is_action_just_pressed("Up"):
 					velocity.y = jump_speed
 					#if is_on_floor() == false: double jump
@@ -563,3 +538,7 @@ func _on_GunTimer_timeout():
 
 func on_rise_finished():
 	state = "idle"
+
+
+func _on_PlatformTimer_timeout():
+	set_collision_mask_bit(7, 1)
