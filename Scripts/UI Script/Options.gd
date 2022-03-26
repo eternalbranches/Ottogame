@@ -1,20 +1,9 @@
 extends Control
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
+var selected_tab := 0
+var tab_count := 0
 func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	tab_count = $TabContainer.get_tab_count()
 
 func _on_BackButton_pressed():
 	visible = false
@@ -27,3 +16,18 @@ func _on_BackButton_pressed():
 		
 		get_node("../Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton").grab_focus()
 		get_node("../Pausemenu").show()
+
+func _process(delta):
+	if Input.is_action_just_pressed("NextTab"):
+		print(selected_tab, tab_count)
+		selected_tab += 1
+		if selected_tab > tab_count -1:
+			selected_tab = 0
+		$TabContainer.current_tab = selected_tab
+		$BackButton.grab_focus()
+	if Input.is_action_just_pressed("LastTab"):
+		selected_tab -= 1
+		if selected_tab < 0 :
+			selected_tab = tab_count -1
+		$TabContainer.current_tab = selected_tab
+		$BackButton.grab_focus()
