@@ -2165,11 +2165,9 @@ texture = ExtResource( 43 )
 
 [node name="FallingPlatform" parent="FallingTiles" instance=ExtResource( 44 )]
 position = Vector2( 3628.87, 256.26 )
-mass = 5.0
 
 [node name="FallingPlatform2" parent="FallingTiles" instance=ExtResource( 44 )]
 position = Vector2( 3493.49, 257.101 )
-mass = 5.0
 
 [connection signal="pressed" from="GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="GUI/Pausemenu/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]

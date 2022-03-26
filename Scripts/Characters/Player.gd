@@ -42,7 +42,6 @@ var can_shoot := true
 
 var possible_targets = []
 var current_target = null
-var controller := false
 
 signal death
 
@@ -58,16 +57,23 @@ func _ready():
 func get_input():
 	var dir = 0
 	if CharacterSave.save_dict["running"] == true:
-		if Input.is_action_just_pressed("Right"):
-			$"Dash-timer".start()
-			if dash_r == 1:
+		if CharacterSave.controller == false:
+			if Input.is_action_just_pressed("Right"):
+				$"Dash-timer".start()
+				if dash_r == 1:
+					state = "running"
+				dash_r += 1
+			if Input.is_action_just_pressed("Left"):
+				$"Dash-timer".start()
+				if dash_l == 1:
+					state = "running"
+				dash_l += 1
+		else:
+			if Input.get_action_strength("Left") > 0.7:
 				state = "running"
-			dash_r += 1
-		if Input.is_action_just_pressed("Left"):
-			$"Dash-timer".start()
-			if dash_l == 1:
+			if Input.get_action_strength("Right") > 0.7:
 				state = "running"
-			dash_l += 1
+			#print(Input.get_action_strength("Left"))
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
 		animation_mode.travel("Walk_E")
@@ -181,6 +187,11 @@ func get_input_midair():
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
 			can_doublejump = false
+	if Input.is_action_just_pressed("Aim_assist"):
+		if possible_targets.empty() == false:
+			current_target = possible_targets[0]
+			possible_targets.push_back(current_target)
+			possible_targets.erase(current_target)
 			
 			
 
@@ -212,6 +223,11 @@ func get_input_midair_run():
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
 			can_doublejump = false
+	if Input.is_action_just_pressed("Aim_assist"):
+		if possible_targets.empty() == false:
+			current_target = possible_targets[0]
+			possible_targets.push_back(current_target)
+			possible_targets.erase(current_target)
 
 func _physics_process(delta):
 	$DebugState.text = state
@@ -468,7 +484,7 @@ func shooting():
 		if Input.is_action_just_pressed("Shoot"):
 			var skill = load("res://Scenes/Abilities/Bullet.tscn")
 			var skill_instance = skill.instance()
-			if controller == false:
+			if CharacterSave.controller == false:
 				skill_instance.rotation = get_angle_to(get_global_mouse_position())
 			else:
 				if current_target != null:
@@ -509,22 +525,18 @@ func on_death():
 
 
 func _on_Aim_Assist_body_entered(body):
-	print(possible_targets)
 	possible_targets.push_front(body)
 
 func _on_Aim_Assist_body_exited(body):
 	possible_targets.erase(body)
-	print(possible_targets)
 
 
 func _on_Aim_Assist_area_entered(area):
 	possible_targets.push_front(area)
-	print(possible_targets)
 
 
 func _on_Aim_Assist_area_exited(area):
 	possible_targets.erase(area)
-	print(possible_targets)
 
 func collect_powerup(PText):
 	$Powerup.visible = true

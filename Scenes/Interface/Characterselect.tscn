@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Assets/Objects/door.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UI Script/Characterselect.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Objects/idunno.png" type="Texture" id=4]
 
 [node name="Singleplayer_Characterselect" type="Control"]
 anchor_right = 1.0
@@ -242,6 +244,9 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 50, 50 )
+texture_normal = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+texture_focused = ExtResource( 1 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -462,20 +467,24 @@ __meta__ = {
 }
 
 [node name="BackButton" type="TextureButton" parent="N"]
-margin_left = 1720.0
-margin_top = 976.0
-margin_right = 1912.0
-margin_bottom = 1064.0
+margin_left = 777.078
+margin_top = 482.29
+margin_right = 969.078
+margin_bottom = 570.29
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="N/BackButton"]
-margin_left = -882.996
-margin_top = -481.803
-margin_right = -746.996
-margin_bottom = -423.803
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -29.0
+margin_right = 68.0
+margin_bottom = 29.0
 text = "Back"
 align = 1
 __meta__ = {

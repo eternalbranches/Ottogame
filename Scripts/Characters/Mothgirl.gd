@@ -25,6 +25,7 @@ func _physics_process(delta):
 			
 func heal_animation():
 	state = "heal"
+	$AudioStreamPlayer2D.play()
 	animation_mode.travel("Heal")
 	
 	

@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI Script/ControllerMouse.gd" type="Script" id=1]
+
+[node name="ControllerMouse" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 139.0
+margin_top = 123.0
+margin_right = -118.0
+margin_bottom = -114.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MouseKeyboard" type="Button" parent="NinePatchRect/HBoxContainer"]
+margin_right = 300.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 300, 50 )
+text = "Mouse & Keyboard"
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/HBoxContainer"]
+margin_left = 304.0
+margin_right = 404.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 100, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controller" type="Button" parent="NinePatchRect/HBoxContainer"]
+margin_left = 408.0
+margin_right = 708.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 300, 0 )
+text = "Controller"
+
+[connection signal="pressed" from="NinePatchRect/HBoxContainer/MouseKeyboard" to="." method="_on_MouseKeyboard_pressed"]
+[connection signal="pressed" from="NinePatchRect/HBoxContainer/Controller" to="." method="_on_Controller_pressed"]

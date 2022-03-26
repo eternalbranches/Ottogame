@@ -4,6 +4,7 @@ var state := "idle"
 var max_hp := 2
 var current_hp := 2
 var current_direction := "E"
+var spawn_guardposition := 5
 var velocity := Vector2.ZERO
 export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
@@ -20,7 +21,7 @@ onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
 func _ready():
-	pass
+	spawn_guardposition = get_global_position().x
 	
 
 func _physics_process(delta):
@@ -71,23 +72,33 @@ func _physics_process(delta):
 				if state != "death":
 					state = "sight"
 		"chase":
+			velocity.x = 0
 			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP)
+			
 			var space_state = get_world_2d().direct_space_state
 			var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
 			if sight_check:
 				if sight_check.collider.name == "Player" and player_in_range == true:
 					state = "shoot"
-				elif sight_check.collider.name == "Player" and player_in_range == false:
+				elif sight_check.collider.name == "Player" and player_in_range == false and $RayCast2D.is_colliding() == true:
 					if last_seen.x > position.x:
 						velocity.x = speed
 					if last_seen.x < position.x:
 						velocity.x = -speed
 				else:
-					if last_seen.x > position.x:
-						velocity.x = speed
-					if last_seen.x < position.x:
-						velocity.x = -speed
+					if $RayCast2D.is_colliding() == true:
+						if last_seen.x > position.x:
+							velocity.x = speed
+						if last_seen.x < position.x:
+							velocity.x = -speed
+			velocity = move_and_slide(velocity, Vector2.UP)
+		"return":
+			if get_global_position().x > spawn_guardposition:
+				velocity.x = speed
+			if get_global_position().x < spawn_guardposition:
+				velocity.x = -speed
+			if get_global_position().x == spawn_guardposition:
+				state = "idle"
 			
 			
 func on_hit(damage, origin, enemy_posx):
@@ -130,6 +141,7 @@ func _on_ShootCD_timeout():
 	can_shoot = true
 
 func _on_Range_body_entered(body):
+	$RayCast2D.enabled = true
 	if state == "idle":
 		state = "sight"
 		player_in_range = true

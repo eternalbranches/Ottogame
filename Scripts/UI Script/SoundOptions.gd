@@ -10,6 +10,7 @@ var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxv
 
 
 func _ready():
+	#$NinePatchRect/VBoxContainer/GameVolumeSlider.grab_focus()
 	#$VolumeSlider.value = db2linear(AudioServer.get_bus_volume_db(volumebus))
 	#$MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(musicbus))
 	#$SoundeffectSlider.value = db2linear(AudioServer.get_bus_volume_db(effectbus))
@@ -58,12 +59,3 @@ func load_volume():
 		#print(volumefile.result)
 		soundvaluearray = volumefile.get_var()
 		volumefile.close()
-
-
-func _on_BackButton_pressed():
-	if CharacterSave.ingame == false:
-		get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
-	else:
-		get_parent().get_parent().visible = false
-
-

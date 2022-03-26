@@ -14,7 +14,9 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ESC"):
 		$GUI/Pausemenu.visible = true
+		$GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton.grab_focus()
 		get_tree().paused = true
+		
 func assign_checkpoints():
 	while checkpoint_count !=  $Checkpoints.get_child_count():
 		$Checkpoints.get_child(checkpoint_count).checkpoint_number = checkpoint_count
@@ -76,18 +78,22 @@ func respawn_animation():
 
 func _on_MainMenuButton_pressed():
 	$GUI/Pausemenu/Popup.visible = true
-
-func _on_BackButton_pressed():
-	$GUI/Pausemenu.visible = false
-	get_tree().paused = false
+	$GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton.grab_focus()
 	
 func _on_YesButton_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
 
-
 func _on_NoButton_pressed():
 	$GUI/Pausemenu/Popup.visible = false
+	$GUI/Pausemenu.grab_focus()
+	
+func _on_BackButton_pressed():
+	$GUI/Pausemenu.visible = false
+	$GUI/Pausemenu/Popup.visible = false
+	get_tree().paused = false
 
 func _on_OptionsButton_pressed():
 	$GUI/Options.visible = true
+	$GUI/Pausemenu.hide()
+	$GUI/Options/TabContainer/SoundOptions/NinePatchRect/VBoxContainer/GameVolumeSlider.grab_focus()

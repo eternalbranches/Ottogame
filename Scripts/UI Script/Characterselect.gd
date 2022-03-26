@@ -9,6 +9,8 @@ const ironman_texture = preload("res://icon.png")
 const bunny_texture = preload("res://icon.png")
 func _ready():
 	LoadSlots()
+	#$N/H/LineEdit.grab_focus()
+	$N/H1/IronmanMode/PlayChar1.grab_focus()
 
 func SaveSlots():
 	var savefile = File.new()

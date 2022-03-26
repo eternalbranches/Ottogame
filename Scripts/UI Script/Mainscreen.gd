@@ -11,13 +11,18 @@ var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxv
 func _ready():
 	CharacterSave.ingame = false
 	load_volume()
+	$NinePatchRect/VBoxContainer/PlayButton.grab_focus()
 
 func _on_PlayButton_pressed():
 	get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")
 
 
 func _on_OptionsButton_pressed():
-	get_tree().change_scene("res://Scenes/Interface/Options.tscn")
+	$NinePatchRect/VBoxContainer.hide()
+	$Options.visible = true
+	$NinePatchRect.release_focus()
+	$Options/TabContainer/SoundOptions/NinePatchRect/VBoxContainer/GameVolumeSlider.grab_focus()
+	#get_tree().change_scene("res://Scenes/Interface/Options.tscn")
 
 func _on_CreditsButton_pressed():
 	pass # Replace with function body.
