@@ -17,15 +17,14 @@ func _on_BackButton_pressed():
 		get_node("../Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton").grab_focus()
 		get_node("../Pausemenu").show()
 
-func _process(delta):
-	if Input.is_action_just_pressed("NextTab"):
-		print(selected_tab, tab_count)
+func _process(_delta):
+	if Input.is_action_just_pressed("Shoot"):
 		selected_tab += 1
 		if selected_tab > tab_count -1:
 			selected_tab = 0
 		$TabContainer.current_tab = selected_tab
 		$BackButton.grab_focus()
-	if Input.is_action_just_pressed("LastTab"):
+	if Input.is_action_just_pressed("Aim_assist"):
 		selected_tab -= 1
 		if selected_tab < 0 :
 			selected_tab = tab_count -1

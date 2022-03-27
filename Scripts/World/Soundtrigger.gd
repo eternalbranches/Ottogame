@@ -10,6 +10,6 @@ func _ready():
 #	pass
 
 
-func _on_Soundtrigger_body_entered(body):
+func _on_Soundtrigger_body_entered(_body):
 	get_node("..").music_change(play_music)
 	#get_parent().music_change(play_music)

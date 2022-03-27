@@ -30,7 +30,7 @@ func _ready():
 	apply_impulse(Vector2(), Vector2(projectile_speed, 0).rotated(rotation))
 	#SelfDestruct()
 
-func _process(delta):
+func _process(_delta):
 	if dead == false:
 		$Smoketrail.add_point(global_position)
 func SelfDestruct():

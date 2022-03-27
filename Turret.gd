@@ -10,11 +10,20 @@ var current_hp := 2
 
 var state = "idle"
 var initialized := false
+export var sprite_pointing := "S"
 
 func _ready():
-	pass
+	match sprite_pointing:
+		"S":
+			pass
+		"N":
+			$Sprite.flip_v = false
+		"E":
+			$Sprite.rotation_degrees = -90
+		"W":
+			$Sprite.rotation_degrees = 90
 
-func _process(delta):
+func _process(_delta):
 	$Label.text = state
 	match state:
 		"idle":
@@ -52,13 +61,13 @@ func sightcheck():
 			state = "sight"
 			$ShootCD.stop()
 
-func _on_Range_body_entered(body):
+func _on_Range_body_entered(_body):
 	if state == "idle":
 		state = "sight"
 		player_in_range = true
 
 
-func _on_Range_body_exited(body):
+func _on_Range_body_exited(_body):
 	if state == "shoot":
 		$ChangeState.start()
 	else:
@@ -79,6 +88,8 @@ func on_hit(damage, origin, enemyposx):
 			
 func on_death():
 	state = "death"
+	$RemoveTimer.start()
+	
 
 
 func _on_ChangeState_timeout():
@@ -88,3 +99,7 @@ func _on_ChangeState_timeout():
 			$ShootCD.stop()
 			player_in_range = false
 			initialized = false
+
+
+func _on_RemoveTimer_timeout():
+	queue_free()

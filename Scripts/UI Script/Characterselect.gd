@@ -44,7 +44,7 @@ func _on_IronmanMode_toggled(button_pressed):
 		get_node("N/H3/IronmanMode/PlayChar3").texture_normal = bunny_texture
 		
 func _on_LineEdit_text_entered(new_text):
-	var counter = 1
+	#var counter = 1
 	var savefile = File.new()
 	for character in charslot_dict:
 		if charslot_dict[character][0] == "empty" and new_text != "empty":
@@ -56,7 +56,7 @@ func _on_LineEdit_text_entered(new_text):
 			else:
 				charslot_dict[character][1] = "false"
 			CharacterSlots()
-			counter += 1
+			#counter += 1
 			SaveSlots()
 			break
 	

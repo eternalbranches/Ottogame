@@ -11,7 +11,7 @@ func _ready():
 		respawn_animation()
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ESC"):
 		$GUI/Pausemenu.visible = true
 		$GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton.grab_focus()
@@ -57,11 +57,11 @@ func _on_Player_death():
 	
 
 
-func _on_Cameratrigger_body_entered(body):
+func _on_Cameratrigger_body_entered(_body):
 	$Camera2D.current = true
 
 
-func _on_Cameratrigger_body_exited(body):
+func _on_Cameratrigger_body_exited(_body):
 	$YSort/Player/Player/Camera2D.current = true
 	
 func respawn_animation():

@@ -61,7 +61,8 @@ func _physics_process(delta):
 				get_parent().add_child(skill_instance)
 				can_shoot = false
 		"death":
-			pass
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
 		"knockback":
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -93,6 +94,7 @@ func _physics_process(delta):
 							velocity.x = -speed
 			velocity = move_and_slide(velocity, Vector2.UP)
 		"return":
+			print("return")
 			if get_global_position().x > spawn_guardposition:
 				velocity.x = speed
 			if get_global_position().x < spawn_guardposition:
@@ -122,6 +124,7 @@ func on_death():
 	set_collision_layer_bit(2, 0)
 	set_collision_mask_bit(1,0)
 	$Hurtbox.queue_free()
+	$RemoveTimer.start()
 	
 	
 func sightcheck():
@@ -140,7 +143,7 @@ func sightcheck():
 func _on_ShootCD_timeout():
 	can_shoot = true
 
-func _on_Range_body_entered(body):
+func _on_Range_body_entered(_body):
 	$RayCast2D.enabled = true
 	if state == "idle":
 		state = "sight"
@@ -148,7 +151,7 @@ func _on_Range_body_entered(body):
 	elif state == "chase":
 		$PositionTimer.start()
 
-func _on_Range_body_exited(body):
+func _on_Range_body_exited(_body):
 		player_in_range = false
 		initialized = false
 		if state != "death":
@@ -163,3 +166,7 @@ func _on_Hurtbox_body_entered(body):
 func _on_PositionTimer_timeout():
 	state = "sight"
 	player_in_range = true
+
+
+func _on_RemoveTimer_timeout():
+	queue_free()

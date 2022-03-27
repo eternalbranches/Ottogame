@@ -6,7 +6,9 @@ export (int) var dash_jump_speed := 425
 export (int) var crawl_speed := 150
 export (int) var jump_speed := -1000
 export (int) var gravity := 3000
-export (int) var walljump_power := -300
+export (int) var walljump_height := -300
+export (int) var walljump_power := 150
+
 export (int) var knockback_power := 300
 export (int, 0, 200) var push = 100
 
@@ -102,11 +104,6 @@ func get_input():
 				Engine.time_scale = 1.0
 				bullettime = false
 			
-	if Input.is_action_just_pressed("Aim_assist"):
-		if possible_targets.empty() == false:
-			current_target = possible_targets[0]
-			possible_targets.push_back(current_target)
-			possible_targets.erase(current_target)
 
 
 
@@ -139,11 +136,6 @@ func get_input_running():
 				Engine.time_scale = 1.0
 				bullettime = false
 			
-	if Input.is_action_just_pressed("Aim_assist"):
-		if possible_targets.empty() == false:
-			current_target = possible_targets[0]
-			possible_targets.push_back(current_target)
-			possible_targets.erase(current_target)
 	
 	if Input.is_action_just_pressed("Down"):
 		set_collision_mask_bit(7,0)
@@ -187,11 +179,6 @@ func get_input_midair():
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
 			can_doublejump = false
-	if Input.is_action_just_pressed("Aim_assist"):
-		if possible_targets.empty() == false:
-			current_target = possible_targets[0]
-			possible_targets.push_back(current_target)
-			possible_targets.erase(current_target)
 			
 			
 
@@ -223,11 +210,6 @@ func get_input_midair_run():
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
 			can_doublejump = false
-	if Input.is_action_just_pressed("Aim_assist"):
-		if possible_targets.empty() == false:
-			current_target = possible_targets[0]
-			possible_targets.push_back(current_target)
-			possible_targets.erase(current_target)
 
 func _physics_process(delta):
 	$DebugState.text = state
@@ -413,13 +395,13 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
 			if started == false:
-				velocity.y = walljump_power
+				velocity.y = walljump_height
 				if $Wallcheck_W.is_colliding() == true:
-					velocity.x = 340
+					velocity.x = walljump_power
 					last_direction = "right"
 					animation_mode.travel("Jumping_E")
 				elif $Wallcheck_E.is_colliding() == true:
-					velocity.x = -340
+					velocity.x = -walljump_power
 					last_direction = "left"
 					animation_mode.travel("Jumping_W")
 				started = true
@@ -429,6 +411,8 @@ func _physics_process(delta):
 			shooting()
 			
 		"wallslide":
+			if velocity.y <= 0:
+				velocity.y = 0
 			shooting()
 			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
 				state = "midair"
@@ -480,6 +464,16 @@ func action():
 			#global_position.y -= 8
 			state = "climbing"
 func shooting():
+	if CharacterSave.controller == true:
+		if Input.is_action_just_pressed("Aim_assist"):
+			possible_targets = $Aim_Assist.get_overlapping_bodies()
+			print(possible_targets)
+			if possible_targets.empty() == false:
+				current_target = possible_targets[0]
+				possible_targets.push_back(current_target)
+				possible_targets.erase(current_target)
+			else:
+				current_target = null
 	if CharacterSave.save_dict["gun"] == true and can_shoot == true:
 		if Input.is_action_just_pressed("Shoot"):
 			var skill = load("res://Scenes/Abilities/Bullet.tscn")
@@ -488,7 +482,20 @@ func shooting():
 				skill_instance.rotation = get_angle_to(get_global_mouse_position())
 			else:
 				if current_target != null:
-					skill_instance.rotation = get_angle_to(current_target.get_global_position())
+					if $Aim_Assist.get_overlapping_bodies().has(current_target):
+						skill_instance.rotation = get_angle_to(current_target.get_global_position())
+					else:
+						current_target = null
+				else:
+					print(Input.is_action_pressed("Up"))
+					if Input.is_action_pressed("Up"):
+						skill_instance.rotation = -1.55
+					elif last_direction == "right":
+						skill_instance.rotation = 0
+					elif last_direction == "left":
+						#skill_instance.rotation = get_angle_to($AimPosition.get_global_position())
+						skill_instance.rotation = -3.14
+						print(get_angle_to($AimPosition.get_global_position()))
 			skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
 			skill_instance.origin = "Player"
 			$SFXPLayer.play()

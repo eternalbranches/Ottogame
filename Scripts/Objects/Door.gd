@@ -13,7 +13,7 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	if CharacterSave.save_dict["orange_keycard"] == true:
 		visible = false
 		set_collision_layer_bit(0, 0)

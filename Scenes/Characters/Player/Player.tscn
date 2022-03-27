@@ -680,14 +680,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 11
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -798,10 +798,9 @@ shape = SubResource( 79 )
 [node name="SFXPLayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
+[node name="AimPosition" type="Position2D" parent="."]
+position = Vector2( -101.229, -5.65921 )
+
 [connection signal="timeout" from="Dash-timer" to="." method="_on_Dashtimer_timeout"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
-[connection signal="area_entered" from="Aim_Assist" to="." method="_on_Aim_Assist_area_entered"]
-[connection signal="area_exited" from="Aim_Assist" to="." method="_on_Aim_Assist_area_exited"]
-[connection signal="body_entered" from="Aim_Assist" to="." method="_on_Aim_Assist_body_entered"]
-[connection signal="body_exited" from="Aim_Assist" to="." method="_on_Aim_Assist_body_exited"]

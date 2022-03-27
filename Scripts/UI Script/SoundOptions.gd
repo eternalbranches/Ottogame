@@ -45,7 +45,7 @@ func _on_WeatherVolumeSlider_value_changed(value):
 	SaveGameVolumen("safedweathervalue", value)
 
 
-func SaveGameVolumen(volumentype, value):
+func SaveGameVolumen(_volumentype, _value):
 	var volumefile = File.new()
 	volumefile.open("user://save_volume.dat", File.WRITE)
 	volumefile.store_var(soundvaluearray)
