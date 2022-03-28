@@ -2033,6 +2033,9 @@ position = Vector2( 2138.84, -1490.73 )
 [node name="Checkpoint4" parent="Checkpoints" instance=ExtResource( 27 )]
 position = Vector2( 1372.72, -1515.46 )
 
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource( 27 )]
+position = Vector2( 1008, 184 )
+
 [node name="Powerups" type="Node" parent="."]
 
 [node name="Walljump_Unlock" parent="Powerups" instance=ExtResource( 28 )]

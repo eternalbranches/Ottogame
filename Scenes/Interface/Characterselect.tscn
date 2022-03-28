@@ -1,9 +1,67 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/Objects/door.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/Buttons/Button_Normal.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UI Script/Characterselect.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Objects/idunno.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/Buttons/Button_Focused.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/Background/tile_background (1).png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/Buttons/x.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/Buttons/Back_button.png" type="Texture" id=7]
+[ext_resource path="res://Assets/UI/Buttons/Button_Clicked.png" type="Texture" id=8]
+[ext_resource path="res://Assets/UI/Fonts/color basic.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/Characters/Profile/otto's good side.png" type="Texture" id=10]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform float Strength : hint_range(0,20) = 1;
+uniform float RandomOffset = 1f;
+
+
+float random( float seed )
+{
+	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46 + RandomOffset, -54.3415 ) ) ) );
+}
+
+void vertex()
+{
+	vec2 VERTEX_OFFSET = VERTEX;
+	VERTEX_OFFSET.x += (
+		random(
+			( trunc( VERTEX_OFFSET.y))
+		+	TIME
+		) - 0.5
+	) * Strength ;
+
+	VERTEX_OFFSET.y += (
+		random(
+			( trunc( VERTEX_OFFSET.x))
+		+	TIME
+		) - 0.5
+	) * Strength;
+	
+	VERTEX = VERTEX_OFFSET;	
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/Strength = 1.0
+shader_param/RandomOffset = 1.0
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 9 )
 
 [node name="Singleplayer_Characterselect" type="Control"]
 anchor_right = 1.0
@@ -12,6 +70,13 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" type="AnimatedSprite" parent="."]
+material = SubResource( 5 )
+position = Vector2( 512.283, 299.818 )
+scale = Vector2( 0.533232, 0.554945 )
+frames = SubResource( 1 )
+playing = true
 
 [node name="N" type="NinePatchRect" parent="."]
 anchor_right = 1.0
@@ -24,469 +89,226 @@ __meta__ = {
 visible = true
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -448.0
-margin_top = -136.0
-margin_right = 8.0
-margin_bottom = 112.0
+margin_left = -736.0
+margin_top = 208.0
+margin_right = -280.0
+margin_bottom = 456.0
 rect_scale = Vector2( 2, 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="N/Popup"]
-margin_left = 48.0
-margin_top = 72.0
-margin_right = 368.0
-margin_bottom = 200.0
+margin_left = 92.0
+margin_top = 56.0
+margin_right = 412.0
+margin_bottom = 220.0
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="N/Popup/TextureRect"]
-margin_left = 48.0
-margin_top = 32.0
-margin_right = 296.0
-margin_bottom = 66.0
-text = "Do you want to delete"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="charname" type="Label" parent="N/Popup/TextureRect"]
-margin_left = 40.0
-margin_top = 64.0
-margin_right = 180.0
-margin_bottom = 98.0
-text = "Mokkla?"
-align = 1
+margin_left = 24.0
+margin_top = 20.0
+margin_right = 272.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 2 )
+text = "Do you want to 
+delete this File?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ConfirmDelete" type="TextureButton" parent="N/Popup/TextureRect"]
-margin_left = 180.0
-margin_top = 64.0
-margin_right = 210.0
-margin_bottom = 94.0
+margin_left = 68.0
+margin_top = 76.0
+margin_right = 98.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 30, 30 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="N/Popup/TextureRect/ConfirmDelete"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 26, 26 )
-texture = ExtResource( 3 )
+texture_normal = ExtResource( 3 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StopDelete" type="TextureButton" parent="N/Popup/TextureRect"]
-margin_left = 232.0
-margin_top = 64.0
-margin_right = 262.0
-margin_bottom = 94.0
+margin_left = 120.0
+margin_top = 76.0
+margin_right = 150.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 30, 30 )
+texture_normal = ExtResource( 6 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/Popup/TextureRect/StopDelete"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -15.0
-margin_top = -19.5
-margin_right = 15.0
-margin_bottom = 19.5
-rect_min_size = Vector2( 30, 30 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "X"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="H" type="HBoxContainer" parent="N"]
-margin_left = 64.4709
-margin_top = 182.863
-margin_right = 1248.47
-margin_bottom = 272.863
-custom_constants/separation = 44
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="N/H"]
-margin_top = 38.0
-margin_right = 96.0
-margin_bottom = 52.0
-text = "New Character:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LineEdit" type="LineEdit" parent="N/H"]
-margin_left = 140.0
-margin_top = 20.0
-margin_right = 510.0
-margin_bottom = 70.0
-rect_min_size = Vector2( 370, 50 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-align = 1
-max_length = 14
-placeholder_text = "Name + Enter"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/H"]
-margin_left = 554.0
-margin_top = 38.0
-margin_right = 648.0
-margin_bottom = 52.0
-text = "Ironman Mode"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanMode" type="CheckButton" parent="N/H"]
-margin_left = 692.0
-margin_right = 782.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 90, 90 )
-pressed = true
-align = 1
-expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="H1" type="HBoxContainer" parent="N"]
-margin_left = 3.88489
-margin_top = 265.542
-margin_right = 1188.88
-margin_bottom = 345.542
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -44.0
+margin_right = 378.0
+margin_bottom = 55.0
 custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayChar1" type="TextureButton" parent="N/H1"]
+margin_right = 482.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 4 )
+texture_focused = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Charactername" type="Label" parent="N/H1/PlayChar1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -107.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "-  Empty -"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Delete1" type="TextureButton" parent="N/H1"]
-margin_right = 80.0
-margin_bottom = 80.0
+visible = false
+margin_left = 402.0
+margin_top = 9.0
+margin_right = 482.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 80, 80 )
-
-[node name="Label" type="Label" parent="N/H1/Delete1"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = -55.0
-margin_right = 40.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 80, 80 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "X"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Charactername" type="Label" parent="N/H1"]
-margin_left = 130.0
-margin_top = 33.0
-margin_right = 585.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 455, 0 )
-text = "                                   -  Empty Characterslot    -"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/H1"]
-margin_left = 635.0
-margin_top = 33.0
-margin_right = 755.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 120, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Margin" type="Label" parent="N/H1"]
-margin_left = 805.0
-margin_top = 33.0
-margin_right = 895.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 90, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanMode" type="TextureRect" parent="N/H1"]
-margin_left = 945.0
-margin_right = 1025.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+size_flags_vertical = 4
+texture_normal = ExtResource( 6 )
 expand = true
-
-[node name="PlayChar1" type="TextureButton" parent="N/H1/IronmanMode"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-texture_normal = ExtResource( 3 )
-texture_hover = ExtResource( 4 )
-texture_focused = ExtResource( 1 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanTexture" type="TextureRect" parent="N/H1/IronmanMode"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -25.7937
-margin_top = -25.0
-margin_right = 24.2063
-margin_bottom = 25.0
-rect_min_size = Vector2( 50, 50 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="H2" type="HBoxContainer" parent="N"]
-margin_left = 7.95441
-margin_top = 330.152
-margin_right = 1192.95
-margin_bottom = 410.152
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 60.0
+margin_right = 482.0
+margin_bottom = 159.0
 custom_constants/separation = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayChar2" type="TextureButton" parent="N/H2"]
+margin_right = 482.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 4 )
+texture_focused = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Charactername" type="Label" parent="N/H2/PlayChar2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -107.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "-  Empty -"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Delete2" type="TextureButton" parent="N/H2"]
-margin_right = 80.0
-margin_bottom = 80.0
+visible = false
+margin_left = 402.0
+margin_top = 9.0
+margin_right = 482.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 80, 80 )
-
-[node name="Label" type="Label" parent="N/H2/Delete2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = -55.0
-margin_right = 40.0
-margin_bottom = 55.0
-rect_min_size = Vector2( 80, 80 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "X"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Charactername" type="Label" parent="N/H2"]
-margin_left = 130.0
-margin_top = 33.0
-margin_right = 585.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 455, 0 )
-size_flags_horizontal = 4
-text = "                                   -  Empty Characterslot    -"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/H2"]
-margin_left = 635.0
-margin_top = 33.0
-margin_right = 755.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 120, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Margin" type="Label" parent="N/H2"]
-margin_left = 805.0
-margin_top = 33.0
-margin_right = 895.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 90, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanMode" type="TextureRect" parent="N/H2"]
-margin_left = 945.0
-margin_right = 1025.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+size_flags_vertical = 4
+texture_normal = ExtResource( 6 )
 expand = true
-
-[node name="PlayChar2" type="TextureButton" parent="N/H2/IronmanMode"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -0.793701
-margin_bottom = -0.793701
-rect_min_size = Vector2( 50, 50 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanTexture" type="TextureRect" parent="N/H2/IronmanMode"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -25.0
-margin_top = -25.0
-margin_right = 25.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 50, 50 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="H3" type="HBoxContainer" parent="N"]
-margin_left = 9.61395
-margin_top = 404.041
-margin_right = 1194.61
-margin_bottom = 484.041
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = 164.0
+margin_right = 378.0
+margin_bottom = 263.0
 custom_constants/separation = 50
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Delete3" type="TextureButton" parent="N/H3"]
-margin_right = 80.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
-
-[node name="Label" type="Label" parent="N/H3/Delete3"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = -56.0
-margin_right = 40.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 80, 80 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-text = "X"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Charactername" type="Label" parent="N/H3"]
-margin_left = 130.0
-margin_top = 33.0
-margin_right = 585.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 455, 0 )
-text = "                                   -  Empty Characterslot    -"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/H3"]
-margin_left = 635.0
-margin_top = 33.0
-margin_right = 755.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 120, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Margin2" type="Label" parent="N/H3"]
-margin_left = 805.0
-margin_top = 33.0
-margin_right = 895.0
-margin_bottom = 47.0
-rect_min_size = Vector2( 90, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IronmanMode" type="TextureRect" parent="N/H3"]
-margin_left = 945.0
-margin_right = 1025.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+[node name="PlayChar3" type="TextureButton" parent="N/H3"]
+margin_right = 482.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 3
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 4 )
+texture_focused = ExtResource( 4 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="PlayChar3" type="TextureButton" parent="N/H3/IronmanMode"]
+[node name="Charactername" type="Label" parent="N/H3/PlayChar3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 50, 50 )
-expand = true
+margin_right = -107.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 3 )
+text = "-  Empty -"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IronmanTexture" type="TextureRect" parent="N/H3/IronmanMode"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -25.0
-margin_top = -25.0
-margin_right = 25.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 50, 50 )
-mouse_filter = 2
-texture = ExtResource( 3 )
+[node name="Delete3" type="TextureButton" parent="N/H3"]
+visible = false
+margin_left = 402.0
+margin_top = 9.0
+margin_right = 482.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 80, 80 )
+size_flags_vertical = 4
+texture_normal = ExtResource( 6 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BackButton" type="TextureButton" parent="N"]
-margin_left = 777.078
-margin_top = 482.29
-margin_right = 969.078
-margin_bottom = 570.29
+margin_left = 64.0
+margin_top = 8.0
+margin_right = 299.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 7 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="N/BackButton"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -68.0
-margin_top = -29.0
-margin_right = 68.0
-margin_bottom = 29.0
-text = "Back"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -495,14 +317,22 @@ __meta__ = {
 
 [node name="SFXStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 200, 200 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 10 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
 [connection signal="pressed" from="N/Popup/TextureRect/ConfirmDelete" to="." method="_on_ConfirmDelete_pressed"]
 [connection signal="pressed" from="N/Popup/TextureRect/StopDelete" to="." method="_on_StopDelete_pressed"]
-[connection signal="text_entered" from="N/H/LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="toggled" from="N/H/IronmanMode" to="." method="_on_IronmanMode_toggled"]
+[connection signal="mouse_entered" from="N/H1/PlayChar1" to="." method="_on_PlayChar1_mouse_entered"]
+[connection signal="pressed" from="N/H1/PlayChar1" to="." method="_on_PlayChar1_pressed"]
 [connection signal="pressed" from="N/H1/Delete1" to="." method="_on_Delete1_pressed"]
-[connection signal="pressed" from="N/H1/IronmanMode/PlayChar1" to="." method="_on_PlayChar1_pressed"]
+[connection signal="mouse_entered" from="N/H2/PlayChar2" to="." method="_on_PlayChar2_mouse_entered"]
+[connection signal="pressed" from="N/H2/PlayChar2" to="." method="_on_PlayChar2_pressed"]
 [connection signal="pressed" from="N/H2/Delete2" to="." method="_on_Delete2_pressed"]
-[connection signal="pressed" from="N/H2/IronmanMode/PlayChar2" to="." method="_on_PlayChar2_pressed"]
+[connection signal="mouse_entered" from="N/H3/PlayChar3" to="." method="_on_PlayChar3_mouse_entered"]
+[connection signal="pressed" from="N/H3/PlayChar3" to="." method="_on_PlayChar3_pressed"]
 [connection signal="pressed" from="N/H3/Delete3" to="." method="_on_Delete3_pressed"]
-[connection signal="pressed" from="N/H3/IronmanMode/PlayChar3" to="." method="_on_PlayChar3_pressed"]
 [connection signal="pressed" from="N/BackButton" to="." method="_on_BackButton_pressed"]
