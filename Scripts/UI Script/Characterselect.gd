@@ -15,6 +15,7 @@ var PressedLoading := false
 func _ready():
 		$N/H1/PlayChar1.grab_focus()
 		progress_load()
+		$AnimationPlayer.play("Background_Animation")
 		
 func progress_load():
 	var savefile = File.new()
@@ -140,3 +141,7 @@ func _on_StopDelete_pressed():
 	$N/Popup.visible = false
 	$N/H1/PlayChar1.grab_focus()
 
+
+
+func _on_BackButton_pressed():
+	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")

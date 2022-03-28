@@ -1,0 +1,322 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://AlphaDemo.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Enemies/Turret.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Objects/Checkpoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/Enemies/Guard.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Characters/Player/Mothgirl.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Characters/Player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Tiles/tileset1.4.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/Objects/Lamp.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Objects/BreakableTile.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Abilities/Unlocks/Crawling_Unlock.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/UI Script/MonitorPerformance.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Objects/Spikes.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Interface/Options.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Effects/background.png" type="Texture" id=14]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "tileset1.4.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 65, 325, 64, 64 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/occluder = SubResource( 1 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[node name="AlphaDemo" type="Node2D"]
+position = Vector2( 2560, -216 )
+script = ExtResource( 1 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" type="YSort" parent="YSort"]
+
+[node name="Player" parent="YSort/Player" instance=ExtResource( 6 )]
+position = Vector2( -2705.9, -50.6591 )
+jump_speed = -500
+
+[node name="Mothgirl" parent="YSort/Player" instance=ExtResource( 5 )]
+position = Vector2( -1285.71, 492.779 )
+
+[node name="Enemy" type="YSort" parent="YSort"]
+
+[node name="Guard" parent="YSort/Enemy" instance=ExtResource( 4 )]
+position = Vector2( -189.244, -792 )
+
+[node name="Turret" parent="YSort/Enemy" instance=ExtResource( 2 )]
+position = Vector2( -377.266, -122.663 )
+
+[node name="Spikes" parent="YSort/Enemy" instance=ExtResource( 12 )]
+position = Vector2( -1213.52, -27.96 )
+
+[node name="Objects" type="YSort" parent="YSort"]
+
+[node name="Lights" type="Node2D" parent="YSort/Objects"]
+
+[node name="Lamp" parent="YSort/Objects/Lights" instance=ExtResource( 8 )]
+position = Vector2( -2701.24, -42.5647 )
+
+[node name="Checkpoints" type="YSort" parent="YSort"]
+
+[node name="Checkpoint" parent="YSort/Checkpoints" instance=ExtResource( 3 )]
+position = Vector2( -2716.7, 19.8737 )
+
+[node name="Powerups" type="YSort" parent="YSort"]
+
+[node name="Crawling_Unlock" parent="YSort/Powerups" instance=ExtResource( 10 )]
+position = Vector2( -1643.79, -80.3612 )
+
+[node name="BreakableTiles" type="YSort" parent="YSort"]
+
+[node name="BreakableTile" parent="YSort/BreakableTiles" instance=ExtResource( 9 )]
+position = Vector2( -1863.36, -117.682 )
+
+[node name="Tiles" type="TileMap" parent="."]
+tile_set = SubResource( 3 )
+format = 1
+tile_data = PoolIntArray( -524333, 0, 0, -524332, 0, 0, -524331, 0, 0, -524330, 0, 0, -524329, 0, 0, -524328, 0, 0, -524327, 0, 0, -524326, 0, 0, -524325, 0, 0, -524324, 0, 0, -524323, 0, 0, -524322, 0, 0, -524321, 0, 0, -524320, 0, 0, -524319, 0, 0, -524318, 0, 0, -524317, 0, 0, -524316, 0, 0, -524315, 0, 0, -524314, 0, 0, -524313, 0, 0, -524312, 0, 0, -524311, 0, 0, -524310, 0, 0, -458797, 0, 0, -458774, 0, 0, -393261, 0, 0, -393238, 0, 0, -327725, 0, 0, -327702, 0, 0, -262189, 0, 0, -262166, 0, 0, -196653, 0, 0, -196630, 0, 0, -131117, 0, 0, -131094, 0, 0, -65581, 0, 0, -65558, 0, 0, -45, 0, 0, -22, 0, 0, 65491, 0, 0, 65514, 0, 0, 131027, 0, 0, 131028, 0, 0, 131029, 0, 0, 131030, 0, 0, 131031, 0, 0, 131032, 0, 0, 131033, 0, 0, 131034, 0, 0, 131035, 0, 0, 131036, 0, 0, 131037, 0, 0, 131038, 0, 0, 131039, 0, 0, 131040, 0, 0, 131041, 0, 0, 131042, 0, 0, 131043, 0, 0, 131044, 0, 0, 131045, 0, 0, 131046, 0, 0, 131047, 0, 0, 131048, 0, 0, 131049, 0, 0, 131050, 0, 0 )
+
+[node name="Background" type="TileMap" parent="."]
+format = 1
+
+[node name="Background2" type="TileMap" parent="."]
+format = 1
+
+[node name="TwoWayTiles" type="TileMap" parent="."]
+format = 1
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AmbiencePlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="GUI/Label"]
+margin_left = 7.34173
+margin_top = -38.6929
+margin_right = 47.3417
+margin_bottom = -24.6929
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonitorPerformance" type="MarginContainer" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = -40.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MonitorPerformance"]
+margin_right = 1024.0
+margin_bottom = 550.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MonitorPerformance/HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 550.0
+alignment = 2
+
+[node name="Stat1" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 518.0
+margin_right = 26.0
+margin_bottom = 532.0
+text = "FPS"
+
+[node name="Stat2" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 536.0
+margin_right = 26.0
+margin_bottom = 550.0
+text = "CPU"
+
+[node name="Pausemenu" type="NinePatchRect" parent="GUI"]
+pause_mode = 2
+visible = false
+margin_left = 384.238
+margin_top = 196.539
+margin_right = 633.238
+margin_bottom = 424.539
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Pausemenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -43.5
+margin_right = 43.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Pausemenu/HBoxContainer"]
+margin_right = 83.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+bbcode_enabled = true
+bbcode_text = "[center]Pause Menu[center]"
+text = "Pause Menu"
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 83.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="MainMenuButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 83.0
+margin_bottom = 68.0
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 83.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 40, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 116.0
+margin_right = 83.0
+margin_bottom = 136.0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer3" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 140.0
+margin_right = 83.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 40, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 184.0
+margin_right = 83.0
+margin_bottom = 204.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="NinePatchRect" parent="GUI/Pausemenu"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 100 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Pausemenu/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/Pausemenu/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 31.0
+text = "Do you really want to go back?
+Unsaved Progress will be lost."
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Pausemenu/Popup/VBoxContainer"]
+margin_top = 35.0
+margin_right = 249.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="YesButton" type="Button" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "Yes"
+
+[node name="MarginContainer2" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 88.0
+margin_right = 153.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 65, 0 )
+
+[node name="NoButton" type="Button" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 157.0
+margin_right = 197.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "No"
+
+[node name="MarginContainer3" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 201.0
+margin_right = 241.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="Options" parent="GUI" instance=ExtResource( 13 )]
+visible = false

@@ -1986,10 +1986,8 @@ visible = false
 [node name="Player" type="YSort" parent="YSort"]
 
 [node name="Player" parent="YSort/Player" instance=ExtResource( 5 )]
-position = Vector2( 1086.56, -1534.79 )
-speed = 125
+position = Vector2( 64, 208 )
 jump_speed = -500
-gravity = 1000
 
 [node name="Mothgirl" parent="YSort/Player" instance=ExtResource( 38 )]
 position = Vector2( 3925.58, 920.496 )
@@ -2022,7 +2020,7 @@ position = Vector2( 478.075, -1513.37 )
 [node name="Checkpoints" type="Node" parent="."]
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 27 )]
-position = Vector2( 41.2572, 254.591 )
+position = Vector2( 40, 248 )
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 27 )]
 position = Vector2( 1862.05, -466.828 )

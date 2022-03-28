@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-export (int) var speed := 350
+export (int) var speed := 150
 export (int) var dash_speed := 500
 export (int) var dash_jump_speed := 425
 export (int) var crawl_speed := 150
-export (int) var jump_speed := -1000
-export (int) var gravity := 3000
+export (int) var jump_speed := -500
+export (int) var gravity := 1000
 export (int) var walljump_height := -300
 export (int) var walljump_power := 150
 
