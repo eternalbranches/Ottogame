@@ -13,9 +13,9 @@ var delet_save:= "1"
 var PressedLoading := false
 
 func _ready():
-		$N/H1/PlayChar1.grab_focus()
-		progress_load()
-		$AnimationPlayer.play("Background_Animation")
+	$AnimationPlayer.play("FadeIn")
+	$N/H1/PlayChar1.grab_focus()
+	progress_load()
 		
 func progress_load():
 	var savefile = File.new()
@@ -50,8 +50,9 @@ func _on_PlayChar1_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H1/PlayChar1.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			$AnimationPlayer.play("FadeOut")
+			#yield(get_tree().create_timer(0.5), "timeout")
+			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 	else:
 		var savefile1 = File.new()
 		savefile1.open("user://save_file1.dat", File.WRITE)
@@ -70,8 +71,8 @@ func _on_PlayChar2_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H2/PlayChar2.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			#yield(get_tree().create_timer(0.5), "timeout")
+			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 	else:
 		savefile.open("user://save_file2.dat", File.WRITE)
 		savefile.store_var(progress_dict2)
@@ -89,8 +90,8 @@ func _on_PlayChar3_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H3/PlayChar3.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
-			yield(get_tree().create_timer(0.5), "timeout")
-			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
+			#yield(get_tree().create_timer(0.5), "timeout")
+			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 	else:
 		savefile.open("user://save_file3.dat", File.WRITE)
 		savefile.store_var(progress_dict3)
@@ -145,3 +146,11 @@ func _on_StopDelete_pressed():
 
 func _on_BackButton_pressed():
 	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	match anim_name:
+		"FadeIn":
+			$AnimationPlayer.play("Background_Animation")
+		"FadeOut":
+			get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")

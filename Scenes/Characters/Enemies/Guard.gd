@@ -13,6 +13,7 @@ export (int) var touch_damage := 1
 var initialized := false
 var knockback := false
 var can_shoot := true
+var reset_started := false
 var player_in_range
 onready var player = get_node("../../Player/Player")
 var last_seen := Vector2.ZERO
@@ -61,6 +62,7 @@ func _physics_process(delta):
 				get_parent().add_child(skill_instance)
 				can_shoot = false
 		"death":
+			velocity.x = 0
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 		"knockback":
@@ -81,6 +83,7 @@ func _physics_process(delta):
 			if sight_check:
 				if sight_check.collider.name == "Player" and player_in_range == true:
 					state = "shoot"
+					$ChangeState.stop()
 				elif sight_check.collider.name == "Player" and player_in_range == false and $RayCast2D.is_colliding() == true:
 					if last_seen.x > position.x:
 						velocity.x = speed
@@ -92,9 +95,12 @@ func _physics_process(delta):
 							velocity.x = speed
 						if last_seen.x < position.x:
 							velocity.x = -speed
+						if reset_started == false:
+							reset_started = true
+							$ChangeState.start()
+						
 			velocity = move_and_slide(velocity, Vector2.UP)
 		"return":
-			print("return")
 			if get_global_position().x > spawn_guardposition:
 				velocity.x = speed
 			if get_global_position().x < spawn_guardposition:
@@ -103,17 +109,17 @@ func _physics_process(delta):
 				state = "idle"
 			
 			
-func on_hit(damage, origin, enemy_posx):
+func on_hit(damage, _origin, enemy_posx):
 	if state != "death":
 		current_hp -= damage
-		
+		flash()
 			
 	if position.x < enemy_posx:
-		velocity.x = -200
+		velocity.x += 200
 	else:
-		velocity.x = +200
+		velocity.x -= 200
 	velocity.y = 0
-	velocity.y -= 1000
+	velocity.y -= 200
 	state = "knockback"
 	if current_hp <= 0:
 			on_death()
@@ -143,15 +149,17 @@ func sightcheck():
 func _on_ShootCD_timeout():
 	can_shoot = true
 
-func _on_Range_body_entered(_body):
-	$RayCast2D.enabled = true
-	if state == "idle":
-		state = "sight"
-		player_in_range = true
-	elif state == "chase":
-		$PositionTimer.start()
+func _on_Range_body_entered(body):
+	if body.is_in_group("Player"):
+		$RayCast2D.enabled = true
+		if state == "idle":
+			state = "sight"
+			player_in_range = true
+		elif state == "chase":
+			$PositionTimer.start()
 
-func _on_Range_body_exited(_body):
+func _on_Range_body_exited(body):
+	if body.is_in_group("Player"):
 		player_in_range = false
 		initialized = false
 		if state != "death":
@@ -160,7 +168,8 @@ func _on_Range_body_exited(_body):
 
 
 func _on_Hurtbox_body_entered(body):
-	body.on_hit(touch_damage, "enemy", position.x)
+	if body.is_in_group("Player"):
+		body.on_hit(touch_damage, "enemy", position.x)
 
 
 func _on_PositionTimer_timeout():
@@ -170,3 +179,14 @@ func _on_PositionTimer_timeout():
 
 func _on_RemoveTimer_timeout():
 	queue_free()
+
+func flash():
+	$Sprite.material.set_shader_param("flash_modifier", 0.4)
+	$FlashTimer.start()
+
+func _on_FashTimer_timeout():
+	$Sprite.material.set_shader_param("flash_modifier", 0)
+
+
+func _on_ChangeState_timeout():
+	state = "return"

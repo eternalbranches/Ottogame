@@ -7,6 +7,8 @@ var ambiencebus := AudioServer.get_bus_index("Ambience")
 #var weatherbus := AudioServer.get_bus_index("Weather")
 var soundvaluearray = {"safedvolumevalue" : 1, "safedmusicvalue" : 1, "safedsfxvalue" : 1, "safedambiencevalue" : 1, "safedweathervalue" : 1}
 
+var clicked := false
+
 
 func _ready():
 	CharacterSave.ingame = false
@@ -14,7 +16,12 @@ func _ready():
 	$NinePatchRect/VBoxContainer/PlayButton.grab_focus()
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")
+	if clicked == false:
+		clicked = true
+		$AnimationPlayer.play("FadeOut")
+		$SFXPlayer.play()
+		#yield(get_tree().create_timer(0.5), "timeout")
+		#get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")
 
 
 func _on_OptionsButton_pressed():
@@ -41,3 +48,7 @@ func load_volume():
 	AudioServer.set_bus_volume_db(musicbus, linear2db(soundvaluearray["safedmusicvalue"]))
 	AudioServer.set_bus_volume_db(sfxbus, linear2db(soundvaluearray["safedsfxvalue"]))
 	AudioServer.set_bus_volume_db(ambiencebus, linear2db(soundvaluearray["safedambiencevalue"]))
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")

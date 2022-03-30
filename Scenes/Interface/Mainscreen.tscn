@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/UI/Fonts/AlegreyaSC-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/Fonts/LargeFont.tres" type="DynamicFont" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://Assets/Soundtrack/Music/The Escape Room Full Version.wav" type="AudioStream" id=4]
 [ext_resource path="res://Scenes/Interface/Options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/UI/Background/file.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Soundtrack/SFX/Hit 10_4.wav" type="AudioStream" id=7]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/VHS-and-CRT-monitor-effect
@@ -239,8 +240,8 @@ void fragment()
 }
 "
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/overlay = false
 shader_param/scanlines_opacity = 0.4
 shader_param/scanlines_width = 0.25
@@ -263,7 +264,7 @@ shader_param/clip_warp = false
 shader_param/vignette_intensity = 0.4
 shader_param/vignette_opacity = 0.5
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -271,11 +272,39 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 outline_size = 1
 outline_color = Color( 0.356863, 0.356863, 0.356863, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "FadeOut"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
 
 [node name="Mainscreen" type="Control"]
 anchor_right = 1.0
@@ -286,10 +315,10 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 4 )
+material = SubResource( 2 )
 position = Vector2( 510.616, 299.467 )
 scale = Vector2( 1.27795, 1.49541 )
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_left = 0.5
@@ -322,7 +351,7 @@ __meta__ = {
 margin_right = 400.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 0, 20 )
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 0.345098, 0.109804, 0.109804, 1 )
 bbcode_enabled = true
 bbcode_text = "[tornado radius=2 freq=2][center]Titelscreen[/center][/tornado]"
@@ -390,9 +419,20 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
+bus = "Music"
 
 [node name="Options" parent="." instance=ExtResource( 5 )]
 visible = false
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeOut = SubResource( 5 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
+
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

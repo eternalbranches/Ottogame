@@ -80,7 +80,7 @@ func _on_Range_body_exited(_body):
 func _on_ShootCD_timeout():
 	can_shoot = true
 	
-func on_hit(damage, origin, enemyposx):
+func on_hit(damage, _origin, _enemyposx):
 	if state != "death":
 		current_hp -= damage
 	if current_hp <= 0:

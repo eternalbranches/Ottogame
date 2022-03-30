@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Turret.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Objects/Turret.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/idunno.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=3]
 

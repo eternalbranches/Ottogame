@@ -18,6 +18,7 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	body.climbable = true
+	body.ladder_location = position.x
 
 
 func _on_Area2D_body_exited(body):

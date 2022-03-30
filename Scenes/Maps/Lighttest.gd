@@ -5,6 +5,7 @@ var checkpoint_count := 0
 
 
 func _ready():
+	$AnimationPlayer.play("FadeIn")
 	assign_checkpoints()
 	checkpoint_load()
 	if CharacterSave.first_spawn == false:

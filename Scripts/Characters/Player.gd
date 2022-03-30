@@ -26,6 +26,7 @@ var velocity := Vector2.ZERO
 
 var ceiling := false
 var climbable := false
+var ladder_location := 0.0
 var invulnerable := false
 var last_direction := "right"
 
@@ -46,6 +47,7 @@ var possible_targets = []
 var current_target = null
 
 signal death
+signal HPchange
 
 
 func _ready():
@@ -162,19 +164,7 @@ func get_input_midair():
 		dir -= 1
 	if dir != 0:
 		velocity.x = lerp(velocity.x, dir * speed, acceleration)
-	if CharacterSave.save_dict["walljump"] == true:
-		if is_on_wall() and can_wallslide == true:
-			if $Wallcheck_W.is_colliding() == true:
-				state = "wallslide"
-				can_doublejump = true
-				velocity = Vector2.ZERO
-				last_direction = "left"
-			elif $Wallcheck_E.is_colliding() == true:
-				state = "wallslide"
-				can_doublejump = true
-				velocity = Vector2.ZERO
-				last_direction = "right"
-				
+	check_wallslide()
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
@@ -194,18 +184,19 @@ func get_input_midair_run():
 		dir -= 1
 	if dir != 0:
 		velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
-	if CharacterSave.save_dict["walljump"] == true:
-		if is_on_wall() and can_wallslide == true:
-			if $Wallcheck_W.is_colliding() == true:
-				state = "wallslide"
-				can_doublejump = true
-				velocity = Vector2.ZERO
-				last_direction = "left"
-			elif $Wallcheck_E.is_colliding() == true:
-				state = "wallslide"
-				can_doublejump = true
-				velocity = Vector2.ZERO
-				last_direction = "right"
+	check_wallslide()
+	#if CharacterSave.save_dict["walljump"] == true:
+	#	if is_on_wall() and can_wallslide == true:
+	#		if $Wallcheck_W.is_colliding() == true:
+	#			state = "wallslide"
+	#			can_doublejump = true
+	#			velocity = Vector2.ZERO
+	#			last_direction = "left"
+	#		elif $Wallcheck_E.is_colliding() == true:
+	#			state = "wallslide"
+	#			can_doublejump = true
+	#			velocity = Vector2.ZERO
+	#			last_direction = "right"
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
 			velocity.y = jump_speed
@@ -359,16 +350,17 @@ func _physics_process(delta):
 		"climbing":
 			animation_mode.travel("Climbing")
 			shooting()
-			if Input.is_action_pressed("Up"):
-				velocity.y = -100
-			if Input.is_action_pressed("Down"):
-				velocity.y = 100
 			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
 			if Input.is_action_just_pressed("ActionButton"):
 					velocity.y = jump_speed
 					state = "midair"
+			if Input.is_action_pressed("Up"):
+				velocity.y = -100
+			if Input.is_action_pressed("Down"):
+				velocity.y = 100
 			if climbable == false:
-				velocity.y = jump_speed
+				if velocity.y == -100:
+					velocity.y = jump_speed
 				state = "midair"
 				
 		"knockback":
@@ -384,7 +376,8 @@ func _physics_process(delta):
 				set_collision_mask_bit(2, 1)
 				knockback = false
 				invulnerable = false
-				state = "midair"
+				if state != "death":
+					state = "midair"
 				
 		"walljump":
 			velocity.y += gravity/3 * delta
@@ -406,8 +399,9 @@ func _physics_process(delta):
 					animation_mode.travel("Jumping_W")
 				started = true
 				yield(get_tree().create_timer(0.28), "timeout")
-				started = false
-				state = "midair_run"
+				if state == "walljump":
+					started = false
+					state = "midair_run"
 			shooting()
 			
 		"wallslide":
@@ -418,11 +412,12 @@ func _physics_process(delta):
 				state = "midair"
 			if is_on_floor():
 				yield(get_tree().create_timer(0.2), "timeout")
-				if state != "death":
+				if state == "wallslide":
 					state = "idle"
 			elif velocity.y > 180:
-				can_wallslide = false
-				state = "midair"
+				if state == "wallslide":
+					can_wallslide = false
+					state = "midair"
 				yield(get_tree().create_timer(1), "timeout")
 				can_wallslide = true
 			
@@ -463,6 +458,21 @@ func action():
 			velocity = Vector2.ZERO
 			#global_position.y -= 8
 			state = "climbing"
+			global_position.x = ladder_location
+
+func check_wallslide():
+	if CharacterSave.save_dict["walljump"] == true:
+		if is_on_wall() and can_wallslide == true:
+			if $Wallcheck_W.is_colliding() == true and $Wallcheck_W.get_collider().is_in_group("notWallslidable") == false:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "left"
+			elif $Wallcheck_E.is_colliding() == true and $Wallcheck_E.get_collider().is_in_group("notWallslidable") == false:
+				state = "wallslide"
+				can_doublejump = true
+				velocity = Vector2.ZERO
+				last_direction = "right"
 func shooting():
 	if CharacterSave.controller == true:
 		if Input.is_action_just_pressed("Aim_assist"):
@@ -513,6 +523,7 @@ func _on_Dashtimer_timeout():
 func on_hit(damage, origin, enemy_posx):
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
+		emit_signal("HPchange", current_hp)
 	if position.x < enemy_posx:
 		velocity.x = -200
 	else:

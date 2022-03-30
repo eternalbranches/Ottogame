@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hit 10_4.wav-b4183c6c3ec9ce90f5cc6a69d4d6dccc.sample"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/Hit 10_4.wav"
+dest_files=[ "res://.import/Hit 10_4.wav-b4183c6c3ec9ce90f5cc6a69d4d6dccc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

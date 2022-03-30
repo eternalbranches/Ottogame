@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var worldposition := Vector2.ZERO
 var fallstarted := false
-var fall:= false
+var falling:= false
 var velocity := Vector2.ZERO
 export var gravity := 1500
 func _ready():
@@ -13,18 +13,18 @@ func fall():
 		fallstarted = true
 	
 func _on_FallTimer_timeout():
-	fall = true
+	falling = true
 	$RespawnTimer.start()
 	
 func _on_RespawnTimer_timeout():
 	set_position(worldposition)
 	fallstarted = false
-	fall = false
+	falling = false
 	visible = true
 	set_collision_layer_bit(7,1)
 	
 func _process(delta):
-	if fall == true:
+	if falling == true:
 		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity, Vector2.UP)
 		if is_on_floor() == true:

@@ -1,14 +1,20 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Characters/guard.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Characters/Enemies/Guard.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=3]
+[ext_resource path="res://Scripts/Shader/flash.gdshader" type="Shader" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 15.625 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Death_E"
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -22,8 +28,7 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Death_W"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -37,7 +42,7 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -53,7 +58,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -68,7 +73,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -84,32 +89,30 @@ tracks/0/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "Death_E"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Death_W"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Shoot_E"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Shoot_W"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=13]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=14]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
@@ -117,61 +120,65 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
-[sub_resource type="AnimationNodeStateMachine" id=20]
-states/Death_E/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachine" id=21]
+states/Death_E/node = SubResource( 8 )
 states/Death_E/position = Vector2( 871, 34 )
-states/Death_W/node = SubResource( 8 )
+states/Death_W/node = SubResource( 9 )
 states/Death_W/position = Vector2( 330, 34 )
-states/Idle/node = SubResource( 9 )
+states/Idle/node = SubResource( 10 )
 states/Idle/position = Vector2( 607, 105 )
-states/Shoot_E/node = SubResource( 10 )
+states/Shoot_E/node = SubResource( 11 )
 states/Shoot_E/position = Vector2( 783, 105 )
-states/Shoot_W/node = SubResource( 11 )
+states/Shoot_W/node = SubResource( 12 )
 states/Shoot_W/position = Vector2( 449, 105 )
-transitions = [ "Idle", "Shoot_W", SubResource( 12 ), "Shoot_W", "Idle", SubResource( 13 ), "Idle", "Shoot_E", SubResource( 14 ), "Shoot_E", "Idle", SubResource( 15 ), "Idle", "Death_W", SubResource( 16 ), "Shoot_W", "Death_W", SubResource( 17 ), "Shoot_E", "Death_E", SubResource( 18 ), "Idle", "Death_E", SubResource( 19 ) ]
+transitions = [ "Idle", "Shoot_W", SubResource( 13 ), "Shoot_W", "Idle", SubResource( 14 ), "Idle", "Shoot_E", SubResource( 15 ), "Shoot_E", "Idle", SubResource( 16 ), "Idle", "Death_W", SubResource( 17 ), "Shoot_W", "Death_W", SubResource( 18 ), "Shoot_E", "Death_E", SubResource( 19 ), "Idle", "Death_E", SubResource( 20 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
-[sub_resource type="CircleShape2D" id=22]
+[sub_resource type="CircleShape2D" id=23]
 radius = 424.3
 
-[sub_resource type="CapsuleShape2D" id=23]
+[sub_resource type="CapsuleShape2D" id=24]
 height = 26.4101
 
 [node name="Guard" type="KinematicBody2D" groups=[
 "Enemy",
 ]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
 position = Vector2( 0, 2 )
 texture = ExtResource( 1 )
 hframes = 3
 vframes = 7
-frame = 6
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Death_E = SubResource( 2 )
-anims/Death_W = SubResource( 3 )
-anims/Idle = SubResource( 4 )
-anims/Shoot_E = SubResource( 5 )
-anims/Shoot_W = SubResource( 6 )
+anims/Death_E = SubResource( 3 )
+anims/Death_W = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+anims/Shoot_E = SubResource( 6 )
+anims/Shoot_W = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 20 )
+tree_root = SubResource( 21 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 21 )
+parameters/playback = SubResource( 22 )
 
 [node name="ShootCD" type="Timer" parent="."]
 
 [node name="ChangeState" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
@@ -189,7 +196,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
-shape = SubResource( 22 )
+shape = SubResource( 23 )
 
 [node name="SFXPLayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -198,11 +205,11 @@ bus = "SFX"
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.157486, 2.83483 )
-shape = SubResource( 23 )
+shape = SubResource( 24 )
 
 [node name="PositionTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -215,9 +222,15 @@ cast_to = Vector2( 0, 5 )
 [node name="RemoveTimer" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
+[connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="timeout" from="PositionTimer" to="." method="_on_PositionTimer_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FashTimer_timeout"]
