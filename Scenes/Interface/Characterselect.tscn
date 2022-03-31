@@ -84,7 +84,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "FadeOut"
 length = 2.0
 tracks/0/type = "value"
@@ -99,11 +99,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
-
-[sub_resource type="DynamicFont" id=5]
-font_data = ExtResource( 9 )
+tracks/1/type = "value"
+tracks/1/path = NodePath("MusicPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
 
 [sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 9 )
 
 [node name="Singleplayer_Characterselect" type="Control"]
@@ -123,7 +135,7 @@ texture = ExtResource( 5 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Background_Animation = SubResource( 3 )
 anims/FadeIn = SubResource( 4 )
-anims/FadeOut = SubResource( 7 )
+anims/FadeOut = SubResource( 5 )
 
 [node name="N" type="NinePatchRect" parent="."]
 anchor_right = 1.0
@@ -160,7 +172,7 @@ margin_left = 24.0
 margin_top = 20.0
 margin_right = 272.0
 margin_bottom = 63.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Do you want to 
 delete this File?"
 __meta__ = {
@@ -225,7 +237,7 @@ anchor_bottom = 1.0
 margin_right = -107.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "-  Empty -"
 align = 1
 valign = 1
@@ -277,7 +289,7 @@ anchor_bottom = 1.0
 margin_right = -107.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "-  Empty -"
 align = 1
 valign = 1
@@ -330,7 +342,7 @@ anchor_bottom = 1.0
 margin_right = -107.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "-  Empty -"
 align = 1
 valign = 1
@@ -360,7 +372,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 autoplay = true
 bus = "Music"
