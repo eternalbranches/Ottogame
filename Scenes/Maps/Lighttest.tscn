@@ -2184,13 +2184,13 @@ position = Vector2( 520, -1496 )
 position = Vector2( 544, -1512 )
 
 [node name="LaserDrill" parent="YSort/Enemy" instance=ExtResource( 48 )]
-position = Vector2( 2208, -2488 )
+position = Vector2( 2200, -2488 )
 
 [node name="LaserDrill3" parent="YSort/Enemy" instance=ExtResource( 48 )]
-position = Vector2( 2208, -2176 )
+position = Vector2( 2200, -2176 )
 
 [node name="LaserDrill4" parent="YSort/Enemy" instance=ExtResource( 48 )]
-position = Vector2( 2528, -2328 )
+position = Vector2( 2536, -2328 )
 rotation = 3.14159
 
 [node name="Checkpoints" type="Node" parent="."]
