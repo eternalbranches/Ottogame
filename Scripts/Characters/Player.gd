@@ -1,19 +1,24 @@
 extends KinematicBody2D
 
-export (int) var speed := 150
-export (int) var dash_speed := 500
-export (int) var dash_jump_speed := 425
+export (int) var max_speed := 150
+export (int) var speed_change := 5
+export (int) var run_speed_change := 7
+export (int) var max_dash_speed := 500
+var max_jump_speed := 150
+var max_run_jump_speed := 425
 export (int) var crawl_speed := 150
-export (int) var jump_speed := -500
+export (int) var jump_strenght := -500
 export (int) var gravity := 1000
-export (int) var walljump_height := -300
+export (int) var walljump_height := -250
 export (int) var walljump_power := 150
+export (int) var second_jump_power := -380
 
 export (int) var knockback_power := 300
 export (int, 0, 200) var push = 100
 
 
-export (float, 0, 1.0) var friction = 0.3
+export (float, 0, 1.0) var friction = 0.2
+export (float, 0, 1.0) var friction_run = 0.03
 export (float, 0, 1.0) var acceleration = 0.1
 
 onready var animation_tree = get_node("AnimationTree")
@@ -42,6 +47,7 @@ var can_doublejump := true
 var started := false
 var can_wallslide := true
 var can_shoot := true
+var run_released = true
 
 var possible_targets = []
 var current_target = null
@@ -59,7 +65,11 @@ func _ready():
 		
 
 func get_input():
-	var dir = 0
+	#var dir = 0
+	#if velocity.x > max_speed:
+	#	velocity.x = max_speed
+	#elif velocity.x < -speed:
+	#	velocity.x = -speed
 	if CharacterSave.save_dict["running"] == true:
 		if CharacterSave.controller == false:
 			if Input.is_action_just_pressed("Right"):
@@ -80,18 +90,37 @@ func get_input():
 			#print(Input.get_action_strength("Left"))
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
-		animation_mode.travel("Walk_E")
-		dir += 1
+		#animation_mode.travel("Walk_E")
+		if velocity.x < 0:
+			velocity.x += speed_change
+		if velocity.x < max_speed:
+			velocity.x += speed_change
+			#velocity.x = lerp(velocity.x, speed, acceleration)
+		#dir += 1
 		
 		
-	if Input.is_action_pressed("Left"):
+	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
-		animation_mode.travel("Walk_W")
-		dir -= 1
-	if dir != 0:
-		velocity.x = lerp(velocity.x, dir * speed, acceleration)
+		#animation_mode.travel("Walk_W")
+		if velocity.x > 0:
+			velocity.x -= speed_change
+		if velocity.x > -max_speed:
+			velocity.x -= speed_change
+			#velocity.x = lerp(velocity.x, -speed, acceleration)
+	
+		#dir -= 1
+	#if dir != 0:
+		#velocity.x = lerp(velocity.x, dir * speed, acceleration)
+		#velocity.x = lerp(velocity.x,  velocity.x, acceleration)
+	#else:
+		#velocity.x = lerp(velocity.x, 0, friction)
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
+	
+	if velocity.x > 0 :
+		animation_mode.travel("Walk_E")
+	elif velocity.x <0:
+		animation_mode.travel("Walk_W")
 	if Input.is_action_just_pressed("Down"):
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
@@ -110,23 +139,49 @@ func get_input():
 
 
 func get_input_running():
-	var dir = 0
+	#var dir = 0
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
-		animation_mode.travel("Run_E")
-		dir += 1
-	if Input.is_action_pressed("Left"):
+		run_released = false
+		if velocity.x < 0:
+			velocity.x += run_speed_change
+		if velocity.x < max_dash_speed:
+			velocity.x += run_speed_change
+			#velocity.x = lerp(velocity.x, dash_speed, acceleration)
+		#dir += 1
+	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
-		animation_mode.travel("Run_W")
-		dir -= 1
-	if dir != 0:
-		velocity.x = lerp(velocity.x, dir * dash_speed, acceleration)
+		run_released = false
+		if velocity.x > 0:
+			velocity.x -= run_speed_change
+		if velocity.x > - max_dash_speed:
+			velocity.x -= run_speed_change
+			#velocity.x = lerp(velocity.x, -dash_speed, acceleration)
+		#dir -= 1
+	#if dir != 0:
+		#velocity.x = lerp(velocity.x, dir * dash_speed, acceleration)
 	else:
-		velocity.x = lerp(velocity.x, 0, friction)
+		velocity.x = lerp(velocity.x, 0, friction_run)
+	#if velocity.x > dash_speed:
+	#	velocity.x = dash_speed
+	#elif velocity.x < -dash_speed:
+	#	velocity.x = -dash_speed
 	if Input.is_action_just_released("Right"):
-		state = "moving"
+		run_released = true
 	if Input.is_action_just_released("Left"):
-		state = "moving"
+		run_released = true
+	if run_released == true:
+		if velocity.x < max_speed and velocity.x > -max_speed:
+			state = "moving"
+	
+		#elif velocity.x > -speed:
+		#	print(velocity.x, "b")
+		#	state = "moving"
+		#	run_released = false
+	if velocity.x > 0 :
+		animation_mode.travel("Run_E")
+	elif velocity.x <0:
+		animation_mode.travel("Run_W")
 		
 	
 	if CharacterSave.save_dict["running"] == true:
@@ -153,37 +208,65 @@ func get_input_crawl():
 		velocity.x -= crawl_speed
 		
 func get_input_midair():
-	var dir = 0
+#	var dir = 0
 	if Input.is_action_pressed("Right"):
-		last_direction = "right"
-		animation_mode.travel("Jumping_E")
-		dir += 1
+		if velocity.x < 0:
+			velocity.x += speed_change
+		if velocity.x < max_jump_speed:
+			velocity.x += speed_change
+		#velocity.x = lerp(velocity.x, speed, acceleration)
+		#animation_mode.travel("Jumping_E")
+		#dir += 1
 	if Input.is_action_pressed("Left"):
-		last_direction = "left"
-		animation_mode.travel("Jumping_W")
-		dir -= 1
-	if dir != 0:
-		velocity.x = lerp(velocity.x, dir * speed, acceleration)
+		if velocity.x > - 0:
+			velocity.x -= speed_change
+		if velocity.x > - max_jump_speed:
+			velocity.x -= speed_change
+		#velocity.x -= speed_change
+#		velocity.x = lerp(velocity.x, -speed, acceleration)
+		#animation_mode.travel("Jumping_W")
+		#dir -= 1
+	#else:
+	##if dir != 0:
+	#	velocity.x = lerp(velocity.x, 0, acceleration)
 	check_wallslide()
+	
+	if velocity.x > 0 :
+		animation_mode.travel("Jumping_E")
+		last_direction = "right"
+	elif velocity.x <0:
+		animation_mode.travel("Jumping_W")
+		last_direction = "left"
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
-			velocity.y = jump_speed
+			max_jump_speed = max_speed
+			velocity.y = second_jump_power
 			can_doublejump = false
 			
 			
 
 func get_input_midair_run():
-	var dir = 0
+#	var dir = 0
 	if Input.is_action_pressed("Right"):
-		last_direction = "right"
-		animation_mode.travel("Jumping_E")
-		dir += 1
+		if velocity.x < 0:
+			velocity.x += run_speed_change
+		if velocity.x < max_run_jump_speed:
+			velocity.x += run_speed_change
+		#velocity.x = lerp(velocity.x, dash_jump_speed, acceleration)
+		#last_direction = "right"
+#		animation_mode.travel("Jumping_E")
+#		dir += 1
 	if Input.is_action_pressed("Left"):
-		last_direction = "left"
-		animation_mode.travel("Jumping_W")
-		dir -= 1
-	if dir != 0:
-		velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
+		if velocity.x > - 0:
+			velocity.x -= run_speed_change
+		if velocity.x > - max_run_jump_speed:
+			velocity.x -= run_speed_change
+		#velocity.x = lerp(velocity.x, -dash_jump_speed, acceleration)
+		#last_direction = "left"
+#		animation_mode.travel("Jumping_W")
+#		dir -= 1
+	#if dir != 0:
+	#	velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
 	check_wallslide()
 	#if CharacterSave.save_dict["walljump"] == true:
 	#	if is_on_wall() and can_wallslide == true:
@@ -199,20 +282,29 @@ func get_input_midair_run():
 	#			last_direction = "right"
 	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Up"):
-			velocity.y = jump_speed
+			velocity.y = second_jump_power
+			max_run_jump_speed = max_dash_speed
 			can_doublejump = false
+			
+	if velocity.x > 0 :
+		animation_mode.travel("Jumping_E")
+		last_direction = "right"
+	elif velocity.x <0:
+		animation_mode.travel("Jumping_W")
+		last_direction = "left"
 
 func _physics_process(delta):
 	$DebugState.text = state
 	match state:
 		"idle":
+			
+			get_input()
+			shooting()
+			action()
 			if last_direction == "right":
 				animation_mode.travel("Idle_E")
 			else:
 				animation_mode.travel("Idle_W")
-			get_input()
-			shooting()
-			action()
 			velocity.y += gravity * delta
 			#velocity = move_and_slide(velocity, Vector2.UP)
 			velocity = move_and_slide(velocity, Vector2.UP,
@@ -224,7 +316,7 @@ func _physics_process(delta):
 
 			if Input.is_action_just_pressed("Up"):
 				#if is_on_floor():
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
 					state = "midair"
 			#if velocity != Vector2.ZERO:
 			elif (round(velocity.x)) != 0:
@@ -253,7 +345,8 @@ func _physics_process(delta):
 				elif collision.collider.is_in_group("Falling"):
 					collision.collider.fall()
 			if Input.is_action_just_pressed("Up"):
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
+					max_jump_speed = velocity.x
 					#if is_on_floor() == false: double jump
 					#	state = "midair"
 			if is_on_floor() == false:
@@ -281,13 +374,12 @@ func _physics_process(delta):
 				elif collision.collider.is_in_group("Falling"):
 					collision.collider.fall()
 			if Input.is_action_just_pressed("Up"):
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
+					max_run_jump_speed = velocity.x
 					#if is_on_floor() == false: double jump
 					#	state = "midair"
 			if is_on_floor() == false:
 				state = "midair_run"
-			elif velocity == Vector2.ZERO:
-				state = "idle"
 			elif Input.is_action_just_pressed("Crawl"):
 				change_crawling()
 				state = "crawling"
@@ -321,7 +413,8 @@ func _physics_process(delta):
 					false, 4, PI/4, false)
 			if is_on_floor():
 				can_doublejump = true
-				state = "moving"
+				state = "running"
+				run_released = true
 		
 		"crawling":
 			get_input_crawl()
@@ -334,7 +427,7 @@ func _physics_process(delta):
 				animation_mode.travel("Crawling_E")
 			if Input.is_action_just_pressed("Up") and ceiling == false:
 					#change_standing()
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
 			if is_on_floor() == false:
 				change_standing()
 				state = "midair"
@@ -352,7 +445,7 @@ func _physics_process(delta):
 			shooting()
 			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
 			if Input.is_action_just_pressed("ActionButton"):
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
 					state = "midair"
 			if Input.is_action_pressed("Up"):
 				velocity.y = -100
@@ -360,7 +453,7 @@ func _physics_process(delta):
 				velocity.y = 100
 			if climbable == false:
 				if velocity.y == -100:
-					velocity.y = jump_speed
+					velocity.y = jump_strenght
 				state = "midair"
 				
 		"knockback":

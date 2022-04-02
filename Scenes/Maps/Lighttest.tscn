@@ -2275,6 +2275,10 @@ texture = ExtResource( 37 )
 [node name="PushableBlock" parent="." instance=ExtResource( 39 )]
 position = Vector2( 3221.71, 19.9602 )
 
+[node name="PushableBlock2" parent="." instance=ExtResource( 39 )]
+position = Vector2( 2464, -2480 )
+collision_mask = 131
+
 [node name="BreakableTiles" type="Node" parent="."]
 
 [node name="BreakableTile" parent="BreakableTiles" instance=ExtResource( 40 )]
