@@ -1,13 +1,13 @@
 extends Control
 var progress_dict1 := {"ironman" : false, "current_checkpoint" : 0, 
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false}
+					"orange_keycard": false, "shield": false}
 var progress_dict2 := {"ironman" : false, "current_checkpoint" : 0, 
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false}
+					"orange_keycard": false, "shield": false}
 var progress_dict3 := {"ironman" : false, "current_checkpoint" : 0, 
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false}
+					"orange_keycard": false, "shield": false}
 
 var delet_save:= "1"
 var PressedLoading := false
@@ -71,6 +71,7 @@ func _on_PlayChar2_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H2/PlayChar2.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
+			$AnimationPlayer.play("FadeOut")
 			#yield(get_tree().create_timer(0.5), "timeout")
 			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 	else:
@@ -90,6 +91,7 @@ func _on_PlayChar3_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H3/PlayChar3.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
+			$AnimationPlayer.play("FadeOut")
 			#yield(get_tree().create_timer(0.5), "timeout")
 			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
 	else:
