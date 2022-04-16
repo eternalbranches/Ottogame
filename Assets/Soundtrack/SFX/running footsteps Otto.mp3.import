@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/running footsteps Otto.mp3-70abfe19ed67bbb1a04bc66ec5ed5aef.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/running footsteps Otto.mp3"
+dest_files=[ "res://.import/running footsteps Otto.mp3-70abfe19ed67bbb1a04bc66ec5ed5aef.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

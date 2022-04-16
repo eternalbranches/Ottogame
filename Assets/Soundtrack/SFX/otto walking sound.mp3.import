@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/otto walking sound.mp3-a655c436a45d0b4d292d6f8b495c20df.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/otto walking sound.mp3"
+dest_files=[ "res://.import/otto walking sound.mp3-a655c436a45d0b4d292d6f8b495c20df.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -317,6 +317,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "Push_E"
+length = 0.8
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritemesh/Body:frame")
 tracks/0/interp = 1
@@ -324,7 +326,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 104, 105, 106, 107 ]
@@ -336,40 +338,42 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 104, 105, 106, 107 ]
-}
-
-[sub_resource type="Animation" id=90]
-resource_name = "Push_W"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritemesh/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 112, 113, 114, 115 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritemesh/Arms:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 112, 113, 114, 115 ]
 }
 
 [sub_resource type="Animation" id=14]
+resource_name = "Push_W"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 112, 113, 114, 115 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 112, 113, 114, 115 ]
+}
+
+[sub_resource type="Animation" id=15]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritemesh/Body:frame")
@@ -410,34 +414,6 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritemesh/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 72, 73, 74, 75, 76, 77 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritemesh/Arms:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 72, 73, 74, 75, 76, 77 ]
-}
-
 [sub_resource type="Animation" id=16]
 length = 0.6
 loop = true
@@ -451,6 +427,34 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
+"values": [ 72, 73, 74, 75, 76, 77 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 72, 73, 74, 75, 76, 77 ]
+}
+
+[sub_resource type="Animation" id=17]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
 "values": [ 80, 81, 82, 83, 84, 85 ]
 }
 tracks/1/type = "value"
@@ -464,46 +468,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 80, 81, 82, 83, 84, 85 ]
-}
-
-[sub_resource type="Animation" id=17]
-length = 1.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritemesh/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritemesh/Arms:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Spritemesh:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -519,6 +483,46 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Spritemesh:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 tracks/1/type = "value"
@@ -546,32 +550,6 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=19]
-tracks/0/type = "value"
-tracks/0/path = NodePath("Spritemesh/Body:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 43 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Spritemesh/Arms:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 43 ]
-}
-
 [sub_resource type="Animation" id=20]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Spritemesh/Body:frame")
@@ -583,6 +561,32 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
+"values": [ 43 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spritemesh/Arms:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 43 ]
+}
+
+[sub_resource type="Animation" id=21]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spritemesh/Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
 "values": [ 51 ]
 }
 tracks/1/type = "value"
@@ -598,55 +602,53 @@ tracks/1/keys = {
 "values": [ 51 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "Climbing"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "Crawling_E"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Crawling_W"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "Death_left"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "Death_right"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Idle_E"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "Idle_W"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Jumping_E"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "Jumping_W"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "Rise"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "Run_E"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "Run_W"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "Walk_E"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Walk_W"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Wallslide_E"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Wallslide_W"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 
@@ -744,49 +746,51 @@ animation = "Wallslide_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
 
-[sub_resource type="AnimationNodeStateMachine" id=86]
-states/Climbing/node = SubResource( 21 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachine" id=87]
+states/Climbing/node = SubResource( 22 )
 states/Climbing/position = Vector2( 175, -45 )
-states/Crawling_E/node = SubResource( 22 )
+states/Crawling_E/node = SubResource( 23 )
 states/Crawling_E/position = Vector2( -86, 228.749 )
-states/Crawling_W/node = SubResource( 23 )
+states/Crawling_W/node = SubResource( 24 )
 states/Crawling_W/position = Vector2( 438, 228.749 )
-states/Death_left/node = SubResource( 24 )
+states/Death_left/node = SubResource( 25 )
 states/Death_left/position = Vector2( 643, 116 )
-states/Death_right/node = SubResource( 25 )
+states/Death_right/node = SubResource( 26 )
 states/Death_right/position = Vector2( -285, 109 )
-states/Idle_E/node = SubResource( 26 )
+states/Idle_E/node = SubResource( 27 )
 states/Idle_E/position = Vector2( 86, 109 )
-states/Idle_W/node = SubResource( 27 )
+states/Idle_W/node = SubResource( 28 )
 states/Idle_W/position = Vector2( 266, 109 )
-states/Jumping_E/node = SubResource( 28 )
+states/Jumping_E/node = SubResource( 29 )
 states/Jumping_E/position = Vector2( -86, -64.251 )
-states/Jumping_W/node = SubResource( 29 )
+states/Jumping_W/node = SubResource( 30 )
 states/Jumping_W/position = Vector2( 438, -64.251 )
-states/Rise/node = SubResource( 30 )
+states/Rise/node = SubResource( 31 )
 states/Rise/position = Vector2( 204, 185.749 )
-states/Run_E/node = SubResource( 31 )
+states/Run_E/node = SubResource( 32 )
 states/Run_E/position = Vector2( -280, 228.749 )
-states/Run_W/node = SubResource( 32 )
+states/Run_W/node = SubResource( 33 )
 states/Run_W/position = Vector2( 619, 228.749 )
-states/Walk_E/node = SubResource( 33 )
+states/Walk_E/node = SubResource( 34 )
 states/Walk_E/position = Vector2( -86, 109 )
-states/Walk_W/node = SubResource( 34 )
+states/Walk_W/node = SubResource( 35 )
 states/Walk_W/position = Vector2( 438, 109 )
-states/Wallslide_E/node = SubResource( 35 )
+states/Wallslide_E/node = SubResource( 36 )
 states/Wallslide_E/position = Vector2( -42, -212.251 )
-states/Wallslide_W/node = SubResource( 36 )
+states/Wallslide_W/node = SubResource( 37 )
 states/Wallslide_W/position = Vector2( 352, -212.251 )
-transitions = [ "Walk_W", "Climbing", SubResource( 37 ), "Walk_E", "Climbing", SubResource( 38 ), "Climbing", "Walk_W", SubResource( 39 ), "Climbing", "Walk_E", SubResource( 40 ), "Climbing", "Idle_E", SubResource( 41 ), "Walk_E", "Crawling_E", SubResource( 42 ), "Walk_W", "Crawling_W", SubResource( 43 ), "Crawling_W", "Walk_W", SubResource( 44 ), "Crawling_E", "Walk_E", SubResource( 45 ), "Crawling_E", "Crawling_W", SubResource( 46 ), "Crawling_W", "Crawling_E", SubResource( 47 ), "Idle_E", "Climbing", SubResource( 48 ), "Idle_E", "Walk_E", SubResource( 49 ), "Walk_E", "Idle_E", SubResource( 50 ), "Crawling_E", "Idle_E", SubResource( 51 ), "Idle_W", "Climbing", SubResource( 52 ), "Climbing", "Idle_W", SubResource( 53 ), "Idle_W", "Walk_W", SubResource( 54 ), "Walk_W", "Idle_W", SubResource( 55 ), "Idle_W", "Walk_E", SubResource( 56 ), "Crawling_W", "Idle_W", SubResource( 57 ), "Walk_W", "Jumping_W", SubResource( 58 ), "Walk_E", "Jumping_E", SubResource( 59 ), "Jumping_E", "Idle_E", SubResource( 60 ), "Jumping_W", "Idle_W", SubResource( 61 ), "Jumping_E", "Climbing", SubResource( 62 ), "Jumping_W", "Climbing", SubResource( 63 ), "Walk_W", "Death_left", SubResource( 64 ), "Jumping_W", "Death_left", SubResource( 65 ), "Crawling_W", "Death_left", SubResource( 66 ), "Idle_W", "Death_left", SubResource( 67 ), "Crawling_E", "Death_right", SubResource( 68 ), "Walk_E", "Death_right", SubResource( 69 ), "Jumping_E", "Death_right", SubResource( 70 ), "Idle_E", "Death_right", SubResource( 71 ), "Climbing", "Death_right", SubResource( 72 ), "Climbing", "Death_left", SubResource( 73 ), "Walk_W", "Run_W", SubResource( 74 ), "Run_W", "Walk_W", SubResource( 75 ), "Run_E", "Walk_E", SubResource( 76 ), "Walk_E", "Run_E", SubResource( 77 ), "Run_E", "Death_right", SubResource( 78 ), "Run_W", "Death_left", SubResource( 79 ), "Death_left", "Idle_W", SubResource( 80 ), "Rise", "Idle_E", SubResource( 81 ), "Jumping_E", "Wallslide_E", SubResource( 82 ), "Jumping_W", "Wallslide_W", SubResource( 83 ), "Wallslide_W", "Jumping_W", SubResource( 84 ), "Wallslide_E", "Jumping_E", SubResource( 85 ) ]
+transitions = [ "Walk_W", "Climbing", SubResource( 38 ), "Walk_E", "Climbing", SubResource( 39 ), "Climbing", "Walk_W", SubResource( 40 ), "Climbing", "Walk_E", SubResource( 41 ), "Climbing", "Idle_E", SubResource( 42 ), "Walk_E", "Crawling_E", SubResource( 43 ), "Walk_W", "Crawling_W", SubResource( 44 ), "Crawling_W", "Walk_W", SubResource( 45 ), "Crawling_E", "Walk_E", SubResource( 46 ), "Crawling_E", "Crawling_W", SubResource( 47 ), "Crawling_W", "Crawling_E", SubResource( 48 ), "Idle_E", "Climbing", SubResource( 49 ), "Idle_E", "Walk_E", SubResource( 50 ), "Walk_E", "Idle_E", SubResource( 51 ), "Crawling_E", "Idle_E", SubResource( 52 ), "Idle_W", "Climbing", SubResource( 53 ), "Climbing", "Idle_W", SubResource( 54 ), "Idle_W", "Walk_W", SubResource( 55 ), "Walk_W", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_E", SubResource( 57 ), "Crawling_W", "Idle_W", SubResource( 58 ), "Walk_W", "Jumping_W", SubResource( 59 ), "Walk_E", "Jumping_E", SubResource( 60 ), "Jumping_E", "Idle_E", SubResource( 61 ), "Jumping_W", "Idle_W", SubResource( 62 ), "Jumping_E", "Climbing", SubResource( 63 ), "Jumping_W", "Climbing", SubResource( 64 ), "Walk_W", "Death_left", SubResource( 65 ), "Jumping_W", "Death_left", SubResource( 66 ), "Crawling_W", "Death_left", SubResource( 67 ), "Idle_W", "Death_left", SubResource( 68 ), "Crawling_E", "Death_right", SubResource( 69 ), "Walk_E", "Death_right", SubResource( 70 ), "Jumping_E", "Death_right", SubResource( 71 ), "Idle_E", "Death_right", SubResource( 72 ), "Climbing", "Death_right", SubResource( 73 ), "Climbing", "Death_left", SubResource( 74 ), "Walk_W", "Run_W", SubResource( 75 ), "Run_W", "Walk_W", SubResource( 76 ), "Run_E", "Walk_E", SubResource( 77 ), "Walk_E", "Run_E", SubResource( 78 ), "Run_E", "Death_right", SubResource( 79 ), "Run_W", "Death_left", SubResource( 80 ), "Death_left", "Idle_W", SubResource( 81 ), "Rise", "Idle_E", SubResource( 82 ), "Jumping_E", "Wallslide_E", SubResource( 83 ), "Jumping_W", "Wallslide_W", SubResource( 84 ), "Wallslide_W", "Jumping_W", SubResource( 85 ), "Wallslide_E", "Jumping_E", SubResource( 86 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -633, -315.09 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=87]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=88]
 
-[sub_resource type="RectangleShape2D" id=88]
+[sub_resource type="RectangleShape2D" id=89]
 extents = Vector2( 12.2145, 10 )
 
-[sub_resource type="CircleShape2D" id=89]
+[sub_resource type="CircleShape2D" id=90]
 radius = 287.661
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -803,14 +807,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 112
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 15
-frame = 112
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -859,20 +863,21 @@ anims/Idle_W = SubResource( 10 )
 anims/Jumping_E = SubResource( 11 )
 anims/Jumping_W = SubResource( 12 )
 anims/Push_E = SubResource( 13 )
-anims/Push_W = SubResource( 90 )
-anims/Rise = SubResource( 14 )
-anims/Run_E = SubResource( 15 )
-anims/Run_W = SubResource( 16 )
-anims/Walk_E = SubResource( 17 )
-anims/Walk_W = SubResource( 18 )
-anims/Wallslide_E = SubResource( 19 )
-anims/Wallslide_W = SubResource( 20 )
+anims/Push_W = SubResource( 14 )
+anims/Rise = SubResource( 15 )
+anims/Run_E = SubResource( 16 )
+anims/Run_W = SubResource( 17 )
+anims/Walk_E = SubResource( 18 )
+anims/Walk_W = SubResource( 19 )
+anims/Wallslide_E = SubResource( 20 )
+anims/Wallslide_W = SubResource( 21 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 86 )
+tree_root = SubResource( 87 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 process_mode = 0
-parameters/playback = SubResource( 87 )
+parameters/playback = SubResource( 88 )
 
 [node name="Ceilingcheck" type="Area2D" parent="."]
 position = Vector2( 0, -12.5511 )
@@ -880,7 +885,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceilingcheck"]
 position = Vector2( 0.890892, -4.7931 )
-shape = SubResource( 88 )
+shape = SubResource( 89 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 0, -12.5511 )
@@ -926,10 +931,15 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Aim_Assist"]
 visible = false
 position = Vector2( -0.0589981, 0.0589905 )
-shape = SubResource( 89 )
+shape = SubResource( 90 )
 
 [node name="SFXPLayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
 
 [node name="AimPosition" type="Position2D" parent="."]
 position = Vector2( -101.229, -5.65921 )

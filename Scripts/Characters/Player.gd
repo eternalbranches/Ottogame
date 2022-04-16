@@ -24,6 +24,9 @@ export (float, 0, 1.0) var acceleration = 0.1
 onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
+onready var runningsfx = preload("res://Assets/Soundtrack/SFX/running footsteps Otto.mp3")
+onready var walkingsfx = preload("res://Assets/Soundtrack/SFX/otto walking sound.mp3")
+
 var state := "idle"
 var previous_state := "idle"
 
@@ -303,6 +306,8 @@ func _physics_process(delta):
 			shooting()
 			shield()
 			action()
+			if $SFX.stream != null:
+				$SFX.stream = null
 			if last_direction == "right":
 				animation_mode.travel("Idle_E")
 			else:
@@ -338,6 +343,9 @@ func _physics_process(delta):
 			shooting()
 			action()
 			shield()
+			if $SFX.stream != walkingsfx:
+				$SFX.stream = walkingsfx
+				$SFX.play()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
@@ -368,6 +376,9 @@ func _physics_process(delta):
 			shooting()
 			action()
 			shield()
+			if $SFX.stream != runningsfx:
+				$SFX.stream = runningsfx
+				$SFX.play()
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
@@ -390,6 +401,8 @@ func _physics_process(delta):
 			
 			
 		"midair":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			if last_direction == "right":
 				animation_mode.travel("Jumping_E")
 			else:
@@ -406,6 +419,8 @@ func _physics_process(delta):
 				state = "moving"
 
 		"midair_run":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			if last_direction == "right":
 				animation_mode.travel("Jumping_E")
 			else:
@@ -423,6 +438,8 @@ func _physics_process(delta):
 				run_released = true
 		
 		"crawling":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			get_input_crawl()
 			shooting()
 			action()
@@ -447,6 +464,8 @@ func _physics_process(delta):
 				ceiling = true
 				
 		"climbing":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			animation_mode.travel("Climbing")
 			shooting()
 			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
@@ -465,6 +484,8 @@ func _physics_process(delta):
 				max_run_jump_speed = max_dash_speed
 				
 		"knockback":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
@@ -481,6 +502,8 @@ func _physics_process(delta):
 					state = "midair"
 				
 		"walljump":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			velocity.y += gravity/3 * delta
 			if last_direction == "right":
 				velocity.x += 15
@@ -506,6 +529,8 @@ func _physics_process(delta):
 			shooting()
 			
 		"wallslide":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			if velocity.y <= 0:
 				velocity.y = 0
 			shooting()
@@ -534,6 +559,8 @@ func _physics_process(delta):
 				state = "walljump"
 			
 		"death":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			animation_mode.travel("Death_" +last_direction)
 			velocity.y += gravity * delta
 			if is_on_floor():
@@ -542,6 +569,8 @@ func _physics_process(delta):
 					false, 4, PI/4, false)
 			
 		"rise":
+			if $SFX.stream != null:
+				$SFX.stream = null
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
