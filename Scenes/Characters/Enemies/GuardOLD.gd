@@ -6,7 +6,6 @@ var current_hp := 2
 var current_direction := "E"
 var spawn_guardposition := 5
 var velocity := Vector2.ZERO
-var new_random_xpos := 0.0
 
 export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
@@ -17,8 +16,6 @@ var knockback := false
 var can_shoot := true
 var reset_started := false
 var player_in_range
-var can_walk_E := false
-var can_walk_W := false
 onready var player = get_node("../../Player/Player")
 var last_seen := Vector2.ZERO
 
@@ -29,20 +26,12 @@ onready var animation_mode = animation_tree.get("parameters/playback")
 
 func _ready():
 	spawn_guardposition = get_global_position().x
-	
-	
+	rng.randomize()
+	var my_random_number = rng.randi_range(0, 10)
 	#rng.randi_range(0, 5)
 #rng.randf_range(-10.0, 10.0)
-func _process(delta):
-	if state != "idle":
-		if $Floorcheck_E.is_colliding() == true:
-			can_walk_E = true
-		else:
-			can_walk_E = false
-		if $Floorcheck_W.is_colliding() == true:
-			can_walk_W = true
-		else:
-			can_walk_W = false
+	print(my_random_number)
+	
 func _physics_process(delta):
 	$Label.text = state
 	match state:
@@ -55,41 +44,20 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			sightcheck()
-			
-		"combat":
-			var remaining_distance = get_global_position().x - new_random_xpos
+		"shoot":
 			if player.position.x > position.x:
 				current_direction = "E"
 			elif player.position.x < position.x:
 				current_direction = "W"
-			if remaining_distance > 5:
-				if can_walk_E == true:
-					velocity.x = speed
-				else:
-					velocity.x = 0
-			elif remaining_distance < 5:
-				if can_walk_W == true:
-					velocity.x = -speed
-				else: 
-					velocity.x = 0
-			animation_mode.travel("Walk_"+ current_direction)
+			velocity.x = 0
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
-			
-			
+			animation_mode.travel("Shoot_"+current_direction)
 			sightcheck()
 			#if initialized == false:
 			#	$ShootCD.start()
 			#	initialized = true
 			if can_shoot == true and player_in_range:
-				state = "shoot"
-				
-		"shoot":
-			if can_shoot == true:
-				can_shoot = false
-				rng.randomize()
-				var numberanimation = rng.randi_range(1, 2)
-				animation_mode.travel("Shoot_"+current_direction + str(numberanimation))
 				var skill = load("res://Scenes/Abilities/Bullet.tscn")
 				var skill_instance = skill.instance()
 				skill_instance.rotation = get_angle_to(player.get_global_position())
@@ -100,8 +68,7 @@ func _physics_process(delta):
 				$SFXPLayer.play()
 				get_parent().add_child(skill_instance)
 				$ShootCD.start()
-				$ShootAnim.start()
-			
+				can_shoot = false
 		"death":
 			velocity.x = 0
 			velocity.y += gravity * delta
@@ -190,9 +157,10 @@ func sightcheck():
 	if sight_check:
 		if sight_check.collider.name == "Player":
 			last_seen = player.position
-			if state == "sight":
-				state = "combat"
+			if state != "shoot":
+				state = "shoot"
 		else:
+			#initialized = false
 			state = "return"
 
 func _on_ShootCD_timeout():
@@ -201,9 +169,7 @@ func _on_ShootCD_timeout():
 func _on_Range_body_entered(body):
 	if body.is_in_group("Player"):
 		player_in_range = true
-		$Floorcheck_E.enabled = true
-		$Floorcheck_W.enabled = true
-		
+		$RayCast2D.enabled = true
 		if state == "idle":
 			state = "sight"
 		elif state == "chase":
@@ -241,9 +207,3 @@ func _on_FashTimer_timeout():
 func _on_ChangeState_timeout():
 	state = "return"
 	reset_started = false
-
-func _on_ShootAnim_timeout():
-	state = "combat"
-	rng.randomize()
-	var offset_x = rng.randf_range(-30, 30)
-	new_random_xpos = get_global_position().x + offset_x

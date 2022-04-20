@@ -14,7 +14,7 @@ export (int) var walljump_power := 150
 export (int) var second_jump_power := -400
 
 export (int) var knockback_power := 300
-export (int, 0, 200) var push = 100
+export (int, 0, 200) var push = 400
 
 
 export (float, 0, 1.0) var friction = 0.2
@@ -318,8 +318,8 @@ func _physics_process(delta):
 					false, 4, PI/4, false)
 			for index in get_slide_count():
 				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Pushable"):
-					collision.collider.apply_central_impulse(-collision.normal * push)
+				if collision.collider.is_in_group("Falling"):
+					collision.collider.fall()
 
 			if Input.is_action_just_pressed("Up"):
 				#if is_on_floor():
@@ -351,10 +351,16 @@ func _physics_process(delta):
 					false, 4, PI/4, false)
 			for index in get_slide_count():
 				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Pushable"):
-					collision.collider.apply_central_impulse(-collision.normal * push)
-				elif collision.collider.is_in_group("Falling"):
+				if collision.collider.is_in_group("Falling"):
 					collision.collider.fall()
+			if $Wallcheck_E.is_colliding():
+				if $Wallcheck_E.get_collider().is_in_group("Pushable") and last_direction == "right":
+					state = "push"
+					last_direction = "right"
+			if $Wallcheck_W.is_colliding():
+				if $Wallcheck_W.get_collider().is_in_group("Pushable") and last_direction == "left":
+					state = "push"
+					last_direction = "left"
 			if Input.is_action_just_pressed("Up"):
 					velocity.y = jump_strenght
 					#max_jump_speed = velocity.x
@@ -574,6 +580,32 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP,
 					false, 4, PI/4, false)
+		
+		"push":
+			if $SFX.stream != null:
+				$SFX.stream = null
+			if last_direction == "left":
+				if Input.is_action_pressed("Left"):
+					velocity.x = -10
+				if Input.is_action_just_pressed("Right") or $Wallcheck_W.is_colliding() == false:
+					state = "idle"
+			else:
+				if Input.is_action_pressed("Right"):
+					velocity.x = 10
+				if Input.is_action_just_pressed("Left") or $Wallcheck_E.is_colliding() == false:
+					state = "idle"
+			velocity.y += gravity * delta
+			if last_direction == "left":
+				animation_mode.travel("Push_W")
+			else:
+				animation_mode.travel("Push_E")
+			velocity = move_and_slide(velocity, Vector2.UP,
+					false, 4, PI/4, false)
+			for index in get_slide_count():
+				var collision = get_slide_collision(index)
+				if collision.collider.is_in_group("Pushable"):
+					collision.collider.apply_central_impulse(-collision.normal * push)
+					
 func change_crawling():
 	$CollisionStanding.disabled = true
 	$CollisionCrawling.disabled = false
@@ -593,13 +625,13 @@ func action():
 func check_wallslide():
 	if CharacterSave.save_dict["walljump"] == true:
 		if is_on_wall() and can_wallslide == true:
-			if $Wallcheck_W.is_colliding() == true and $Wallcheck_W.get_collider().is_in_group("notWallslidable") == false:
+			if $Wallcheck_W.is_colliding() == true and $Wallcheck_W.get_collider().is_in_group("Wallslideable"):
 				state = "wallslide"
 				can_doublejump = true
 				velocity = Vector2.ZERO
 				last_direction = "left"
 				animation_mode.travel("Wallslide_W")
-			elif $Wallcheck_E.is_colliding() == true and $Wallcheck_E.get_collider().is_in_group("notWallslidable") == false:
+			if $Wallcheck_E.is_colliding() == true and $Wallcheck_E.get_collider().is_in_group("Wallslideable"):
 				state = "wallslide"
 				can_doublejump = true
 				velocity = Vector2.ZERO

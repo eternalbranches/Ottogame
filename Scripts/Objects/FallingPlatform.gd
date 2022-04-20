@@ -22,6 +22,8 @@ func _on_RespawnTimer_timeout():
 	falling = false
 	visible = true
 	set_collision_layer_bit(7,1)
+	set_collision_mask_bit(1, 0)
+	set_collision_mask_bit(0, 0)
 	
 func _process(delta):
 	if falling == true:
@@ -30,6 +32,8 @@ func _process(delta):
 		if is_on_floor() == true:
 			visible = false
 			set_collision_layer_bit(7,0)
+			set_collision_mask_bit(1, 0)
+			set_collision_mask_bit(0, 0)
 
 
 

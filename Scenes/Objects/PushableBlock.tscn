@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Tiles/dark tile 2.png" type="Texture" id=2]
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 4.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -13,7 +16,8 @@ polygon = PoolVector2Array( -24, -24, 24, -24, 24, 24, -24, 24 )
 ]]
 collision_mask = 3
 mass = 10.0
-gravity_scale = 5.0
+physics_material_override = SubResource( 3 )
+gravity_scale = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

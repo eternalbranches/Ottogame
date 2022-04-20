@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://Assets/Characters/Otto spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
@@ -629,6 +629,12 @@ animation = "Jumping_E"
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "Jumping_W"
 
+[sub_resource type="AnimationNodeAnimation" id=91]
+animation = "Push_E"
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "Push_W"
+
 [sub_resource type="AnimationNodeAnimation" id=31]
 animation = "Rise"
 
@@ -748,6 +754,18 @@ animation = "Wallslide_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=86]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=98]
+
 [sub_resource type="AnimationNodeStateMachine" id=87]
 states/Climbing/node = SubResource( 22 )
 states/Climbing/position = Vector2( 175, -45 )
@@ -767,6 +785,10 @@ states/Jumping_E/node = SubResource( 29 )
 states/Jumping_E/position = Vector2( -86, -64.251 )
 states/Jumping_W/node = SubResource( 30 )
 states/Jumping_W/position = Vector2( 438, -64.251 )
+states/Push_E/node = SubResource( 91 )
+states/Push_E/position = Vector2( -285, -64.251 )
+states/Push_W/node = SubResource( 92 )
+states/Push_W/position = Vector2( 643, -64.251 )
 states/Rise/node = SubResource( 31 )
 states/Rise/position = Vector2( 204, 185.749 )
 states/Run_E/node = SubResource( 32 )
@@ -781,7 +803,7 @@ states/Wallslide_E/node = SubResource( 36 )
 states/Wallslide_E/position = Vector2( -42, -212.251 )
 states/Wallslide_W/node = SubResource( 37 )
 states/Wallslide_W/position = Vector2( 352, -212.251 )
-transitions = [ "Walk_W", "Climbing", SubResource( 38 ), "Walk_E", "Climbing", SubResource( 39 ), "Climbing", "Walk_W", SubResource( 40 ), "Climbing", "Walk_E", SubResource( 41 ), "Climbing", "Idle_E", SubResource( 42 ), "Walk_E", "Crawling_E", SubResource( 43 ), "Walk_W", "Crawling_W", SubResource( 44 ), "Crawling_W", "Walk_W", SubResource( 45 ), "Crawling_E", "Walk_E", SubResource( 46 ), "Crawling_E", "Crawling_W", SubResource( 47 ), "Crawling_W", "Crawling_E", SubResource( 48 ), "Idle_E", "Climbing", SubResource( 49 ), "Idle_E", "Walk_E", SubResource( 50 ), "Walk_E", "Idle_E", SubResource( 51 ), "Crawling_E", "Idle_E", SubResource( 52 ), "Idle_W", "Climbing", SubResource( 53 ), "Climbing", "Idle_W", SubResource( 54 ), "Idle_W", "Walk_W", SubResource( 55 ), "Walk_W", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_E", SubResource( 57 ), "Crawling_W", "Idle_W", SubResource( 58 ), "Walk_W", "Jumping_W", SubResource( 59 ), "Walk_E", "Jumping_E", SubResource( 60 ), "Jumping_E", "Idle_E", SubResource( 61 ), "Jumping_W", "Idle_W", SubResource( 62 ), "Jumping_E", "Climbing", SubResource( 63 ), "Jumping_W", "Climbing", SubResource( 64 ), "Walk_W", "Death_left", SubResource( 65 ), "Jumping_W", "Death_left", SubResource( 66 ), "Crawling_W", "Death_left", SubResource( 67 ), "Idle_W", "Death_left", SubResource( 68 ), "Crawling_E", "Death_right", SubResource( 69 ), "Walk_E", "Death_right", SubResource( 70 ), "Jumping_E", "Death_right", SubResource( 71 ), "Idle_E", "Death_right", SubResource( 72 ), "Climbing", "Death_right", SubResource( 73 ), "Climbing", "Death_left", SubResource( 74 ), "Walk_W", "Run_W", SubResource( 75 ), "Run_W", "Walk_W", SubResource( 76 ), "Run_E", "Walk_E", SubResource( 77 ), "Walk_E", "Run_E", SubResource( 78 ), "Run_E", "Death_right", SubResource( 79 ), "Run_W", "Death_left", SubResource( 80 ), "Death_left", "Idle_W", SubResource( 81 ), "Rise", "Idle_E", SubResource( 82 ), "Jumping_E", "Wallslide_E", SubResource( 83 ), "Jumping_W", "Wallslide_W", SubResource( 84 ), "Wallslide_W", "Jumping_W", SubResource( 85 ), "Wallslide_E", "Jumping_E", SubResource( 86 ) ]
+transitions = [ "Walk_W", "Climbing", SubResource( 38 ), "Walk_E", "Climbing", SubResource( 39 ), "Climbing", "Walk_W", SubResource( 40 ), "Climbing", "Walk_E", SubResource( 41 ), "Climbing", "Idle_E", SubResource( 42 ), "Walk_E", "Crawling_E", SubResource( 43 ), "Walk_W", "Crawling_W", SubResource( 44 ), "Crawling_W", "Walk_W", SubResource( 45 ), "Crawling_E", "Walk_E", SubResource( 46 ), "Crawling_E", "Crawling_W", SubResource( 47 ), "Crawling_W", "Crawling_E", SubResource( 48 ), "Idle_E", "Climbing", SubResource( 49 ), "Idle_E", "Walk_E", SubResource( 50 ), "Walk_E", "Idle_E", SubResource( 51 ), "Crawling_E", "Idle_E", SubResource( 52 ), "Idle_W", "Climbing", SubResource( 53 ), "Climbing", "Idle_W", SubResource( 54 ), "Idle_W", "Walk_W", SubResource( 55 ), "Walk_W", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_E", SubResource( 57 ), "Crawling_W", "Idle_W", SubResource( 58 ), "Walk_W", "Jumping_W", SubResource( 59 ), "Walk_E", "Jumping_E", SubResource( 60 ), "Jumping_E", "Idle_E", SubResource( 61 ), "Jumping_W", "Idle_W", SubResource( 62 ), "Jumping_E", "Climbing", SubResource( 63 ), "Jumping_W", "Climbing", SubResource( 64 ), "Walk_W", "Death_left", SubResource( 65 ), "Jumping_W", "Death_left", SubResource( 66 ), "Crawling_W", "Death_left", SubResource( 67 ), "Idle_W", "Death_left", SubResource( 68 ), "Crawling_E", "Death_right", SubResource( 69 ), "Walk_E", "Death_right", SubResource( 70 ), "Jumping_E", "Death_right", SubResource( 71 ), "Idle_E", "Death_right", SubResource( 72 ), "Climbing", "Death_right", SubResource( 73 ), "Climbing", "Death_left", SubResource( 74 ), "Walk_W", "Run_W", SubResource( 75 ), "Run_W", "Walk_W", SubResource( 76 ), "Run_E", "Walk_E", SubResource( 77 ), "Walk_E", "Run_E", SubResource( 78 ), "Run_E", "Death_right", SubResource( 79 ), "Run_W", "Death_left", SubResource( 80 ), "Death_left", "Idle_W", SubResource( 81 ), "Rise", "Idle_E", SubResource( 82 ), "Jumping_E", "Wallslide_E", SubResource( 83 ), "Jumping_W", "Wallslide_W", SubResource( 84 ), "Wallslide_W", "Jumping_W", SubResource( 85 ), "Wallslide_E", "Jumping_E", SubResource( 86 ), "Idle_E", "Push_E", SubResource( 93 ), "Push_E", "Idle_E", SubResource( 94 ), "Push_W", "Idle_W", SubResource( 95 ), "Idle_W", "Push_W", SubResource( 96 ), "Walk_E", "Push_E", SubResource( 97 ), "Walk_W", "Push_W", SubResource( 98 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -633, -315.09 )
 
@@ -807,14 +829,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 7
+frame = 3
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 15
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -906,14 +928,14 @@ wait_time = 10.0
 wait_time = 0.1
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]
-position = Vector2( 1, 0 )
+position = Vector2( 3, 0 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( 10, 0 )
 collide_with_areas = true
 
 [node name="Wallcheck_W" type="RayCast2D" parent="."]
-position = Vector2( -1, 0 )
+position = Vector2( -3, 0 )
 enabled = true
 exclude_parent = false
 cast_to = Vector2( -10, 0 )
