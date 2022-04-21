@@ -1,17 +1,15 @@
 extends StaticBody2D
 
 export var key = "orange"
+export var closed := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+	if closed == true:
+		set_collision_layer_bit(0,1)
+		set_collision_mask_bit(1,1)
+		
 
 func _on_Area2D_body_entered(_body):
 	if CharacterSave.save_dict["orange_keycard"] == true:

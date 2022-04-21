@@ -1663,127 +1663,127 @@ position = Vector2( -18.4998, -15.1362 )
 texture = ExtResource( 2 )
 
 [node name="Lamp3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 757.184, 102.583 )
+position = Vector2( 752, 48 )
 
 [node name="Lamp16" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2089.37, -1574.67 )
+position = Vector2( 2112, -1648 )
 
 [node name="Lamp17" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1390.75, -1561.95 )
+position = Vector2( 1696, -1648 )
+
+[node name="Lamp30" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1376, -1648 )
 
 [node name="Lamp4" parent="." instance=ExtResource( 12 )]
-position = Vector2( 759.652, 287.229 )
+position = Vector2( 848, 304 )
+rotation = 3.14159
+lamp_texture = 2
+
+[node name="Lamp31" parent="." instance=ExtResource( 12 )]
+position = Vector2( 640, 304 )
+rotation = 3.14159
+lamp_texture = 2
 
 [node name="Lamp5" parent="." instance=ExtResource( 12 )]
-position = Vector2( 45.1707, 139.364 )
-flickering = true
+position = Vector2( 40, 144 )
 
 [node name="Lamp14" parent="." instance=ExtResource( 12 )]
 position = Vector2( 3216.87, -871.176 )
-flickering = true
 
 [node name="Lamp7" parent="." instance=ExtResource( 12 )]
-position = Vector2( 925.742, 123.089 )
-flickering = true
+position = Vector2( 920, 128 )
 
 [node name="Lamp18" parent="." instance=ExtResource( 12 )]
 position = Vector2( 3721.87, -595.759 )
-flickering = true
 
 [node name="Lamp10" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1311.89, 172.298 )
-flickering = true
+position = Vector2( 1304, 144 )
+
+[node name="Lamp32" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1640, 144 )
+
+[node name="Lamp33" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1696, -368 )
 
 [node name="Lamp19" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2096, -144 )
-texture_scale = 2.0
-flickering = true
+position = Vector2( 2328, -176 )
 
 [node name="Lamp20" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2728, -152 )
-texture_scale = 2.0
-flickering = true
+position = Vector2( 2912, -176 )
 
 [node name="Lamp21" parent="." instance=ExtResource( 12 )]
-position = Vector2( 3592, 448 )
-texture_scale = 6.0
-energy = 0.79
+position = Vector2( 3408, 496 )
+rotation = 4.71239
+texture_scale = 1.5
 
 [node name="Lamp22" parent="." instance=ExtResource( 12 )]
 position = Vector2( 4659.19, 476.876 )
-texture_scale = 6.0
-energy = 0.79
+rotation = 1.5708
+texture_scale = 1.5
 
 [node name="Lamp23" parent="." instance=ExtResource( 12 )]
 position = Vector2( 4896, 656 )
-texture_scale = 2.0
-energy = 0.79
+lamp_texture = 2
 
 [node name="Lamp24" parent="." instance=ExtResource( 12 )]
 position = Vector2( 5160, 656 )
-texture_scale = 2.0
-energy = 0.79
+lamp_texture = 2
 
 [node name="Lamp25" parent="." instance=ExtResource( 12 )]
 position = Vector2( 5408, 656 )
-texture_scale = 2.0
-energy = 0.79
-flashing = true
+lamp_texture = 2
 
 [node name="Lamp26" parent="." instance=ExtResource( 12 )]
 position = Vector2( 5607.84, 656 )
-texture_scale = 2.0
-energy = 0.79
+lamp_texture = 2
 
 [node name="Lamp27" parent="." instance=ExtResource( 12 )]
-position = Vector2( 5253.88, 1028.95 )
-texture_scale = 2.0
-energy = 0.79
+position = Vector2( 5040, 944 )
+rotation = 3.14159
+lamp_texture = 2
+
+[node name="Lamp29" parent="." instance=ExtResource( 12 )]
+position = Vector2( 5472, 944 )
+rotation = 3.14159
+energy = 0.4
 
 [node name="Lamp28" parent="." instance=ExtResource( 12 )]
 position = Vector2( 5577.75, 934.495 )
 scale = Vector2( 1.56454, 0.532567 )
-texture_scale = 0.02
-color = Color( 1, 0, 0, 1 )
-flashing = true
 
 [node name="Lamp12" parent="." instance=ExtResource( 12 )]
 position = Vector2( 3459.89, -799.702 )
-flickering = true
 
 [node name="Lamp13" parent="." instance=ExtResource( 12 )]
 position = Vector2( 3256, -616 )
-flickering = true
 
 [node name="Lamp11" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1380.26, -516.199 )
-flickering = true
+position = Vector2( 1376, -560 )
 
 [node name="Lamp15" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1830.98, -506.949 )
-flickering = true
+position = Vector2( 1696, -560 )
 
 [node name="Lamp6" parent="." instance=ExtResource( 12 )]
-position = Vector2( 350.259, 139.263 )
-light = "red"
-flashing = true
+position = Vector2( 344, 144 )
 
 [node name="Lamp9" parent="." instance=ExtResource( 12 )]
-position = Vector2( 573.507, 133.27 )
-light = "red"
-flashing = true
+position = Vector2( 560, 144 )
 
 [node name="Lamp8" parent="." instance=ExtResource( 12 )]
 show_behind_parent = true
-position = Vector2( 165.195, 235.455 )
+position = Vector2( 160, 232 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 31.0308, -1777.27 )
 texture = ExtResource( 3 )
+texture_scale = 0.7
 color = Color( 0.878431, 0.0745098, 0.0745098, 1 )
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1791,10 +1791,14 @@ __meta__ = {
 [node name="Light2D3" type="Light2D" parent="."]
 position = Vector2( 2808, -1664 )
 texture = ExtResource( 3 )
+texture_scale = 0.7
 color = Color( 0.878431, 0.0745098, 0.0745098, 1 )
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1802,10 +1806,13 @@ __meta__ = {
 [node name="Light2D6" type="Light2D" parent="."]
 position = Vector2( 1744, -1888 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1813,10 +1820,13 @@ __meta__ = {
 [node name="Light2D12" type="Light2D" parent="."]
 position = Vector2( 1320, -2024 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1824,21 +1834,27 @@ __meta__ = {
 [node name="Light2D7" type="Light2D" parent="."]
 position = Vector2( 1320, -1760 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Light2D8" type="Light2D" parent="."]
-position = Vector2( 1328, -2272 )
+position = Vector2( 1320, -2272 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1846,10 +1862,13 @@ __meta__ = {
 [node name="Light2D9" type="Light2D" parent="."]
 position = Vector2( 2360, -2312 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1857,21 +1876,28 @@ __meta__ = {
 [node name="Light2D10" type="Light2D" parent="."]
 position = Vector2( 1296, -2600 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.7
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Light2D11" type="Light2D" parent="."]
-position = Vector2( 1880, -2744 )
+position = Vector2( 1920, -2648 )
 texture = ExtResource( 3 )
-energy = 0.83
+texture_scale = 0.1
+color = Color( 1, 0, 0, 1 )
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -1879,10 +1905,14 @@ __meta__ = {
 [node name="Light2D5" type="Light2D" parent="."]
 position = Vector2( 3646.76, -1348.43 )
 texture = ExtResource( 3 )
+texture_scale = 0.7
 color = Color( 0.878431, 0.0745098, 0.0745098, 1 )
+energy = 0.6
 shadow_enabled = true
-shadow_gradient_length = 5.0
-shadow_filter = 1
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_gradient_length = 100.0
+shadow_filter = 3
+shadow_filter_smooth = 24.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -2202,7 +2232,7 @@ position = Vector2( 1536, -1520 )
 position = Vector2( 1815.85, -2641.66 )
 
 [node name="Checkpoint5" parent="Checkpoints" instance=ExtResource( 27 )]
-position = Vector2( 1008, 184 )
+position = Vector2( 1680, 16 )
 
 [node name="Powerups" type="Node" parent="."]
 
@@ -2240,9 +2270,9 @@ position = Vector2( 2271.6, -1537.41 )
 scale = Vector2( 3.2, 3.2 )
 
 [node name="Door2" parent="." instance=ExtResource( 35 )]
-visible = false
 position = Vector2( 1885.79, -0.764038 )
 scale = Vector2( 3.2, 3.2 )
+closed = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 4031.12, 421.34 )
@@ -2253,7 +2283,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cameratrigger"]
-position = Vector2( 4045.39, 546.632 )
+position = Vector2( 4048, 544 )
 shape = SubResource( 124 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -2275,52 +2305,8 @@ collision_mask = 131
 [node name="BreakableTiles" type="Node" parent="."]
 
 [node name="BreakableTile" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4680, 952 )
-
-[node name="BreakableTile2" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4680, 936 )
-
-[node name="BreakableTile3" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4680, 920 )
-
-[node name="BreakableTile4" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4680, 904 )
-
-[node name="BreakableTile5" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4696, 904 )
-
-[node name="BreakableTile6" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4696, 920 )
-
-[node name="BreakableTile7" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4696, 936 )
-
-[node name="BreakableTile8" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4696, 952 )
-
-[node name="BreakableTile9" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4712, 952 )
-
-[node name="BreakableTile10" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4712, 936 )
-
-[node name="BreakableTile11" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4712, 920 )
-
-[node name="BreakableTile12" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4712, 904 )
-
-[node name="BreakableTile13" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4728, 904 )
-
-[node name="BreakableTile14" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4728, 920 )
-
-[node name="BreakableTile15" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4728, 936 )
-
-[node name="BreakableTile16" parent="BreakableTiles" instance=ExtResource( 40 )]
-position = Vector2( 4728, 952 )
+position = Vector2( 4704, 928 )
+scale = Vector2( 4, 4 )
 
 [node name="OneWayPlatform" parent="." instance=ExtResource( 41 )]
 position = Vector2( 4060.16, 270.68 )
