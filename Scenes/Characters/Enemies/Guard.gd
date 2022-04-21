@@ -62,16 +62,14 @@ func _physics_process(delta):
 				current_direction = "E"
 			elif player.position.x < position.x:
 				current_direction = "W"
-			if remaining_distance > 5:
+			if remaining_distance > -5 and remaining_distance < 5:
+				velocity.x = 0
+			elif remaining_distance < -5:
 				if can_walk_E == true:
 					velocity.x = speed
-				else:
-					velocity.x = 0
-			elif remaining_distance < 5:
+			else:
 				if can_walk_W == true:
 					velocity.x = -speed
-				else: 
-					velocity.x = 0
 			animation_mode.travel("Walk_"+ current_direction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -148,12 +146,13 @@ func _physics_process(delta):
 						
 		#	velocity = move_and_slide(velocity, Vector2.UP)
 		"return":
+			var remaining_distance = get_global_position().x - spawn_guardposition
+			if remaining_distance > -5 and remaining_distance < 5:
+				state = "idle"
 			if get_global_position().x < spawn_guardposition:
 				velocity.x = speed
 			if get_global_position().x > spawn_guardposition:
 				velocity.x = -speed
-			if round(get_global_position().x) == spawn_guardposition:
-				state = "idle"
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 		"reposition":
@@ -245,5 +244,5 @@ func _on_ChangeState_timeout():
 func _on_ShootAnim_timeout():
 	state = "combat"
 	rng.randomize()
-	var offset_x = rng.randf_range(-30, 30)
+	var offset_x = rng.randf_range(-220, 220)
 	new_random_xpos = get_global_position().x + offset_x
