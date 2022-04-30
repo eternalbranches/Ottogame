@@ -67,9 +67,13 @@ func _physics_process(delta):
 			elif remaining_distance < -5:
 				if can_walk_E == true:
 					velocity.x = speed
+				else:
+					velocity.x = 0
 			else:
 				if can_walk_W == true:
 					velocity.x = -speed
+				else: 
+					velocity.x = 0
 			animation_mode.travel("Walk_"+ current_direction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -146,6 +150,7 @@ func _physics_process(delta):
 						
 		#	velocity = move_and_slide(velocity, Vector2.UP)
 		"return":
+			sightcheck()
 			var remaining_distance = get_global_position().x - spawn_guardposition
 			if remaining_distance > -5 and remaining_distance < 5:
 				state = "idle"
@@ -189,7 +194,7 @@ func sightcheck():
 	if sight_check:
 		if sight_check.collider.name == "Player":
 			last_seen = player.position
-			if state == "sight":
+			if state == "sight" or "return":
 				state = "combat"
 		else:
 			state = "return"

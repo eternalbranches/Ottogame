@@ -679,35 +679,44 @@ func shooting():
 		
 
 func shield():
-	if CharacterSave.save_dict["shield"] == true and can_shield == true:
-		if Input.is_action_just_pressed("Shield"):
-			var skill = load("res://Scenes/Abilities/Shield.tscn")
-			var skill_instance = skill.instance()
-			if CharacterSave.controller == false:
-				skill_instance.rotation = get_angle_to(get_global_mouse_position())
-			else:
-				if current_target != null:
-					if $Aim_Assist.get_overlapping_bodies().has(current_target):
-						skill_instance.rotation = get_angle_to(current_target.get_global_position())
-					else:
-						current_target = null
-				else:
-					if Input.is_action_pressed("Up"):
-						skill_instance.rotation = -1.55
-					elif last_direction == "right":
-						skill_instance.direction = "E"
-					elif last_direction == "left":
-						skill_instance.direction = "W"
-						#skill_instance.rotation = get_angle_to($AimPosition.get_global_position())
-						#skill_instance.rotation = -3.14
-						#print(get_angle_to($AimPosition.get_global_position()))
-			skill_instance.position = get_global_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
-			skill_instance.origin = "Player"
-			$SFXPLayer.play()
-			can_shield = false
-			$ShieldTimer.start()
+		if CharacterSave.save_dict["shield"] == true and can_shield == true:
+			if Input.is_action_just_pressed("Shield"):
+				print("shield")
+				$Shield2.set_collision_mask_bit(4,1)
+				$Shield2/Selfdestruct.start()
+				$Shield2.animdirection(last_direction, $Shield_E.get_position(), $Shield_W.get_position())
+#				var skill = load("res://Scenes/Abilities/Shield.tscn")
+#				var skill_instance = skill.instance()
+#				if CharacterSave.controller == false:
+#					skill_instance.rotation = get_angle_to(get_global_mouse_position())
+#					if last_direction == "left":
+#						skill_instance.direction = "E"
+#						skill_instance.set_global_position(get_node("Shield_E").get_global_position())
+#					else:
+#						skill_instance.direction = "W"
+#						skill_instance.set_global_position(get_node("Shield_W").get_global_position())
+#				else:
+#					if current_target != null:
+#						if $Aim_Assist.get_overlapping_bodies().has(current_target):
+##							skill_instance.rotation = get_angle_to(current_target.get_global_position())
+#						else:
+#							current_target = null
+#					else:
+#						if Input.is_action_pressed("Up"):
+#							skill_instance.rotation = -1.55
+#						elif last_direction == "right":
+#							skill_instance.direction = "E"
+#							skill_instance.set_global_position(get_node("Shield_E").get_global_position())
+#							
+#						elif last_direction == "left":
+#							skill_instance.direction = "W"
+#							skill_instance.set_global_position(get_node("Shield_W").get_global_position())
+#			skill_instance.origin = "Player"
+				$SFXPLayer.play()
+				can_shield = false
+				$ShieldTimer.start()
 			#skill_instance.node_reference = get_path()
-			add_child(skill_instance)
+#			get_parent().add_child(skill_instance)
 			
 			
 func _on_Dashtimer_timeout():

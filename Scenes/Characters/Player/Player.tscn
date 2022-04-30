@@ -1,10 +1,12 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://Assets/Characters/Otto spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Characters/otto arms.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=4]
 [ext_resource path="res://Assets/UI/Fonts/AlegreyaSC-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scripts/Abilities/Shield.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Effects/shield sprite.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -629,36 +631,32 @@ animation = "Jumping_E"
 [sub_resource type="AnimationNodeAnimation" id=30]
 animation = "Jumping_W"
 
-[sub_resource type="AnimationNodeAnimation" id=91]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "Push_E"
 
-[sub_resource type="AnimationNodeAnimation" id=92]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "Push_W"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "Rise"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "Run_E"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Run_W"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Walk_E"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Walk_W"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "Wallslide_E"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "Wallslide_W"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
@@ -754,19 +752,23 @@ animation = "Wallslide_W"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=86]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=93]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=94]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=95]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=96]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=97]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=98]
-
-[sub_resource type="AnimationNodeStateMachine" id=87]
+[sub_resource type="AnimationNodeStateMachine" id=95]
 states/Climbing/node = SubResource( 22 )
 states/Climbing/position = Vector2( 175, -45 )
 states/Crawling_E/node = SubResource( 23 )
@@ -785,35 +787,92 @@ states/Jumping_E/node = SubResource( 29 )
 states/Jumping_E/position = Vector2( -86, -64.251 )
 states/Jumping_W/node = SubResource( 30 )
 states/Jumping_W/position = Vector2( 438, -64.251 )
-states/Push_E/node = SubResource( 91 )
+states/Push_E/node = SubResource( 31 )
 states/Push_E/position = Vector2( -285, -64.251 )
-states/Push_W/node = SubResource( 92 )
+states/Push_W/node = SubResource( 32 )
 states/Push_W/position = Vector2( 643, -64.251 )
-states/Rise/node = SubResource( 31 )
+states/Rise/node = SubResource( 33 )
 states/Rise/position = Vector2( 204, 185.749 )
-states/Run_E/node = SubResource( 32 )
+states/Run_E/node = SubResource( 34 )
 states/Run_E/position = Vector2( -280, 228.749 )
-states/Run_W/node = SubResource( 33 )
+states/Run_W/node = SubResource( 35 )
 states/Run_W/position = Vector2( 619, 228.749 )
-states/Walk_E/node = SubResource( 34 )
+states/Walk_E/node = SubResource( 36 )
 states/Walk_E/position = Vector2( -86, 109 )
-states/Walk_W/node = SubResource( 35 )
+states/Walk_W/node = SubResource( 37 )
 states/Walk_W/position = Vector2( 438, 109 )
-states/Wallslide_E/node = SubResource( 36 )
+states/Wallslide_E/node = SubResource( 38 )
 states/Wallslide_E/position = Vector2( -42, -212.251 )
-states/Wallslide_W/node = SubResource( 37 )
+states/Wallslide_W/node = SubResource( 39 )
 states/Wallslide_W/position = Vector2( 352, -212.251 )
-transitions = [ "Walk_W", "Climbing", SubResource( 38 ), "Walk_E", "Climbing", SubResource( 39 ), "Climbing", "Walk_W", SubResource( 40 ), "Climbing", "Walk_E", SubResource( 41 ), "Climbing", "Idle_E", SubResource( 42 ), "Walk_E", "Crawling_E", SubResource( 43 ), "Walk_W", "Crawling_W", SubResource( 44 ), "Crawling_W", "Walk_W", SubResource( 45 ), "Crawling_E", "Walk_E", SubResource( 46 ), "Crawling_E", "Crawling_W", SubResource( 47 ), "Crawling_W", "Crawling_E", SubResource( 48 ), "Idle_E", "Climbing", SubResource( 49 ), "Idle_E", "Walk_E", SubResource( 50 ), "Walk_E", "Idle_E", SubResource( 51 ), "Crawling_E", "Idle_E", SubResource( 52 ), "Idle_W", "Climbing", SubResource( 53 ), "Climbing", "Idle_W", SubResource( 54 ), "Idle_W", "Walk_W", SubResource( 55 ), "Walk_W", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_E", SubResource( 57 ), "Crawling_W", "Idle_W", SubResource( 58 ), "Walk_W", "Jumping_W", SubResource( 59 ), "Walk_E", "Jumping_E", SubResource( 60 ), "Jumping_E", "Idle_E", SubResource( 61 ), "Jumping_W", "Idle_W", SubResource( 62 ), "Jumping_E", "Climbing", SubResource( 63 ), "Jumping_W", "Climbing", SubResource( 64 ), "Walk_W", "Death_left", SubResource( 65 ), "Jumping_W", "Death_left", SubResource( 66 ), "Crawling_W", "Death_left", SubResource( 67 ), "Idle_W", "Death_left", SubResource( 68 ), "Crawling_E", "Death_right", SubResource( 69 ), "Walk_E", "Death_right", SubResource( 70 ), "Jumping_E", "Death_right", SubResource( 71 ), "Idle_E", "Death_right", SubResource( 72 ), "Climbing", "Death_right", SubResource( 73 ), "Climbing", "Death_left", SubResource( 74 ), "Walk_W", "Run_W", SubResource( 75 ), "Run_W", "Walk_W", SubResource( 76 ), "Run_E", "Walk_E", SubResource( 77 ), "Walk_E", "Run_E", SubResource( 78 ), "Run_E", "Death_right", SubResource( 79 ), "Run_W", "Death_left", SubResource( 80 ), "Death_left", "Idle_W", SubResource( 81 ), "Rise", "Idle_E", SubResource( 82 ), "Jumping_E", "Wallslide_E", SubResource( 83 ), "Jumping_W", "Wallslide_W", SubResource( 84 ), "Wallslide_W", "Jumping_W", SubResource( 85 ), "Wallslide_E", "Jumping_E", SubResource( 86 ), "Idle_E", "Push_E", SubResource( 93 ), "Push_E", "Idle_E", SubResource( 94 ), "Push_W", "Idle_W", SubResource( 95 ), "Idle_W", "Push_W", SubResource( 96 ), "Walk_E", "Push_E", SubResource( 97 ), "Walk_W", "Push_W", SubResource( 98 ) ]
+transitions = [ "Walk_W", "Climbing", SubResource( 40 ), "Walk_E", "Climbing", SubResource( 41 ), "Climbing", "Walk_W", SubResource( 42 ), "Climbing", "Walk_E", SubResource( 43 ), "Climbing", "Idle_E", SubResource( 44 ), "Walk_E", "Crawling_E", SubResource( 45 ), "Walk_W", "Crawling_W", SubResource( 46 ), "Crawling_W", "Walk_W", SubResource( 47 ), "Crawling_E", "Walk_E", SubResource( 48 ), "Crawling_E", "Crawling_W", SubResource( 49 ), "Crawling_W", "Crawling_E", SubResource( 50 ), "Idle_E", "Climbing", SubResource( 51 ), "Idle_E", "Walk_E", SubResource( 52 ), "Walk_E", "Idle_E", SubResource( 53 ), "Crawling_E", "Idle_E", SubResource( 54 ), "Idle_W", "Climbing", SubResource( 55 ), "Climbing", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_W", SubResource( 57 ), "Walk_W", "Idle_W", SubResource( 58 ), "Idle_W", "Walk_E", SubResource( 59 ), "Crawling_W", "Idle_W", SubResource( 60 ), "Walk_W", "Jumping_W", SubResource( 61 ), "Walk_E", "Jumping_E", SubResource( 62 ), "Jumping_E", "Idle_E", SubResource( 63 ), "Jumping_W", "Idle_W", SubResource( 64 ), "Jumping_E", "Climbing", SubResource( 65 ), "Jumping_W", "Climbing", SubResource( 66 ), "Walk_W", "Death_left", SubResource( 67 ), "Jumping_W", "Death_left", SubResource( 68 ), "Crawling_W", "Death_left", SubResource( 69 ), "Idle_W", "Death_left", SubResource( 70 ), "Crawling_E", "Death_right", SubResource( 71 ), "Walk_E", "Death_right", SubResource( 72 ), "Jumping_E", "Death_right", SubResource( 73 ), "Idle_E", "Death_right", SubResource( 74 ), "Climbing", "Death_right", SubResource( 75 ), "Climbing", "Death_left", SubResource( 76 ), "Walk_W", "Run_W", SubResource( 77 ), "Run_W", "Walk_W", SubResource( 78 ), "Run_E", "Walk_E", SubResource( 79 ), "Walk_E", "Run_E", SubResource( 80 ), "Run_E", "Death_right", SubResource( 81 ), "Run_W", "Death_left", SubResource( 82 ), "Death_left", "Idle_W", SubResource( 83 ), "Rise", "Idle_E", SubResource( 84 ), "Jumping_E", "Wallslide_E", SubResource( 85 ), "Jumping_W", "Wallslide_W", SubResource( 86 ), "Wallslide_W", "Jumping_W", SubResource( 87 ), "Wallslide_E", "Jumping_E", SubResource( 88 ), "Idle_E", "Push_E", SubResource( 89 ), "Push_E", "Idle_E", SubResource( 90 ), "Push_W", "Idle_W", SubResource( 91 ), "Idle_W", "Push_W", SubResource( 92 ), "Walk_E", "Push_E", SubResource( 93 ), "Walk_W", "Push_W", SubResource( 94 ) ]
 start_node = "Idle_E"
 graph_offset = Vector2( -633, -315.09 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=88]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=96]
 
-[sub_resource type="RectangleShape2D" id=89]
+[sub_resource type="RectangleShape2D" id=97]
 extents = Vector2( 12.2145, 10 )
 
-[sub_resource type="CircleShape2D" id=90]
+[sub_resource type="CircleShape2D" id=98]
 radius = 287.661
+
+[sub_resource type="Animation" id=99]
+resource_name = "Shield_E"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionPolygon2D:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( 15.3946, -2.08472, 12.327, -1.25883, 16.2205, 4.28643, 20.4679, 15.023, 13.9788, 28.7092, 18.1082, 28.4732, 25.0693, 18.2086, 24.4794, 8.41589 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 19, 20, 21, 22, 23, 24, 25 ]
+}
+
+[sub_resource type="Animation" id=100]
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionPolygon2D:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ PoolVector2Array( -15.2813, -2.79262, -13.6295, -1.73076, -22.0064, 14.6691, -13.2756, 28.5912, -15.0453, 30.125, -21.8884, 24.6977, -27.7876, 15.6129, -25.428, 9.35976 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16 ]
+}
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -895,11 +954,11 @@ anims/Wallslide_E = SubResource( 20 )
 anims/Wallslide_W = SubResource( 21 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 87 )
+tree_root = SubResource( 95 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 88 )
+parameters/playback = SubResource( 96 )
 
 [node name="Ceilingcheck" type="Area2D" parent="."]
 position = Vector2( 0, -12.5511 )
@@ -907,12 +966,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceilingcheck"]
 position = Vector2( 0.890892, -4.7931 )
-shape = SubResource( 89 )
-
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 0, -12.5511 )
-
-[node name="Position2D" type="Position2D" parent="Position2D"]
+shape = SubResource( 97 )
 
 [node name="Dash-timer" type="Timer" parent="."]
 wait_time = 0.25
@@ -945,6 +999,12 @@ collide_with_areas = true
 position = Vector2( 0, 18 )
 cast_to = Vector2( 0, 9 )
 
+[node name="Shield_E" type="Position2D" parent="."]
+position = Vector2( 20, -12 )
+
+[node name="Shield_W" type="Position2D" parent="."]
+position = Vector2( -20, -12.063 )
+
 [node name="Aim_Assist" type="Area2D" parent="."]
 position = Vector2( 0, -12.5511 )
 collision_layer = 0
@@ -953,7 +1013,7 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Aim_Assist"]
 visible = false
 position = Vector2( -0.0589981, 0.0589905 )
-shape = SubResource( 90 )
+shape = SubResource( 98 )
 
 [node name="SFXPLayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -966,7 +1026,35 @@ bus = "SFX"
 [node name="AimPosition" type="Position2D" parent="."]
 position = Vector2( -101.229, -5.65921 )
 
+[node name="Shield2" type="Area2D" parent="."]
+position = Vector2( 83.4698, 17.9539 )
+collision_layer = 0
+collision_mask = 8
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Shield2"]
+texture = ExtResource( 7 )
+hframes = 9
+vframes = 4
+frame = 19
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shield2"]
+polygon = PoolVector2Array( 15.3946, -2.08472, 12.327, -1.25883, 16.2205, 4.28643, 20.4679, 15.023, 13.9788, 28.7092, 18.1082, 28.4732, 25.0693, 18.2086, 24.4794, 8.41589 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield2"]
+anims/Shield_E = SubResource( 99 )
+anims/Shield_W = SubResource( 100 )
+
+[node name="Selfdestruct" type="Timer" parent="Shield2"]
+wait_time = 4.0
+one_shot = true
+
 [connection signal="timeout" from="Dash-timer" to="." method="_on_Dashtimer_timeout"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
+[connection signal="body_entered" from="Shield2" to="Shield2" method="_on_Shield2_body_entered"]
+[connection signal="timeout" from="Shield2/Selfdestruct" to="Shield2" method="_on_Selfdestruct_timeout"]
