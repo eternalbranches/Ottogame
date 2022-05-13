@@ -888,14 +888,14 @@ position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 15
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -1027,6 +1027,7 @@ bus = "SFX"
 position = Vector2( -101.229, -5.65921 )
 
 [node name="Shield2" type="Area2D" parent="."]
+visible = false
 position = Vector2( 83.4698, 17.9539 )
 collision_layer = 0
 collision_mask = 8

@@ -58,7 +58,6 @@ color = Color( 0.27451, 0.27451, 0.27451, 1 )
 
 [node name="Player" parent="YSort/Player" instance=ExtResource( 6 )]
 position = Vector2( -2705.9, -50.6591 )
-jump_speed = -500
 
 [node name="Mothgirl" parent="YSort/Player" instance=ExtResource( 5 )]
 position = Vector2( -1285.71, 492.779 )
