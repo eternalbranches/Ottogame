@@ -351,8 +351,8 @@ __meta__ = {
 margin_right = 400.0
 margin_bottom = 92.0
 rect_min_size = Vector2( 0, 20 )
-custom_fonts/normal_font = SubResource( 4 )
 custom_colors/default_color = Color( 0.345098, 0.109804, 0.109804, 1 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[tornado radius=2 freq=2][center]Titelscreen[/center][/tornado]"
 text = "Titelscreen"
@@ -370,9 +370,9 @@ margin_top = 140.0
 margin_right = 400.0
 margin_bottom = 190.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -389,9 +389,9 @@ margin_top = 238.0
 margin_right = 400.0
 margin_bottom = 288.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -408,9 +408,9 @@ margin_top = 336.0
 margin_right = 400.0
 margin_bottom = 386.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false

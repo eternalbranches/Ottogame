@@ -13,15 +13,16 @@ var initialized := false
 export var sprite_pointing := "S"
 
 func _ready():
-	match sprite_pointing:
-		"S":
-			pass
-		"N":
-			$Sprite.flip_v = false
-		"E":
-			$Sprite.rotation_degrees = -90
-		"W":
-			$Sprite.rotation_degrees = 90
+	$AnimationPlayer.play("Inactive")
+	#match sprite_pointing:
+	#	"S":
+	#		pass
+	#	"N":
+	#		$Sprite.flip_v = false
+	#	"E":
+	#		$Sprite.rotation_degrees = -90
+	#	"W":
+	#		$Sprite.rotation_degrees = 90
 
 func _process(_delta):
 	$Label.text = state
@@ -62,9 +63,11 @@ func sightcheck():
 			$ShootCD.stop()
 
 func _on_Range_body_entered(_body):
+	print("in range")
 	if state == "idle":
 		state = "sight"
 		player_in_range = true
+		$AnimationPlayer.play("Activate")
 
 
 func _on_Range_body_exited(_body):
@@ -89,6 +92,7 @@ func on_hit(damage, _origin, _enemyposx):
 func on_death():
 	state = "death"
 	$RemoveTimer.start()
+	$AnimationPlayer.play("Death")
 	
 
 
@@ -103,3 +107,10 @@ func _on_ChangeState_timeout():
 
 func _on_RemoveTimer_timeout():
 	queue_free()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	match anim_name:
+		"Activate":
+			$AnimationPlayer.play("Idle")
+			#$Light2D.queue_free()

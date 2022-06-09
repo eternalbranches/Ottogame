@@ -173,16 +173,12 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 3
-frame = 7
+frame = 22
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 2 )
 position = Vector2( 12, -2 )
-emitting = false
 amount = 4
-lifetime = 1.3
-one_shot = true
-explosiveness = 0.2
 process_material = SubResource( 3 )
 texture = ExtResource( 1 )
 
@@ -203,7 +199,6 @@ anims/Idle = SubResource( 6 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 14 )
 
 [node name="AbilitySFX" type="AudioStreamPlayer2D" parent="."]
