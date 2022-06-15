@@ -7,6 +7,7 @@ var player_in_range
 
 var can_shoot := false
 var current_hp := 2
+var can_activate := true
 
 var state = "idle"
 var initialized := false
@@ -34,7 +35,7 @@ func _process(_delta):
 		"shoot":
 			sightcheck()
 			if initialized == false:
-				$ShootCD.start()
+				#$ShootCD.start()
 				initialized = true
 			if can_shoot == true:
 				var skill = load("res://Scenes/Abilities/Bullet.tscn")
@@ -63,8 +64,8 @@ func sightcheck():
 			$ShootCD.stop()
 
 func _on_Range_body_entered(_body):
-	print("in range")
-	if state == "idle":
+	if state == "idle" and can_activate:
+		can_activate = false
 		state = "sight"
 		player_in_range = true
 		$AnimationPlayer.play("Activate")
@@ -79,6 +80,7 @@ func _on_Range_body_exited(_body):
 		if state != "death":
 			state = "idle"
 		$ShootCD.stop()
+		
 
 func _on_ShootCD_timeout():
 	can_shoot = true
@@ -91,7 +93,7 @@ func on_hit(damage, _origin, _enemyposx):
 			
 func on_death():
 	state = "death"
-	$RemoveTimer.start()
+	#$RemoveTimer.start()
 	$AnimationPlayer.play("Death")
 	
 
@@ -103,6 +105,8 @@ func _on_ChangeState_timeout():
 			$ShootCD.stop()
 			player_in_range = false
 			initialized = false
+			$AnimationPlayer.play_backwards("Activate")
+			$Deactivate.start()
 
 
 func _on_RemoveTimer_timeout():
@@ -114,3 +118,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"Activate":
 			$AnimationPlayer.play("Idle")
 			#$Light2D.queue_free()
+
+
+func _on_Deactivate_timeout():
+	can_activate = true

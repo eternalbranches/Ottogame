@@ -510,7 +510,7 @@ func _physics_process(delta):
 		"walljump":
 			if $SFX.stream != null:
 				$SFX.stream = null
-			velocity.y += gravity/3 * delta
+			velocity.y += gravity/3.0 * delta
 			if last_direction == "right":
 				velocity.x += 15
 			else:
@@ -739,6 +739,14 @@ func on_hit(damage, origin, enemy_posx):
 		set_collision_mask_bit(2, 0)
 	if current_hp <= 0 and state != "death":
 			on_death()
+
+func on_heal(healamount):
+	if state != "death":
+		current_hp += healamount
+		if current_hp > max_hp:
+			current_hp = max_hp
+		emit_signal("HPchange",current_hp)
+		$HealParticle.emitting = true
 		
 func on_death():
 	state = "death"

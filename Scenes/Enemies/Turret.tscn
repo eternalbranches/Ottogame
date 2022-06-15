@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Objects/Turret.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Objects/turrettower.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Effects/background.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Effects/spotlight_7.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Effects/glowing_circle.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.875, 8.34518 )
@@ -52,10 +53,46 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 0.7 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:shape:extents")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 20.875, 8.34518 ), Vector2( 20.875, 8.34518 ), Vector2( 20.875, 24.5085 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0.0445385 ), Vector2( 0, 0.0445385 ), Vector2( 0, -16.1188 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Light2D3:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.3, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, true ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Death"
-length = 0.9
+length = 1.5
 step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Tower:frame")
@@ -81,6 +118,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.7, 0.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Tower:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.75, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -25 ), Vector2( 0, 18 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Light2D3:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "Idle"
@@ -98,6 +159,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 6, 7, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D3:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.6, 0.8, 0.6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D2:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.8, 0.6, 0.8 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -178,7 +263,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:position")
+tracks/1/path = NodePath("Mask:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -261,8 +346,33 @@ tracks/7/keys = {
 "update": 0,
 "values": [ 0.7 ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Light2D3:energy")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.6 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Light2D3:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [node name="Turret" type="StaticBody2D" groups=["Enemy"]]
+rotation = 3.14159
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 1 )
@@ -292,8 +402,13 @@ vframes = 2
 texture = ExtResource( 4 )
 
 [node name="ShootCD" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
 
 [node name="ChangeState" type="Timer" parent="."]
+one_shot = true
+
+[node name="Deactivate" type="Timer" parent="."]
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
@@ -319,7 +434,7 @@ anims/Idle = SubResource( 6 )
 anims/Inactive = SubResource( 7 )
 anims/RESET = SubResource( 5 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="Mask" type="Light2D" parent="."]
 position = Vector2( 0.187469, 25.4446 )
 scale = Vector2( 0.353876, 0.394539 )
 texture = ExtResource( 5 )
@@ -333,9 +448,17 @@ texture = ExtResource( 6 )
 color = Color( 1, 0, 0, 1 )
 energy = 0.7
 
+[node name="Light2D3" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -15.838 )
+texture = ExtResource( 7 )
+color = Color( 1, 0.470588, 0, 1 )
+energy = 0.6
+
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
+[connection signal="timeout" from="Deactivate" to="." method="_on_Deactivate_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

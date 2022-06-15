@@ -4,7 +4,7 @@ var state := "idle"
 var max_hp := 2
 var current_hp := 2
 var current_direction := "E"
-var spawn_guardposition := 5
+var spawn_guardposition := 5.0
 var velocity := Vector2.ZERO
 var new_random_xpos := 0.0
 
@@ -33,7 +33,7 @@ func _ready():
 	
 	#rng.randi_range(0, 5)
 #rng.randf_range(-10.0, 10.0)
-func _process(delta):
+func _process(_delta):
 	if state != "idle":
 		if $Floorcheck_E.is_colliding() == true:
 			can_walk_E = true

@@ -50,5 +50,5 @@ func load_volume():
 	AudioServer.set_bus_volume_db(ambiencebus, linear2db(soundvaluearray["safedambiencevalue"]))
 
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	get_tree().change_scene("res://Scenes/Interface/Characterselect.tscn")
