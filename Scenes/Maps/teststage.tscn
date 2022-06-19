@@ -21,5 +21,4 @@ width_curve = SubResource( 1 )
 gradient = SubResource( 2 )
 texture = ExtResource( 3 )
 texture_mode = 2
-wildness = 5.0
 min_spawn_distance = 10.0
