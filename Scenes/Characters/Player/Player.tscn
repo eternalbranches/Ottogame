@@ -1044,7 +1044,7 @@ bus = "SFX"
 [node name="AimPosition" type="Position2D" parent="."]
 position = Vector2( -101.229, -5.65921 )
 
-[node name="Shield2" type="Area2D" parent="."]
+[node name="Shield" type="Area2D" parent="."]
 visible = false
 position = Vector2( 83.4698, 17.9539 )
 collision_layer = 0
@@ -1054,20 +1054,20 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Shield2"]
+[node name="Sprite" type="Sprite" parent="Shield"]
 texture = ExtResource( 7 )
 hframes = 9
 vframes = 4
 frame = 19
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shield2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shield"]
 polygon = PoolVector2Array( 15.3946, -2.08472, 12.327, -1.25883, 16.2205, 4.28643, 20.4679, 15.023, 13.9788, 28.7092, 18.1082, 28.4732, 25.0693, 18.2086, 24.4794, 8.41589 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield"]
 anims/Shield_E = SubResource( 99 )
 anims/Shield_W = SubResource( 100 )
 
-[node name="Selfdestruct" type="Timer" parent="Shield2"]
+[node name="Selfdestruct" type="Timer" parent="Shield"]
 wait_time = 4.0
 one_shot = true
 
@@ -1086,5 +1086,5 @@ texture = ExtResource( 8 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
-[connection signal="body_entered" from="Shield2" to="Shield2" method="_on_Shield2_body_entered"]
-[connection signal="timeout" from="Shield2/Selfdestruct" to="Shield2" method="_on_Selfdestruct_timeout"]
+[connection signal="body_entered" from="Shield" to="Shield" method="_on_Shield2_body_entered"]
+[connection signal="timeout" from="Shield/Selfdestruct" to="Shield" method="_on_Selfdestruct_timeout"]

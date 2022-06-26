@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Turret_Activate.mp3-1db2256772ce4e999a3db25602657067.mp3str"
+
+[deps]
+
+source_file="res://Assets/Soundtrack/SFX/Turret/Turret_Activate.mp3"
+dest_files=[ "res://.import/Turret_Activate.mp3-1db2256772ce4e999a3db25602657067.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

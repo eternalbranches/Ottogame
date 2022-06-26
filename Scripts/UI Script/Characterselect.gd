@@ -1,13 +1,13 @@
 extends Control
 var progress_dict1 := {"ironman" : false, "current_checkpoint" : 0, 
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false, "shield": false}
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"keycards" : []}
 var progress_dict2 := {"ironman" : false, "current_checkpoint" : 0, 
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false, "shield": false}
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"keycards" : []}
 var progress_dict3 := {"ironman" : false, "current_checkpoint" : 0, 
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false, "shield": false}
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"keycards" : []}
 
 var delet_save:= "1"
 var PressedLoading := false
@@ -50,6 +50,11 @@ func _on_PlayChar1_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H1/PlayChar1.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
+			for key in progress_dict1:
+				if CharacterSave.save_dict.has(key):
+					pass
+				else:
+					CharacterSave.save_dict[key] = progress_dict1[key]
 			$AnimationPlayer.play("FadeOut")
 			#yield(get_tree().create_timer(0.5), "timeout")
 			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
@@ -71,6 +76,11 @@ func _on_PlayChar2_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H2/PlayChar2.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
+			for key in progress_dict2:
+				if CharacterSave.save_dict.has(key):
+					pass
+				else:
+					CharacterSave.save_dict[key] = progress_dict2[key]
 			$AnimationPlayer.play("FadeOut")
 			#yield(get_tree().create_timer(0.5), "timeout")
 			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")
@@ -91,6 +101,11 @@ func _on_PlayChar3_pressed():
 			savefile.close()
 			$SFXStreamPlayer.play()
 			$N/H3/PlayChar3.texture_focused = load("res://Assets/UI/Buttons/Button_Clicked.png")
+			for key in progress_dict3:
+				if CharacterSave.save_dict.has(key):
+					pass
+				else:
+					CharacterSave.save_dict[key] = progress_dict3[key]
 			$AnimationPlayer.play("FadeOut")
 			#yield(get_tree().create_timer(0.5), "timeout")
 			#get_tree().change_scene("res://Scenes/Maps/Lighttest.tscn")

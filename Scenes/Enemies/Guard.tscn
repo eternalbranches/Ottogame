@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Assets/Characters/guard sprite sheet.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Characters/Enemies/Guard.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Guard.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=3]
 [ext_resource path="res://Scripts/Shader/flash.gdshader" type="Shader" id=4]
 
@@ -232,9 +232,7 @@ extents = Vector2( 9.41607, 19.3436 )
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 8.08548, 18.3279 )
 
-[node name="Guard" type="KinematicBody2D" groups=[
-"Enemy",
-]]
+[node name="Guard" type="KinematicBody2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource( 2 )
@@ -245,7 +243,7 @@ position = Vector2( -0.105118, -6.40896 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 13
-frame = 20
+frame = 17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death = SubResource( 2 )

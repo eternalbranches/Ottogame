@@ -10,6 +10,7 @@ func _ready():
 	checkpoint_load()
 	if CharacterSave.first_spawn == false:
 		respawn_animation()
+	print(CharacterSave.save_dict["keycards"])
 
 
 func _process(_delta):

@@ -682,9 +682,10 @@ func shield():
 		if CharacterSave.save_dict["shield"] == true and can_shield == true:
 			if Input.is_action_just_pressed("Shield"):
 				print("shield")
-				$Shield2.set_collision_mask_bit(4,1)
-				$Shield2/Selfdestruct.start()
-				$Shield2.animdirection(last_direction, $Shield_E.get_position(), $Shield_W.get_position())
+				$Shield.visible = true
+				$Shield.set_collision_mask_bit(4,1)
+				$Shield/Selfdestruct.start()
+				$Shield.animdirection(last_direction, $Shield_E.get_position(), $Shield_W.get_position())
 #				var skill = load("res://Scenes/Abilities/Shield.tscn")
 #				var skill_instance = skill.instance()
 #				if CharacterSave.controller == false:

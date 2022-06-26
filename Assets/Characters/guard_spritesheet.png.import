@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Otto_spritesheet.png-1869df1ef488d47fe3f2ed50745ed09e.stex"
+path="res://.import/guard_spritesheet.png-efb5c61c692ba1e099cef7778fe71fd6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Otto_spritesheet.png"
-dest_files=[ "res://.import/Otto_spritesheet.png-1869df1ef488d47fe3f2ed50745ed09e.stex" ]
+source_file="res://Assets/Characters/guard_spritesheet.png"
+dest_files=[ "res://.import/guard_spritesheet.png-efb5c61c692ba1e099cef7778fe71fd6.stex" ]
 
 [params]
 

@@ -8,12 +8,15 @@ var player_in_range
 var can_shoot := false
 var current_hp := 2
 var can_activate := true
+export var black := false
 
 var state = "idle"
 var initialized := false
 export var sprite_pointing := "S"
 
 func _ready():
+	if black == true:
+		$Sprite/Tower.texture = load("res://Assets/Objects/turretnewlcolor_spritesheet.png")
 	$AnimationPlayer.play("Inactive")
 	#match sprite_pointing:
 	#	"S":
@@ -45,7 +48,7 @@ func _process(_delta):
 				skill_instance.enemyposx = position.x
 				skill_instance.origin = "Enemy"
 				#skill_instance.node_reference = get_path()
-				$SFXPLayer.play()
+				#$SFXPLayer.play()
 				get_parent().add_child(skill_instance)
 				can_shoot = false
 	
@@ -69,6 +72,7 @@ func _on_Range_body_entered(_body):
 		state = "sight"
 		player_in_range = true
 		$AnimationPlayer.play("Activate")
+		$SFXPLayer.play()
 
 
 func _on_Range_body_exited(_body):

@@ -4,8 +4,8 @@ var first_spawn := true
 var controller := false
 var profile := 1
 var save_dict = {"ironman" : false, "current_checkpoint" : 0, 
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false,
-					"orange_keycard": false, "shield": false}
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"keycards" : []}
 
 
 func save_progress():

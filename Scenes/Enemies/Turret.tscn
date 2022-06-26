@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Objects/Turret.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Soundtrack/SFX/Turret/Turret_Activate.mp3" type="AudioStream" id=3]
 [ext_resource path="res://Assets/Objects/turrettower.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Effects/background.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Effects/spotlight_7.png" type="Texture" id=6]
@@ -16,7 +16,7 @@ radius = 424.3
 
 [sub_resource type="Animation" id=3]
 resource_name = "Activate"
-length = 1.8
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Tower:position")
 tracks/0/interp = 1
@@ -24,7 +24,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 3.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 24 ), Vector2( 0, -25 ) ]
@@ -36,7 +36,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 3.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -48,7 +48,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 3.7, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.7 ]
@@ -60,7 +60,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5 ),
+"times": PoolRealArray( 0, 0.5, 3.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 20.875, 8.34518 ), Vector2( 20.875, 8.34518 ), Vector2( 20.875, 24.5085 ) ]
@@ -72,7 +72,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5 ),
+"times": PoolRealArray( 0, 0.5, 3.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0.0445385 ), Vector2( 0, 0.0445385 ), Vector2( 0, -16.1188 ) ]
@@ -84,7 +84,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 1.3, 1.8 ),
+"times": PoolRealArray( 0, 3.5, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, false, true ]
@@ -423,6 +423,9 @@ __meta__ = {
 
 [node name="SFXPLayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = -10.0
+attenuation = 4.43828
+bus = "SFX"
 
 [node name="RemoveTimer" type="Timer" parent="."]
 wait_time = 10.0
