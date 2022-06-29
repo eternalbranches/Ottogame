@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Otto_arms.png-e847f1c9134cc022ff6d5d6d9d474f9e.stex"
+path="res://.import/otto_arms.png-5dc57cec0b10f9feab66af16345f1a54.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Otto_arms.png"
-dest_files=[ "res://.import/Otto_arms.png-e847f1c9134cc022ff6d5d6d9d474f9e.stex" ]
+source_file="res://Assets/Characters/otto_arms.png"
+dest_files=[ "res://.import/otto_arms.png-5dc57cec0b10f9feab66af16345f1a54.stex" ]
 
 [params]
 

@@ -501,7 +501,7 @@ func _physics_process(delta):
 				bullettime = false
 				knockback = true
 				yield(get_tree().create_timer(0.3), "timeout")
-				set_collision_mask_bit(2, 1)
+				#set_collision_mask_bit(2, 1)
 				knockback = false
 				invulnerable = false
 				if state != "death":
@@ -719,7 +719,11 @@ func shield():
 			#skill_instance.node_reference = get_path()
 #			get_parent().add_child(skill_instance)
 			
-			
+func state_change(new_state):
+	if state != "dead":
+		state = new_state
+		
+	
 func _on_Dashtimer_timeout():
 	dash_l = 0
 	dash_r = 0
@@ -737,7 +741,7 @@ func on_hit(damage, origin, enemy_posx):
 	
 	if state != "death":
 		state = "knockback"
-		set_collision_mask_bit(2, 0)
+		#set_collision_mask_bit(2, 0)
 	if current_hp <= 0 and state != "death":
 			on_death()
 
@@ -788,3 +792,11 @@ func _on_PlatformTimer_timeout():
 
 func _on_ShieldTimer_timeout():
 	can_shield = true
+
+
+func _on_ActivateEnemies_body_entered(body):
+	body.player_enters_range(true)
+
+
+func _on_ActivateEnemies_body_exited(body):
+	body.player_enters_range(false)

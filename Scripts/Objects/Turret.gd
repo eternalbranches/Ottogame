@@ -2,6 +2,7 @@ extends StaticBody2D
 onready var player = get_node("../../Player/Player")
 
 var player_in_range
+var player_close
 #var player_in_sight
 #var player_seen
 
@@ -70,7 +71,7 @@ func _on_Range_body_entered(_body):
 	if state == "idle" and can_activate:
 		can_activate = false
 		state = "sight"
-		player_in_range = true
+		player_close = true
 		$AnimationPlayer.play("Activate")
 		$SFXPLayer.play()
 
@@ -79,7 +80,7 @@ func _on_Range_body_exited(_body):
 	if state == "shoot":
 		$ChangeState.start()
 	else:
-		player_in_range = false
+		player_close = false
 		initialized = false
 		if state != "death":
 			state = "idle"
@@ -107,7 +108,7 @@ func _on_ChangeState_timeout():
 		if state != "death":
 			state = "idle"
 			$ShootCD.stop()
-			player_in_range = false
+			player_close = false
 			initialized = false
 			$AnimationPlayer.play_backwards("Activate")
 			$Deactivate.start()
@@ -126,3 +127,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_Deactivate_timeout():
 	can_activate = true
+
+func player_enters_range(in_range):
+	player_in_range ==true

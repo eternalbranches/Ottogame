@@ -164,12 +164,12 @@ func _physics_process(delta):
 			pass
 			
 			
-func on_hit(damage, _origin, enemy_posx):
+func on_hit(damage, _origin, enemy_pos, em):
 	if state != "death":
 		current_hp -= damage
 		flash()
 			
-	if position.x < enemy_posx:
+	if position.x < enemy_pos.x:
 		velocity.x += 200
 	else:
 		velocity.x -= 200
@@ -251,3 +251,6 @@ func _on_ShootAnim_timeout():
 	rng.randomize()
 	var offset_x = rng.randf_range(-220, 220)
 	new_random_xpos = get_global_position().x + offset_x
+
+func player_enters_range(in_range):
+	pass

@@ -1,6 +1,6 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=114 format=2]
 
-[ext_resource path="res://Assets/Characters/Otto_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Characters/otto_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Characters/otto_arms.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=4]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scripts/Abilities/Shield.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Effects/shield sprite.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Effects/floaty_64.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Characters/otto_spritesheet_n.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Characters/otto_arms_n.png" type="Texture" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -897,7 +899,10 @@ scale = 0.35
 color = Color( 1, 0, 0, 1 )
 anim_speed = 0.05
 
-[node name="Player" type="KinematicBody2D" groups=["Player"]]
+[sub_resource type="RectangleShape2D" id=104]
+extents = Vector2( 1200, 1200 )
+
+[node name="Player" type="KinematicBody2D" groups=["Mutant", "Player"]]
 collision_layer = 2
 collision_mask = 145
 script = ExtResource( 2 )
@@ -907,6 +912,7 @@ script = ExtResource( 2 )
 [node name="Body" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 1 )
+normal_map = ExtResource( 9 )
 hframes = 8
 vframes = 15
 frame = 7
@@ -914,6 +920,7 @@ frame = 7
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
 texture = ExtResource( 3 )
+normal_map = ExtResource( 10 )
 hframes = 8
 vframes = 15
 frame = 7
@@ -1082,9 +1089,18 @@ explosiveness = 0.08
 process_material = SubResource( 103 )
 texture = ExtResource( 8 )
 
+[node name="ActivateEnemies" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateEnemies"]
+shape = SubResource( 104 )
+
 [connection signal="timeout" from="Dash-timer" to="." method="_on_Dashtimer_timeout"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_Shield2_body_entered"]
 [connection signal="timeout" from="Shield/Selfdestruct" to="Shield" method="_on_Selfdestruct_timeout"]
+[connection signal="body_entered" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_entered"]
+[connection signal="body_exited" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_exited"]

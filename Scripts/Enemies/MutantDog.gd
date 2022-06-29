@@ -4,7 +4,7 @@ var state := "idle"
 var max_hp := 2
 var current_hp := 2
 var current_direction := "W"
-var spawn_guardposition := 5.0
+var spawn_position := 5.0
 var velocity := Vector2.ZERO
 var new_random_xpos := 0.0
 var dead := false
@@ -35,11 +35,8 @@ var last_seen := Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
 
-onready var animation_tree = get_node("AnimationTree")
-onready var animation_mode = animation_tree.get("parameters/playback")
-
 func _ready():
-	spawn_guardposition = get_global_position().x
+	spawn_position = get_global_position().x
 	
 	
 	#rng.randi_range(0, 5)
@@ -48,10 +45,9 @@ func _process(_delta):
 	floorcheck()
 
 func _physics_process(delta):
-	$Label.text = state
+	#$Label.text = state
 	match state:
 		"idle":
-			animation_mode.travel("Idle_"+ current_direction)
 			velocity.x = lerp(velocity.x, 0, friction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -61,14 +57,11 @@ func _physics_process(delta):
 			if current_direction == "E" and can_walk_E == true:
 				velocity.x = speed /2
 				#print("E")
-				animation_mode.travel("Walk_"+ current_direction)
 			elif current_direction == "W" and can_walk_W == true:
 				velocity.x = -speed/2
-				animation_mode.travel("Walk_"+ current_direction)
 				#print("")
 			else:
 				velocity.x = 0
-				animation_mode.travel("Idle_"+ current_direction)
 			
 			velocity.x = lerp(velocity.x, 0, friction)
 			velocity.y += gravity * delta
@@ -96,7 +89,6 @@ func _physics_process(delta):
 					velocity.x = -speed
 				else: 
 					velocity.x = 0
-			animation_mode.travel("Walk_"+ current_direction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
@@ -117,7 +109,6 @@ func _physics_process(delta):
 				#rng.randomize()
 				#var numberanimation = rng.randi_range(1, 2)
 				#print(numberanimation)
-				animation_mode.travel("Shoot_"+current_direction + str(1))
 				$ShootCD.start()
 				$ShootAnim.start()
 			
@@ -166,12 +157,12 @@ func _physics_process(delta):
 						
 		#	velocity = move_and_slide(velocity, Vector2.UP)
 		"return":
-			var remaining_distance = get_global_position().x - spawn_guardposition
+			var remaining_distance = get_global_position().x - spawn_position
 			if remaining_distance > -10 and remaining_distance < 10:
 				change_state("idle")
-			if get_global_position().x < spawn_guardposition:
+			if get_global_position().x < spawn_position:
 				velocity.x = speed
-			if get_global_position().x > spawn_guardposition:
+			if get_global_position().x > spawn_position:
 				velocity.x = -speed
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
@@ -203,7 +194,6 @@ func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
 func on_death() -> void:
 	change_state("death")
 	dead = true
-	animation_mode.travel("Death_" + current_direction)
 	set_collision_layer_bit(2, 0)
 	set_collision_mask_bit(1,0)
 	$RemoveTimer.start()

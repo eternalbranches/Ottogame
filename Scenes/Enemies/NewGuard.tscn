@@ -1,14 +1,18 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/Characters/guard_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/NewGuard.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3" type="AudioStream" id=3]
 [ext_resource path="res://Scripts/Shader/flash.gdshader" type="Shader" id=4]
+[ext_resource path="res://Scripts/Enemies/Hitbox.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 8.73071, 19.2968 )
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
-shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
 shader_param/flash_modifier = 0.0
 
 [sub_resource type="Animation" id=41]
@@ -43,8 +47,50 @@ tracks/0/keys = {
 "values": [ 50, 51, 52, 53, 54, 55, 56, 57 ]
 }
 
+[sub_resource type="Animation" id=42]
+resource_name = "Idle_E"
+length = 3.0
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Eyesight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 9.64, -8.803 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Eyesight:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+
 [sub_resource type="Animation" id=3]
-resource_name = "Idle"
+resource_name = "Idle_W"
 length = 3.0
 loop = true
 step = 0.2
@@ -59,6 +105,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Eyesight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9.63992, -8.80328 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Eyesight:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=40]
@@ -86,6 +156,150 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( -13.3757, -1.5892 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Eyesight/SightMN:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Eyesight/SightMN:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Eyesight/SightM:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Eyesight/SightM:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Eyesight/SightS:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Eyesight/SightS:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Eyesight/SightMS:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Eyesight/SightMS:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Eyesight/SightN:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Eyesight/SightN:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Eyesight:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9.63992, -8.80328 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Eyesight:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -307,7 +521,10 @@ animation = "Death_E"
 animation = "Death_W"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
-animation = "Idle"
+animation = "Idle_E"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "Idle_W"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Shoot_E1"
@@ -321,63 +538,62 @@ animation = "Walk_E"
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Walk_W"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
 
 [sub_resource type="AnimationNodeStateMachine" id=35]
 states/Death_E/node = SubResource( 10 )
-states/Death_E/position = Vector2( 871, 34 )
+states/Death_E/position = Vector2( 897, 43 )
 states/Death_W/node = SubResource( 11 )
-states/Death_W/position = Vector2( 330, 34 )
-states/Idle/node = SubResource( 12 )
-states/Idle/position = Vector2( 607, 105 )
+states/Death_W/position = Vector2( 352, 43 )
+states/Idle_E/node = SubResource( 12 )
+states/Idle_E/position = Vector2( 722, 115 )
+states/Idle_W/node = SubResource( 43 )
+states/Idle_W/position = Vector2( 558, 115 )
 states/Shoot_E1/node = SubResource( 13 )
-states/Shoot_E1/position = Vector2( 932, 253 )
+states/Shoot_E1/position = Vector2( 897, 115 )
 states/Shoot_W1/node = SubResource( 15 )
-states/Shoot_W1/position = Vector2( 321, 253 )
+states/Shoot_W1/position = Vector2( 352, 115 )
 states/Walk_E/node = SubResource( 17 )
-states/Walk_E/position = Vector2( 749, 105 )
+states/Walk_E/position = Vector2( 722, 218 )
 states/Walk_W/node = SubResource( 18 )
-states/Walk_W/position = Vector2( 467, 105 )
-transitions = [ "Idle", "Death_W", SubResource( 19 ), "Idle", "Death_E", SubResource( 20 ), "Idle", "Walk_E", SubResource( 23 ), "Idle", "Walk_W", SubResource( 24 ), "Walk_E", "Idle", SubResource( 33 ), "Walk_W", "Idle", SubResource( 34 ), "Shoot_W1", "Death_W", SubResource( 42 ), "Shoot_E1", "Death_E", SubResource( 43 ), "Shoot_E1", "Idle", SubResource( 46 ), "Shoot_W1", "Idle", SubResource( 48 ), "Idle", "Shoot_W1", SubResource( 49 ), "Idle", "Shoot_E1", SubResource( 51 ) ]
-start_node = "Idle"
+states/Walk_W/position = Vector2( 558, 218 )
+transitions = [ "Idle_W", "Idle_E", SubResource( 44 ), "Idle_E", "Idle_W", SubResource( 45 ), "Idle_E", "Walk_E", SubResource( 46 ), "Walk_W", "Idle_W", SubResource( 47 ), "Idle_W", "Walk_W", SubResource( 48 ), "Walk_E", "Idle_E", SubResource( 49 ), "Idle_E", "Shoot_E1", SubResource( 50 ), "Shoot_E1", "Idle_E", SubResource( 51 ), "Idle_E", "Death_E", SubResource( 52 ), "Idle_W", "Death_W", SubResource( 53 ), "Idle_W", "Shoot_W1", SubResource( 54 ), "Shoot_W1", "Idle_W", SubResource( 55 ) ]
+start_node = "Idle_W"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
-[sub_resource type="CircleShape2D" id=37]
-radius = 424.3
-
 [sub_resource type="RectangleShape2D" id=38]
-extents = Vector2( 9.41607, 19.3436 )
+extents = Vector2( 9.45, 20.085 )
 
-[sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 8.08548, 18.3279 )
-
-[node name="NewGuard" type="KinematicBody2D" groups=["Enemy"]]
+[node name="NewGuard" type="KinematicBody2D" groups=["Enemy", "Guard"]]
 collision_layer = 4
-collision_mask = 7
 script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6.13085 )
+shape = SubResource( 39 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
@@ -390,7 +606,8 @@ frame = 50
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death_E = SubResource( 41 )
 anims/Death_W = SubResource( 2 )
-anims/Idle = SubResource( 3 )
+anims/Idle_E = SubResource( 42 )
+anims/Idle_W = SubResource( 3 )
 anims/RESET = SubResource( 40 )
 anims/Shoot_E1 = SubResource( 4 )
 anims/Shoot_E2 = SubResource( 5 )
@@ -417,10 +634,6 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="PositionTimer" type="Timer" parent="."]
-wait_time = 0.4
-one_shot = true
-
 [node name="RemoveTimer" type="Timer" parent="."]
 wait_time = 10.0
 
@@ -428,15 +641,20 @@ wait_time = 10.0
 wait_time = 0.2
 one_shot = true
 
+[node name="SightTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="AI_Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0.0352941, 1, 0.027451, 1 )
 margin_left = 0.25
 margin_top = -60.75
 margin_right = 40.25
 margin_bottom = -46.75
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label2" type="Label" parent="."]
 margin_right = 40.0
@@ -445,48 +663,64 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Range" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
-position = Vector2( -0.0883865, 0 )
-shape = SubResource( 37 )
-
 [node name="SFXPLayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 attenuation = 2.46229
 bus = "SFX"
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 6
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( 1.14441e-05, 6.91636 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 6.175 )
 shape = SubResource( 38 )
 
 [node name="Floorcheck_W" type="RayCast2D" parent="."]
-position = Vector2( -5, 24 )
-cast_to = Vector2( 0, 10 )
+position = Vector2( -8, 24 )
+cast_to = Vector2( 0, 2 )
 
 [node name="Floorcheck_E" type="RayCast2D" parent="."]
-position = Vector2( 5, 24 )
-cast_to = Vector2( 0, 10 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 7.226 )
-shape = SubResource( 39 )
+position = Vector2( 8, 24 )
+cast_to = Vector2( 0, 2 )
 
 [node name="Bulletpoint" type="Position2D" parent="."]
 position = Vector2( -13.3757, -1.5892 )
 
+[node name="Eyesight" type="Node2D" parent="."]
+position = Vector2( -9.63992, -8.80328 )
+
+[node name="SightN" type="RayCast2D" parent="Eyesight"]
+enabled = true
+cast_to = Vector2( -300, -60 )
+collision_mask = 15
+
+[node name="SightMN" type="RayCast2D" parent="Eyesight"]
+enabled = true
+cast_to = Vector2( -310, -30 )
+collision_mask = 15
+
+[node name="SightM" type="RayCast2D" parent="Eyesight"]
+enabled = true
+cast_to = Vector2( -320, 0 )
+collision_mask = 15
+
+[node name="SightMS" type="RayCast2D" parent="Eyesight"]
+enabled = true
+cast_to = Vector2( -310, 30 )
+collision_mask = 15
+
+[node name="SightS" type="RayCast2D" parent="Eyesight"]
+enabled = true
+cast_to = Vector2( -300, 60 )
+collision_mask = 15
+
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
 [connection signal="timeout" from="ShootAnim" to="." method="_on_ShootAnim_timeout"]
-[connection signal="timeout" from="PositionTimer" to="." method="_on_PositionTimer_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FashTimer_timeout"]
-[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
-[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
-[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="timeout" from="SightTimer" to="." method="_on_SightTimer_timeout"]
+[connection signal="timeout" from="AI_Timer" to="." method="_on_AI_Timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hurtbox_body_entered"]

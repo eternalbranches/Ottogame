@@ -3,7 +3,7 @@ extends RigidBody2D
 var projectile_speed = 500
 var damage := 1
 var origin
-var direction
+#var direction
 var life_time = 20
 var dead := false
 var enemyposx
@@ -37,18 +37,24 @@ func SelfDestruct():
 	$DestructTimer.start()
 
 func _on_Area2D_body_entered(body):
-	get_node("AudioStreamPlayer2D").stream = SFX_Impact
-	$AudioStreamPlayer2D.play()
-	get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
-	self.hide()
-	$Light2D.enabled = false
-	dead = true
 	if body.is_in_group("Enemy"):
-		body.on_hit(damage, origin, position.x)
+		var direction_hit = "W"
+		if get_global_position().x > body.get_global_position().x:
+			direction_hit = "E"
+		body.on_hit(damage, origin, get_global_position(), direction_hit)
+		#print(body.get_global_position().x, "   ",get_global_position().x)
 	elif body.is_in_group("Player"):
 		body.on_hit(damage, origin, enemyposx)
 	elif body.is_in_group("Destructable"):
 		body.on_hit(damage)
+	get_node("AudioStreamPlayer2D").stream = SFX_Impact
+	$AudioStreamPlayer2D.play()
+	get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
+	remove_from_group("Projectiles")
+	self.hide()
+	$Light2D.enabled = false
+	dead = true
+	
 
 
 func _on_Smoketrail_dead():

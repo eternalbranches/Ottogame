@@ -11,7 +11,7 @@ extents = Vector2( 7.34868, 0.276078 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7.97345, 0.483948 )
 
-[node name="BulletLaser" type="RigidBody2D"]
+[node name="BulletLaser" type="RigidBody2D" groups=["Projectiles"]]
 position = Vector2( 1.26135, 43.3062 )
 collision_layer = 8
 collision_mask = 0
