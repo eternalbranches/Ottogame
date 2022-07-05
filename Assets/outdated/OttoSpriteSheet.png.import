@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OttoSpriteSheet.png-fb9f230f5346e83cefe041395eeb8ac1.stex"
+path="res://.import/ottospritesheet.png-2980d90674595430242446385744038a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/outdated/OttoSpriteSheet.png"
-dest_files=[ "res://.import/OttoSpriteSheet.png-fb9f230f5346e83cefe041395eeb8ac1.stex" ]
+source_file="res://assets/outdated/ottospritesheet.png"
+dest_files=[ "res://.import/ottospritesheet.png-2980d90674595430242446385744038a.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

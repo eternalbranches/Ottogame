@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Objects/BreakableTile.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Tiles/old wall texture tile.png" type="Texture" id=2]
+[ext_resource path="res://scripts/objects/breakabletile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/old wall texture tile.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.98665, 8.00275 )

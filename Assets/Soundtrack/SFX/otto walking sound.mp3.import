@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/otto walking sound.mp3-a655c436a45d0b4d292d6f8b495c20df.mp3str"
+path="res://.import/otto walking sound.mp3-c913411b1ee65fbdbcdb7f34c1f9fccc.mp3str"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/SFX/otto walking sound.mp3"
-dest_files=[ "res://.import/otto walking sound.mp3-a655c436a45d0b4d292d6f8b495c20df.mp3str" ]
+source_file="res://assets/soundtrack/sfx/otto walking sound.mp3"
+dest_files=[ "res://.import/otto walking sound.mp3-c913411b1ee65fbdbcdb7f34c1f9fccc.mp3str" ]
 
 [params]
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Assets/UI/Fonts/AlegreyaSC-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/UI/Fonts/LargeFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Scripts/UI Script/Mainscreen.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Soundtrack/Music/The Escape Room Full Version.wav" type="AudioStream" id=4]
-[ext_resource path="res://Scenes/Interface/Options.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/UI/Background/file.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Soundtrack/SFX/Hit 10_4.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/ui/fonts/alegreyasc_regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/ui_script/mainscreen.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/background/file.png" type="Texture" id=3]
+[ext_resource path="res://assets/soundtrack/music/The Escape Room Full Version.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/soundtrack/sfx/Hit 10_4.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/ui/fonts/largefont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scenes/interface/options.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "/*
@@ -266,7 +266,7 @@ shader_param/vignette_opacity = 0.5
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -309,7 +309,7 @@ tracks/1/keys = {
 [node name="Mainscreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
@@ -366,7 +366,7 @@ margin_bottom = 190.0
 rect_min_size = Vector2( 0, 50 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -385,7 +385,7 @@ margin_bottom = 288.0
 rect_min_size = Vector2( 0, 50 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -404,7 +404,7 @@ margin_bottom = 386.0
 rect_min_size = Vector2( 0, 50 )
 custom_colors/font_color_disabled = Color( 0.768627, 0.121569, 0.121569, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 6 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -415,7 +415,7 @@ stream = ExtResource( 4 )
 autoplay = true
 bus = "Music"
 
-[node name="Options" parent="." instance=ExtResource( 5 )]
+[node name="Options" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -424,7 +424,7 @@ anims/FadeOut = SubResource( 5 )
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 5 )
 bus = "SFX"
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

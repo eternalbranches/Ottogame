@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/machine_room.mp3-7b053bb5a52b17fcf8af5af1ae06cec2.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/ambience/machine_room.mp3"
+dest_files=[ "res://.import/machine_room.mp3-7b053bb5a52b17fcf8af5af1ae06cec2.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

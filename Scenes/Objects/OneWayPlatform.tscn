@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Tiles/middle horizontal blue.png" type="Texture" id=1]
+[ext_resource path="res://assets/tiles/middle horizontal blue.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 39.7107, 6.15889 )

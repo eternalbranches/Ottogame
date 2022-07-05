@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wall lab tile 1.png-020a0d4828dfac77f31b076dc24de987.stex"
+path="res://.import/wall lab tile 1.png-404dda784b58863d614e8674a0d06c82.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/wall lab tile 1.png"
-dest_files=[ "res://.import/wall lab tile 1.png-020a0d4828dfac77f31b076dc24de987.stex" ]
+source_file="res://assets/tiles/wall lab tile 1.png"
+dest_files=[ "res://.import/wall lab tile 1.png-404dda784b58863d614e8674a0d06c82.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

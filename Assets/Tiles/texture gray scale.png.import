@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/texture gray scale.png-c0937ee75ec7e10f2f9721cd53afe267.stex"
+path="res://.import/texture gray scale.png-31875aca137aacf08f475f78e2f8ea6b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/texture gray scale.png"
-dest_files=[ "res://.import/texture gray scale.png-c0937ee75ec7e10f2f9721cd53afe267.stex" ]
+source_file="res://assets/tiles/texture gray scale.png"
+dest_files=[ "res://.import/texture gray scale.png-31875aca137aacf08f475f78e2f8ea6b.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

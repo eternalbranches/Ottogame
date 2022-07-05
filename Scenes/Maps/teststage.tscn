@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://teststage.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Abilities/Smoketrail.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Effects/trail.png" type="Texture" id=3]
+[ext_resource path="res://scenes/abilities/smoketrail.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/effects/trail.png" type="Texture" id=3]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.00555556, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 0.994444, 0.136364 ), 0.0, 0.0, 0, 0 ]

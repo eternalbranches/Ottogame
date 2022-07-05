@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Assets/Effects/glowing_circle.png" type="Texture" id=2]
+[ext_resource path="res://assets/effects/glowing_circle.png" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "# Casts a laser along a raycast, emitting particles on the impact point.

@@ -55,10 +55,10 @@ func _physics_process(delta):
 		"alert":
 			
 			if current_direction == "E" and can_walk_E == true:
-				velocity.x = speed /2
+				velocity.x = speed /2.0
 				#print("E")
 			elif current_direction == "W" and can_walk_W == true:
-				velocity.x = -speed/2
+				velocity.x = -speed/2.0
 				#print("")
 			else:
 				velocity.x = 0

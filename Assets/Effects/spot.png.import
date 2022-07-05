@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spot.png-f28f0b260731581f5cd6f728ebb1087a.stex"
+path="res://.import/spot.png-e235032d4389314528fd4c4141881715.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Effects/spot.png"
-dest_files=[ "res://.import/spot.png-f28f0b260731581f5cd6f728ebb1087a.stex" ]
+source_file="res://assets/effects/spot.png"
+dest_files=[ "res://.import/spot.png-e235032d4389314528fd4c4141881715.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

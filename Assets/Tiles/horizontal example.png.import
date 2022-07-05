@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/horizontal example.png-40a840f11a06f1ff25c319b6a9ba7a7a.stex"
+path="res://.import/horizontal example.png-34f0d9b59fdc165549f40df558303b70.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/horizontal example.png"
-dest_files=[ "res://.import/horizontal example.png-40a840f11a06f1ff25c319b6a9ba7a7a.stex" ]
+source_file="res://assets/tiles/horizontal example.png"
+dest_files=[ "res://.import/horizontal example.png-34f0d9b59fdc165549f40df558303b70.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

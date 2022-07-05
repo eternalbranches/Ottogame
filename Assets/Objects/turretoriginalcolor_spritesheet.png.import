@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/turretoriginalcolor_spritesheet.png-f90f5498e94b55ec45e70fd705d0d3aa.stex"
+path="res://.import/turretoriginalcolor_spritesheet.png-0912cb853449424c827140221e411b0d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/turretoriginalcolor_spritesheet.png"
-dest_files=[ "res://.import/turretoriginalcolor_spritesheet.png-f90f5498e94b55ec45e70fd705d0d3aa.stex" ]
+source_file="res://assets/objects/turretoriginalcolor_spritesheet.png"
+dest_files=[ "res://.import/turretoriginalcolor_spritesheet.png-0912cb853449424c827140221e411b0d.stex" ]
 
 [params]
 

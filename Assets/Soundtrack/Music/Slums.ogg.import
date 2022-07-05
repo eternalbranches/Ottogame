@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Slums.ogg-f71219e908121389cd3ffe6f6a44ec27.oggstr"
+path="res://.import/slums.ogg-f43dc93e508c79dfc852e34bca6eba61.oggstr"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/Music/Slums.ogg"
-dest_files=[ "res://.import/Slums.ogg-f71219e908121389cd3ffe6f6a44ec27.oggstr" ]
+source_file="res://assets/soundtrack/music/slums.ogg"
+dest_files=[ "res://.import/slums.ogg-f43dc93e508c79dfc852e34bca6eba61.oggstr" ]
 
 [params]
 

@@ -90,7 +90,7 @@ func _on_Range_body_exited(_body):
 func _on_ShootCD_timeout():
 	can_shoot = true
 	
-func on_hit(damage, _origin, _enemyposx):
+func on_hit(damage, _origin, _enemypos, _direction_hit):
 	if state != "death":
 		current_hp -= damage
 	if current_hp <= 0:
@@ -128,5 +128,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func _on_Deactivate_timeout():
 	can_activate = true
 
-func player_enters_range(in_range):
-	player_in_range ==true
+func player_enters_range(_body):
+	player_in_range = true

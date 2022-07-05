@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scripts/Objects/Turret.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Soundtrack/SFX/Turret/Turret_Activate.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Objects/turrettower.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Effects/background.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Effects/spotlight_7.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Effects/glowing_circle.png" type="Texture" id=7]
+[ext_resource path="res://scripts/objects/turret.gd" type="Script" id=1]
+[ext_resource path="res://assets/objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/soundtrack/sfx/Turret/Turret_Activate.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/objects/turrettower.png" type="Texture" id=4]
+[ext_resource path="res://assets/effects/background.png" type="Texture" id=5]
+[ext_resource path="res://assets/effects/spotlight_7.png" type="Texture" id=6]
+[ext_resource path="res://assets/effects/glowing_circle.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.875, 8.34518 )

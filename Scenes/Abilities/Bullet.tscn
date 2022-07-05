@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Abilities/Bullet.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Abilities/Smoketrail.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Effects/light.png" type="Texture" id=4]
+[ext_resource path="res://scripts/abilities/bullet.gd" type="Script" id=2]
+[ext_resource path="res://scenes/abilities/smoketrail.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/effects/light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.44319

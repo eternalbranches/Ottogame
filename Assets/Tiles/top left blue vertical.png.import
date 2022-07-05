@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/top left blue vertical.png-bd95f594252d27c3f4226bc93308a9fb.stex"
+path="res://.import/top left blue vertical.png-3c71296c615d5cc41365d52b2a55dd92.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/top left blue vertical.png"
-dest_files=[ "res://.import/top left blue vertical.png-bd95f594252d27c3f4226bc93308a9fb.stex" ]
+source_file="res://assets/tiles/top left blue vertical.png"
+dest_files=[ "res://.import/top left blue vertical.png-3c71296c615d5cc41365d52b2a55dd92.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

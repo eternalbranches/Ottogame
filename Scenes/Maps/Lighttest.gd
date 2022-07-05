@@ -19,19 +19,19 @@ func _process(_delta):
 		$GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton.grab_focus()
 		get_tree().paused = true
 		
-func assign_checkpoints():
+func assign_checkpoints() -> void:
 	while checkpoint_count !=  $Checkpoints.get_child_count():
 		$Checkpoints.get_child(checkpoint_count).checkpoint_number = checkpoint_count
 		checkpoints[$Checkpoints.get_child(checkpoint_count)] = $Checkpoints.get_child(checkpoint_count).get_global_position()
 		checkpoint_count += 1
 		
-func checkpoint_load():
+func checkpoint_load() -> void:
 	var keys = checkpoints.keys()
 	var key  = keys[CharacterSave.save_dict["current_checkpoint"]]
 	$YSort/Player/Player.global_position = checkpoints[key]
 	
 	
-func music_change(track):
+func music_change(track) -> void:
 	var music = load(track)
 	$MusicPlayer.set_stream(music)
 	$MusicPlayer.play()
@@ -42,7 +42,7 @@ func music_change(track):
 	$Soundtrigger.queue_free()
 
 
-func _on_Player_death():
+func _on_Player_death() -> void:
 	CharacterSave.first_spawn = false
 	yield(get_tree().create_timer(1), "timeout")
 	$CanvasModulate.color = Color(0,0,0)
@@ -59,14 +59,14 @@ func _on_Player_death():
 	
 
 
-func _on_Cameratrigger_body_entered(_body):
+func _on_Cameratrigger_body_entered(_body) -> void:
 	$Camera2D.current = true
 
 
-func _on_Cameratrigger_body_exited(_body):
+func _on_Cameratrigger_body_exited(_body) -> void:
 	$YSort/Player/Player/Camera2D.current = true
 	
-func respawn_animation():
+func respawn_animation() -> void:
 	var keys = checkpoints.keys()
 	var key  = keys[CharacterSave.save_dict["current_checkpoint"]]
 	$YSort/Player/Mothgirl.global_position = checkpoints[key] - Vector2 (40, 15)
@@ -82,20 +82,20 @@ func _on_MainMenuButton_pressed():
 	$GUI/Pausemenu/Popup.visible = true
 	$GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton.grab_focus()
 	
-func _on_YesButton_pressed():
+func _on_YesButton_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
 
-func _on_NoButton_pressed():
+func _on_NoButton_pressed() -> void:
 	$GUI/Pausemenu/Popup.visible = false
 	$GUI/Pausemenu.grab_focus()
 	
-func _on_BackButton_pressed():
+func _on_BackButton_pressed() -> void:
 	$GUI/Pausemenu.visible = false
 	$GUI/Pausemenu/Popup.visible = false
 	get_tree().paused = false
 
-func _on_OptionsButton_pressed():
+func _on_OptionsButton_pressed() -> void:
 	$GUI/Options.visible = true
 	$GUI/Pausemenu.hide()
 	$GUI/Options/TabContainer/SoundOptions/NinePatchRect/VBoxContainer/GameVolumeSlider.grab_focus()

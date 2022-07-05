@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://Scripts/Abstract/StateMachine.gd"
+"path": "res://scripts/abstract/statemachine.gd"
 } ]
 _global_script_class_icons={
 "StateMachine": ""
@@ -21,13 +21,14 @@ _global_script_class_icons={
 [application]
 
 config/name="unnamed game"
-run/main_scene="res://Scenes/Interface/Mainscreen.tscn"
+run/main_scene="res://scenes/interface/mainscreen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Scripts/Globals/Global.gd"
-CharacterSave="*res://Scripts/Globals/CharacterSave.gd"
+Global="*res://scripts/globals/global.gd"
+CharacterSave="*res://scripts/globals/charactersave.gd"
+GameEvents="*res://scripts/globals/game_events.gd"
 
 [display]
 
@@ -194,12 +195,13 @@ Shield={
 2d_render/layer_4="Projectiles"
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemy"
+2d_physics/layer_3="Mutants"
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_5="Hurtbox"
 2d_physics/layer_6="Hitbox"
 2d_physics/layer_7="Pickups"
 2d_physics/layer_8="TwoWayPlatform"
+2d_physics/layer_9="Guards"
 
 [physics]
 

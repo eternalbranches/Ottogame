@@ -1,0 +1,268 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/ui_script/gui.gd" type="Script" id=1]
+[ext_resource path="res://scripts/ui_script/monitorperformance.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/fonts/color_basic.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/effects/background.png" type="Texture" id=4]
+[ext_resource path="res://scenes/interface/options.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/gui/healthbar/redbar.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/gui/healthbar/bluebar.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/gui/healthbar/outline_500.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/gui/healthbar/ottoportraits_500.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ui_script/hpbar.gd" type="Script" id=10]
+[ext_resource path="res://scripts/ui_script/energybar.gd" type="Script" id=11]
+[ext_resource path="res://scripts/ui_script/hplabel.gd" type="Script" id=12]
+[ext_resource path="res://scripts/ui_script/avatar.gd" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Label"]
+margin_left = 7.34173
+margin_top = -38.6929
+margin_right = 47.3417
+margin_bottom = -24.6929
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonitorPerformance" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = -40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MonitorPerformance"]
+margin_right = 1024.0
+margin_bottom = 550.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MonitorPerformance/HBoxContainer"]
+margin_right = 26.0
+margin_bottom = 550.0
+alignment = 2
+
+[node name="Stat1" type="Label" parent="MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 518.0
+margin_right = 26.0
+margin_bottom = 532.0
+text = "FPS"
+
+[node name="Stat2" type="Label" parent="MonitorPerformance/HBoxContainer/VBoxContainer"]
+margin_top = 536.0
+margin_right = 26.0
+margin_bottom = 550.0
+text = "CPU"
+
+[node name="Pausemenu" type="NinePatchRect" parent="."]
+pause_mode = 2
+visible = false
+margin_left = 384.238
+margin_top = 196.539
+margin_right = 633.238
+margin_bottom = 424.539
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pausemenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -43.5
+margin_right = 43.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pausemenu/HBoxContainer"]
+margin_right = 83.0
+margin_bottom = 228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_right = 83.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+bbcode_enabled = true
+bbcode_text = "[center]Pause Menu[center]"
+text = "Pause Menu"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 83.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="MainMenuButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 83.0
+margin_bottom = 68.0
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer2" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 83.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 40, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 116.0
+margin_right = 83.0
+margin_bottom = 136.0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer3" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 140.0
+margin_right = 83.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 40, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 184.0
+margin_right = 83.0
+margin_bottom = 204.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="NinePatchRect" parent="Pausemenu"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 100 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pausemenu/Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pausemenu/Popup/VBoxContainer"]
+margin_right = 249.0
+margin_bottom = 31.0
+text = "Do you really want to go back?
+Unsaved Progress will be lost."
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pausemenu/Popup/VBoxContainer"]
+margin_top = 35.0
+margin_right = 249.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="YesButton" type="Button" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "Yes"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 88.0
+margin_right = 153.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 65, 0 )
+
+[node name="NoButton" type="Button" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 157.0
+margin_right = 197.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "No"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+margin_left = 201.0
+margin_right = 241.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="Options" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="HPBar" type="TextureRect" parent="."]
+texture = ExtResource( 8 )
+
+[node name="HP" type="TextureProgress" parent="HPBar"]
+margin_left = 100.0
+margin_top = 20.0
+margin_right = 295.0
+margin_bottom = 60.0
+value = 100.0
+texture_progress = ExtResource( 6 )
+script = ExtResource( 10 )
+
+[node name="Energy" type="TextureProgress" parent="HPBar"]
+margin_left = 100.0
+margin_top = 54.807
+margin_right = 295.0
+margin_bottom = 94.807
+value = 100.0
+texture_progress = ExtResource( 7 )
+script = ExtResource( 11 )
+
+[node name="Avatar" type="Sprite" parent="HPBar"]
+position = Vector2( 37.5, 58.065 )
+texture = ExtResource( 9 )
+hframes = 5
+script = ExtResource( 13 )
+
+[node name="Label" type="Label" parent="HPBar"]
+margin_left = 5.98247
+margin_top = -3.88623
+margin_right = 70.9825
+margin_bottom = 25.1138
+custom_fonts/font = SubResource( 1 )
+text = "100"
+align = 1
+valign = 1
+script = ExtResource( 12 )

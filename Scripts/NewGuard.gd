@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+onready var animation_tree = get_node("AnimationTree")
+onready var animation_mode = animation_tree.get("parameters/playback")
+
 var state := "idle"
 var max_hp := 2
 var current_hp := 2
@@ -8,10 +11,8 @@ var spawn_guardposition := 5.0
 var velocity := Vector2.ZERO
 var new_random_xpos := 0.0
 var dead := false
-
-var in_sight := {"Guards": [], "Mutants": [], "Projectiles": []}
+var in_sight := {"Mutants": [], "Projectiles": []}
 var in_memory := {"Guards": [], "Mutants": [], "Projectiles": []}
-
 var morale := 100
 var threat := 0
 var alert := false
@@ -19,24 +20,25 @@ var combat := false
 var target
 var investigate_pos: Vector2
 var player_in_range := false
+var last_seen := Vector2.ZERO
+var knockback := false
+var can_shoot := true
+var reset_started := false
+var can_walk_E := false
+var can_walk_W := false
 
 export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
 export (int) var speed := 200
 export (int) var touch_damage := 1
 #var initialized := false
-var knockback := false
-var can_shoot := true
-var reset_started := false
-var can_walk_E := false
-var can_walk_W := false
+
 #onready var player = get_node("../../Player/Player")
-var last_seen := Vector2.ZERO
+
 
 var rng = RandomNumberGenerator.new()
 
-onready var animation_tree = get_node("AnimationTree")
-onready var animation_mode = animation_tree.get("parameters/playback")
+
 
 func _ready():
 	spawn_guardposition = get_global_position().x
@@ -59,15 +61,15 @@ func _physics_process(delta):
 		"alert":
 			
 			if current_direction == "E" and can_walk_E == true:
-				velocity.x = speed /2
+				velocity.x = speed / 2.0
 				#print("E")
 				animation_mode.travel("Walk_"+ current_direction)
 			elif current_direction == "W" and can_walk_W == true:
-				velocity.x = -speed/2
+				velocity.x = -speed/2.0
 				animation_mode.travel("Walk_"+ current_direction)
 				#print("")
 			else:
-				velocity.x = 0
+				velocity.x = 0.0
 				animation_mode.travel("Idle_"+ current_direction)
 			
 			velocity.x = lerp(velocity.x, 0, friction)
@@ -204,7 +206,7 @@ func on_death() -> void:
 	change_state("death")
 	dead = true
 	animation_mode.travel("Death_" + current_direction)
-	set_collision_layer_bit(2, 0)
+	set_collision_layer_bit(8, 0)
 	set_collision_mask_bit(1,0)
 	$RemoveTimer.start()
 	for child in $Eyesight.get_children():
@@ -257,7 +259,7 @@ func _on_ShootAnim_timeout() -> void:
 func create_bullet() -> void:
 	randomize()
 	var random_vector = Vector2(rand_range(-50.0 , 50.0), rand_range(-50.0 , 50.0))
-	var skill = load("res://Scenes/Abilities/BulletLaser.tscn")
+	var skill = load("res://scenes/abilities/bulletlaser.tscn")
 	var skill_instance = skill.instance()
 	skill_instance.rotation = get_angle_to(target.get_global_position() + random_vector)
 	skill_instance.position = $Bulletpoint.get_global_position()                  #get_node("TurnAxis/CastPoint").get_global_position()
@@ -289,10 +291,6 @@ func _on_SightTimer_timeout() -> void:
 				if alert == false:
 					alert = true
 				print("spotted projectile")
-			elif child.get_collider().is_in_group("Guard") and in_sight["Guards"].has(child.get_collider()) == false:
-				in_sight["Guards"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Guards")
-		#child.enabled = false
 		
 		
 func add_memory(new_memory, category):

@@ -18,6 +18,7 @@ var SFX_Impact
 func _ready():
 	if origin == "Player":
 		$Area2D.set_collision_mask_bit(2, true)
+		$Area2D.set_collision_mask_bit(8, true)
 	elif origin == "Enemy":
 		$Area2D.set_collision_mask_bit(1, true)
 	SelfDestruct()
@@ -37,6 +38,7 @@ func SelfDestruct():
 	$DestructTimer.start()
 
 func _on_Area2D_body_entered(body):
+	print(body)
 	if body.is_in_group("Enemy"):
 		var direction_hit = "W"
 		if get_global_position().x > body.get_global_position().x:
@@ -50,7 +52,6 @@ func _on_Area2D_body_entered(body):
 	get_node("AudioStreamPlayer2D").stream = SFX_Impact
 	$AudioStreamPlayer2D.play()
 	get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
-	remove_from_group("Projectiles")
 	self.hide()
 	$Light2D.enabled = false
 	dead = true

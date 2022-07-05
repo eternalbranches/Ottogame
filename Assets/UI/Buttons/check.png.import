@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/check.png-56d810c6c0e6f1a821a50b5b18b0d11f.stex"
+path="res://.import/check.png-b2aab75d3d4f0aaef5cc496690d46e2c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Buttons/check.png"
-dest_files=[ "res://.import/check.png-56d810c6c0e6f1a821a50b5b18b0d11f.stex" ]
+source_file="res://assets/ui/buttons/check.png"
+dest_files=[ "res://.import/check.png-b2aab75d3d4f0aaef5cc496690d46e2c.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

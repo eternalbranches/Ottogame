@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/Abilities/Unlock/Doublejump_Unlock.gd" type="Script" id=1]
+[ext_resource path="res://scripts/abilities/unlock/Doublejump_Unlock.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Soundtrack/SFX/ability item sound effect.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/soundtrack/sfx/ability item sound effect.mp3" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 

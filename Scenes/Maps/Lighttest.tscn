@@ -1,60 +1,57 @@
-[gd_scene load_steps=234 format=2]
+[gd_scene load_steps=231 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Effects/spot.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Effects/light.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Effects/background.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Characters/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Tiles/dark tile 1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Tiles/texture gray scale.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Tiles/old wall texture tile.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Tiles/wall tile.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Tiles/dark tile 2.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Tiles/wall lab tile 1.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Objects/Lamp.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Tiles/wall tile 5 (64x64).png" type="Texture" id=13]
-[ext_resource path="res://Assets/Tiles/wall tile 1 (64x64).png" type="Texture" id=14]
-[ext_resource path="res://Assets/Tiles/wall tile 3 (64x64).png" type="Texture" id=15]
-[ext_resource path="res://Assets/Tiles/wall tile 4 (64x64).png" type="Texture" id=16]
-[ext_resource path="res://Scenes/Objects/Ladder.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Soundtrack/Music/The Escape Room Full Version.wav" type="AudioStream" id=18]
-[ext_resource path="res://Assets/Soundtrack/Ambience/Atmosphere Loop 10.wav" type="AudioStream" id=19]
-[ext_resource path="res://Assets/Tiles/tileset 1.2.png" type="Texture" id=20]
-[ext_resource path="res://Scenes/Objects/Spikes.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Assets/Tiles/tileset1.4.png" type="Texture" id=22]
-[ext_resource path="res://Scripts/UI Script/MonitorPerformance.gd" type="Script" id=23]
-[ext_resource path="res://Scenes/Enemies/Turret.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Scenes/Enemies/Guard.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Scenes/Maps/Lighttest.gd" type="Script" id=26]
-[ext_resource path="res://Scenes/Objects/Checkpoint.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Walljump_Unlock.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Timeslow_Unlock.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Crawling_Unlock.tscn" type="PackedScene" id=30]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Running_Unlock.tscn" type="PackedScene" id=31]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Gun_Unlock.tscn" type="PackedScene" id=32]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Doublejump_Unlock.tscn" type="PackedScene" id=33]
-[ext_resource path="res://Scenes/World/Soundtrigger.tscn" type="PackedScene" id=34]
-[ext_resource path="res://Scenes/Objects/Door.tscn" type="PackedScene" id=35]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Orange_Keycard.tscn" type="PackedScene" id=36]
-[ext_resource path="res://Assets/Effects/floaty_64.png" type="Texture" id=37]
-[ext_resource path="res://Scenes/Characters/Player/Mothgirl.tscn" type="PackedScene" id=38]
-[ext_resource path="res://Scenes/Objects/PushableBlock.tscn" type="PackedScene" id=39]
-[ext_resource path="res://Scenes/Objects/BreakableTile.tscn" type="PackedScene" id=40]
-[ext_resource path="res://Scenes/Objects/OneWayPlatform.tscn" type="PackedScene" id=41]
-[ext_resource path="res://Assets/Tiles/tileset1.3.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Objects/super computer.png" type="Texture" id=43]
-[ext_resource path="res://Scenes/Objects/FallingPlatform.tscn" type="PackedScene" id=44]
-[ext_resource path="res://Scenes/Interface/Options.tscn" type="PackedScene" id=45]
-[ext_resource path="res://Assets/UI/GUI/healthbar empty.png" type="Texture" id=46]
-[ext_resource path="res://Scripts/UI Script/GUI.gd" type="Script" id=47]
-[ext_resource path="res://Scenes/Objects/LaserDrill.tscn" type="PackedScene" id=48]
-[ext_resource path="res://Scenes/Abilities/Unlocks/Shield_Unlock.tscn" type="PackedScene" id=49]
-[ext_resource path="res://Assets/Objects/super computer variant 2.png" type="Texture" id=50]
-[ext_resource path="res://Scenes/Objects/HealthSyringe.tscn" type="PackedScene" id=51]
-[ext_resource path="res://Assets/Tiles/autotiling.png" type="Texture" id=52]
-[ext_resource path="res://Scenes/Enemies/NewGuard.tscn" type="PackedScene" id=53]
-[ext_resource path="res://Assets/Tiles/autotiling_n.png" type="Texture" id=54]
-[ext_resource path="res://Scenes/Enemies/MutantDog.tscn" type="PackedScene" id=55]
+[ext_resource path="res://assets/effects/spot.png" type="Texture" id=2]
+[ext_resource path="res://assets/effects/light.png" type="Texture" id=3]
+[ext_resource path="res://assets/effects/background.png" type="Texture" id=4]
+[ext_resource path="res://scenes/characters/player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/tiles/dark tile 1.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/texture gray scale.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/old wall texture tile.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/wall tile.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/dark tile 2.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/wall lab tile 1.png" type="Texture" id=11]
+[ext_resource path="res://scenes/objects/lamp.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/tiles/wall tile 5 (64x64).png" type="Texture" id=13]
+[ext_resource path="res://assets/tiles/wall tile 1 (64x64).png" type="Texture" id=14]
+[ext_resource path="res://assets/tiles/wall tile 3 (64x64).png" type="Texture" id=15]
+[ext_resource path="res://assets/tiles/wall tile 4 (64x64).png" type="Texture" id=16]
+[ext_resource path="res://scenes/objects/ladder.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/soundtrack/music/The Escape Room Full Version.wav" type="AudioStream" id=18]
+[ext_resource path="res://assets/soundtrack/ambience/atmosphere_loop_10.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/tiles/tileset 1.2.png" type="Texture" id=20]
+[ext_resource path="res://scenes/objects/electricgrid.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/tiles/tileset1.4.png" type="Texture" id=22]
+[ext_resource path="res://scenes/interface/gui.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/enemies/turret.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/enemies/guard.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/maps/lighttest.gd" type="Script" id=26]
+[ext_resource path="res://scenes/objects/checkpoint.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/abilities/unlocks/walljump_unlock.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scenes/abilities/unlocks/timeslow_unlock.tscn" type="PackedScene" id=29]
+[ext_resource path="res://scenes/abilities/unlocks/crawling_unlock.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/abilities/unlocks/running_unlock.tscn" type="PackedScene" id=31]
+[ext_resource path="res://scenes/abilities/unlocks/gun_unlock.tscn" type="PackedScene" id=32]
+[ext_resource path="res://scenes/abilities/unlocks/doublejump_unlock.tscn" type="PackedScene" id=33]
+[ext_resource path="res://scenes/world/soundtrigger.tscn" type="PackedScene" id=34]
+[ext_resource path="res://scenes/objects/door.tscn" type="PackedScene" id=35]
+[ext_resource path="res://scenes/abilities/unlocks/orange_keycard.tscn" type="PackedScene" id=36]
+[ext_resource path="res://assets/effects/floaty_64.png" type="Texture" id=37]
+[ext_resource path="res://scenes/characters/player/mothgirl.tscn" type="PackedScene" id=38]
+[ext_resource path="res://scenes/objects/pushableblock.tscn" type="PackedScene" id=39]
+[ext_resource path="res://scenes/objects/breakabletile.tscn" type="PackedScene" id=40]
+[ext_resource path="res://scenes/objects/onewayplatform.tscn" type="PackedScene" id=41]
+[ext_resource path="res://assets/tiles/tileset1.3.png" type="Texture" id=42]
+[ext_resource path="res://assets/objects/super computer.png" type="Texture" id=43]
+[ext_resource path="res://scenes/objects/fallingplatform.tscn" type="PackedScene" id=44]
+[ext_resource path="res://scenes/objects/laserdrill.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scenes/abilities/unlocks/Shield_Unlock.tscn" type="PackedScene" id=49]
+[ext_resource path="res://assets/objects/super_computer_variant_2.png" type="Texture" id=50]
+[ext_resource path="res://scenes/objects/healthsyringe.tscn" type="PackedScene" id=51]
+[ext_resource path="res://assets/tiles/autotiling.png" type="Texture" id=52]
+[ext_resource path="res://scenes/enemies/newguard.tscn" type="PackedScene" id=53]
+[ext_resource path="res://assets/tiles/autotiling_n.png" type="Texture" id=54]
+[ext_resource path="res://scenes/enemies/mutantdog.tscn" type="PackedScene" id=55]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -2042,7 +2039,7 @@ scale = Vector2( 100.708, 72.448 )
 texture = ExtResource( 4 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.345098, 0.27451, 0.27451, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -2424,227 +2421,19 @@ autoplay = true
 bus = "Ambience"
 
 [node name="Spikes" parent="." instance=ExtResource( 21 )]
-position = Vector2( 753.091, 327.828 )
+position = Vector2( 736, 304 )
+
+[node name="Spikes3" parent="." instance=ExtResource( 21 )]
+position = Vector2( 768, 304 )
 
 [node name="Spikes2" parent="." instance=ExtResource( 21 )]
-position = Vector2( 818.091, 64.828 )
+position = Vector2( 704, 304 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 2497.43, -711.922 )
 texture = ExtResource( 22 )
 
-[node name="GUI" type="CanvasLayer" parent="."]
-script = ExtResource( 47 )
-
-[node name="Label" type="Label" parent="GUI"]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="GUI/Label"]
-margin_left = 7.34173
-margin_top = -38.6929
-margin_right = 47.3417
-margin_bottom = -24.6929
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MonitorPerformance" type="MarginContainer" parent="GUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 10.0
-margin_bottom = -40.0
-script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MonitorPerformance"]
-margin_right = 1024.0
-margin_bottom = 550.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MonitorPerformance/HBoxContainer"]
-margin_right = 26.0
-margin_bottom = 550.0
-alignment = 2
-
-[node name="Stat1" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
-margin_top = 518.0
-margin_right = 26.0
-margin_bottom = 532.0
-text = "FPS"
-
-[node name="Stat2" type="Label" parent="GUI/MonitorPerformance/HBoxContainer/VBoxContainer"]
-margin_top = 536.0
-margin_right = 26.0
-margin_bottom = 550.0
-text = "CPU"
-
-[node name="Pausemenu" type="NinePatchRect" parent="GUI"]
-pause_mode = 2
-visible = false
-margin_left = 384.238
-margin_top = 196.539
-margin_right = 633.238
-margin_bottom = 424.539
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Pausemenu"]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -43.5
-margin_right = 43.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Pausemenu/HBoxContainer"]
-margin_right = 83.0
-margin_bottom = 228.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_right = 83.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 30 )
-bbcode_enabled = true
-bbcode_text = "[center]Pause Menu[center]"
-text = "Pause Menu"
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 83.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 0, 10 )
-
-[node name="MainMenuButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 48.0
-margin_right = 83.0
-margin_bottom = 68.0
-text = "Main Menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer2" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 72.0
-margin_right = 83.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 40, 40 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OptionsButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 116.0
-margin_right = 83.0
-margin_bottom = 136.0
-text = "Options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer3" type="MarginContainer" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 140.0
-margin_right = 83.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 40, 40 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackButton" type="Button" parent="GUI/Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 184.0
-margin_right = 83.0
-margin_bottom = 204.0
-text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Popup" type="NinePatchRect" parent="GUI/Pausemenu"]
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 100 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Pausemenu/Popup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/Pausemenu/Popup/VBoxContainer"]
-margin_right = 249.0
-margin_bottom = 31.0
-text = "Do you really want to go back?
-Unsaved Progress will be lost."
-align = 1
-valign = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Pausemenu/Popup/VBoxContainer"]
-margin_top = 35.0
-margin_right = 249.0
-margin_bottom = 75.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 0 )
-
-[node name="YesButton" type="Button" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 44.0
-margin_right = 84.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-text = "Yes"
-
-[node name="MarginContainer2" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 88.0
-margin_right = 153.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 65, 0 )
-
-[node name="NoButton" type="Button" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 157.0
-margin_right = 197.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 40 )
-text = "No"
-
-[node name="MarginContainer3" type="MarginContainer" parent="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer"]
-margin_left = 201.0
-margin_right = 241.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 40, 0 )
-
-[node name="Options" parent="GUI" instance=ExtResource( 45 )]
-visible = false
-
-[node name="HPBar" type="Sprite" parent="GUI"]
-position = Vector2( 59.9799, 19.9699 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 46 )
+[node name="GUI" parent="." instance=ExtResource( 23 )]
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -2860,12 +2649,6 @@ anims/FadeIn = SubResource( 127 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 128 )
 
-[connection signal="pressed" from="GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="GUI/Pausemenu/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="GUI/Pausemenu/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_YesButton_pressed"]
-[connection signal="pressed" from="GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_NoButton_pressed"]
-[connection signal="HPchange" from="YSort/Player/Player" to="GUI" method="_on_Player_HPchange"]
 [connection signal="death" from="YSort/Player/Player" to="." method="_on_Player_death"]
 [connection signal="body_entered" from="Cameratrigger" to="." method="_on_Cameratrigger_body_entered"]
 [connection signal="body_exited" from="Cameratrigger" to="." method="_on_Cameratrigger_body_exited"]

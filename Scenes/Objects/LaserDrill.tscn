@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/Objects/LaserDrill.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Objects/image-300684.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Abilities/Laser.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/objects/laserdrill.gd" type="Script" id=1]
+[ext_resource path="res://assets/objects/image_300684.png" type="Texture" id=2]
+[ext_resource path="res://scenes/abilities/laser.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )

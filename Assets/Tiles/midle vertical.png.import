@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/midle vertical.png-dd5192631c9183e56403ac6e0313c633.stex"
+path="res://.import/midle vertical.png-050bdbd7ec3f2b42de3bf6eccf888f62.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/midle vertical.png"
-dest_files=[ "res://.import/midle vertical.png-dd5192631c9183e56403ac6e0313c633.stex" ]
+source_file="res://assets/tiles/midle vertical.png"
+dest_files=[ "res://.import/midle vertical.png-050bdbd7ec3f2b42de3bf6eccf888f62.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

@@ -57,7 +57,6 @@ var possible_targets = []
 var current_target = null
 
 signal death
-signal HPchange
 
 
 func _ready():
@@ -650,7 +649,7 @@ func shooting():
 				current_target = null
 	if CharacterSave.save_dict["gun"] == true and can_shoot == true:
 		if Input.is_action_just_pressed("Shoot"):
-			var skill = load("res://Scenes/Abilities/Bullet.tscn")
+			var skill = load("res://scenes/abilities/bullet.tscn")
 			var skill_instance = skill.instance()
 			if CharacterSave.controller == false:
 				skill_instance.rotation = get_angle_to(get_global_mouse_position())
@@ -731,7 +730,7 @@ func _on_Dashtimer_timeout():
 func on_hit(damage, origin, enemy_posx):
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
-		emit_signal("HPchange", current_hp)
+		GameEvents.emit_signal_hp_change(current_hp, max_hp)
 	if position.x < enemy_posx:
 		velocity.x = -200
 	else:
@@ -750,7 +749,7 @@ func on_heal(healamount):
 		current_hp += healamount
 		if current_hp > max_hp:
 			current_hp = max_hp
-		emit_signal("HPchange",current_hp)
+		GameEvents.emit_signal_hp_change(current_hp, max_hp)
 		$HealParticle.emitting = true
 		
 func on_death():

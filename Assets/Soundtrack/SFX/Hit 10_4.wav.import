@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Hit 10_4.wav-b4183c6c3ec9ce90f5cc6a69d4d6dccc.sample"
+path="res://.import/Hit 10_4.wav-35ffa979e4293d46b195a28ea8d5fb3d.sample"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/SFX/Hit 10_4.wav"
-dest_files=[ "res://.import/Hit 10_4.wav-b4183c6c3ec9ce90f5cc6a69d4d6dccc.sample" ]
+source_file="res://assets/soundtrack/sfx/Hit 10_4.wav"
+dest_files=[ "res://.import/Hit 10_4.wav-35ffa979e4293d46b195a28ea8d5fb3d.sample" ]
 
 [params]
 

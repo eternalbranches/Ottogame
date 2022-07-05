@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/middle center blue.png-ab0aaf32468ad3e5c6dabd30928c1add.stex"
+path="res://.import/middle center blue.png-d6b9978cb16a1af8f8b3c7c7cc017edf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/middle center blue.png"
-dest_files=[ "res://.import/middle center blue.png-ab0aaf32468ad3e5c6dabd30928c1add.stex" ]
+source_file="res://assets/tiles/middle center blue.png"
+dest_files=[ "res://.import/middle center blue.png-d6b9978cb16a1af8f8b3c7c7cc017edf.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
