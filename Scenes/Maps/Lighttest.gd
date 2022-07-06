@@ -46,6 +46,7 @@ func _on_Player_death() -> void:
 	CharacterSave.first_spawn = false
 	yield(get_tree().create_timer(1), "timeout")
 	$CanvasModulate.color = Color(0,0,0)
+	get_tree().set_current_scene(self)
 	#var savefile = File.new()
 	#savefile.open("user://save_file"+ CharacterSave.save_dict["character_name"]+".dat", File.READ)
 	#CharacterSave.save_dict = savefile.get_var()

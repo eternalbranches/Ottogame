@@ -29,6 +29,7 @@ config/icon="res://icon.png"
 Global="*res://scripts/globals/global.gd"
 CharacterSave="*res://scripts/globals/charactersave.gd"
 GameEvents="*res://scripts/globals/game_events.gd"
+Scenechanger="*res://scripts/globals/scenechanger.gd"
 
 [display]
 

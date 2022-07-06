@@ -1,11 +1,11 @@
 extends Control
-var progress_dict1 := {"ironman" : false, "current_checkpoint" : 0, 
+var progress_dict1 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
 					"keycards" : []}
-var progress_dict2 := {"ironman" : false, "current_checkpoint" : 0, 
+var progress_dict2 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
 					"keycards" : []}
-var progress_dict3 := {"ironman" : false, "current_checkpoint" : 0, 
+var progress_dict3 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
 					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
 					"keycards" : []}
 
@@ -170,4 +170,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"FadeIn":
 			$AnimationPlayer.play("Background_Animation")
 		"FadeOut":
-			get_tree().change_scene("res://scenes/maps/lighttest.tscn")
+			get_tree().change_scene("res://scenes/interface/scenetransition.tscn")
+			#Scenechanger.goto_scene("res://scenes/maps/lighttest.tscn", self)
+			

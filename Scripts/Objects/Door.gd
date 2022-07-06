@@ -3,8 +3,6 @@ extends StaticBody2D
 export var key = "orange_keycard"
 export var closed := false
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if closed == true:
 		set_collision_layer_bit(0,1)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/ui/fonts/largefont.tres" type="DynamicFont" id=1]
+
+[node name="ProgressBar" type="ProgressBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -248.0
+margin_top = -57.0
+margin_right = 247.0
+margin_bottom = 58.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = -10.1022
+margin_top = -144.798
+margin_right = 508.898
+margin_bottom = -27.7976
+custom_fonts/font = ExtResource( 1 )
+text = "Loading Screen"
+align = 1
+valign = 1

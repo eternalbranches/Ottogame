@@ -86,7 +86,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "FadeOut"
-length = 2.0
+length = 1.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasModulate:color")
 tracks/0/interp = 1
@@ -125,7 +125,7 @@ script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 575.543, 300 )
+position = Vector2( 600, 300 )
 scale = Vector2( 0.675, 0.57037 )
 texture = ExtResource( 5 )
 
@@ -137,9 +137,6 @@ anims/FadeOut = SubResource( 5 )
 [node name="N" type="NinePatchRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Popup" type="Popup" parent="N"]
 visible = true
@@ -150,9 +147,6 @@ margin_top = 208.0
 margin_right = -280.0
 margin_bottom = 456.0
 rect_scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="N/Popup"]
 margin_left = 92.0
