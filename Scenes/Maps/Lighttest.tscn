@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=2]
+[gd_scene load_steps=236 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=2]
@@ -45,6 +45,8 @@
 [ext_resource path="res://assets/objects/super computer.png" type="Texture" id=43]
 [ext_resource path="res://scenes/objects/fallingplatform.tscn" type="PackedScene" id=44]
 [ext_resource path="res://scenes/objects/sliding_door.tscn" type="PackedScene" id=45]
+[ext_resource path="res://scenes/abstract/loudnoise.tscn" type="PackedScene" id=46]
+[ext_resource path="res://scenes/abstract/smallnoise.tscn" type="PackedScene" id=47]
 [ext_resource path="res://scenes/objects/laserdrill.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/abilities/unlocks/Shield_Unlock.tscn" type="PackedScene" id=49]
 [ext_resource path="res://assets/objects/super_computer_variant_2.png" type="Texture" id=50]
@@ -53,6 +55,8 @@
 [ext_resource path="res://scenes/enemies/newguard.tscn" type="PackedScene" id=53]
 [ext_resource path="res://assets/tiles/autotiling_n.png" type="Texture" id=54]
 [ext_resource path="res://scenes/enemies/mutantdog.tscn" type="PackedScene" id=55]
+[ext_resource path="res://scenes/abstract/mediumnoise.tscn" type="PackedScene" id=56]
+[ext_resource path="res://scenes/characters/scientist.tscn" type="PackedScene" id=57]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -2440,7 +2444,7 @@ texture = ExtResource( 22 )
 [node name="Player" type="YSort" parent="YSort"]
 
 [node name="Player" parent="YSort/Player" instance=ExtResource( 5 )]
-position = Vector2( 2504, -2072 )
+position = Vector2( 738.052, -437.019 )
 
 [node name="Mothgirl" parent="YSort/Player" instance=ExtResource( 38 )]
 position = Vector2( 3925.58, 920.496 )
@@ -2515,6 +2519,9 @@ position = Vector2( 1701.21, -542.663 )
 [node name="MutantDog2" parent="YSort/Enemy" instance=ExtResource( 55 )]
 position = Vector2( 3160, -2112 )
 
+[node name="Scientist" parent="YSort/Enemy" instance=ExtResource( 57 )]
+position = Vector2( 733.797, -1505.2 )
+
 [node name="Checkpoints" type="Node" parent="."]
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 27 )]
@@ -2568,6 +2575,7 @@ position = Vector2( 648, 80 )
 
 [node name="Soundtrigger" parent="." instance=ExtResource( 34 )]
 position = Vector2( 2385.69, -1570.02 )
+play_music = "res://assets/soundtrack/music/modern_battle_theme_5.ogg"
 
 [node name="Door" parent="." instance=ExtResource( 35 )]
 visible = false
@@ -2670,6 +2678,15 @@ anims/FadeIn = SubResource( 127 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 128 )
+
+[node name="LoudNoise" parent="." instance=ExtResource( 46 )]
+position = Vector2( 139.408, -440.895 )
+
+[node name="MediumNoise" parent="." instance=ExtResource( 56 )]
+position = Vector2( 496.415, -446.923 )
+
+[node name="SmallNoise" parent="." instance=ExtResource( 47 )]
+position = Vector2( 664.07, -443.065 )
 
 [connection signal="death" from="YSort/Player/Player" to="." method="_on_Player_death"]
 [connection signal="body_entered" from="Cameratrigger" to="." method="_on_Cameratrigger_body_entered"]

@@ -20,7 +20,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="unnamed game"
+config/name="Verinax Dynamics"
 run/main_scene="res://scenes/interface/mainscreen.tscn"
 config/icon="res://icon.png"
 

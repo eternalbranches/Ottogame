@@ -7,7 +7,7 @@ export var trap := false
 func _ready():
 	if close == true:
 		set_collision_layer_bit(0,1)
-		set_collision_mask_bit(1,1)
+		#set_collision_mask_bit(1,1)
 		
 
 func _on_Area2D_body_entered(_body):
@@ -18,9 +18,11 @@ func _on_Area2D_body_entered(_body):
 func closed():
 	set_collision_layer_bit(0, 1)
 	close = true
+	print(close)
 func open():
 	set_collision_layer_bit(0, 0)
 	close = false
+	print(close)
 
 
 func _on_Area2D_body_exited(body):

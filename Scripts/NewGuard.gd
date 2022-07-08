@@ -268,6 +268,13 @@ func create_bullet() -> void:
 	#skill_instance.node_reference = get_path()
 	$SFXPLayer.play()
 	get_parent().add_child(skill_instance)
+	create_noise("medium")
+	
+func create_noise(volume) -> void:
+	var noise = load("res://scenes/abstract/"+volume+"noise.tscn")
+	var noise_instance = noise.instance()
+	noise_instance.position = get_global_position()
+	get_parent().add_child(noise_instance)
 
 
 func _on_SightTimer_timeout() -> void:
@@ -307,6 +314,8 @@ func _on_AI_Timer_timeout():
 				investigate_pos = target.get_global_position()
 		elif in_memory["Projectiles"].empty() == false:
 			change_state("alert")
+		elif investigate_pos != null:
+			change_state("alert")
 		if combat == true and state != "shoot":
 			change_state("combat")
 			
@@ -345,3 +354,21 @@ func floorcheck() -> void:
 			#print($Floorcheck_W.get_collider())
 		else:
 			can_walk_W = false
+			
+func heard_sound(volume : String, sound_position : Vector2):
+	match volume:
+		"loud":
+			alert = true
+			investigate_pos = sound_position
+			_on_AI_Timer_timeout()
+		"medium":
+			alert = true
+			investigate_pos = sound_position
+			_on_AI_Timer_timeout()
+		"small":
+			if alert == false: 
+				if sound_position.x > get_global_position().x:
+					current_direction = "E"
+				else:
+					current_direction = "W"
+				

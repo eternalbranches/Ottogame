@@ -587,7 +587,7 @@ start_node = "Idle_W"
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 9.45, 20.085 )
 
-[node name="NewGuard" type="KinematicBody2D" groups=["Enemy", "Guard"]]
+[node name="NewGuard" type="KinematicBody2D" groups=["Can_Hear", "Enemy", "Guard"]]
 collision_layer = 256
 script = ExtResource( 2 )
 
