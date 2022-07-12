@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=2]
+[gd_scene load_steps=237 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://scenes/enemies/mutantdog.tscn" type="PackedScene" id=55]
 [ext_resource path="res://scenes/abstract/mediumnoise.tscn" type="PackedScene" id=56]
 [ext_resource path="res://scenes/characters/scientist.tscn" type="PackedScene" id=57]
+[ext_resource path="res://scenes/abilities/unlocks/dash_unlock.tscn" type="PackedScene" id=58]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -2520,7 +2521,7 @@ position = Vector2( 1701.21, -542.663 )
 position = Vector2( 3160, -2112 )
 
 [node name="Scientist" parent="YSort/Enemy" instance=ExtResource( 57 )]
-position = Vector2( 733.797, -1505.2 )
+position = Vector2( 2009.7, -2660.92 )
 
 [node name="Checkpoints" type="Node" parent="."]
 
@@ -2539,6 +2540,9 @@ position = Vector2( 1536, -1520 )
 
 [node name="Checkpoint6" parent="Checkpoints" instance=ExtResource( 27 )]
 position = Vector2( 1815.85, -2641.66 )
+
+[node name="Checkpoint7" parent="Checkpoints" instance=ExtResource( 27 )]
+position = Vector2( 2751.86, -2096.48 )
 
 [node name="Checkpoint5" parent="Checkpoints" instance=ExtResource( 27 )]
 position = Vector2( 1680, 16 )
@@ -2572,6 +2576,9 @@ position = Vector2( 1536, -1656 )
 
 [node name="HealthSyringe" parent="Powerups" instance=ExtResource( 51 )]
 position = Vector2( 648, 80 )
+
+[node name="Walljump_Unlock2" parent="Powerups" instance=ExtResource( 58 )]
+position = Vector2( 2911.19, -2301.72 )
 
 [node name="Soundtrigger" parent="." instance=ExtResource( 34 )]
 position = Vector2( 2385.69, -1570.02 )

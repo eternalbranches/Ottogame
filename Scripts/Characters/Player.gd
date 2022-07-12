@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export (int) var max_speed := 150
-export (int) var speed_change := 5
+export (int) var speed_change := 20
 export (int) var run_speed_change := 7
 export (int) var max_dash_speed := 500
 var max_jump_speed := 150
@@ -100,8 +100,6 @@ func get_input():
 			velocity.x += speed_change
 			#velocity.x = lerp(velocity.x, speed, acceleration)
 		#dir += 1
-		
-		
 	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
 		#animation_mode.travel("Walk_W")
@@ -110,7 +108,6 @@ func get_input():
 		if velocity.x > -max_speed:
 			velocity.x -= speed_change
 			#velocity.x = lerp(velocity.x, -speed, acceleration)
-	
 		#dir -= 1
 	#if dir != 0:
 		#velocity.x = lerp(velocity.x, dir * speed, acceleration)
@@ -139,7 +136,109 @@ func get_input():
 				bullettime = false
 			
 
+func idle_state(delta) -> void:
+	get_input()
+	shooting()
+	shield()
+	action()
+	if $SFX.stream != null:
+		$SFX.stream = null
+	if last_direction == "right":
+		animation_mode.travel("Idle_E")
+	else:
+		animation_mode.travel("Idle_W")
+	velocity.y += gravity * delta
+	#velocity = move_and_slide(velocity, Vector2.UP)
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Falling"):
+			collision.collider.fall()
 
+	if Input.is_action_just_pressed("Jump"):
+		#if is_on_floor():
+			velocity.y = jump_strenght
+			state = "midair"
+	#if velocity != Vector2.ZERO:
+	elif (round(velocity.x)) != 0:
+		if is_on_floor():
+			state = "moving"
+		else:
+			state = "midair"
+	if Input.is_action_just_pressed("Crawl"):
+		if CharacterSave.save_dict["crawling"] == true:
+			change_crawling()
+			state = "crawling"
+			
+		
+func running_state(delta) -> void:
+	get_input_running()
+	shooting()
+	action()
+	shield()
+	if $SFX.stream != runningsfx:
+		$SFX.stream = runningsfx
+		$SFX.play()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Pushable"):
+			collision.collider.apply_central_impulse(-collision.normal * push)
+		elif collision.collider.is_in_group("Falling"):
+			collision.collider.fall()
+	if Input.is_action_just_pressed("Jump"):
+			velocity.y = jump_strenght
+			#max_run_jump_speed = velocity.x
+			#if is_on_floor() == false: double jump
+			#	state = "midair"
+	if is_on_floor() == false:
+		state = "midair_run"
+	elif Input.is_action_just_pressed("Crawl"):
+		change_crawling()
+		state = "crawling"
+		
+		
+func moving_state(delta) -> void:
+	get_input()
+	shooting()
+	action()
+	shield()
+	if $SFX.stream != walkingsfx:
+		$SFX.stream = walkingsfx
+		$SFX.play()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Falling"):
+			collision.collider.fall()
+	if $Wallcheck_E.is_colliding():
+		if $Wallcheck_E.get_collider().is_in_group("Pushable") and last_direction == "right":
+			state = "push"
+			last_direction = "right"
+	if $Wallcheck_W.is_colliding():
+		if $Wallcheck_W.get_collider().is_in_group("Pushable") and last_direction == "left":
+			state = "push"
+			last_direction = "left"
+	if Input.is_action_just_pressed("Jump"):
+			velocity.y = jump_strenght
+			#max_jump_speed = velocity.x
+			#if is_on_floor() == false: double jump
+			#	state = "midair"
+	if is_on_floor() == false:
+		state = "midair"
+	#elif velocity == Vector2.ZERO:
+	#elif velocity.x > 0.1 and velocity.x < -0.1:
+	elif (round(velocity.x)) == 0:
+		state = "idle"
+	if CharacterSave.save_dict["crawling"] == true:
+		if Input.is_action_just_pressed("Crawl"):
+			change_crawling()
+			state = "crawling"
 
 func get_input_running():
 	#var dir = 0
@@ -201,6 +300,33 @@ func get_input_running():
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
 
+func crawling_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	get_input_crawl()
+	shooting()
+	action()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity /2, Vector2.UP,
+			false, 4, PI/4, false)
+	if velocity == Vector2.ZERO:
+		animation_mode.travel("Crawling_E")
+	if Input.is_action_just_pressed("Up") and ceiling == false:
+			#change_standing()
+			velocity.y = jump_strenght
+	if is_on_floor() == false:
+		change_standing()
+		state = "midair"
+	if Input.is_action_just_released("Crawl") and ceiling == false:
+		change_standing()
+		state = "idle"
+		#print($Ceilingcheck.get_overlapping_bodies())
+	if $Ceilingcheck.get_overlapping_bodies().empty():
+		ceiling = false
+	else:
+		ceiling = true
+		
+	
 func get_input_crawl():
 	velocity.x = 0
 	if Input.is_action_pressed("Right"):
@@ -240,8 +366,22 @@ func get_input_midair():
 	elif velocity.x <0:
 		animation_mode.travel("Jumping_W")
 		last_direction = "left"
-	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Up"):
+	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Jump"):
+			velocity.y = second_jump_power
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+		elif Input.is_action_just_pressed("Left"):
+			velocity.x = second_jump_power /2
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+		elif Input.is_action_just_pressed("Right"):
+			velocity.x = -second_jump_power /2
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+			
+	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Jump"):
 			max_jump_speed = max_speed
 			velocity.y = second_jump_power
 			can_doublejump = false
@@ -283,8 +423,23 @@ func get_input_midair_run():
 	#			can_doublejump = true
 	#			velocity = Vector2.ZERO
 	#			last_direction = "right"
-	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Up"):
+	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Jump"):
+			velocity.y = second_jump_power
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+		elif Input.is_action_just_pressed("Left"):
+			velocity.x = second_jump_power /2
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+		elif Input.is_action_just_pressed("Right"):
+			velocity.x = -second_jump_power /2
+			max_run_jump_speed = max_dash_speed
+			can_doublejump = false
+			
+			
+	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Jump"):
 			velocity.y = second_jump_power
 			max_run_jump_speed = max_dash_speed
 			can_doublejump = false
@@ -295,316 +450,188 @@ func get_input_midair_run():
 	elif velocity.x <0:
 		animation_mode.travel("Jumping_W")
 		last_direction = "left"
+		
+func midair_state(delta):
+	if $SFX.stream != null:
+		$SFX.stream = null
+	if last_direction == "right":
+		animation_mode.travel("Jumping_E")
+	else:
+		animation_mode.travel("Jumping_W")
+	get_input_midair()
+	shooting()
+	action()
+	shield()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	if is_on_floor():
+		can_doublejump = true
+		state = "moving"
+		
+func midair_run_state(delta):
+	if $SFX.stream != null:
+		$SFX.stream = null
+	if last_direction == "right":
+		animation_mode.travel("Jumping_E")
+	else:
+		animation_mode.travel("Jumping_W")
+	get_input_midair_run()
+	shooting()
+	action()
+	shield()
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	if is_on_floor():
+		can_doublejump = true
+		state = "running"
+		run_released = true
 
+func climbing_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	animation_mode.travel("Climbing")
+	shooting()
+	velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
+	if Input.is_action_just_pressed("ActionButton"):
+			velocity.y = jump_strenght
+			state = "midair"
+	if Input.is_action_pressed("Up"):
+		velocity.y = -100
+	if Input.is_action_pressed("Down"):
+		velocity.y = 100
+	if climbable == false:
+		if velocity.y == -100:
+			velocity.y = jump_strenght
+		state = "midair"
+		max_jump_speed = max_speed
+		max_run_jump_speed = max_dash_speed
+		
+func knockback_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	if knockback == false:
+		invulnerable = true
+		Engine.time_scale = 1.0
+		bullettime = false
+		knockback = true
+		yield(get_tree().create_timer(0.3), "timeout")
+		#set_collision_mask_bit(2, 1)
+		knockback = false
+		invulnerable = false
+		if state != "death":
+			state = "midair"
+			
+func walljump_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	velocity.y += gravity/3.0 * delta
+	if last_direction == "right":
+		velocity.x += 15
+	else:
+		velocity.x -= 15
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	if started == false:
+		velocity.y = walljump_height
+		if $Wallcheck_W.is_colliding() == true:
+			velocity.x = walljump_power
+			last_direction = "right"
+			animation_mode.travel("Jumping_E")
+		elif $Wallcheck_E.is_colliding() == true:
+			velocity.x = -walljump_power
+			last_direction = "left"
+			animation_mode.travel("Jumping_W")
+		started = true
+		yield(get_tree().create_timer(0.28), "timeout")
+		if state == "walljump":
+			started = false
+			state = "midair_run"
+	shooting()
+	
+func wallslide_state(delta):
+	if $SFX.stream != null:
+		$SFX.stream = null
+	if velocity.y <= 0:
+		velocity.y = 0
+	shooting()
+	if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
+		state = "midair"
+	if is_on_floor():
+		yield(get_tree().create_timer(0.2), "timeout")
+		if state == "wallslide":
+			state = "idle"
+	elif velocity.y > 180:
+		if state == "wallslide":
+			can_wallslide = false
+			state = "midair"
+		yield(get_tree().create_timer(1), "timeout")
+		can_wallslide = true
+	
+	velocity.y += 140 *delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	if Input.is_action_just_pressed("Down"):
+		state = "midair"
+		can_wallslide = false
+		yield(get_tree().create_timer(1), "timeout")
+		can_wallslide = true
+	if Input.is_action_just_pressed("Jump"):
+		state = "walljump"
+		
+func death_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	animation_mode.travel("Death_" +last_direction)
+	velocity.y += gravity * delta
+	if is_on_floor():
+		velocity.x = lerp(velocity.x, 0, friction)
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+		
+func rise_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+			
+func push_state(delta) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = null
+	if last_direction == "left":
+		if Input.is_action_pressed("Left"):
+			velocity.x = -10
+		if Input.is_action_just_pressed("Right") or $Wallcheck_W.is_colliding() == false:
+			state = "idle"
+	else:
+		if Input.is_action_pressed("Right"):
+			velocity.x = 10
+		if Input.is_action_just_pressed("Left") or $Wallcheck_E.is_colliding() == false:
+			state = "idle"
+	velocity.y += gravity * delta
+	if last_direction == "left":
+		animation_mode.travel("Push_W")
+	else:
+		animation_mode.travel("Push_E")
+	velocity = move_and_slide(velocity, Vector2.UP,
+			false, 4, PI/4, false)
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("Pushable"):
+			collision.collider.apply_central_impulse(-collision.normal * push)
+			
 func _physics_process(delta):
+	state_manager(delta)
+	call(state + "_state", delta)
+
+func _process(delta):
 	$DebugState.text = state
-	match state:
-		"idle":
-			
-			get_input()
-			shooting()
-			shield()
-			action()
-			if $SFX.stream != null:
-				$SFX.stream = null
-			if last_direction == "right":
-				animation_mode.travel("Idle_E")
-			else:
-				animation_mode.travel("Idle_W")
-			velocity.y += gravity * delta
-			#velocity = move_and_slide(velocity, Vector2.UP)
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			for index in get_slide_count():
-				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Falling"):
-					collision.collider.fall()
-
-			if Input.is_action_just_pressed("Up"):
-				#if is_on_floor():
-					velocity.y = jump_strenght
-					state = "midair"
-			#if velocity != Vector2.ZERO:
-			elif (round(velocity.x)) != 0:
-				if is_on_floor():
-					state = "moving"
-				else:
-					state = "midair"
-			if Input.is_action_just_pressed("Crawl"):
-				if CharacterSave.save_dict["crawling"] == true:
-					change_crawling()
-					state = "crawling"
-			
-
-				
-		"moving":
-			get_input()
-			shooting()
-			action()
-			shield()
-			if $SFX.stream != walkingsfx:
-				$SFX.stream = walkingsfx
-				$SFX.play()
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			for index in get_slide_count():
-				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Falling"):
-					collision.collider.fall()
-			if $Wallcheck_E.is_colliding():
-				if $Wallcheck_E.get_collider().is_in_group("Pushable") and last_direction == "right":
-					state = "push"
-					last_direction = "right"
-			if $Wallcheck_W.is_colliding():
-				if $Wallcheck_W.get_collider().is_in_group("Pushable") and last_direction == "left":
-					state = "push"
-					last_direction = "left"
-			if Input.is_action_just_pressed("Up"):
-					velocity.y = jump_strenght
-					#max_jump_speed = velocity.x
-					#if is_on_floor() == false: double jump
-					#	state = "midair"
-			if is_on_floor() == false:
-				state = "midair"
-			#elif velocity == Vector2.ZERO:
-			#elif velocity.x > 0.1 and velocity.x < -0.1:
-			elif (round(velocity.x)) == 0:
-				state = "idle"
-			if CharacterSave.save_dict["crawling"] == true:
-				if Input.is_action_just_pressed("Crawl"):
-					change_crawling()
-					state = "crawling"
-				
-		"running":
-			get_input_running()
-			shooting()
-			action()
-			shield()
-			if $SFX.stream != runningsfx:
-				$SFX.stream = runningsfx
-				$SFX.play()
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			for index in get_slide_count():
-				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Pushable"):
-					collision.collider.apply_central_impulse(-collision.normal * push)
-				elif collision.collider.is_in_group("Falling"):
-					collision.collider.fall()
-			if Input.is_action_just_pressed("Up"):
-					velocity.y = jump_strenght
-					#max_run_jump_speed = velocity.x
-					#if is_on_floor() == false: double jump
-					#	state = "midair"
-			if is_on_floor() == false:
-				state = "midair_run"
-			elif Input.is_action_just_pressed("Crawl"):
-				change_crawling()
-				state = "crawling"
-			
-			
-		"midair":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			if last_direction == "right":
-				animation_mode.travel("Jumping_E")
-			else:
-				animation_mode.travel("Jumping_W")
-			get_input_midair()
-			shooting()
-			action()
-			shield()
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			if is_on_floor():
-				can_doublejump = true
-				state = "moving"
-
-		"midair_run":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			if last_direction == "right":
-				animation_mode.travel("Jumping_E")
-			else:
-				animation_mode.travel("Jumping_W")
-			get_input_midair_run()
-			shooting()
-			action()
-			shield()
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			if is_on_floor():
-				can_doublejump = true
-				state = "running"
-				run_released = true
-		
-		"crawling":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			get_input_crawl()
-			shooting()
-			action()
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity /2, Vector2.UP,
-					false, 4, PI/4, false)
-			if velocity == Vector2.ZERO:
-				animation_mode.travel("Crawling_E")
-			if Input.is_action_just_pressed("Up") and ceiling == false:
-					#change_standing()
-					velocity.y = jump_strenght
-			if is_on_floor() == false:
-				change_standing()
-				state = "midair"
-			if Input.is_action_just_released("Crawl") and ceiling == false:
-				change_standing()
-				state = "idle"
-				#print($Ceilingcheck.get_overlapping_bodies())
-			if $Ceilingcheck.get_overlapping_bodies().empty():
-				ceiling = false
-			else:
-				ceiling = true
-				
-		"climbing":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			animation_mode.travel("Climbing")
-			shooting()
-			velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
-			if Input.is_action_just_pressed("ActionButton"):
-					velocity.y = jump_strenght
-					state = "midair"
-			if Input.is_action_pressed("Up"):
-				velocity.y = -100
-			if Input.is_action_pressed("Down"):
-				velocity.y = 100
-			if climbable == false:
-				if velocity.y == -100:
-					velocity.y = jump_strenght
-				state = "midair"
-				max_jump_speed = max_speed
-				max_run_jump_speed = max_dash_speed
-				
-		"knockback":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			if knockback == false:
-				invulnerable = true
-				Engine.time_scale = 1.0
-				bullettime = false
-				knockback = true
-				yield(get_tree().create_timer(0.3), "timeout")
-				#set_collision_mask_bit(2, 1)
-				knockback = false
-				invulnerable = false
-				if state != "death":
-					state = "midair"
-				
-		"walljump":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			velocity.y += gravity/3.0 * delta
-			if last_direction == "right":
-				velocity.x += 15
-			else:
-				velocity.x -= 15
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			if started == false:
-				velocity.y = walljump_height
-				if $Wallcheck_W.is_colliding() == true:
-					velocity.x = walljump_power
-					last_direction = "right"
-					animation_mode.travel("Jumping_E")
-				elif $Wallcheck_E.is_colliding() == true:
-					velocity.x = -walljump_power
-					last_direction = "left"
-					animation_mode.travel("Jumping_W")
-				started = true
-				yield(get_tree().create_timer(0.28), "timeout")
-				if state == "walljump":
-					started = false
-					state = "midair_run"
-			shooting()
-			
-		"wallslide":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			if velocity.y <= 0:
-				velocity.y = 0
-			shooting()
-			if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
-				state = "midair"
-			if is_on_floor():
-				yield(get_tree().create_timer(0.2), "timeout")
-				if state == "wallslide":
-					state = "idle"
-			elif velocity.y > 180:
-				if state == "wallslide":
-					can_wallslide = false
-					state = "midair"
-				yield(get_tree().create_timer(1), "timeout")
-				can_wallslide = true
-			
-			velocity.y += 140 *delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			if Input.is_action_just_pressed("Down"):
-				state = "midair"
-				can_wallslide = false
-				yield(get_tree().create_timer(1), "timeout")
-				can_wallslide = true
-			if Input.is_action_just_pressed("Up"):
-				state = "walljump"
-			
-		"death":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			animation_mode.travel("Death_" +last_direction)
-			velocity.y += gravity * delta
-			if is_on_floor():
-				velocity.x = lerp(velocity.x, 0, friction)
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			
-		"rise":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			velocity.y += gravity * delta
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-		
-		"push":
-			if $SFX.stream != null:
-				$SFX.stream = null
-			if last_direction == "left":
-				if Input.is_action_pressed("Left"):
-					velocity.x = -10
-				if Input.is_action_just_pressed("Right") or $Wallcheck_W.is_colliding() == false:
-					state = "idle"
-			else:
-				if Input.is_action_pressed("Right"):
-					velocity.x = 10
-				if Input.is_action_just_pressed("Left") or $Wallcheck_E.is_colliding() == false:
-					state = "idle"
-			velocity.y += gravity * delta
-			if last_direction == "left":
-				animation_mode.travel("Push_W")
-			else:
-				animation_mode.travel("Push_E")
-			velocity = move_and_slide(velocity, Vector2.UP,
-					false, 4, PI/4, false)
-			for index in get_slide_count():
-				var collision = get_slide_collision(index)
-				if collision.collider.is_in_group("Pushable"):
-					collision.collider.apply_central_impulse(-collision.normal * push)
-					
+	
 func change_crawling():
 	$CollisionStanding.disabled = true
 	$CollisionCrawling.disabled = false
@@ -718,16 +745,21 @@ func shield():
 			#skill_instance.node_reference = get_path()
 #			get_parent().add_child(skill_instance)
 			
-func state_change(new_state):
-	if state != "dead":
+
+func change_state(new_state) -> void:
+	if state != "death":
 		state = new_state
+
+func state_manager(delta) -> void:
+	match state:
+		"idle":
+			idle_state(delta)
 		
-	
-func _on_Dashtimer_timeout():
+func _on_Dashtimer_timeout() -> void:
 	dash_l = 0
 	dash_r = 0
 
-func on_hit(damage, origin, enemy_posx):
+func on_hit(damage, origin, enemy_posx) -> void:
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
 		GameEvents.emit_signal_hp_change(current_hp, max_hp)
@@ -744,7 +776,7 @@ func on_hit(damage, origin, enemy_posx):
 	if current_hp <= 0 and state != "death":
 			on_death()
 
-func on_heal(healamount):
+func on_heal(healamount) -> void:
 	if state != "death":
 		current_hp += healamount
 		if current_hp > max_hp:
@@ -752,7 +784,7 @@ func on_heal(healamount):
 		GameEvents.emit_signal_hp_change(current_hp, max_hp)
 		$HealParticle.emitting = true
 		
-func on_death():
+func on_death() -> void:
 	state = "death"
 	emit_signal("death")
 
@@ -776,6 +808,7 @@ func collect_powerup(PText):
 	$Powerup.text = PText
 	yield(get_tree().create_timer(5), "timeout")
 	$Powerup.visible = false
+
 
 
 func _on_GunTimer_timeout():

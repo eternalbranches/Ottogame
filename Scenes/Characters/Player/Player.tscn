@@ -915,7 +915,7 @@ texture = ExtResource( 1 )
 normal_map = ExtResource( 9 )
 hframes = 8
 vframes = 15
-frame = 7
+frame = 3
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
@@ -923,7 +923,7 @@ texture = ExtResource( 3 )
 normal_map = ExtResource( 10 )
 hframes = 8
 vframes = 15
-frame = 7
+frame = 3
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )

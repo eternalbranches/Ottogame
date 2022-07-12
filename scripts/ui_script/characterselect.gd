@@ -1,12 +1,12 @@
 extends Control
 var progress_dict1 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false, "dash" : false,
 					"keycards" : []}
 var progress_dict2 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false, "dash" : false,
 					"keycards" : []}
 var progress_dict3 := {"ironman" : false, "current_checkpoint" : 0, "current_map" : "lighttest",
-					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false,
+					"walljump": false, "doublejump": false, "gun" : false, "flashlight": false, "timeslow": false, "crawling": false, "running": false, "shield": false, "dash" : false,
 					"keycards" : []}
 
 var delet_save:= "1"
