@@ -3,7 +3,8 @@ extends KinematicBody2D
 export (int) var max_speed := 150
 export (int) var speed_change := 20
 export (int) var run_speed_change := 7
-export (int) var max_dash_speed := 500
+export (int) var max_run_speed := 500
+export(int) var dash_speed := 600
 var max_jump_speed := 150
 var max_run_jump_speed := 425
 export (int) var crawl_speed := 150
@@ -12,7 +13,6 @@ export (int) var gravity := 1000
 export (int) var walljump_height := -250
 export (int) var walljump_power := 150
 export (int) var second_jump_power := -400
-
 export (int) var knockback_power := 300
 export (int, 0, 200) var push = 400
 
@@ -41,8 +41,8 @@ var last_direction := "right"
 var current_hp := 3
 var max_hp := 3
 
-var dash_l := 0
-var dash_r := 0
+var run_l := 0
+var run_r := 0
 var knockback := false
 var bullettime := false
 var can_jump := false
@@ -68,52 +68,35 @@ func _ready():
 		
 
 func get_input():
-	#var dir = 0
-	#if velocity.x > max_speed:
-	#	velocity.x = max_speed
-	#elif velocity.x < -speed:
-	#	velocity.x = -speed
 	if CharacterSave.save_dict["running"] == true:
 		if CharacterSave.controller == false:
 			if Input.is_action_just_pressed("Right"):
 				$"Dash-timer".start()
-				if dash_r == 1:
+				if run_r == 1:
 					state = "running"
-				dash_r += 1
+				run_r += 1
 			if Input.is_action_just_pressed("Left"):
 				$"Dash-timer".start()
-				if dash_l == 1:
+				if run_l == 1:
 					state = "running"
-				dash_l += 1
+				run_l += 1
 		else:
 			if Input.get_action_strength("Left") > 0.7:
 				state = "running"
 			if Input.get_action_strength("Right") > 0.7:
 				state = "running"
-			#print(Input.get_action_strength("Left"))
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
-		#animation_mode.travel("Walk_E")
 		if velocity.x < 0:
 			velocity.x += speed_change
 		if velocity.x < max_speed:
 			velocity.x += speed_change
-			#velocity.x = lerp(velocity.x, speed, acceleration)
-		#dir += 1
 	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
-		#animation_mode.travel("Walk_W")
 		if velocity.x > 0:
 			velocity.x -= speed_change
 		if velocity.x > -max_speed:
 			velocity.x -= speed_change
-			#velocity.x = lerp(velocity.x, -speed, acceleration)
-		#dir -= 1
-	#if dir != 0:
-		#velocity.x = lerp(velocity.x, dir * speed, acceleration)
-		#velocity.x = lerp(velocity.x,  velocity.x, acceleration)
-	#else:
-		#velocity.x = lerp(velocity.x, 0, friction)
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
 	
@@ -134,7 +117,11 @@ func get_input():
 			else:
 				Engine.time_scale = 1.0
 				bullettime = false
-			
+
+func sfx_manager(audio : AudioStreamMP3) -> void:
+	if $SFX.stream != null:
+		$SFX.stream = audio
+		
 
 func idle_state(delta) -> void:
 	get_input()
@@ -157,10 +144,8 @@ func idle_state(delta) -> void:
 			collision.collider.fall()
 
 	if Input.is_action_just_pressed("Jump"):
-		#if is_on_floor():
-			velocity.y = jump_strenght
-			state = "midair"
-	#if velocity != Vector2.ZERO:
+		velocity.y = jump_strenght
+		state = "midair"
 	elif (round(velocity.x)) != 0:
 		if is_on_floor():
 			state = "moving"
@@ -191,9 +176,6 @@ func running_state(delta) -> void:
 			collision.collider.fall()
 	if Input.is_action_just_pressed("Jump"):
 			velocity.y = jump_strenght
-			#max_run_jump_speed = velocity.x
-			#if is_on_floor() == false: double jump
-			#	state = "midair"
 	if is_on_floor() == false:
 		state = "midair_run"
 	elif Input.is_action_just_pressed("Crawl"):
@@ -226,13 +208,8 @@ func moving_state(delta) -> void:
 			last_direction = "left"
 	if Input.is_action_just_pressed("Jump"):
 			velocity.y = jump_strenght
-			#max_jump_speed = velocity.x
-			#if is_on_floor() == false: double jump
-			#	state = "midair"
 	if is_on_floor() == false:
 		state = "midair"
-	#elif velocity == Vector2.ZERO:
-	#elif velocity.x > 0.1 and velocity.x < -0.1:
 	elif (round(velocity.x)) == 0:
 		state = "idle"
 	if CharacterSave.save_dict["crawling"] == true:
@@ -247,27 +224,17 @@ func get_input_running():
 		run_released = false
 		if velocity.x < 0:
 			velocity.x += run_speed_change
-		if velocity.x < max_dash_speed:
+		if velocity.x < max_run_speed:
 			velocity.x += run_speed_change
-			#velocity.x = lerp(velocity.x, dash_speed, acceleration)
-		#dir += 1
 	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
 		run_released = false
 		if velocity.x > 0:
 			velocity.x -= run_speed_change
-		if velocity.x > - max_dash_speed:
+		if velocity.x > - max_run_speed:
 			velocity.x -= run_speed_change
-			#velocity.x = lerp(velocity.x, -dash_speed, acceleration)
-		#dir -= 1
-	#if dir != 0:
-		#velocity.x = lerp(velocity.x, dir * dash_speed, acceleration)
 	else:
 		velocity.x = lerp(velocity.x, 0, friction_run)
-	#if velocity.x > dash_speed:
-	#	velocity.x = dash_speed
-	#elif velocity.x < -dash_speed:
-	#	velocity.x = -dash_speed
 	if Input.is_action_just_released("Right"):
 		run_released = true
 	if Input.is_action_just_released("Left"):
@@ -276,10 +243,6 @@ func get_input_running():
 		if velocity.x < max_speed and velocity.x > -max_speed:
 			state = "moving"
 	
-		#elif velocity.x > -speed:
-		#	print(velocity.x, "b")
-		#	state = "moving"
-		#	run_released = false
 	if velocity.x > 0 :
 		animation_mode.travel("Run_E")
 	elif velocity.x <0:
@@ -300,6 +263,12 @@ func get_input_running():
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
 
+func dash_state(delta)-> void:
+	if $Dash_Timer.is_stopped() == true:
+		$Dash_Timer.start()
+	velocity.normalized() * dash_speed
+	move_and_slide(velocity)
+	
 func crawling_state(delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
@@ -312,7 +281,6 @@ func crawling_state(delta) -> void:
 	if velocity == Vector2.ZERO:
 		animation_mode.travel("Crawling_E")
 	if Input.is_action_just_pressed("Up") and ceiling == false:
-			#change_standing()
 			velocity.y = jump_strenght
 	if is_on_floor() == false:
 		change_standing()
@@ -320,7 +288,6 @@ func crawling_state(delta) -> void:
 	if Input.is_action_just_released("Crawl") and ceiling == false:
 		change_standing()
 		state = "idle"
-		#print($Ceilingcheck.get_overlapping_bodies())
 	if $Ceilingcheck.get_overlapping_bodies().empty():
 		ceiling = false
 	else:
@@ -343,21 +310,11 @@ func get_input_midair():
 			velocity.x += speed_change
 		if velocity.x < max_jump_speed:
 			velocity.x += speed_change
-		#velocity.x = lerp(velocity.x, speed, acceleration)
-		#animation_mode.travel("Jumping_E")
-		#dir += 1
 	if Input.is_action_pressed("Left"):
 		if velocity.x > - 0:
 			velocity.x -= speed_change
 		if velocity.x > - max_jump_speed:
 			velocity.x -= speed_change
-		#velocity.x -= speed_change
-#		velocity.x = lerp(velocity.x, -speed, acceleration)
-		#animation_mode.travel("Jumping_W")
-		#dir -= 1
-	#else:
-	##if dir != 0:
-	#	velocity.x = lerp(velocity.x, 0, acceleration)
 	check_wallslide()
 	
 	if velocity.x > 0 :
@@ -366,83 +323,50 @@ func get_input_midair():
 	elif velocity.x <0:
 		animation_mode.travel("Jumping_W")
 		last_direction = "left"
+
+			
+func dash() -> void:
 	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Jump"):
-			velocity.y = second_jump_power
-			max_run_jump_speed = max_dash_speed
+		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Up"):
+			velocity.y = -dash_speed
+			max_run_jump_speed = max_run_speed
 			can_doublejump = false
-		elif Input.is_action_just_pressed("Left"):
-			velocity.x = second_jump_power /2
-			max_run_jump_speed = max_dash_speed
+			state = "dash"
+		elif Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Down"):
+			velocity.y = dash_speed
+			max_run_jump_speed = max_run_speed
 			can_doublejump = false
-		elif Input.is_action_just_pressed("Right"):
-			velocity.x = -second_jump_power /2
-			max_run_jump_speed = max_dash_speed
+			state = "dash"
+		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Left"):
+			velocity.x = -dash_speed
+			max_run_jump_speed = max_run_speed
 			can_doublejump = false
-			
+			state = "dash"
+		elif Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Right"):
+			velocity.x = dash_speed
+			max_run_jump_speed = max_run_speed
+			can_doublejump = false
+			state = "dash"
+		
 	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Jump"):
+		if Input.is_action_just_pressed("Dash"):
+			velocity = Vector2(0, -dash_speed)
 			max_jump_speed = max_speed
-			velocity.y = second_jump_power
 			can_doublejump = false
-			
-			
+			state = "dash"
 
 func get_input_midair_run():
-#	var dir = 0
 	if Input.is_action_pressed("Right"):
 		if velocity.x < 0:
 			velocity.x += run_speed_change
 		if velocity.x < max_run_jump_speed:
 			velocity.x += run_speed_change
-		#velocity.x = lerp(velocity.x, dash_jump_speed, acceleration)
-		#last_direction = "right"
-#		animation_mode.travel("Jumping_E")
-#		dir += 1
 	if Input.is_action_pressed("Left"):
 		if velocity.x > - 0:
 			velocity.x -= run_speed_change
 		if velocity.x > - max_run_jump_speed:
 			velocity.x -= run_speed_change
-		#velocity.x = lerp(velocity.x, -dash_jump_speed, acceleration)
-		#last_direction = "left"
-#		animation_mode.travel("Jumping_W")
-#		dir -= 1
-	#if dir != 0:
-	#	velocity.x = lerp(velocity.x, dir * dash_jump_speed, acceleration)
 	check_wallslide()
-	#if CharacterSave.save_dict["walljump"] == true:
-	#	if is_on_wall() and can_wallslide == true:
-	#		if $Wallcheck_W.is_colliding() == true:
-	#			state = "wallslide"
-	#			can_doublejump = true
-	#			velocity = Vector2.ZERO
-	#			last_direction = "left"
-	#		elif $Wallcheck_E.is_colliding() == true:
-	#			state = "wallslide"
-	#			can_doublejump = true
-	#			velocity = Vector2.ZERO
-	#			last_direction = "right"
-	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Jump"):
-			velocity.y = second_jump_power
-			max_run_jump_speed = max_dash_speed
-			can_doublejump = false
-		elif Input.is_action_just_pressed("Left"):
-			velocity.x = second_jump_power /2
-			max_run_jump_speed = max_dash_speed
-			can_doublejump = false
-		elif Input.is_action_just_pressed("Right"):
-			velocity.x = -second_jump_power /2
-			max_run_jump_speed = max_dash_speed
-			can_doublejump = false
-			
-			
-	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Jump"):
-			velocity.y = second_jump_power
-			max_run_jump_speed = max_dash_speed
-			can_doublejump = false
 			
 	if velocity.x > 0 :
 		animation_mode.travel("Jumping_E")
@@ -462,6 +386,7 @@ func midair_state(delta):
 	shooting()
 	action()
 	shield()
+	dash()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP,
 			false, 4, PI/4, false)
@@ -480,6 +405,7 @@ func midair_run_state(delta):
 	shooting()
 	action()
 	shield()
+	dash()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP,
 			false, 4, PI/4, false)
@@ -506,7 +432,7 @@ func climbing_state(delta) -> void:
 			velocity.y = jump_strenght
 		state = "midair"
 		max_jump_speed = max_speed
-		max_run_jump_speed = max_dash_speed
+		max_run_jump_speed = max_run_speed
 		
 func knockback_state(delta) -> void:
 	if $SFX.stream != null:
@@ -756,8 +682,8 @@ func state_manager(delta) -> void:
 			idle_state(delta)
 		
 func _on_Dashtimer_timeout() -> void:
-	dash_l = 0
-	dash_r = 0
+	run_l = 0
+	run_r = 0
 
 func on_hit(damage, origin, enemy_posx) -> void:
 	if state != "death" and invulnerable == false:
@@ -832,3 +758,7 @@ func _on_ActivateEnemies_body_entered(body):
 
 func _on_ActivateEnemies_body_exited(body):
 	body.player_enters_range(false)
+
+
+func _on_Dash_Timer_timeout():
+	state = "midair_run"

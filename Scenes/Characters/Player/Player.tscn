@@ -915,7 +915,7 @@ texture = ExtResource( 1 )
 normal_map = ExtResource( 9 )
 hframes = 8
 vframes = 15
-frame = 3
+frame = 7
 
 [node name="Arms" type="Sprite" parent="Spritemesh"]
 position = Vector2( 0, -12 )
@@ -923,7 +923,7 @@ texture = ExtResource( 3 )
 normal_map = ExtResource( 10 )
 hframes = 8
 vframes = 15
-frame = 3
+frame = 7
 
 [node name="CollisionStanding" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0883865, 0.59857 )
@@ -1005,6 +1005,10 @@ wait_time = 10.0
 
 [node name="PlatformTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="Dash_Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]
 position = Vector2( 3, 0 )
@@ -1101,6 +1105,7 @@ shape = SubResource( 104 )
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
+[connection signal="timeout" from="Dash_Timer" to="." method="_on_Dash_Timer_timeout"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_Shield2_body_entered"]
 [connection signal="timeout" from="Shield/Selfdestruct" to="Shield" method="_on_Selfdestruct_timeout"]
 [connection signal="body_entered" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_entered"]
