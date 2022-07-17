@@ -14,10 +14,8 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("ESC"):
-		$GUI/Pausemenu.visible = true
-		$GUI/Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton.grab_focus()
-		get_tree().paused = true
+	pass
+		
 		
 func assign_checkpoints() -> void:
 	while checkpoint_count !=  $Checkpoints.get_child_count():
@@ -75,28 +73,3 @@ func respawn_animation() -> void:
 	yield(get_tree().create_timer(3), "timeout")
 	$YSort/Player/Mothgirl.stop_flying()
 	$YSort/Player/Mothgirl.position = Vector2(3700,500)
-
-
-
-
-func _on_MainMenuButton_pressed():
-	$GUI/Pausemenu/Popup.visible = true
-	$GUI/Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton.grab_focus()
-	
-func _on_YesButton_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
-
-func _on_NoButton_pressed() -> void:
-	$GUI/Pausemenu/Popup.visible = false
-	$GUI/Pausemenu.grab_focus()
-	
-func _on_BackButton_pressed() -> void:
-	$GUI/Pausemenu.visible = false
-	$GUI/Pausemenu/Popup.visible = false
-	get_tree().paused = false
-
-func _on_OptionsButton_pressed() -> void:
-	$GUI/Options.visible = true
-	$GUI/Pausemenu.hide()
-	$GUI/Options/TabContainer/SoundOptions/NinePatchRect/VBoxContainer/GameVolumeSlider.grab_focus()

@@ -4,8 +4,8 @@ onready var animation_tree = get_node("AnimationTree")
 onready var animation_mode = animation_tree.get("parameters/playback")
 
 var state := "idle"
-var max_hp := 2
-var current_hp := 2
+var max_hp := 15
+var current_hp := 15
 var current_direction := "W"
 var spawn_guardposition := 5.0
 var velocity := Vector2.ZERO
@@ -272,7 +272,7 @@ func _on_SightTimer_timeout() -> void:
 	for child in $Eyesight.get_children():
 	#	child.enabled = true
 		if child.is_colliding():
-			#print(child.get_collider())
+			print(child.get_collider())
 			if child.get_collider().is_in_group("Mutant") and in_sight["Mutants"].has(child.get_collider()) == false:
 				in_sight["Mutants"].push_back(child.get_collider())
 				add_memory(child.get_collider(), "Mutants")
@@ -287,6 +287,7 @@ func _on_SightTimer_timeout() -> void:
 				if alert == false:
 					alert = true
 				print("spotted projectile")
+				
 		
 		
 func add_memory(new_memory, category):

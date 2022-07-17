@@ -78,7 +78,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0 ]
+"values": [ 5 ]
 }
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -94,6 +94,7 @@ position = Vector2( 0, -7.15256e-07 )
 scale = Vector2( 1.25, 1.23077 )
 texture = ExtResource( 1 )
 vframes = 6
+frame = 5
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

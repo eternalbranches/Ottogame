@@ -4,7 +4,7 @@ export (int) var max_speed := 150
 export (int) var speed_change := 20
 export (int) var run_speed_change := 7
 export (int) var max_run_speed := 500
-export(int) var dash_speed := 600
+export(int) var dash_speed := 300
 var max_jump_speed := 150
 var max_run_jump_speed := 425
 export (int) var crawl_speed := 150
@@ -38,8 +38,8 @@ var ladder_location := 0.0
 var invulnerable := false
 var last_direction := "right"
 
-var current_hp := 3
-var max_hp := 3
+var current_hp := 100
+var max_hp := 100
 
 var run_l := 0
 var run_r := 0
@@ -266,7 +266,7 @@ func get_input_running():
 func dash_state(delta)-> void:
 	if $Dash_Timer.is_stopped() == true:
 		$Dash_Timer.start()
-	velocity.normalized() * dash_speed
+	velocity.normalized() * dash_speed * delta
 	move_and_slide(velocity)
 	
 func crawling_state(delta) -> void:
@@ -328,7 +328,7 @@ func get_input_midair():
 func dash() -> void:
 	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Up"):
-			velocity.y = -dash_speed
+			velocity.y = -dash_speed *2
 			max_run_jump_speed = max_run_speed
 			can_doublejump = false
 			state = "dash"

@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var projectile_speed = 500
-var damage := 1
+var damage := 5
 var origin
 #var direction
 var life_time = 20
