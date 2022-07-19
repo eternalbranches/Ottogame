@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/objects/turret.gd" type="Script" id=1]
 [ext_resource path="res://assets/objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/effects/background.png" type="Texture" id=5]
 [ext_resource path="res://assets/effects/spotlight_7.png" type="Texture" id=6]
 [ext_resource path="res://assets/effects/glowing_circle.png" type="Texture" id=7]
+[ext_resource path="res://scenes/abilities/laser.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20.875, 8.34518 )
@@ -88,6 +89,146 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, false, true ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Attack_E"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Laser:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -160.0, -45.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Laser")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_is_casting"
+}, {
+"args": [ false ],
+"method": "set_is_casting"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Attack_W"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Laser:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -20.0, -120.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Laser")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_is_casting"
+}, {
+"args": [ false ],
+"method": "set_is_casting"
+} ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Deactivate"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite/Tower:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -25 ), Vector2( 0, 24 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D2:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.7, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:shape:extents")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 20.875, 24.5085 ), Vector2( 20.875, 8.34518 ), Vector2( 20.875, 8.34518 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16.1188 ), Vector2( 0, 0.0445385 ), Vector2( 0, 0.0445385 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Light2D3:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.6, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -370,6 +511,18 @@ tracks/9/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("Laser:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -159.273 ]
+}
 
 [node name="Turret" type="StaticBody2D" groups=["Enemy"]]
 rotation = 3.14159
@@ -412,6 +565,9 @@ one_shot = true
 [node name="Deactivate" type="Timer" parent="."]
 one_shot = true
 
+[node name="LaserTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0.0352941, 1, 0.027451, 1 )
 margin_left = 0.25
@@ -433,6 +589,9 @@ wait_time = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Activate = SubResource( 3 )
+anims/Attack_E = SubResource( 8 )
+anims/Attack_W = SubResource( 9 )
+anims/Deactivate = SubResource( 10 )
 anims/Death = SubResource( 4 )
 anims/Idle = SubResource( 6 )
 anims/Inactive = SubResource( 7 )
@@ -459,10 +618,18 @@ texture = ExtResource( 7 )
 color = Color( 1, 0.470588, 0, 1 )
 energy = 0.6
 
+[node name="Laser" parent="." instance=ExtResource( 8 )]
+modulate = Color( 1, 0.121569, 0.0784314, 1 )
+show_behind_parent = true
+position = Vector2( 9.91821e-05, -40 )
+rotation = -2.77984
+scale = Vector2( 1, 0.5 )
+
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
 [connection signal="timeout" from="Deactivate" to="." method="_on_Deactivate_timeout"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

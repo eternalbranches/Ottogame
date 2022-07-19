@@ -9,6 +9,8 @@ var current_hp := 15
 var current_direction := "W"
 var spawn_guardposition := 5.0
 var velocity := Vector2.ZERO
+var jumppower := 1000
+var can_jump := true
 var new_random_xpos := 0.0
 var dead := false
 var in_sight := {"Mutants": [], "Projectiles": []}
@@ -26,12 +28,16 @@ var can_shoot := true
 var reset_started := false
 var can_walk_E := false
 var can_walk_W := false
+var near_wall_E := false
+var near_wall_W := false
 
 export var group := 1
 export (int) var gravity := 3000
+
 export (float, 0, 1.0) var friction = 0.3
-export (int) var speed := 200
+export (int) var speed := 300
 export (int) var touch_damage := 1
+export var debug := false
 #var initialized := false
 
 #onready var player = get_node("../../Player/Player")
@@ -55,27 +61,28 @@ func _physics_process(delta):
 
 
 func state_manager(delta):
-	match state:
-		"idle":
-			idle_state(delta)
+	call(state+"_state", delta)
+	#match state:
+	#	"idle":
+	#		idle_state(delta)
 			
-		"alert":
-			alert_state(delta)
+	#	"alert":
+	#		alert_state(delta)
 			
-		"combat":
-			combat_state(delta)
+	#	"combat":
+	#		combat_state(delta)
 			
-		"shoot":
-			shoot_state()
+	#	"shoot":
+	#		shoot_state()
+	#		
+	#	"death":
+	#		death_state(delta)
+	#		
+	#	"knockback":
+	#		knockback_state(delta)
 			
-		"death":
-			death_state(delta)
-			
-		"knockback":
-			knockback_state(delta)
-			
-		"return":
-			return_state(delta)
+	#	"return":
+	#		return_state(delta)
 
 func idle_state(delta):
 	animation_mode.travel("Idle_"+ current_direction)
@@ -85,24 +92,52 @@ func idle_state(delta):
 	
 func alert_state(delta):
 	if current_direction == "E" and can_walk_E == true:
-		velocity.x = speed / 2.0
+		velocity.x = speed
 		#print("E")
 		animation_mode.travel("Walk_"+ current_direction)
 	elif current_direction == "W" and can_walk_W == true:
-		velocity.x = -speed/2.0
+		velocity.x = -speed
 		animation_mode.travel("Walk_"+ current_direction)
 		#print("")
 	else:
 		velocity.x = 0.0
 		animation_mode.travel("Idle_"+ current_direction)
-	
+		
+
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
+	#if debug == true:
+	#	print(velocity.x)
 	velocity = move_and_slide(velocity, Vector2.UP)
+	if current_direction == "E":
+		if $Wallcheck_E.is_colliding():
+			if $Wallcheck_E.get_collider().is_in_group("Obstruction"):
+				#if $Wallcheck_E.get_collision_point().x > get_global_position().x:
+					if can_jump == true:
+						jump("E")
+						change_state("jump", "alert_state")
+	elif current_direction == "W":
+		if $Wallcheck_W.is_colliding():
+			if $Wallcheck_W.get_collider().is_in_group("Obstruction"):
+				#if $Wallcheck_E.get_collision_point().x < get_global_position().x:
+					if can_jump == true:
+						jump("W")
+						change_state("jump", "alert_state")
+	
+func jump_state(delta):
+	if current_direction == "E":
+		velocity.x = speed
+	else:
+		velocity.x = -speed
+	print(velocity.x)
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+	if is_on_floor() == true:
+		change_state("alert", "jump_state")
 	
 func combat_state(delta):
 	if target == null:
-		state = "alert"
+		change_state("alert", "combat_state")
 		return
 	var remaining_distance = get_global_position().x - new_random_xpos
 	if target.position.x > position.x:
@@ -127,16 +162,15 @@ func combat_state(delta):
 	
 	if in_sight["Mutants"].empty() == false:
 		if can_shoot == true:
-			change_state("shoot")
+			change_state("shoot", "combat_state")
 	else:
-		change_state("alert")
+		change_state("alert", "combat_state")
 
-func shoot_state():
+func shoot_state(delta):
 	if can_shoot == true:
 		can_shoot = false
 		#rng.randomize()
 		#var numberanimation = rng.randi_range(1, 2)
-		#print(numberanimation)
 		animation_mode.travel("Shoot_"+current_direction + str(1))
 		$ShootCD.start()
 		$ShootAnim.start()
@@ -153,12 +187,12 @@ func knockback_state(delta):
 		knockback = true
 		yield(get_tree().create_timer(1), "timeout")
 		knockback = false
-		change_state("alert")
+		change_state("alert", "knockback_state")
 		
 func return_state(delta):
 	var remaining_distance = get_global_position().x - spawn_guardposition
 	if remaining_distance > -10 and remaining_distance < 10:
-		change_state("idle")
+		change_state("idle", "return_state")
 	if get_global_position().x < spawn_guardposition:
 		velocity.x = speed
 	if get_global_position().x > spawn_guardposition:
@@ -186,13 +220,13 @@ func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
 		current_direction = direction_hit
 		#investigate(direction_hit)
 	alert = true
-	change_state("alert")
+	change_state("alert", "on_hit")
 	
 	if current_hp <= 0:
 			on_death()
 		
 func on_death() -> void:
-	change_state("death")
+	change_state("death", "on_death")
 	dead = true
 	animation_mode.travel("Death_" + current_direction)
 	set_collision_layer_bit(8, 0)
@@ -236,11 +270,11 @@ func _on_FashTimer_timeout() -> void:
 
 
 func _on_ChangeState_timeout() -> void:
-	change_state("return")
+	change_state("return", "change_state_timeout")
 	reset_started = false
 
 func _on_ShootAnim_timeout() -> void:
-	change_state("combat")
+	change_state("combat", "shootanim_timeout")
 	rng.randomize()
 	var offset_x = rng.randf_range(-220, 220)
 	new_random_xpos = get_global_position().x + offset_x
@@ -270,9 +304,9 @@ func _on_SightTimer_timeout() -> void:
 	for key in in_sight:
 		in_sight[key].resize(0)
 	for child in $Eyesight.get_children():
+		#child as RayCast2D
 	#	child.enabled = true
 		if child.is_colliding():
-			print(child.get_collider())
 			if child.get_collider().is_in_group("Mutant") and in_sight["Mutants"].has(child.get_collider()) == false:
 				in_sight["Mutants"].push_back(child.get_collider())
 				add_memory(child.get_collider(), "Mutants")
@@ -286,10 +320,18 @@ func _on_SightTimer_timeout() -> void:
 				add_memory(child.get_collider(), "Projectiles")
 				if alert == false:
 					alert = true
-				print("spotted projectile")
 				
 		
-		
+func jump(direction):
+	velocity.y = -jumppower
+	if direction == "E":
+		velocity.x = speed
+	else:
+		velocity.x = -speed
+	can_jump = false
+	$JumpCD.start()
+	
+
 func add_memory(new_memory, category):
 	if in_memory[category].has(new_memory) == false:
 		in_memory[category].push_back(new_memory)
@@ -313,30 +355,33 @@ func _on_AI_Timer_timeout():
 			target = in_memory["Mutants"][0]
 			if in_sight["Mutants"].has(target) == false:
 				investigate_pos = target.get_global_position()
-		elif in_memory["Projectiles"].empty() == false:
-			change_state("alert")
-		elif investigate_pos != null:
-			change_state("alert")
-		if combat == true and state != "shoot":
-			change_state("combat")
+		elif in_memory["Projectiles"].empty() == false and state == "idle":
+			change_state("alert", "AI_timer")
+		elif investigate_pos != null and state == "idle":
+			change_state("alert", "AI_timer")
+		if combat == true and state != "shoot" and in_sight["Mutants"].has(target):
+			change_state("combat", "Ai_timer")
 			
 func investigate(direction_hit) -> void:
 	current_direction = direction_hit
 		
-func change_state(new_state) -> void:
-	#print( state, new_state)
+func change_state(new_state, caller) -> void:
+	if debug == true:
+		print(caller)
 	if state != "death":
 		state = new_state
 	match new_state:
 		"alert":
 			$Floorcheck_E.enabled = true
 			$Floorcheck_W.enabled = true
+			$Wallcheck_E.enabled = true
+			$Wallcheck_W.enabled = true
+			
 			
 func player_enters_range(in_range):
 	if in_range == true:
 		player_in_range = true
 		$SightTimer.set_wait_time(0.3)
-		print("activate")
 	else:
 		player_in_range = false
 		$SightTimer.set_wait_time(10)
@@ -346,12 +391,10 @@ func floorcheck() -> void:
 	if state != "idle":
 		if $Floorcheck_E.is_colliding() == true:
 			can_walk_E = true
-			#print($Floorcheck_E.get_collider())
 		else:
 			can_walk_E = false
 		if $Floorcheck_W.is_colliding() == true:
 			can_walk_W = true
-			#print($Floorcheck_W.get_collider())
 		else:
 			can_walk_W = false
 			
@@ -372,3 +415,7 @@ func heard_sound(volume : String, sound_position : Vector2):
 				else:
 					current_direction = "W"
 				
+
+
+func _on_JumpCD_timeout():
+	can_jump = true

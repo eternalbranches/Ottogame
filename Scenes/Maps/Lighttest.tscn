@@ -2518,6 +2518,7 @@ position = Vector2( 393.707, -1503.5 )
 
 [node name="NewGuard10" parent="YSort/Enemy" instance=ExtResource( 53 )]
 position = Vector2( 756.668, -1384.09 )
+debug = true
 
 [node name="MutantDog" parent="YSort/Enemy" instance=ExtResource( 55 )]
 position = Vector2( 1701.21, -542.663 )
