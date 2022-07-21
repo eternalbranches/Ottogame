@@ -60,7 +60,7 @@ func _physics_process(delta):
 	state_manager(delta)
 
 
-func state_manager(delta):
+func state_manager(delta) -> void:
 	call(state+"_state", delta)
 	#match state:
 	#	"idle":
@@ -90,7 +90,29 @@ func idle_state(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-func alert_state(delta):
+func patrol_state(delta) -> void:
+	if current_direction == "E":
+		if new_random_xpos < get_global_position().x :
+			velocity.x = 0
+			if $PatrolPause.is_stopped():
+				$PatrolPause.start()
+		else:
+			velocity.x = speed
+	else:
+		if new_random_xpos > get_global_position().x :
+			velocity.x = 0
+			if $PatrolPause.is_stopped():
+				$PatrolPause.start()
+		else:
+			velocity.x = -speed
+	velocity.x = lerp(velocity.x, 0, friction)
+	velocity.y += gravity * delta
+	#if debug == true:
+	#	print(velocity.x)
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	
+func alert_state(delta) -> void:
 	if current_direction == "E" and can_walk_E == true:
 		velocity.x = speed
 		#print("E")
@@ -102,29 +124,37 @@ func alert_state(delta):
 	else:
 		velocity.x = 0.0
 		animation_mode.travel("Idle_"+ current_direction)
+		if $PatrolTimer.is_stopped():
+			$PatrolTimer.start()
+		
 		
 
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
 	#if debug == true:
 	#	print(velocity.x)
-	velocity = move_and_slide(velocity, Vector2.UP)
 	if current_direction == "E":
 		if $Wallcheck_E.is_colliding():
 			if $Wallcheck_E.get_collider().is_in_group("Obstruction"):
 				#if $Wallcheck_E.get_collision_point().x > get_global_position().x:
-					if can_jump == true:
+					if can_jump == true and target.get_global_position().y -20 > get_global_position().y:
 						jump("E")
 						change_state("jump", "alert_state")
+					else: 
+						velocity.x = 0
 	elif current_direction == "W":
 		if $Wallcheck_W.is_colliding():
 			if $Wallcheck_W.get_collider().is_in_group("Obstruction"):
 				#if $Wallcheck_E.get_collision_point().x < get_global_position().x:
-					if can_jump == true:
+					if can_jump == true and target.get_global_position().y -20 > get_global_position().y:
 						jump("W")
 						change_state("jump", "alert_state")
+					else: 
+						velocity.x = 0
+	velocity = move_and_slide(velocity, Vector2.UP)
+
 	
-func jump_state(delta):
+func jump_state(delta) -> void:
 	if current_direction == "E":
 		velocity.x = speed
 	else:
@@ -135,7 +165,7 @@ func jump_state(delta):
 	if is_on_floor() == true:
 		change_state("alert", "jump_state")
 	
-func combat_state(delta):
+func combat_state(delta) -> void:
 	if target == null:
 		change_state("alert", "combat_state")
 		return
@@ -166,7 +196,7 @@ func combat_state(delta):
 	else:
 		change_state("alert", "combat_state")
 
-func shoot_state(delta):
+func shoot_state(delta) -> void:
 	if can_shoot == true:
 		can_shoot = false
 		#rng.randomize()
@@ -175,12 +205,12 @@ func shoot_state(delta):
 		$ShootCD.start()
 		$ShootAnim.start()
 		
-func death_state(delta):
+func death_state(delta) -> void:
 	velocity.x = 0
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-func knockback_state(delta):
+func knockback_state(delta) -> void:
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	if knockback == false:
@@ -189,7 +219,7 @@ func knockback_state(delta):
 		knockback = false
 		change_state("alert", "knockback_state")
 		
-func return_state(delta):
+func return_state(delta) -> void:
 	var remaining_distance = get_global_position().x - spawn_guardposition
 	if remaining_distance > -10 and remaining_distance < 10:
 		change_state("idle", "return_state")
@@ -322,7 +352,7 @@ func _on_SightTimer_timeout() -> void:
 					alert = true
 				
 		
-func jump(direction):
+func jump(direction) -> void:
 	velocity.y = -jumppower
 	if direction == "E":
 		velocity.x = speed
@@ -332,23 +362,23 @@ func jump(direction):
 	$JumpCD.start()
 	
 
-func add_memory(new_memory, category):
+func add_memory(new_memory, category) -> void:
 	if in_memory[category].has(new_memory) == false:
 		in_memory[category].push_back(new_memory)
 		call_ally(new_memory, category)
 		
 	
-func call_ally(memory, category):
+func call_ally(memory, category) -> void:
 	get_tree().call_group("guard_"+ str(group), "hear_ally", memory, category)
 		
-func hear_ally(memory, category):
+func hear_ally(memory, category) -> void:
 	add_memory(memory, category)
 	if alert == false:
 		alert = true
 	_on_AI_Timer_timeout()
 	
 	
-func _on_AI_Timer_timeout():
+func _on_AI_Timer_timeout() -> void:
 	if alert == true and dead == false:
 		if in_memory["Mutants"].empty() == false:
 			combat = true
@@ -378,7 +408,7 @@ func change_state(new_state, caller) -> void:
 			$Wallcheck_W.enabled = true
 			
 			
-func player_enters_range(in_range):
+func player_enters_range(in_range) -> void:
 	if in_range == true:
 		player_in_range = true
 		$SightTimer.set_wait_time(0.3)
@@ -415,7 +445,28 @@ func heard_sound(volume : String, sound_position : Vector2):
 				else:
 					current_direction = "W"
 				
+				
+func new_random_position() -> void:
+	randomize()
+	var random_offset = rng.randf_range(-30.0, 30.0)
+	new_random_xpos = get_global_position().x + random_offset
+	
 
 
-func _on_JumpCD_timeout():
+func _on_JumpCD_timeout() -> void:
 	can_jump = true
+
+
+func _on_PatrolTimer_timeout() -> void:
+	if state == "alert":
+		new_random_position()
+		change_state("patrol", "Patrol_timer")
+		if get_global_position().x > new_random_xpos:
+			current_direction = "E"
+		else:
+			current_direction = "W"
+
+
+func _on_PatrolPause_timeout():
+	if state == "patrol":
+		change_state("alert", "patrol_pause")

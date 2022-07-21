@@ -337,9 +337,6 @@ margin_top = -300.0
 margin_right = 200.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 400, 600 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer"]
 margin_right = 400.0

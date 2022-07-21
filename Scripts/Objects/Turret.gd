@@ -102,7 +102,7 @@ func sightcheck():
 			$ShootCD.stop()
 
 func _on_Range_body_entered(body):
-	if state == "idle" and can_activate:
+	if state == "idle" and can_activate == true:
 		current_target = body
 		can_activate = false
 		player_close = true
@@ -113,14 +113,27 @@ func _on_Range_body_entered(body):
 
 
 func _on_Range_body_exited(_body):
-	if state == "shoot":
-		$ChangeState.start()
+	if can_activate == true:
+		if state == "laser":
+			player_close = false
+			initialized = false
+			if state != "death":
+				change_states("idle", "range_body_exited")
+			$ShootCD.stop()
+			$AnimationPlayer.play("Deactivate")
+			#$Deactivate.start()
 	else:
-		player_close = false
-		initialized = false
+		$ChangeState.start()
+		
+func _on_ChangeState_timeout():
+	if $Range.get_overlapping_bodies().empty():
 		if state != "death":
-			change_states("idle", "range_body_exited")
-		$ShootCD.stop()
+			change_states("idle", "change_states")
+			$ShootCD.stop()
+			player_close = false
+			initialized = false
+			$AnimationPlayer.play("Deactivate")
+			#$Deactivate.start()
 		
 
 func _on_ShootCD_timeout():
@@ -139,16 +152,7 @@ func on_death():
 	
 
 
-func _on_ChangeState_timeout():
-	if $Range.get_overlapping_bodies().empty():
-		print($Range.get_overlapping_bodies())
-		if state != "death":
-			change_states("idle", "change_states")
-			$ShootCD.stop()
-			player_close = false
-			initialized = false
-			$AnimationPlayer.play("Deactivate")
-			$Deactivate.start()
+
 
 
 func _on_RemoveTimer_timeout():
@@ -158,15 +162,22 @@ func _on_RemoveTimer_timeout():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"Activate":
+			
 			if player_in_range == true:
 				change_states("laser", "animation_finished")
+				
+				$AnimationPlayer.play("Idle")
 			else:
 				$AnimationPlayer.play("Idle")
 			#$Light2D.queue_free()
 		"Attack_E", "Attack_W":
 			$AnimationPlayer.play("Idle")
+			#print("S")
 		"Deactivate":
 			state = "idle"
+			can_activate = true
+
+
 
 
 
@@ -174,12 +185,6 @@ func change_states(new_state : String, caller : String) -> void:
 	if state != "death":
 		state = new_state
 	print(caller)
-	
-	
-	
-	
-func _on_Deactivate_timeout():
-	can_activate = true
 
 func player_enters_range(_body):
 	player_in_range = true

@@ -4,7 +4,7 @@ export (int) var max_speed := 150
 export (int) var speed_change := 20
 export (int) var run_speed_change := 7
 export (int) var max_run_speed := 500
-export(int) var dash_speed := 300
+export(int) var dash_speed := 700
 var max_jump_speed := 150
 var max_run_jump_speed := 425
 export (int) var crawl_speed := 150
@@ -31,7 +31,8 @@ var state := "idle"
 var previous_state := "idle"
 
 var velocity := Vector2.ZERO
-
+var dash_up := false
+var dash_side := false
 var ceiling := false
 var climbable := false
 var ladder_location := 0.0
@@ -264,9 +265,14 @@ func get_input_running():
 		$PlatformTimer.start()
 
 func dash_state(delta)-> void:
+	if dash_side == false: 
+		velocity.x = 0
+	if dash_up == false:
+		velocity.y = 0
 	if $Dash_Timer.is_stopped() == true:
 		$Dash_Timer.start()
-	velocity.normalized() * dash_speed * delta
+	velocity = velocity.normalized()* dash_speed
+	#print(velocity * dash_speed *10 * delta)
 	move_and_slide(velocity)
 	
 func crawling_state(delta) -> void:
@@ -326,27 +332,38 @@ func get_input_midair():
 
 			
 func dash() -> void:
+	
 	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Up"):
-			velocity.y = -dash_speed *2
+			velocity.y = -dash_speed
+			#velocity.y = clamp(velocity.y - dash_speed, -2000, -dash_speed*2)
 			max_run_jump_speed = max_run_speed
 			can_doublejump = false
 			state = "dash"
+			dash_up = true
 		elif Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Down"):
+			#velocity.y = clamp(velocity.y + dash_speed, dash_speed, 800)
 			velocity.y = dash_speed
 			max_run_jump_speed = max_run_speed
 			can_doublejump = false
 			state = "dash"
+			dash_up = true
 		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Left"):
+			#velocity.x = clamp(velocity.x - dash_speed, -800, -dash_speed)
 			velocity.x = -dash_speed
 			max_run_jump_speed = max_run_speed
 			can_doublejump = false
 			state = "dash"
+			dash_side = true
 		elif Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Right"):
+			#velocity.x = clamp(velocity.x + dash_speed, dash_speed, 800)
 			velocity.x = dash_speed
 			max_run_jump_speed = max_run_speed
 			can_doublejump = false
 			state = "dash"
+			dash_side = true
+
+		
 		
 	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Dash"):
@@ -761,4 +778,6 @@ func _on_ActivateEnemies_body_exited(body):
 
 
 func _on_Dash_Timer_timeout():
+	dash_side = false
+	dash_up = false
 	state = "midair_run"

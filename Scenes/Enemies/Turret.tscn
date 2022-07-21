@@ -560,9 +560,7 @@ wait_time = 8.0
 one_shot = true
 
 [node name="ChangeState" type="Timer" parent="."]
-one_shot = true
-
-[node name="Deactivate" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="."]
@@ -629,7 +627,6 @@ scale = Vector2( 1, 0.5 )
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
-[connection signal="timeout" from="Deactivate" to="." method="_on_Deactivate_timeout"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_LaserTimer_timeout"]
 [connection signal="timeout" from="RemoveTimer" to="." method="_on_RemoveTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

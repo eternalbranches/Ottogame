@@ -653,6 +653,12 @@ autostart = true
 wait_time = 2.0
 one_shot = true
 
+[node name="PatrolTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PatrolPause" type="Timer" parent="."]
+one_shot = true
+
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0.0352941, 1, 0.027451, 1 )
 margin_left = 0.25
@@ -736,4 +742,6 @@ collision_mask = 15
 [connection signal="timeout" from="SightTimer" to="." method="_on_SightTimer_timeout"]
 [connection signal="timeout" from="AI_Timer" to="." method="_on_AI_Timer_timeout"]
 [connection signal="timeout" from="JumpCD" to="." method="_on_JumpCD_timeout"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]
+[connection signal="timeout" from="PatrolPause" to="." method="_on_PatrolPause_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hurtbox_body_entered"]

@@ -76,6 +76,7 @@ text = "CPU"
 
 [node name="Pausemenu" type="NinePatchRect" parent="."]
 pause_mode = 2
+visible = false
 margin_left = 384.238
 margin_top = 196.539
 margin_right = 633.238
