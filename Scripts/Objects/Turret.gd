@@ -1,15 +1,10 @@
 extends StaticBody2D
 onready var player = get_node("../../Player/Player")
 
-var player_in_range
-var player_close
 var current_target
-#var player_in_sight
-#var player_seen
-
 var can_shoot := true
 var laser_active := false
-var current_hp := 2
+var current_hp := 20
 var laser_speed := 1
 var can_activate := true
 var current_direction := "W"
@@ -59,6 +54,10 @@ func _process(_delta):
 				can_shoot = false
 		"laser":
 			if can_shoot == true and current_target.get_global_position().y > get_global_position().y:
+				if current_target.get_global_position().x > get_global_position().x:
+					current_direction = "E"
+				else:
+					current_direction = "W"
 				can_shoot = false
 				if laser_active == false:
 					laser_active = true
@@ -67,7 +66,8 @@ func _process(_delta):
 					else:
 						$Laser.rotation_degrees = rad2deg(get_angle_to(current_target.get_global_position())- 45)
 					$Laser.set_is_casting(true)
-					$LaserTimer.start()
+					if $LaserTimer.is_stopped():
+						$LaserTimer.start()
 					
 			if laser_active == true:
 				if current_direction == "E":
@@ -105,7 +105,6 @@ func _on_Range_body_entered(body):
 	if state == "idle" and can_activate == true:
 		current_target = body
 		can_activate = false
-		player_close = true
 		$AnimationPlayer.play("Activate")
 		$SFXPLayer.play()
 	elif state == "idle" and can_activate == false:
@@ -115,11 +114,10 @@ func _on_Range_body_entered(body):
 func _on_Range_body_exited(_body):
 	if can_activate == true:
 		if state == "laser":
-			player_close = false
 			initialized = false
 			if state != "death":
 				change_states("idle", "range_body_exited")
-			$ShootCD.stop()
+			#$ShootCD.stop()
 			$AnimationPlayer.play("Deactivate")
 			#$Deactivate.start()
 	else:
@@ -130,7 +128,6 @@ func _on_ChangeState_timeout():
 		if state != "death":
 			change_states("idle", "change_states")
 			$ShootCD.stop()
-			player_close = false
 			initialized = false
 			$AnimationPlayer.play("Deactivate")
 			#$Deactivate.start()
@@ -162,33 +159,20 @@ func _on_RemoveTimer_timeout():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"Activate":
+			change_states("laser", "animation_finished")
+			$AnimationPlayer.play("Idle")
 			
-			if player_in_range == true:
-				change_states("laser", "animation_finished")
-				
-				$AnimationPlayer.play("Idle")
-			else:
-				$AnimationPlayer.play("Idle")
-			#$Light2D.queue_free()
 		"Attack_E", "Attack_W":
 			$AnimationPlayer.play("Idle")
-			#print("S")
 		"Deactivate":
-			state = "idle"
+			change_states("idle", "Animation_finished")
 			can_activate = true
-
-
-
 
 
 func change_states(new_state : String, caller : String) -> void:
 	if state != "death":
 		state = new_state
 	print(caller)
-
-func player_enters_range(_body):
-	player_in_range = true
-
 
 func _on_LaserTimer_timeout():
 	$ShootCD.start()

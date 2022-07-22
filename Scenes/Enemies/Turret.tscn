@@ -537,7 +537,7 @@ shape = SubResource( 1 )
 [node name="Range" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 2
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource( 2 )
@@ -556,7 +556,7 @@ vframes = 2
 texture = ExtResource( 4 )
 
 [node name="ShootCD" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 4.0
 one_shot = true
 
 [node name="ChangeState" type="Timer" parent="."]
@@ -564,6 +564,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="."]
+wait_time = 1.5
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
