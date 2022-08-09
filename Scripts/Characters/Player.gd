@@ -610,7 +610,6 @@ func shooting():
 	if CharacterSave.controller == true:
 		if Input.is_action_just_pressed("Aim_assist"):
 			possible_targets = $Aim_Assist.get_overlapping_bodies()
-			print(possible_targets)
 			if possible_targets.empty() == false:
 				current_target = possible_targets[0]
 				possible_targets.push_back(current_target)
@@ -650,7 +649,6 @@ func shooting():
 func shield():
 		if CharacterSave.save_dict["shield"] == true and can_shield == true:
 			if Input.is_action_just_pressed("Shield"):
-				print("shield")
 				$Shield.visible = true
 				$Shield.set_collision_mask_bit(4,1)
 				$Shield/Selfdestruct.start()

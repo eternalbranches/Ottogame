@@ -15,6 +15,7 @@ var new_random_xpos := 0.0
 var dead := false
 var in_sight := {"Mutants": [], "Projectiles": []}
 var in_memory := {"Guards": [], "Mutants": [], "Projectiles": []}
+var target_visible := false
 var morale := 100
 var threat := 0
 var alert := false
@@ -22,7 +23,6 @@ var combat := false
 var target
 var investigate_pos: Vector2
 var player_in_range := false
-var last_seen := Vector2.ZERO
 var knockback := false
 var can_shoot := true
 var reset_started := false
@@ -53,7 +53,7 @@ func _ready():
 #rng.randf_range(-10.0, 10.0)
 func _process(_delta):
 	if state != "idle":
-		floorcheck()
+		pass
 
 func _physics_process(delta):
 	$Label.text = state
@@ -105,53 +105,61 @@ func patrol_state(delta) -> void:
 				$PatrolPause.start()
 		else:
 			velocity.x = -speed
+	animation_mode.travel("Idle_"+ current_direction)
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
-	#if debug == true:
-	#	print(velocity.x)
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	
 func alert_state(delta) -> void:
+	floorcheck()
 	if current_direction == "E" and can_walk_E == true:
 		velocity.x = speed
-		#print("E")
 		animation_mode.travel("Walk_"+ current_direction)
 	elif current_direction == "W" and can_walk_W == true:
 		velocity.x = -speed
 		animation_mode.travel("Walk_"+ current_direction)
-		#print("")
 	else:
 		velocity.x = 0.0
 		animation_mode.travel("Idle_"+ current_direction)
 		if $PatrolTimer.is_stopped():
 			$PatrolTimer.start()
-		
-		
-
+			
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
-	#if debug == true:
-	#	print(velocity.x)
 	if current_direction == "E":
 		if $Wallcheck_E.is_colliding():
 			if $Wallcheck_E.get_collider().is_in_group("Obstruction"):
 				#if $Wallcheck_E.get_collision_point().x > get_global_position().x:
-					if can_jump == true and target.get_global_position().y -20 > get_global_position().y:
+					print(target.get_global_position().y -20 < get_global_position().y)
+					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
 						jump("E")
 						change_state("jump", "alert_state")
 					else: 
 						velocity.x = 0
 	elif current_direction == "W":
 		if $Wallcheck_W.is_colliding():
+			
 			if $Wallcheck_W.get_collider().is_in_group("Obstruction"):
+					#print(target.get_global_position().y -120 < get_global_position().y, target.get_global_position().y -120, get_global_position().y)
 				#if $Wallcheck_E.get_collision_point().x < get_global_position().x:
-					if can_jump == true and target.get_global_position().y -20 > get_global_position().y:
+				if target:
+					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
+						jump("W")
+						change_state("jump", "alert_state")
+					else: 
+						velocity.x = 0
+				else:
+					if can_jump == true and investigate_pos.y -20 < get_global_position().y:
 						jump("W")
 						change_state("jump", "alert_state")
 					else: 
 						velocity.x = 0
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	#if sightcheck() == false:
+	#	pass
+	#	print("lost track")     #needs new state
 
 	
 func jump_state(delta) -> void:
@@ -159,7 +167,6 @@ func jump_state(delta) -> void:
 		velocity.x = speed
 	else:
 		velocity.x = -speed
-	print(velocity.x)
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	if is_on_floor() == true:
@@ -265,18 +272,6 @@ func on_death() -> void:
 	for child in $Eyesight.get_children():
 		child.enabled = false
 	
-	
-#func sightcheck():
-#	var space_state = get_world_2d().direct_space_state
-#	var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
-#	if sight_check:
-#		if sight_check.collider.name == "Player":
-#			last_seen = player.position
-#			if state == "sight" or "return":
-#				state = "combat"
-#		else:
-#			state = "return"
-
 func _on_ShootCD_timeout() -> void:
 	can_shoot = true
 
@@ -339,15 +334,14 @@ func _on_SightTimer_timeout() -> void:
 		if child.is_colliding():
 			if child.get_collider().is_in_group("Mutant") and in_sight["Mutants"].has(child.get_collider()) == false:
 				in_sight["Mutants"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Mutants")
+				add_memory(child.get_collider(), "Mutants", true)
 				if alert == false:
 					alert = true
 					investigate_pos = child.get_global_position()
 					_on_AI_Timer_timeout()
-				print("spotted mutant")
 			elif child.get_collider().is_in_group("Projectiles") and in_sight["Projectiles"].has(child.get_collider()) == false:
 				in_sight["Projectiles"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Projectiles")
+				add_memory(child.get_collider(), "Projectiles", true)
 				if alert == false:
 					alert = true
 				
@@ -362,17 +356,19 @@ func jump(direction) -> void:
 	$JumpCD.start()
 	
 
-func add_memory(new_memory, category) -> void:
+func add_memory(new_memory, category, firsthand) -> void:
 	if in_memory[category].has(new_memory) == false:
 		in_memory[category].push_back(new_memory)
-		call_ally(new_memory, category)
+		if firsthand == true:
+			call_ally(new_memory, category)
 		
 	
 func call_ally(memory, category) -> void:
 	get_tree().call_group("guard_"+ str(group), "hear_ally", memory, category)
+	
 		
 func hear_ally(memory, category) -> void:
-	add_memory(memory, category)
+	add_memory(memory, category, false)
 	if alert == false:
 		alert = true
 	_on_AI_Timer_timeout()
@@ -385,6 +381,8 @@ func _on_AI_Timer_timeout() -> void:
 			target = in_memory["Mutants"][0]
 			if in_sight["Mutants"].has(target) == false:
 				investigate_pos = target.get_global_position()
+			if state == "idle":
+				change_state("alert", "AI_timer")
 		elif in_memory["Projectiles"].empty() == false and state == "idle":
 			change_state("alert", "AI_timer")
 		elif investigate_pos != null and state == "idle":
@@ -396,8 +394,8 @@ func investigate(direction_hit) -> void:
 	current_direction = direction_hit
 		
 func change_state(new_state, caller) -> void:
-	if debug == true:
-		print(caller)
+	#if debug == true:
+		#print(caller)
 	if state != "death":
 		state = new_state
 	match new_state:
@@ -428,7 +426,7 @@ func floorcheck() -> void:
 		else:
 			can_walk_W = false
 			
-func heard_sound(volume : String, sound_position : Vector2):
+func heard_sound(volume : String, sound_position : Vector2) -> void:
 	match volume:
 		"loud":
 			alert = true
@@ -452,6 +450,14 @@ func new_random_position() -> void:
 	new_random_xpos = get_global_position().x + random_offset
 	
 
+func sightcheck():
+	var space_state = get_world_2d().direct_space_state
+	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
+	if sight_check:
+		return true
+	else:
+		return false
+		
 
 func _on_JumpCD_timeout() -> void:
 	can_jump = true
@@ -461,12 +467,12 @@ func _on_PatrolTimer_timeout() -> void:
 	if state == "alert":
 		new_random_position()
 		change_state("patrol", "Patrol_timer")
-		if get_global_position().x > new_random_xpos:
+		if get_global_position().x < new_random_xpos:
 			current_direction = "E"
 		else:
 			current_direction = "W"
 
 
-func _on_PatrolPause_timeout():
+func _on_PatrolPause_timeout() -> void:
 	if state == "patrol":
 		change_state("alert", "patrol_pause")

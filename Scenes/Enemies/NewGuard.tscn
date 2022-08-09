@@ -650,10 +650,11 @@ wait_time = 1.5
 autostart = true
 
 [node name="JumpCD" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 8.0
 one_shot = true
 
 [node name="PatrolTimer" type="Timer" parent="."]
+wait_time = 4.0
 one_shot = true
 
 [node name="PatrolPause" type="Timer" parent="."]
