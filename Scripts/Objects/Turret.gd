@@ -1,5 +1,5 @@
 extends StaticBody2D
-onready var player = get_node("../../Player/Player")
+#onready var player = get_node("../../Player/Player")
 
 var current_target
 var can_shoot := true
@@ -13,6 +13,8 @@ export var black := false
 var state = "idle"
 var initialized := false
 export var sprite_pointing := "S"
+
+onready var ChangeState = $ChangeState
 
 func _ready():
 	if black == true:
@@ -44,7 +46,7 @@ func _process(_delta):
 			if can_shoot == true:
 				var skill = load("res://Scenes/Abilities/Bullet.tscn")
 				var skill_instance = skill.instance()
-				skill_instance.rotation = get_angle_to(player.get_global_position())
+				skill_instance.rotation = get_angle_to(current_target.get_global_position())
 				skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
 				skill_instance.enemyposx = position.x
 				skill_instance.origin = "Enemy"
@@ -90,7 +92,7 @@ func _process(_delta):
 func sightcheck():
 	#var raycasting_player = player.position - Vector2(0, 0)
 	var space_state = get_world_2d().direct_space_state
-	var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
+	var sight_check = space_state.intersect_ray(position, current_target.position, [self], collision_mask)
 	if sight_check:
 		#print(sight_check)
 		if sight_check.collider.name == "Player":
@@ -102,6 +104,7 @@ func sightcheck():
 			$ShootCD.stop()
 
 func _on_Range_body_entered(body):
+	print(body)
 	if state == "idle" and can_activate == true:
 		current_target = body
 		can_activate = false
@@ -121,7 +124,7 @@ func _on_Range_body_exited(_body):
 			$AnimationPlayer.play("Deactivate")
 			#$Deactivate.start()
 	else:
-		$ChangeState.start()
+		ChangeState.start()
 		
 func _on_ChangeState_timeout():
 	if $Range.get_overlapping_bodies().empty():
@@ -170,11 +173,14 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func change_states(new_state : String, caller : String) -> void:
+	print(new_state, caller)
 	if state != "death":
 		state = new_state
-	print(caller)
 
 func _on_LaserTimer_timeout():
 	$ShootCD.start()
 	$Laser.set_is_casting(false)
 	laser_active = false
+	
+func player_enters_range(_check : bool):
+	pass

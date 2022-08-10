@@ -264,7 +264,7 @@ func get_input_running():
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
 
-func dash_state(delta)-> void:
+func dash_state(_delta)-> void:
 	if dash_side == false: 
 		velocity.x = 0
 	if dash_up == false:
@@ -431,7 +431,7 @@ func midair_run_state(delta):
 		state = "running"
 		run_released = true
 
-func climbing_state(delta) -> void:
+func climbing_state(_delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	animation_mode.travel("Climbing")
@@ -572,7 +572,7 @@ func _physics_process(delta):
 	state_manager(delta)
 	call(state + "_state", delta)
 
-func _process(delta):
+func _process(_delta):
 	$DebugState.text = state
 	
 func change_crawling():
@@ -700,7 +700,7 @@ func _on_Dashtimer_timeout() -> void:
 	run_l = 0
 	run_r = 0
 
-func on_hit(damage, origin, enemy_posx) -> void:
+func on_hit(damage, _origin, enemy_posx) -> void:
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
 		GameEvents.emit_signal_hp_change(current_hp, max_hp)

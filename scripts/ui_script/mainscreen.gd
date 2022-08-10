@@ -51,4 +51,5 @@ func load_volume() -> void:
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name) -> void:
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/interface/characterselect.tscn")

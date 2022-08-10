@@ -526,7 +526,7 @@ tracks/10/keys = {
 
 [node name="Turret" type="StaticBody2D" groups=["Enemy"]]
 rotation = 3.14159
-collision_layer = 4
+collision_layer = 512
 collision_mask = 3
 script = ExtResource( 1 )
 
@@ -560,6 +560,7 @@ wait_time = 4.0
 one_shot = true
 
 [node name="ChangeState" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 2.0
 one_shot = true
 
@@ -573,9 +574,6 @@ margin_left = 0.25
 margin_top = -60.75
 margin_right = 40.25
 margin_bottom = -46.75
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SFXPLayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -587,6 +585,7 @@ bus = "SFX"
 wait_time = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Inactive"
 anims/Activate = SubResource( 3 )
 anims/Attack_E = SubResource( 8 )
 anims/Attack_W = SubResource( 9 )

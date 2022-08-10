@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).clamped(max_length)
+	cast_to = (cast_to + Vector2.RIGHT * cast_speed * delta).limit_length(max_length)
 	cast_beam()
 
 #func _unhandled_input(event: InputEvent) -> void:

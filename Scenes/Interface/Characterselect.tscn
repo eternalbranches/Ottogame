@@ -17,7 +17,7 @@
 code = "shader_type canvas_item;
 
 uniform float Strength : hint_range(0,20) = 1;
-uniform float RandomOffset = 1f;
+uniform float RandomOffset = 1;
 
 
 float random( float seed )

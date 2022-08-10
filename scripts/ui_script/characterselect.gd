@@ -162,6 +162,7 @@ func _on_StopDelete_pressed():
 
 
 func _on_BackButton_pressed():
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://scenes/interface/mainscreen.tscn")
 
 
@@ -170,6 +171,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"FadeIn":
 			$AnimationPlayer.play("Background_Animation")
 		"FadeOut":
+			# warning-ignore:return_value_discarded
 			get_tree().change_scene("res://scenes/interface/scenetransition.tscn")
 			#Scenechanger.goto_scene("res://scenes/maps/lighttest.tscn", self)
 			

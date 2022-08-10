@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-func _process(delta):
+func _process(_delta):
 	if $Pausemenu.visible == true:
 		if Input.is_action_just_pressed("ESC"):
 			_on_BackButton_pressed()
@@ -15,6 +15,7 @@ func _on_MainMenuButton_pressed():
 	
 func _on_YesButton_pressed() -> void:
 	get_tree().paused = false
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
 
 func _on_NoButton_pressed() -> void:

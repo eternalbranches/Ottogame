@@ -49,6 +49,7 @@ func _on_Player_death() -> void:
 	#CharacterSave.save_dict = savefile.get_var()
 	#savefile.close()
 	yield(get_tree().create_timer(1.5), "timeout")
+	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 	#var keys = checkpoints.keys()
 	#var key  = keys[CharacterSave.save_dict["current_checkpoint"]]

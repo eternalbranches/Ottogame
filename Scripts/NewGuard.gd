@@ -203,7 +203,7 @@ func combat_state(delta) -> void:
 	else:
 		change_state("alert", "combat_state")
 
-func shoot_state(delta) -> void:
+func shoot_state(_delta) -> void:
 	if can_shoot == true:
 		can_shoot = false
 		#rng.randomize()
@@ -237,7 +237,7 @@ func return_state(delta) -> void:
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-func suprised_state(delta):
+func suprised_state(_delta):
 	pass
 
 
@@ -394,8 +394,8 @@ func investigate(direction_hit) -> void:
 	current_direction = direction_hit
 		
 func change_state(new_state, caller) -> void:
-	#if debug == true:
-		#print(caller)
+	if debug == true:
+		print(caller)
 	if state != "death":
 		state = new_state
 	match new_state:
