@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://scripts/resource/dialogue.gd" type="Script" id=1]
+[ext_resource path="res://assets/characters/profile/otto_determined.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/profile/luna_concerned.png" type="Texture" id=3]
+[ext_resource path="res://assets/textbox assets/dialogue_box3.png" type="Texture" id=4]
+[ext_resource path="res://assets/textbox assets/dialogue_box2.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/profile/luna_speak.png" type="Texture" id=6]
+[ext_resource path="res://assets/characters/profile/otto_calm.png" type="Texture" id=7]
+[ext_resource path="res://assets/characters/profile/luna_smirk.png" type="Texture" id=8]
+[ext_resource path="res://assets/characters/profile/otto_happy.png" type="Texture" id=9]
+
+[resource]
+script = ExtResource( 1 )
+avatar_right = [ ExtResource( 7 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 2 ) ]
+avatar_left = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 8 ) ]
+dialog_slides = [ "[center]You have to find the [wave][color=red]Keycard[/color][/wave][/center]!", "[center]Where can I find it?[/center]", "[center]It's in the room to the right.[/center]", "[center]Good Luck!.[/center]" ]
+highlight = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ) ]
