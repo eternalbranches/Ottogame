@@ -332,7 +332,6 @@ func get_input_midair():
 
 			
 func dash() -> void:
-	
 	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
 		if Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Up"):
 			velocity.y = -dash_speed
@@ -355,6 +354,8 @@ func dash() -> void:
 			can_doublejump = false
 			state = "dash"
 			dash_side = true
+			animation_mode.travel("Dash_W")
+			
 		elif Input.is_action_just_pressed("Dash") and Input.is_action_pressed("Right"):
 			#velocity.x = clamp(velocity.x + dash_speed, dash_speed, 800)
 			velocity.x = dash_speed
@@ -362,6 +363,7 @@ func dash() -> void:
 			can_doublejump = false
 			state = "dash"
 			dash_side = true
+			animation_mode.travel("Dash_E")
 
 		
 		
