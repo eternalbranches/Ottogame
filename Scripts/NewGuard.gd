@@ -105,6 +105,8 @@ func patrol_state(delta) -> void:
 				$PatrolPause.start()
 		else:
 			velocity.x = -speed
+			
+			
 	animation_mode.travel("Idle_"+ current_direction)
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
@@ -127,22 +129,23 @@ func alert_state(delta) -> void:
 			
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
+	
 	if current_direction == "E":
 		if $Wallcheck_E.is_colliding():
 			if $Wallcheck_E.get_collider().is_in_group("Obstruction"):
-				#if $Wallcheck_E.get_collision_point().x > get_global_position().x:
-					print(target.get_global_position().y -20 < get_global_position().y)
+				if target != null:
 					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
 						jump("E")
 						change_state("jump", "alert_state")
 					else: 
 						velocity.x = 0
+				else:
+					velocity.x = 0
+					
 	elif current_direction == "W":
 		if $Wallcheck_W.is_colliding():
 			
 			if $Wallcheck_W.get_collider().is_in_group("Obstruction"):
-					#print(target.get_global_position().y -120 < get_global_position().y, target.get_global_position().y -120, get_global_position().y)
-				#if $Wallcheck_E.get_collision_point().x < get_global_position().x:
 				if target:
 					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
 						jump("W")
@@ -155,6 +158,7 @@ func alert_state(delta) -> void:
 						change_state("jump", "alert_state")
 					else: 
 						velocity.x = 0
+						
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	#if sightcheck() == false:
@@ -417,14 +421,15 @@ func player_enters_range(in_range) -> void:
 
 func floorcheck() -> void:
 	if state != "idle":
-		if $Floorcheck_E.is_colliding() == true:
+		if $Floorcheck_E.is_colliding() == true and $Wallcheck_E.is_colliding() == false:
 			can_walk_E = true
 		else:
 			can_walk_E = false
-		if $Floorcheck_W.is_colliding() == true:
+		if $Floorcheck_W.is_colliding() == true and $Wallcheck_W.is_colliding() == false:
 			can_walk_W = true
 		else:
 			can_walk_W = false
+			
 			
 func heard_sound(volume : String, sound_position : Vector2) -> void:
 	match volume:
@@ -476,3 +481,14 @@ func _on_PatrolTimer_timeout() -> void:
 func _on_PatrolPause_timeout() -> void:
 	if state == "patrol":
 		change_state("alert", "patrol_pause")
+
+
+func _on_Detect_body_entered(body):
+	print(body)
+	if body.is_in_group("Mutant") and in_sight["Mutants"].has(body) == false:
+		in_sight["Mutants"].push_back(body)
+		add_memory(body, "Mutants", true)
+	if alert == false:
+		alert = true
+		investigate_pos = body.get_global_position()
+		_on_AI_Timer_timeout()

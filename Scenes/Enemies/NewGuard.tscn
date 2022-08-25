@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/characters/guard_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/newguard.gd" type="Script" id=2]
@@ -587,6 +587,9 @@ start_node = "Idle_W"
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 9.45, 20.085 )
 
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 22.25, 27.625 )
+
 [node name="NewGuard" type="KinematicBody2D" groups=["Can_Hear", "Enemy", "Guard"]]
 collision_layer = 256
 script = ExtResource( 2 )
@@ -735,6 +738,23 @@ enabled = true
 cast_to = Vector2( -300, 60 )
 collision_mask = 15
 
+[node name="DetectRight" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRight"]
+position = Vector2( 24, 0 )
+shape = SubResource( 56 )
+
+[node name="DetectLeft" type="Area2D" parent="."]
+position = Vector2( -46.528, 0 )
+collision_layer = 6
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectLeft"]
+position = Vector2( 22.528, 0 )
+shape = SubResource( 56 )
+
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
 [connection signal="timeout" from="ShootAnim" to="." method="_on_ShootAnim_timeout"]
@@ -746,3 +766,5 @@ collision_mask = 15
 [connection signal="timeout" from="PatrolTimer" to="." method="_on_PatrolTimer_timeout"]
 [connection signal="timeout" from="PatrolPause" to="." method="_on_PatrolPause_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="body_entered" from="DetectRight" to="." method="_on_Detect_body_entered"]
+[connection signal="body_entered" from="DetectLeft" to="." method="_on_Detect_body_entered"]

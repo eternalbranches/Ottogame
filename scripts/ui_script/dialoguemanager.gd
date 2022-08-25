@@ -3,6 +3,12 @@ onready var background = $"%Background"
 onready var text_label = $"%Textfield"
 onready var avatar_left = $"%Avatar_Left"
 onready var avatar_right = $"%Avatar_Right"
+onready var animation_left = $"%Anim_Left"
+onready var animation_right = $"%Anim_Right"
+onready var background_right = $"%Background_Right"
+onready var background_left = $"%Background_Left"
+onready var timer_left = $"%Timer_Left"
+onready var timer_right = $"%Timer_Right"
 export(Resource) var current_dialogue = current_dialogue as Dialogue
 #export(Resource) var _runtime_data = _runtime_data as RuntimeData
 
@@ -19,6 +25,12 @@ func show_slide() -> void:
 	background.texture = current_dialogue.highlight[_current_slide_index]
 	avatar_left.texture = current_dialogue.avatar_left[_current_slide_index]
 	avatar_right.texture = current_dialogue.avatar_right[_current_slide_index]
+	background_left.texture = current_dialogue.background_left[_current_slide_index]
+	background_right.texture = current_dialogue.background_right[_current_slide_index]
+	animation_left.play(current_dialogue.animation_left[_current_slide_index])
+	animation_right.play(current_dialogue.animation_right[_current_slide_index])
+	timer_left.start(current_dialogue.left_time[_current_slide_index])
+	timer_right.start(current_dialogue.right_time[_current_slide_index])
 
 func _input(event):
 	if Input.is_action_just_pressed("advance_slide"):
@@ -26,41 +38,13 @@ func _input(event):
 			_current_slide_index += 1
 			show_slide()
 		else: # _runtime_data.current_gameplay_state == Enums.GameplayState.IN_DIALOG:
-			GameEvents.emit_signal("dialog_finished")
+			GameEvents.emit_signal_dialogue_finished()
 			visible = false
 
 
-#export(NodePath) onready var _dialog_text = get_node(_dialog_text) as Label
-#export(NodePath) onready var _avatar = get_node(_avatar) as TextureRect
-#export(Resource) var _current_dialogue_tres = _current_dialogue_tres as Dialogue
-#export(Resource) var _runtime_data = _runtime_data as RuntimeData
-#
-#var _current_slide_index := 0
-#func _ready():
-#	_avatar.texture = _current_dialogue_tres.avatar_texture
-#	show_slide()
-#
-#	GameEvents.connect("dialog_initiated", self, "on_dialog_initiated")
-#	GameEvents.connect("dialog_finished", self, "on_dialog_finished")
-#func _input(event):
-#	if Input.is_action_just_pressed("advance_slide"):
-#		if _current_slide_index < _current_dialogue_tres.dialog_slides.size() -1:
-#			_current_slide_index += 1
-#			show_slide()
-#		elif _runtime_data.current_gameplay_state == Enums.GameplayState.IN_DIALOG:
-#			GameEvents.emit_signal("dialog_finished")
-#
-#func show_slide() -> void:
-#	_dialog_text.text = _current_dialogue_tres.dialog_slides[_current_slide_index]
-#
-#func on_dialog_initiated(dialogue : Dialogue) -> void:
-#	_runtime_data.current_gameplay_state = Enums.GameplayState.IN_DIALOG
-#	_current_dialogue_tres = dialogue
-#	_current_slide_index = 0
-#	_avatar.texture = dialogue.avatar_texture
-#	show_slide()
-#	visible = true
-#
-#func on_dialog_finished() -> void:
-#	_runtime_data.current_gameplay_state = Enums.GameplayState.FREEWALK
-#	visible = false
+func _on_Timer_Left_timeout():
+	animation_left.stop()
+
+
+func _on_Timer_Right_timeout():
+	animation_right.stop()

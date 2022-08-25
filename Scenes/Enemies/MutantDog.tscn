@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/enemies/mutantdog.gd" type="Script" id=1]
-[ext_resource path="res://assets/characters/barney_idle.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/barney_test.png" type="Texture" id=2]
 [ext_resource path="res://assets/characters/barney_idle_n.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -100,7 +100,8 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 normal_map = ExtResource( 3 )
-hframes = 16
+hframes = 12
+vframes = 19
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 18.8847, 18.3948 )

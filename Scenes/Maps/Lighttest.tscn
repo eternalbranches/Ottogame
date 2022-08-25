@@ -2482,43 +2482,16 @@ position = Vector2( 3616, -952 )
 position = Vector2( 3480, -1592 )
 
 [node name="NewGuard" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 639.2, -1383.21 )
+position = Vector2( 717.111, -1499.79 )
 
 [node name="NewGuard2" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 648.828, -1500.59 )
+position = Vector2( 444.968, -1511.13 )
 
 [node name="NewGuard3" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( -7.41162, -1247.39 )
-group = 3
+position = Vector2( 254.72, -1285.6 )
 
 [node name="NewGuard4" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 758.879, -1506.66 )
-
-[node name="NewGuard5" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 87.7133, -1246.76 )
-group = 3
-
-[node name="NewGuard6" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 3520, -2080 )
-group = 2
-
-[node name="NewGuard11" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 3656, -2080 )
-group = 2
-
-[node name="NewGuard7" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 922.257, -1501.31 )
-
-[node name="NewGuard8" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 220.634, -1255.58 )
-group = 3
-
-[node name="NewGuard9" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 393.707, -1503.5 )
-
-[node name="NewGuard10" parent="YSort/Enemy" instance=ExtResource( 53 )]
-position = Vector2( 756.668, -1384.09 )
-debug = true
+position = Vector2( 45.5733, -1310.8 )
 
 [node name="MutantDog" parent="YSort/Enemy" instance=ExtResource( 55 )]
 position = Vector2( 1961.46, -480.938 )
