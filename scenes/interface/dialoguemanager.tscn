@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://assets/textbox assets/dialogue_box3.png" type="Texture" id=1]
 [ext_resource path="res://assets/characters/profile/luna_portrait_faceleft.png" type="Texture" id=2]
@@ -7,6 +7,38 @@
 [ext_resource path="res://scripts/ui_script/dialoguemanager.gd" type="Script" id=5]
 [ext_resource path="res://resource/dialogue/test_dialogue.tres" type="Resource" id=6]
 [ext_resource path="res://assets/characters/profile/otto__portrait_faceright.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=22]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background_Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "Wings"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background_Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "Angry"
@@ -174,6 +206,38 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 10, 11 ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background_Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "Wings"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Background_Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -366,6 +430,12 @@ texture = ExtResource( 1 )
 [node name="Background_Left" type="Sprite" parent="."]
 unique_name_in_owner = true
 position = Vector2( 39, 37.5 )
+hframes = 3
+
+[node name="Background_L" type="AnimationPlayer" parent="Background_Left"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 22 )
+anims/Wings = SubResource( 23 )
 
 [node name="Avatar_Left" type="Sprite" parent="."]
 unique_name_in_owner = true
@@ -376,6 +446,7 @@ vframes = 3
 
 [node name="Timer_Left" type="Timer" parent="."]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="Anim_Left" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -396,6 +467,11 @@ position = Vector2( 198, 37.5 )
 texture = ExtResource( 3 )
 hframes = 3
 
+[node name="Background_R" type="AnimationPlayer" parent="Background_Right"]
+root_node = NodePath("../..")
+anims/RESET = SubResource( 24 )
+anims/Wings = SubResource( 25 )
+
 [node name="Avatar_Right" type="Sprite" parent="."]
 unique_name_in_owner = true
 position = Vector2( 198, 37.5 )
@@ -405,6 +481,7 @@ vframes = 3
 
 [node name="Timer_Right" type="Timer" parent="."]
 unique_name_in_owner = true
+one_shot = true
 
 [node name="Anim_Right" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

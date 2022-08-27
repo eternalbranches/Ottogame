@@ -935,7 +935,7 @@ states/Wallslide_W/node = SubResource( 39 )
 states/Wallslide_W/position = Vector2( 352, -212.251 )
 transitions = [ "Walk_W", "Climbing", SubResource( 40 ), "Walk_E", "Climbing", SubResource( 41 ), "Climbing", "Walk_W", SubResource( 42 ), "Climbing", "Walk_E", SubResource( 43 ), "Climbing", "Idle_E", SubResource( 44 ), "Walk_E", "Crawling_E", SubResource( 45 ), "Walk_W", "Crawling_W", SubResource( 46 ), "Crawling_W", "Walk_W", SubResource( 47 ), "Crawling_E", "Walk_E", SubResource( 48 ), "Crawling_E", "Crawling_W", SubResource( 49 ), "Crawling_W", "Crawling_E", SubResource( 50 ), "Idle_E", "Climbing", SubResource( 51 ), "Idle_E", "Walk_E", SubResource( 52 ), "Walk_E", "Idle_E", SubResource( 53 ), "Crawling_E", "Idle_E", SubResource( 54 ), "Idle_W", "Climbing", SubResource( 55 ), "Climbing", "Idle_W", SubResource( 56 ), "Idle_W", "Walk_W", SubResource( 57 ), "Walk_W", "Idle_W", SubResource( 58 ), "Idle_W", "Walk_E", SubResource( 59 ), "Crawling_W", "Idle_W", SubResource( 60 ), "Walk_W", "Jumping_W", SubResource( 61 ), "Walk_E", "Jumping_E", SubResource( 62 ), "Jumping_E", "Idle_E", SubResource( 63 ), "Jumping_W", "Idle_W", SubResource( 64 ), "Jumping_E", "Climbing", SubResource( 65 ), "Jumping_W", "Climbing", SubResource( 66 ), "Walk_W", "Death_left", SubResource( 67 ), "Jumping_W", "Death_left", SubResource( 68 ), "Crawling_W", "Death_left", SubResource( 69 ), "Idle_W", "Death_left", SubResource( 70 ), "Crawling_E", "Death_right", SubResource( 71 ), "Walk_E", "Death_right", SubResource( 72 ), "Jumping_E", "Death_right", SubResource( 73 ), "Idle_E", "Death_right", SubResource( 74 ), "Climbing", "Death_right", SubResource( 75 ), "Climbing", "Death_left", SubResource( 76 ), "Walk_W", "Run_W", SubResource( 77 ), "Run_W", "Walk_W", SubResource( 78 ), "Run_E", "Walk_E", SubResource( 79 ), "Walk_E", "Run_E", SubResource( 80 ), "Run_E", "Death_right", SubResource( 81 ), "Run_W", "Death_left", SubResource( 82 ), "Death_left", "Idle_W", SubResource( 83 ), "Rise", "Idle_E", SubResource( 84 ), "Jumping_E", "Wallslide_E", SubResource( 85 ), "Jumping_W", "Wallslide_W", SubResource( 86 ), "Wallslide_W", "Jumping_W", SubResource( 87 ), "Wallslide_E", "Jumping_E", SubResource( 88 ), "Idle_E", "Push_E", SubResource( 89 ), "Push_E", "Idle_E", SubResource( 90 ), "Push_W", "Idle_W", SubResource( 91 ), "Idle_W", "Push_W", SubResource( 92 ), "Walk_E", "Push_E", SubResource( 93 ), "Walk_W", "Push_W", SubResource( 94 ), "Idle_E", "Dash_E", SubResource( 110 ), "Walk_E", "Dash_E", SubResource( 111 ), "Jumping_E", "Dash_E", SubResource( 112 ), "Jumping_W", "Dash_W", SubResource( 113 ), "Walk_W", "Dash_W", SubResource( 114 ), "Idle_W", "Dash_W", SubResource( 115 ), "Dash_E", "Idle_E", SubResource( 116 ), "Dash_W", "Idle_W", SubResource( 117 ) ]
 start_node = "Idle_E"
-graph_offset = Vector2( -622, -285.126 )
+graph_offset = Vector2( -622, -288.076 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=96]
 
@@ -1141,7 +1141,7 @@ wait_time = 10.0
 wait_time = 0.1
 
 [node name="Dash_Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.25
 one_shot = true
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]

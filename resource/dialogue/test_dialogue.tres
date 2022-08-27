@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://scripts/resource/dialogue.gd" type="Script" id=1]
-[ext_resource path="res://assets/characters/profile/luna_portrait_faceleft.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/profile/luna_portrait_faceright.png" type="Texture" id=2]
 [ext_resource path="res://assets/characters/profile/otto__portrait_faceleftt.png" type="Texture" id=3]
 [ext_resource path="res://assets/textbox assets/dialogue_box3.png" type="Texture" id=4]
 [ext_resource path="res://assets/textbox assets/dialogue_box2.png" type="Texture" id=5]
+[ext_resource path="res://assets/characters/profile/wings_portrait.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 1 )
@@ -14,7 +15,7 @@ background_right = [ null, null, null, null ]
 right_time = [ 0.1, 3.0, 0.1, 0.1 ]
 avatar_left = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
 animation_left = [ "Angry", "Happy", "Joyful", "Neutral" ]
-background_left = [ null, null, null, null ]
+background_left = [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 6 ) ]
 left_time = [ 3.0, 0.1, 3.0, 3.0 ]
 dialog_slides = [ "[center]You have to find the [wave][color=red]Keycard[/color][/wave][/center]!", "[center]Where can I find it?[/center]", "[center]It's in the room to the right.[/center]", "[center]Good Luck!.[/center]" ]
 highlight = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ) ]

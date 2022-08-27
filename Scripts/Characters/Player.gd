@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 export (int) var max_speed := 150
-export (int) var speed_change := 20
-export (int) var run_speed_change := 7
+export (int) var speed_change := 100
+export (int) var run_speed_change := 300
 export (int) var max_run_speed := 500
 export(int) var dash_speed := 700
 var max_jump_speed := 150
@@ -68,7 +68,7 @@ func _ready():
 		
 		
 
-func get_input():
+func get_input(delta):
 	if CharacterSave.save_dict["running"] == true:
 		if CharacterSave.controller == false:
 			if Input.is_action_just_pressed("Right"):
@@ -89,15 +89,15 @@ func get_input():
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
 		if velocity.x < 0:
-			velocity.x += speed_change
+			velocity.x += speed_change * delta
 		if velocity.x < max_speed:
-			velocity.x += speed_change
+			velocity.x += speed_change *delta
 	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
 		if velocity.x > 0:
-			velocity.x -= speed_change
+			velocity.x -= speed_change * delta
 		if velocity.x > -max_speed:
-			velocity.x -= speed_change
+			velocity.x -= speed_change *delta
 	else:
 		velocity.x = lerp(velocity.x, 0, friction)
 	
@@ -125,7 +125,7 @@ func sfx_manager(audio : AudioStreamMP3) -> void:
 		
 
 func idle_state(delta) -> void:
-	get_input()
+	get_input(delta)
 	shooting()
 	shield()
 	action()
@@ -159,7 +159,7 @@ func idle_state(delta) -> void:
 			
 		
 func running_state(delta) -> void:
-	get_input_running()
+	get_input_running(delta)
 	shooting()
 	action()
 	shield()
@@ -185,7 +185,7 @@ func running_state(delta) -> void:
 		
 		
 func moving_state(delta) -> void:
-	get_input()
+	get_input(delta)
 	shooting()
 	action()
 	shield()
@@ -218,22 +218,22 @@ func moving_state(delta) -> void:
 			change_crawling()
 			state = "crawling"
 
-func get_input_running():
+func get_input_running(delta):
 	#var dir = 0
 	if Input.is_action_pressed("Right"):
 		last_direction = "right"
 		run_released = false
 		if velocity.x < 0:
-			velocity.x += run_speed_change
+			velocity.x += run_speed_change *delta
 		if velocity.x < max_run_speed:
-			velocity.x += run_speed_change
+			velocity.x += run_speed_change *delta
 	elif Input.is_action_pressed("Left"):
 		last_direction = "left"
 		run_released = false
 		if velocity.x > 0:
-			velocity.x -= run_speed_change
+			velocity.x -= run_speed_change *delta
 		if velocity.x > - max_run_speed:
-			velocity.x -= run_speed_change
+			velocity.x -= run_speed_change *delta
 	else:
 		velocity.x = lerp(velocity.x, 0, friction_run)
 	if Input.is_action_just_released("Right"):
@@ -264,7 +264,7 @@ func get_input_running():
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
 
-func dash_state(_delta)-> void:
+func dash_state(delta)-> void:
 	if dash_side == false: 
 		velocity.x = 0
 	if dash_up == false:
@@ -274,6 +274,12 @@ func dash_state(_delta)-> void:
 	velocity = velocity.normalized()* dash_speed
 	#print(velocity * dash_speed *10 * delta)
 	move_and_slide(velocity)
+	
+	
+func attack_state(delta) -> void:
+	velocity.y += gravity * delta
+	move_and_slide(velocity)
+	
 	
 func crawling_state(delta) -> void:
 	if $SFX.stream != null:
@@ -309,18 +315,18 @@ func get_input_crawl():
 		animation_mode.travel("Crawling_W")
 		velocity.x -= crawl_speed
 		
-func get_input_midair():
+func get_input_midair(delta):
 #	var dir = 0
 	if Input.is_action_pressed("Right"):
 		if velocity.x < 0:
-			velocity.x += speed_change
+			velocity.x += speed_change *delta
 		if velocity.x < max_jump_speed:
-			velocity.x += speed_change
+			velocity.x += speed_change *delta
 	if Input.is_action_pressed("Left"):
 		if velocity.x > - 0:
-			velocity.x -= speed_change
+			velocity.x -= speed_change *delta
 		if velocity.x > - max_jump_speed:
-			velocity.x -= speed_change
+			velocity.x -= speed_change *delta
 	check_wallslide()
 	
 	if velocity.x > 0 :
@@ -374,17 +380,17 @@ func dash() -> void:
 			can_doublejump = false
 			state = "dash"
 
-func get_input_midair_run():
+func get_input_midair_run(delta):
 	if Input.is_action_pressed("Right"):
 		if velocity.x < 0:
-			velocity.x += run_speed_change
+			velocity.x += run_speed_change * delta
 		if velocity.x < max_run_jump_speed:
-			velocity.x += run_speed_change
+			velocity.x += run_speed_change * delta
 	if Input.is_action_pressed("Left"):
 		if velocity.x > - 0:
-			velocity.x -= run_speed_change
+			velocity.x -= run_speed_change * delta
 		if velocity.x > - max_run_jump_speed:
-			velocity.x -= run_speed_change
+			velocity.x -= run_speed_change * delta
 	check_wallslide()
 			
 	if velocity.x > 0 :
@@ -401,7 +407,7 @@ func midair_state(delta):
 		animation_mode.travel("Jumping_E")
 	else:
 		animation_mode.travel("Jumping_W")
-	get_input_midair()
+	get_input_midair(delta)
 	shooting()
 	action()
 	shield()
@@ -420,7 +426,7 @@ func midair_run_state(delta):
 		animation_mode.travel("Jumping_E")
 	else:
 		animation_mode.travel("Jumping_W")
-	get_input_midair_run()
+	get_input_midair_run(delta)
 	shooting()
 	action()
 	shield()
@@ -433,7 +439,7 @@ func midair_run_state(delta):
 		state = "running"
 		run_released = true
 
-func climbing_state(_delta) -> void:
+func climbing_state(delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	animation_mode.travel("Climbing")

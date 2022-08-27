@@ -7,6 +7,8 @@ onready var animation_left = $"%Anim_Left"
 onready var animation_right = $"%Anim_Right"
 onready var background_right = $"%Background_Right"
 onready var background_left = $"%Background_Left"
+onready var backgroundL_anim = $Background_Left/Background_L
+onready var backgroundR_anim = $Background_Right/Background_R
 onready var timer_left = $"%Timer_Left"
 onready var timer_right = $"%Timer_Right"
 export(Resource) var current_dialogue = current_dialogue as Dialogue
@@ -29,6 +31,8 @@ func show_slide() -> void:
 	background_right.texture = current_dialogue.background_right[_current_slide_index]
 	animation_left.play(current_dialogue.animation_left[_current_slide_index])
 	animation_right.play(current_dialogue.animation_right[_current_slide_index])
+	backgroundL_anim.play("Wings")
+	backgroundR_anim.play("Wings")
 	timer_left.start(current_dialogue.left_time[_current_slide_index])
 	timer_right.start(current_dialogue.right_time[_current_slide_index])
 
@@ -39,12 +43,21 @@ func _input(event):
 			show_slide()
 		else: # _runtime_data.current_gameplay_state == Enums.GameplayState.IN_DIALOG:
 			GameEvents.emit_signal_dialogue_finished()
-			visible = false
+			
 
 
 func _on_Timer_Left_timeout():
+	animation_left.stop(true)
+	animation_left.play()
+	yield(get_tree().create_timer(0.01), "timeout")
 	animation_left.stop()
 
 
 func _on_Timer_Right_timeout():
+	animation_right.stop(true)
+	animation_right.play()
+	yield(get_tree().create_timer(0.01), "timeout")
 	animation_right.stop()
+	
+func dialogue_finished() -> void:
+	visible = false
