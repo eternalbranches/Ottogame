@@ -37,10 +37,12 @@ var ceiling := false
 var climbable := false
 var ladder_location := 0.0
 var invulnerable := false
-var last_direction := "right"
+var last_direction := "W"
 
 var current_hp := 100
 var max_hp := 100
+var sword_damage := 20
+var combo := false
 
 var run_l := 0
 var run_r := 0
@@ -87,13 +89,13 @@ func get_input(delta):
 			if Input.get_action_strength("Right") > 0.7:
 				state = "running"
 	if Input.is_action_pressed("Right"):
-		last_direction = "right"
+		last_direction = "E"
 		if velocity.x < 0:
 			velocity.x += speed_change * delta
 		if velocity.x < max_speed:
 			velocity.x += speed_change *delta
 	elif Input.is_action_pressed("Left"):
-		last_direction = "left"
+		last_direction = "W"
 		if velocity.x > 0:
 			velocity.x -= speed_change * delta
 		if velocity.x > -max_speed:
@@ -129,9 +131,10 @@ func idle_state(delta) -> void:
 	shooting()
 	shield()
 	action()
+	call_deferred("sword_attack")
 	if $SFX.stream != null:
 		$SFX.stream = null
-	if last_direction == "right":
+	if last_direction == "E":
 		animation_mode.travel("Idle_E")
 	else:
 		animation_mode.travel("Idle_W")
@@ -163,6 +166,7 @@ func running_state(delta) -> void:
 	shooting()
 	action()
 	shield()
+	call_deferred("sword_attack")
 	if $SFX.stream != runningsfx:
 		$SFX.stream = runningsfx
 		$SFX.play()
@@ -189,6 +193,7 @@ func moving_state(delta) -> void:
 	shooting()
 	action()
 	shield()
+	call_deferred("sword_attack")
 	if $SFX.stream != walkingsfx:
 		$SFX.stream = walkingsfx
 		$SFX.play()
@@ -200,13 +205,13 @@ func moving_state(delta) -> void:
 		if collision.collider.is_in_group("Falling"):
 			collision.collider.fall()
 	if $Wallcheck_E.is_colliding():
-		if $Wallcheck_E.get_collider().is_in_group("Pushable") and last_direction == "right":
+		if $Wallcheck_E.get_collider().is_in_group("Pushable") and last_direction == "E":
 			state = "push"
-			last_direction = "right"
+			last_direction = "E"
 	if $Wallcheck_W.is_colliding():
-		if $Wallcheck_W.get_collider().is_in_group("Pushable") and last_direction == "left":
+		if $Wallcheck_W.get_collider().is_in_group("Pushable") and last_direction == "W":
 			state = "push"
-			last_direction = "left"
+			last_direction = "W"
 	if Input.is_action_just_pressed("Jump"):
 			velocity.y = jump_strenght
 	if is_on_floor() == false:
@@ -221,14 +226,14 @@ func moving_state(delta) -> void:
 func get_input_running(delta):
 	#var dir = 0
 	if Input.is_action_pressed("Right"):
-		last_direction = "right"
+		last_direction = "E"
 		run_released = false
 		if velocity.x < 0:
 			velocity.x += run_speed_change *delta
 		if velocity.x < max_run_speed:
 			velocity.x += run_speed_change *delta
 	elif Input.is_action_pressed("Left"):
-		last_direction = "left"
+		last_direction = "W"
 		run_released = false
 		if velocity.x > 0:
 			velocity.x -= run_speed_change *delta
@@ -277,7 +282,9 @@ func dash_state(delta)-> void:
 	
 	
 func attack_state(delta) -> void:
+	
 	velocity.y += gravity * delta
+	velocity.x = 0
 	move_and_slide(velocity)
 	
 	
@@ -331,10 +338,10 @@ func get_input_midair(delta):
 	
 	if velocity.x > 0 :
 		animation_mode.travel("Jumping_E")
-		last_direction = "right"
+		last_direction = "E"
 	elif velocity.x <0:
 		animation_mode.travel("Jumping_W")
-		last_direction = "left"
+		last_direction = "W"
 
 			
 func dash() -> void:
@@ -393,20 +400,20 @@ func get_input_midair_run(delta):
 			velocity.x -= run_speed_change * delta
 	check_wallslide()
 			
-	if velocity.x > 0 :
-		animation_mode.travel("Jumping_E")
-		last_direction = "right"
-	elif velocity.x <0:
-		animation_mode.travel("Jumping_W")
-		last_direction = "left"
+	#if velocity.x > 0 :
+	animation_mode.travel("Jumping_" + last_direction)
+		#last_direction = "E"
+	#elif velocity.x <0:
+	#	animation_mode.travel("Jumping_" + last_direction)
+		#last_direction = "W"
 		
 func midair_state(delta):
 	if $SFX.stream != null:
 		$SFX.stream = null
-	if last_direction == "right":
-		animation_mode.travel("Jumping_E")
-	else:
-		animation_mode.travel("Jumping_W")
+	#if last_direction == "E":
+	animation_mode.travel("Jumping_" +last_direction)
+	#else:
+	#	animation_mode.travel("Jumping_W")
 	get_input_midair(delta)
 	shooting()
 	action()
@@ -422,10 +429,10 @@ func midair_state(delta):
 func midair_run_state(delta):
 	if $SFX.stream != null:
 		$SFX.stream = null
-	if last_direction == "right":
-		animation_mode.travel("Jumping_E")
-	else:
-		animation_mode.travel("Jumping_W")
+	#if last_direction == "right":
+	animation_mode.travel("Jumping_" + last_direction)
+	#else:
+	#	animation_mode.travel("Jumping_W")
 	get_input_midair_run(delta)
 	shooting()
 	action()
@@ -481,7 +488,7 @@ func walljump_state(delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	velocity.y += gravity/3.0 * delta
-	if last_direction == "right":
+	if last_direction == "E":
 		velocity.x += 15
 	else:
 		velocity.x -= 15
@@ -491,11 +498,11 @@ func walljump_state(delta) -> void:
 		velocity.y = walljump_height
 		if $Wallcheck_W.is_colliding() == true:
 			velocity.x = walljump_power
-			last_direction = "right"
+			last_direction = "E"
 			animation_mode.travel("Jumping_E")
 		elif $Wallcheck_E.is_colliding() == true:
 			velocity.x = -walljump_power
-			last_direction = "left"
+			last_direction = "W"
 			animation_mode.travel("Jumping_W")
 		started = true
 		yield(get_tree().create_timer(0.28), "timeout")
@@ -554,7 +561,7 @@ func rise_state(delta) -> void:
 func push_state(delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
-	if last_direction == "left":
+	if last_direction == "W":
 		if Input.is_action_pressed("Left"):
 			velocity.x = -10
 		if Input.is_action_just_pressed("Right") or $Wallcheck_W.is_colliding() == false:
@@ -565,10 +572,10 @@ func push_state(delta) -> void:
 		if Input.is_action_just_pressed("Left") or $Wallcheck_E.is_colliding() == false:
 			state = "idle"
 	velocity.y += gravity * delta
-	if last_direction == "left":
-		animation_mode.travel("Push_W")
-	else:
-		animation_mode.travel("Push_E")
+	#if last_direction == "left":
+	animation_mode.travel("Push_" +last_direction)
+	#else:
+	#	animation_mode.travel("Push_E")
 	velocity = move_and_slide(velocity, Vector2.UP,
 			false, 4, PI/4, false)
 	for index in get_slide_count():
@@ -578,7 +585,6 @@ func push_state(delta) -> void:
 			
 func _physics_process(delta):
 	state_manager(delta)
-	call(state + "_state", delta)
 
 func _process(_delta):
 	$DebugState.text = state
@@ -606,13 +612,13 @@ func check_wallslide():
 				state = "wallslide"
 				can_doublejump = true
 				velocity = Vector2.ZERO
-				last_direction = "left"
+				last_direction = "W"
 				animation_mode.travel("Wallslide_W")
 			if $Wallcheck_E.is_colliding() == true and $Wallcheck_E.get_collider().is_in_group("Wallslideable"):
 				state = "wallslide"
 				can_doublejump = true
 				velocity = Vector2.ZERO
-				last_direction = "right"
+				last_direction = "E"
 				animation_mode.travel("Wallslide_E")
 func shooting():
 	if CharacterSave.controller == true:
@@ -639,9 +645,9 @@ func shooting():
 				else:
 					if Input.is_action_pressed("Up"):
 						skill_instance.rotation = -1.55
-					elif last_direction == "right":
+					elif last_direction == "E":
 						skill_instance.rotation = 0
-					elif last_direction == "left":
+					elif last_direction == "W":
 						#skill_instance.rotation = get_angle_to($AimPosition.get_global_position())
 						skill_instance.rotation = -3.14
 						#print(get_angle_to($AimPosition.get_global_position()))
@@ -694,15 +700,23 @@ func shield():
 			#skill_instance.node_reference = get_path()
 #			get_parent().add_child(skill_instance)
 			
-
+func sword_attack():
+	if Input.is_action_just_pressed("SwordAttack"):
+		if velocity.x >= 300 or velocity.x <= -300:
+			animation_mode.travel("SwordStab_"+last_direction)
+		elif combo == false:
+			animation_mode.travel("SwordLight_"+last_direction)
+		else:
+			animation_mode.travel("SwordLight_" +last_direction)
+		change_state("attack")
+	
+	
 func change_state(new_state) -> void:
 	if state != "death":
 		state = new_state
 
 func state_manager(delta) -> void:
-	match state:
-		"idle":
-			idle_state(delta)
+	call(state+"_state", delta)
 		
 func _on_Dashtimer_timeout() -> void:
 	run_l = 0
@@ -787,3 +801,21 @@ func _on_Dash_Timer_timeout():
 	dash_side = false
 	dash_up = false
 	state = "midair_run"
+
+
+func _on_Hitbox_area_entered(area):
+	print(area)
+	if area.is_in_group("Enemy"):
+		area.on_hit(sword_damage)
+		
+func attack_finished()-> void:
+	change_state("idle")
+
+
+func _on_Hitbox_body_entered(body):
+	print(body)
+	if body.is_in_group("Enemy"):
+		var direction_hit = "W"
+		if get_global_position().x > body.get_global_position().x:
+			direction_hit = "E"
+		body.on_hit(sword_damage, "player", get_global_position(), direction_hit)

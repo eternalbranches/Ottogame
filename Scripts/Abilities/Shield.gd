@@ -4,7 +4,7 @@ var origin
 func animdirection(direction, E_pos, W_pos):
 	$Sprite.visible = true
 	set_collision_mask_bit(3, 1)
-	if direction == "left":
+	if direction == "W":
 		$AnimationPlayer.play("Shield_W")
 		position = W_pos
 		

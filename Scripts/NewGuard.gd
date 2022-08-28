@@ -62,27 +62,6 @@ func _physics_process(delta):
 
 func state_manager(delta) -> void:
 	call(state+"_state", delta)
-	#match state:
-	#	"idle":
-	#		idle_state(delta)
-			
-	#	"alert":
-	#		alert_state(delta)
-			
-	#	"combat":
-	#		combat_state(delta)
-			
-	#	"shoot":
-	#		shoot_state()
-	#		
-	#	"death":
-	#		death_state(delta)
-	#		
-	#	"knockback":
-	#		knockback_state(delta)
-			
-	#	"return":
-	#		return_state(delta)
 
 func idle_state(delta):
 	animation_mode.travel("Idle_"+ current_direction)
