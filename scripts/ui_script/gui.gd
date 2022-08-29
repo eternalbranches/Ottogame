@@ -14,9 +14,12 @@ func _on_MainMenuButton_pressed():
 	$Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton.grab_focus()
 	
 func _on_YesButton_pressed() -> void:
+	print("pressed")
 	get_tree().paused = false
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Scenes/Interface/Mainscreen.tscn")
+	get_tree().change_scene("res://scenes/interface/mainscreen.tscn")
+	get_parent().queue_free()
+	
 
 func _on_NoButton_pressed() -> void:
 	$Pausemenu/Popup.visible = false

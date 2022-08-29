@@ -13,7 +13,8 @@ func goto_scene(path, current_scene):
 	
 	var loading_bar = load("res://scenes/interface/loadingscreen.tscn").instance()
 	
-	get_tree().get_root().call_deferred("add_child", loading_bar)
+	#get_tree().get_root().call_deferred("add_child", loading_bar)
+	call_deferred("add_child", loading_bar)
 	
 	var t = OS.get_ticks_msec()
 	
