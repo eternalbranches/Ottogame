@@ -1,17 +1,13 @@
 extends KinematicBody2D
 
 var state := "idle"
-var max_hp := 2
-var current_hp := 2
+var max_hp := 50
+var current_hp := 50
 var current_direction := "W"
 var spawn_position := 5.0
 var velocity := Vector2.ZERO
 var new_random_xpos := 0.0
 var dead := false
-
-var in_sight := {"Guards": [], "Mutants": [], "Projectiles": []}
-var in_memory := {"Guards": [], "Mutants": [], "Projectiles": []}
-
 var morale := 100
 var threat := 0
 var alert := false
@@ -26,26 +22,28 @@ export (int) var speed := 200
 export (int) var touch_damage := 1
 #var initialized := false
 var knockback := false
-var can_shoot := true
+var last_seen := Vector2.ZERO
+var can_tailattack_behind := true
+var can_overhead_jumpattack := true
+var can_tramplejump := true
 var reset_started := false
 var can_walk_E := false
 var can_walk_W := false
-#onready var player = get_node("../../Player/Player")
-var last_seen := Vector2.ZERO
 
 var rng = RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	spawn_position = get_global_position().x
 	
 	
-	#rng.randi_range(0, 5)
-#rng.randf_range(-10.0, 10.0)
-func _process(_delta):
+	
+func _process(_delta) -> void:
 	floorcheck()
-
-func _physics_process(delta):
-	#$Label.text = state
+	$Label.text = state
+	
+	
+func _physics_process(delta) -> void:
+	
 	match state:
 		"idle":
 			velocity.x = lerp(velocity.x, 0, friction)
@@ -53,7 +51,6 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
 		"alert":
-			
 			if current_direction == "E" and can_walk_E == true:
 				velocity.x = speed /2.0
 				#print("E")
@@ -66,6 +63,8 @@ func _physics_process(delta):
 			velocity.x = lerp(velocity.x, 0, friction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
+			
+			sightcheck()
 			
 			
 		"combat":
@@ -93,24 +92,10 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
 			
-			#sightcheck()
-			#if initialized == false:
-			#	$ShootCD.start()
-			#	initialized = true
-			if in_sight["Mutants"].empty() == false:
-				if can_shoot == true:
-					change_state("shoot")
-			else:
-				change_state("alert")
-				
-		"shoot":
-			if can_shoot == true:
-				can_shoot = false
-				#rng.randomize()
-				#var numberanimation = rng.randi_range(1, 2)
-				#print(numberanimation)
-				$ShootCD.start()
-				$ShootAnim.start()
+		"tailattack":
+			if current_direction == "E":
+				if get_global_position().distance_to(target) > 30:
+					$AnimationPlayer.play("overhead_tail_attack"+current_direction)
 			
 		"death":
 			velocity.x = 0
@@ -201,26 +186,23 @@ func on_death() -> void:
 		child.enabled = false
 	
 	
-#func sightcheck():
-#	var space_state = get_world_2d().direct_space_state
-#	var sight_check = space_state.intersect_ray(position, player.position, [self], collision_mask)
-#	if sight_check:
-#		if sight_check.collider.name == "Player":
-#			last_seen = player.position
-#			if state == "sight" or "return":
-#				state = "combat"
-#		else:
-#			state = "return"
+func sightcheck():
+	var space_state = get_world_2d().direct_space_state
+	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
+	if sight_check:
+		if sight_check.collider.name == "Player":
+			last_seen = target.position
+			if state == "sight" or "return":
+				state = "combat"
+		else:
+			state = "return"
 
-func _on_ShootCD_timeout() -> void:
-	can_shoot = true
 
 
 
 func _on_Hurtbox_body_entered(body) -> void:
 	if body.is_in_group("Player"):
 		body.on_hit(touch_damage, "enemy", position.x)
-
 
 
 func _on_RemoveTimer_timeout() -> void:
@@ -244,63 +226,10 @@ func _on_ShootAnim_timeout() -> void:
 	var offset_x = rng.randf_range(-220, 220)
 	new_random_xpos = get_global_position().x + offset_x
 	
-func create_bullet() -> void:
-	randomize()
-	var random_vector = Vector2(rand_range(-50.0 , 50.0), rand_range(-50.0 , 50.0))
-	var skill = load("res://Scenes/Abilities/BulletLaser.tscn")
-	var skill_instance = skill.instance()
-	skill_instance.rotation = get_angle_to(target.get_global_position() + random_vector)
-	skill_instance.position = $Bulletpoint.get_global_position()                  #get_node("TurnAxis/CastPoint").get_global_position()
-	skill_instance.enemyposx = position.x
-	skill_instance.origin = "Enemy"
-	#skill_instance.node_reference = get_path()
-	$SFXPLayer.play()
-	get_parent().add_child(skill_instance)
-
-
-func _on_SightTimer_timeout() -> void:
-	for key in in_sight:
-		in_sight[key].resize(0)
-	for child in $Eyesight.get_children():
-	#	child.enabled = true
-		if child.is_colliding():
-			#print(child.get_collider())
-			if child.get_collider().is_in_group("Mutant") and in_sight["Mutants"].has(child.get_collider()) == false:
-				in_sight["Mutants"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Mutants")
-				if alert == false:
-					alert = true
-					investigate_pos = child.get_global_position()
-					_on_AI_Timer_timeout()
-				print("spotted mutant")
-			elif child.get_collider().is_in_group("Projectiles") and in_sight["Projectiles"].has(child.get_collider()) == false:
-				in_sight["Projectiles"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Projectiles")
-				if alert == false:
-					alert = true
-				print("spotted projectile")
-			elif child.get_collider().is_in_group("Guard") and in_sight["Guards"].has(child.get_collider()) == false:
-				in_sight["Guards"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Guards")
-		#child.enabled = false
-		
-		
-func add_memory(new_memory, category):
-	if in_memory[category].has(new_memory) == false:
-		in_memory[category].push_back(new_memory)
-	
 	
 func _on_AI_Timer_timeout():
-	if alert == true and dead == false:
-		if in_memory["Mutants"].empty() == false:
-			combat = true
-			target = in_memory["Mutants"][0]
-			if in_sight["Mutants"].has(target) == false:
-				investigate_pos = target.get_global_position()
-		elif in_memory["Projectiles"].empty() == false:
-			change_state("alert")
-		if combat == true and state != "shoot":
-			change_state("combat")
+	pass
+	
 			
 func investigate(direction_hit) -> void:
 	current_direction = direction_hit
@@ -313,6 +242,7 @@ func change_state(new_state) -> void:
 		"alert":
 			$Floorcheck_E.enabled = true
 			$Floorcheck_W.enabled = true
+			
 			
 func player_enters_range(in_range):
 	if in_range == true:

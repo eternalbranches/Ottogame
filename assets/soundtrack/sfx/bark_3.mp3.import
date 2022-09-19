@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bark_3.mp3-f61101e980db9134ad50d473cff6ffce.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/bark_3.mp3"
+dest_files=[ "res://.import/bark_3.mp3-f61101e980db9134ad50d473cff6ffce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

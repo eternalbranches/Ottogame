@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_sample.mp3-01dc2f92fce10009ac7f2344a6218c92.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/barney_sample.mp3"
+dest_files=[ "res://.import/barney_sample.mp3-01dc2f92fce10009ac7f2344a6218c92.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_sniff.mp3-b250e009df5f87ca9637d0ea1df8ae48.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/barney_sniff.mp3"
+dest_files=[ "res://.import/barney_sniff.mp3-b250e009df5f87ca9637d0ea1df8ae48.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_calm.mp3-dc68e2f2c496cb74bfd754e72ce2337c.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/barney_calm.mp3"
+dest_files=[ "res://.import/barney_calm.mp3-dc68e2f2c496cb74bfd754e72ce2337c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

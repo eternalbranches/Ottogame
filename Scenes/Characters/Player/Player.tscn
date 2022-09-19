@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=2]
+[gd_scene load_steps=162 format=2]
 
 [ext_resource path="res://assets/characters/otto_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/characters/player.gd" type="Script" id=2]
@@ -1409,6 +1409,12 @@ extents = Vector2( 1200, 1200 )
 [sub_resource type="RectangleShape2D" id=121]
 extents = Vector2( 18.0997, 11.6105 )
 
+[sub_resource type="ParticlesMaterial" id=153]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [node name="Player" type="KinematicBody2D" groups=["Mutant", "Player"]]
 collision_layer = 2
 collision_mask = 145
@@ -1634,6 +1640,10 @@ monitorable = false
 position = Vector2( -16.9358, -10.2616 )
 shape = SubResource( 121 )
 disabled = true
+
+[node name="Movement" type="Particles2D" parent="."]
+emitting = false
+process_material = SubResource( 153 )
 
 [connection signal="timeout" from="Dash-timer" to="." method="_on_Dashtimer_timeout"]
 [connection signal="timeout" from="GunTimer" to="." method="_on_GunTimer_timeout"]
