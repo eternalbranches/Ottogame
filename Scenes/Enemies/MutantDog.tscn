@@ -1,8 +1,15 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scripts/enemies/mutantdog.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/barney_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/characters/barney_idle_n.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Shader/flash.gdshader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 29.0693, 12.905 )
@@ -10,7 +17,6 @@ extents = Vector2( 29.0693, 12.905 )
 [sub_resource type="Animation" id=9]
 resource_name = "Death_E"
 length = 3.0
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -39,7 +45,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=11]
 resource_name = "Death_W"
 length = 3.0
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -181,6 +186,9 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 26.5, 11 )
+
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
@@ -206,6 +214,42 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tailswipe/CollisionShape2D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ SubResource( 17 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tailswipe/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Tailswipe/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13, 24 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -352,6 +396,42 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tailswipe/CollisionShape2D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 17 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tailswipe/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Tailswipe/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, 25 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "Tailattack_Overhead_W"
@@ -380,6 +460,42 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tailswipe/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.2, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tailswipe/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13, 24 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Tailswipe/CollisionShape2D:shape")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 17 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -440,19 +556,18 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[node name="MutantDog" type="KinematicBody2D" groups=["Mutant"]]
+[node name="MutantDog" type="KinematicBody2D" groups=["Enemy", "Mutant"]]
 collision_layer = 4
-collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 18 )
 texture = ExtResource( 2 )
 normal_map = ExtResource( 3 )
 hframes = 12
 vframes = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 35 )
 shape = SubResource( 1 )
 
@@ -481,3 +596,26 @@ anims/Walk_W = SubResource( 16 )
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
+
+[node name="Tailswipe" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tailswipe"]
+position = Vector2( -13, 24 )
+shape = SubResource( 17 )
+disabled = true
+
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Floorcheck_W" type="RayCast2D" parent="."]
+position = Vector2( -12, 48 )
+cast_to = Vector2( 0, 2 )
+
+[node name="Floorcheck_E" type="RayCast2D" parent="."]
+position = Vector2( 9, 48 )
+cast_to = Vector2( 0, 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]

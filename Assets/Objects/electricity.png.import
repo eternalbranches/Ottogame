@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/electricity.png-2629930d29743cc4fb8b507a9f870aef.stex"
+path="res://.import/electricity.png-c245ae5e49705fccc9a4a74c896b6d86.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objects/electricity.png"
-dest_files=[ "res://.import/electricity.png-2629930d29743cc4fb8b507a9f870aef.stex" ]
+source_file="res://Assets/Objects/electricity.png"
+dest_files=[ "res://.import/electricity.png-c245ae5e49705fccc9a4a74c896b6d86.stex" ]
 
 [params]
 

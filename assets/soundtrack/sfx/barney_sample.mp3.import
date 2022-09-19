@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/barney_sample.mp3-01dc2f92fce10009ac7f2344a6218c92.mp3str"
+path="res://.import/barney_sample.mp3-8772e7a524e460e4b0adf2156166cd0b.mp3str"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/barney_sample.mp3"
-dest_files=[ "res://.import/barney_sample.mp3-01dc2f92fce10009ac7f2344a6218c92.mp3str" ]
+source_file="res://Assets/Soundtrack/SFX/barney_sample.mp3"
+dest_files=[ "res://.import/barney_sample.mp3-8772e7a524e460e4b0adf2156166cd0b.mp3str" ]
 
 [params]
 

@@ -34,6 +34,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	spawn_position = get_global_position().x
+	$AnimationPlayer.play("Idle_" + current_direction)
 	
 	
 	
@@ -64,7 +65,7 @@ func _physics_process(delta) -> void:
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
-			sightcheck()
+		#	sightcheck()
 			
 			
 		"combat":
@@ -156,6 +157,7 @@ func _physics_process(delta) -> void:
 			
 			
 func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
+	print("hit", damage)
 	if state != "death":
 		current_hp -= damage
 		flash()
@@ -181,21 +183,22 @@ func on_death() -> void:
 	dead = true
 	set_collision_layer_bit(2, 0)
 	set_collision_mask_bit(1,0)
-	$RemoveTimer.start()
-	for child in $Eyesight.get_children():
-		child.enabled = false
+	$AnimationPlayer.play("Death_" + current_direction)
+	#$RemoveTimer.start()
+	#for child in $Eyesight.get_children():
+	#	child.enabled = false
 	
 	
-func sightcheck():
-	var space_state = get_world_2d().direct_space_state
-	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
-	if sight_check:
-		if sight_check.collider.name == "Player":
-			last_seen = target.position
-			if state == "sight" or "return":
-				state = "combat"
-		else:
-			state = "return"
+#func sightcheck():
+#	var space_state = get_world_2d().direct_space_state
+#	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
+#	if sight_check:
+#		if sight_check.collider.name == "Player":
+#			last_seen = target.position
+#			if state == "sight" or "return":
+#				state = "combat"
+#		else:
+#			state = "return"
 
 
 
@@ -212,7 +215,7 @@ func flash():
 	$Sprite.material.set_shader_param("flash_modifier", 0.4)
 	$FlashTimer.start()
 
-func _on_FashTimer_timeout() -> void:
+func _on_FlashTimer_timeout() -> void:
 	$Sprite.material.set_shader_param("flash_modifier", 0)
 
 

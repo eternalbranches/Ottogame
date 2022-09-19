@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/otto_upset.png-ba8dddb4eb4af604e6fac1e21d10ab7a.stex"
+path="res://.import/otto_upset.png-4bf316b8cac5f88e1cfb2336a958229f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/profile/otto_upset.png"
-dest_files=[ "res://.import/otto_upset.png-ba8dddb4eb4af604e6fac1e21d10ab7a.stex" ]
+source_file="res://Assets/Characters/Profile/otto_upset.png"
+dest_files=[ "res://.import/otto_upset.png-4bf316b8cac5f88e1cfb2336a958229f.stex" ]
 
 [params]
 

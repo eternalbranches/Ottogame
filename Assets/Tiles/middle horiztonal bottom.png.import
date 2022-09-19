@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/middle horiztonal bottom.png-4f048a14d4043c9eb6800360179e7956.stex"
+path="res://.import/middle horiztonal bottom.png-9dc412dfb8cf358e062f4ad98e178a60.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/middle horiztonal bottom.png"
-dest_files=[ "res://.import/middle horiztonal bottom.png-4f048a14d4043c9eb6800360179e7956.stex" ]
+source_file="res://Assets/Tiles/middle horiztonal bottom.png"
+dest_files=[ "res://.import/middle horiztonal bottom.png-9dc412dfb8cf358e062f4ad98e178a60.stex" ]
 
 [params]
 

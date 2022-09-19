@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/otto_happy.png-8bd3efb70480b661a33f564138688881.stex"
+path="res://.import/otto_happy.png-b224ddfa2a524d9f82d6170fab91e214.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/profile/otto_happy.png"
-dest_files=[ "res://.import/otto_happy.png-8bd3efb70480b661a33f564138688881.stex" ]
+source_file="res://Assets/Characters/Profile/otto_happy.png"
+dest_files=[ "res://.import/otto_happy.png-b224ddfa2a524d9f82d6170fab91e214.stex" ]
 
 [params]
 

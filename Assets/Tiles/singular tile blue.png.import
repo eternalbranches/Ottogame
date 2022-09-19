@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/singular tile blue.png-f816869e76315c1eaca7fac92fbe39a3.stex"
+path="res://.import/singular tile blue.png-cd06d0733a8e25f6229278be21b94cf4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/singular tile blue.png"
-dest_files=[ "res://.import/singular tile blue.png-f816869e76315c1eaca7fac92fbe39a3.stex" ]
+source_file="res://Assets/Tiles/singular tile blue.png"
+dest_files=[ "res://.import/singular tile blue.png-cd06d0733a8e25f6229278be21b94cf4.stex" ]
 
 [params]
 

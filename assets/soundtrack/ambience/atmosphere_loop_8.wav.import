@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/atmosphere_loop_8.wav-7e9ef4e28ebe9085e3b860bc9b0a3c00.sample"
+path="res://.import/atmosphere_loop_8.wav-c50f7c2957b1dc252958e8040a2a855c.sample"
 
 [deps]
 
-source_file="res://assets/soundtrack/ambience/atmosphere_loop_8.wav"
-dest_files=[ "res://.import/atmosphere_loop_8.wav-7e9ef4e28ebe9085e3b860bc9b0a3c00.sample" ]
+source_file="res://Assets/Soundtrack/ambience/atmosphere_loop_8.wav"
+dest_files=[ "res://.import/atmosphere_loop_8.wav-c50f7c2957b1dc252958e8040a2a855c.sample" ]
 
 [params]
 
@@ -17,5 +17,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

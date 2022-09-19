@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/otto's good side.png-72f328b987c0b05a50a5e84c72f7be99.stex"
+path="res://.import/otto's good side.png-b09bfd3dbd6f9171e2396788c4df1fe6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/profile/otto's good side.png"
-dest_files=[ "res://.import/otto's good side.png-72f328b987c0b05a50a5e84c72f7be99.stex" ]
+source_file="res://Assets/Characters/Profile/otto's good side.png"
+dest_files=[ "res://.import/otto's good side.png-b09bfd3dbd6f9171e2396788c4df1fe6.stex" ]
 
 [params]
 

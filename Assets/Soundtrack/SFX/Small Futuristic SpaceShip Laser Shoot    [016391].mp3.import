@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-97169343ca628d9150a00706161e6b1f.mp3str"
+path="res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-4247f47fd773dd3f5222c41ff16a4105.mp3str"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/Small Futuristic SpaceShip Laser Shoot    [016391].mp3"
-dest_files=[ "res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-97169343ca628d9150a00706161e6b1f.mp3str" ]
+source_file="res://Assets/Soundtrack/SFX/Small Futuristic SpaceShip Laser Shoot    [016391].mp3"
+dest_files=[ "res://.import/Small Futuristic SpaceShip Laser Shoot    [016391].mp3-4247f47fd773dd3f5222c41ff16a4105.mp3str" ]
 
 [params]
 

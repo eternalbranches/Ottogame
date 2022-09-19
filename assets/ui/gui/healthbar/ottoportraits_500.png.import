@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ottoportraits_500.png-9badadb2c4df0a286c464c2ab64686aa.stex"
+path="res://.import/ottoportraits_500.png-2e69d597ef63edbfbcc8076d4a625677.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/gui/healthbar/ottoportraits_500.png"
-dest_files=[ "res://.import/ottoportraits_500.png-9badadb2c4df0a286c464c2ab64686aa.stex" ]
+source_file="res://Assets/UI/gui/healthbar/ottoportraits_500.png"
+dest_files=[ "res://.import/ottoportraits_500.png-2e69d597ef63edbfbcc8076d4a625677.stex" ]
 
 [params]
 

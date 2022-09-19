@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sliding_door_.png-faa3d9a2403b187b64a0262ac01a126a.stex"
+path="res://.import/sliding_door_.png-310bd0c18237ea6549c3f2c19a5c2048.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objects/sliding_door_.png"
-dest_files=[ "res://.import/sliding_door_.png-faa3d9a2403b187b64a0262ac01a126a.stex" ]
+source_file="res://Assets/Objects/sliding_door_.png"
+dest_files=[ "res://.import/sliding_door_.png-310bd0c18237ea6549c3f2c19a5c2048.stex" ]
 
 [params]
 

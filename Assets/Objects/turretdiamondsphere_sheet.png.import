@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/turretdiamondsphere_sheet.png-673eaf7b640d9f86add735d2dab88414.stex"
+path="res://.import/turretdiamondsphere_sheet.png-94afeef34d3918aba99ba43057bf08e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objects/turretdiamondsphere_sheet.png"
-dest_files=[ "res://.import/turretdiamondsphere_sheet.png-673eaf7b640d9f86add735d2dab88414.stex" ]
+source_file="res://Assets/Objects/turretdiamondsphere_sheet.png"
+dest_files=[ "res://.import/turretdiamondsphere_sheet.png-94afeef34d3918aba99ba43057bf08e7.stex" ]
 
 [params]
 

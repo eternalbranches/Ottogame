@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Magic Element 3_3.wav-1898f5a209c5f46b3d5df3f75151aa10.sample"
+path="res://.import/Magic Element 3_3.wav-b95db1925369fb10594149199bb9855f.sample"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/Magic Element 3_3.wav"
-dest_files=[ "res://.import/Magic Element 3_3.wav-1898f5a209c5f46b3d5df3f75151aa10.sample" ]
+source_file="res://Assets/Soundtrack/SFX/Magic Element 3_3.wav"
+dest_files=[ "res://.import/Magic Element 3_3.wav-b95db1925369fb10594149199bb9855f.sample" ]
 
 [params]
 
@@ -17,5 +17,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

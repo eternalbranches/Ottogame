@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bullet time.mp3-e3e3efa8b389037d345a825a31aaacd4.mp3str"
+path="res://.import/bullet time.mp3-21d6b6d4bad7f062771ff2677d41012f.mp3str"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/bullet time.mp3"
-dest_files=[ "res://.import/bullet time.mp3-e3e3efa8b389037d345a825a31aaacd4.mp3str" ]
+source_file="res://Assets/Soundtrack/SFX/bullet time.mp3"
+dest_files=[ "res://.import/bullet time.mp3-21d6b6d4bad7f062771ff2677d41012f.mp3str" ]
 
 [params]
 

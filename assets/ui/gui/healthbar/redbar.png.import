@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/redbar.png-6f47ceb55b8d4de475d4e46612a67a9b.stex"
+path="res://.import/redbar.png-4269e46bd7fdae2e37ff80ba4e132bd4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/gui/healthbar/redbar.png"
-dest_files=[ "res://.import/redbar.png-6f47ceb55b8d4de475d4e46612a67a9b.stex" ]
+source_file="res://Assets/UI/gui/healthbar/redbar.png"
+dest_files=[ "res://.import/redbar.png-4269e46bd7fdae2e37ff80ba4e132bd4.stex" ]
 
 [params]
 

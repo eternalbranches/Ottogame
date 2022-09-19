@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/barney_calm.mp3-dc68e2f2c496cb74bfd754e72ce2337c.mp3str"
+path="res://.import/barney_calm.mp3-0fff8cccf722cc814d4b952ec07ef3e1.mp3str"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/barney_calm.mp3"
-dest_files=[ "res://.import/barney_calm.mp3-dc68e2f2c496cb74bfd754e72ce2337c.mp3str" ]
+source_file="res://Assets/Soundtrack/SFX/barney_calm.mp3"
+dest_files=[ "res://.import/barney_calm.mp3-0fff8cccf722cc814d4b952ec07ef3e1.mp3str" ]
 
 [params]
 

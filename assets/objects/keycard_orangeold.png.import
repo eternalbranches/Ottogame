@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/keycard_orangeold.png-52a12d6ce59d57c986d3aeb318c6fcf8.stex"
+path="res://.import/keycard_orangeold.png-35692c8483ab091c816c736b96c4ea5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objects/keycard_orangeold.png"
-dest_files=[ "res://.import/keycard_orangeold.png-52a12d6ce59d57c986d3aeb318c6fcf8.stex" ]
+source_file="res://Assets/Objects/keycard_orangeold.png"
+dest_files=[ "res://.import/keycard_orangeold.png-35692c8483ab091c816c736b96c4ea5e.stex" ]
 
 [params]
 

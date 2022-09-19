@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lazor.png-3a8288bce3951d53a22cd9d56cb39196.stex"
+path="res://.import/lazor.png-b8955c22ada62b263d604c5077c4ae7e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/effects/lazor.png"
-dest_files=[ "res://.import/lazor.png-3a8288bce3951d53a22cd9d56cb39196.stex" ]
+source_file="res://Assets/Effects/lazor.png"
+dest_files=[ "res://.import/lazor.png-b8955c22ada62b263d604c5077c4ae7e.stex" ]
 
 [params]
 

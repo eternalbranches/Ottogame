@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Dungeon 2.ogg-0661c6ed742e085b7c3f0203346c3e9b.oggstr"
+path="res://.import/Dungeon 2.ogg-62a4b98893a5cc34227608a9f2043b6e.oggstr"
 
 [deps]
 
-source_file="res://assets/soundtrack/music/Dungeon 2.ogg"
-dest_files=[ "res://.import/Dungeon 2.ogg-0661c6ed742e085b7c3f0203346c3e9b.oggstr" ]
+source_file="res://Assets/Soundtrack/Music/Dungeon 2.ogg"
+dest_files=[ "res://.import/Dungeon 2.ogg-62a4b98893a5cc34227608a9f2043b6e.oggstr" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bark_3.mp3-f61101e980db9134ad50d473cff6ffce.mp3str"
+path="res://.import/bark_3.mp3-c83f05db5958ffc4631003b053a20989.mp3str"
 
 [deps]
 
-source_file="res://assets/soundtrack/sfx/bark_3.mp3"
-dest_files=[ "res://.import/bark_3.mp3-f61101e980db9134ad50d473cff6ffce.mp3str" ]
+source_file="res://Assets/Soundtrack/SFX/bark_3.mp3"
+dest_files=[ "res://.import/bark_3.mp3-c83f05db5958ffc4631003b053a20989.mp3str" ]
 
 [params]
 

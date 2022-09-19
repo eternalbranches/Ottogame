@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torso2.png-265c86f2f20dd2aaf27ca5f2e337c5fc.stex"
+path="res://.import/torso2.png-69fd0925914659ce19bf0d3241a21b80.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/torso2.png"
-dest_files=[ "res://.import/torso2.png-265c86f2f20dd2aaf27ca5f2e337c5fc.stex" ]
+source_file="res://Assets/Characters/torso2.png"
+dest_files=[ "res://.import/torso2.png-69fd0925914659ce19bf0d3241a21b80.stex" ]
 
 [params]
 

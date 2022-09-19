@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/riser_1_6.wav-b355aac44e1a2364243517686c580cf2.sample"
+path="res://.import/riser_1_6.wav-f50b32536da229efcc5db6e966e5a096.sample"
 
 [deps]
 
-source_file="res://assets/soundtrack/ambience/riser_1_6.wav"
-dest_files=[ "res://.import/riser_1_6.wav-b355aac44e1a2364243517686c580cf2.sample" ]
+source_file="res://Assets/Soundtrack/ambience/riser_1_6.wav"
+dest_files=[ "res://.import/riser_1_6.wav-f50b32536da229efcc5db6e966e5a096.sample" ]
 
 [params]
 
@@ -17,5 +17,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

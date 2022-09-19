@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/super computer.png-112cb9736ada601483ea12a5b0df13df.stex"
+path="res://.import/super computer.png-81407f0c8065686a08a8cf23064f9068.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objects/super computer.png"
-dest_files=[ "res://.import/super computer.png-112cb9736ada601483ea12a5b0df13df.stex" ]
+source_file="res://Assets/Objects/super computer.png"
+dest_files=[ "res://.import/super computer.png-81407f0c8065686a08a8cf23064f9068.stex" ]
 
 [params]
 

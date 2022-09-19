@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/autotiling_d.png-27bef30dba0df2ce728e144f4faf8ba8.stex"
+path="res://.import/autotiling_d.png-ea9a281823c287c60f548982b08a1db1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/autotiling_d.png"
-dest_files=[ "res://.import/autotiling_d.png-27bef30dba0df2ce728e144f4faf8ba8.stex" ]
+source_file="res://Assets/Tiles/autotiling_d.png"
+dest_files=[ "res://.import/autotiling_d.png-ea9a281823c287c60f548982b08a1db1.stex" ]
 
 [params]
 

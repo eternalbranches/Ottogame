@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/right arm2.png-9eaaed473ed0cc13416d13c7d09f9868.stex"
+path="res://.import/right arm2.png-2baada0f00135f412cc7e21f61efbd7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/right arm2.png"
-dest_files=[ "res://.import/right arm2.png-9eaaed473ed0cc13416d13c7d09f9868.stex" ]
+source_file="res://Assets/Characters/right arm2.png"
+dest_files=[ "res://.import/right arm2.png-2baada0f00135f412cc7e21f61efbd7f.stex" ]
 
 [params]
 

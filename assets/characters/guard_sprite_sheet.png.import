@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/guard_sprite_sheet.png-2b06c0ec8eef4be2a02c5925794de05a.stex"
+path="res://.import/guard_sprite_sheet.png-52c33cd59b26937912dbb6dc5d59baa1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/guard_sprite_sheet.png"
-dest_files=[ "res://.import/guard_sprite_sheet.png-2b06c0ec8eef4be2a02c5925794de05a.stex" ]
+source_file="res://Assets/Characters/guard_sprite_sheet.png"
+dest_files=[ "res://.import/guard_sprite_sheet.png-52c33cd59b26937912dbb6dc5d59baa1.stex" ]
 
 [params]
 

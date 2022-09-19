@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/barney_idle_n.png-f69f0ae85387ba513813eedba38b0e5a.stex"
+path="res://.import/barney_idle_n.png-f1a4d59749c8177ac2fdd66dd49b6109.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/barney_idle_n.png"
-dest_files=[ "res://.import/barney_idle_n.png-f69f0ae85387ba513813eedba38b0e5a.stex" ]
+source_file="res://Assets/Characters/barney_idle_n.png"
+dest_files=[ "res://.import/barney_idle_n.png-f1a4d59749c8177ac2fdd66dd49b6109.stex" ]
 
 [params]
 
