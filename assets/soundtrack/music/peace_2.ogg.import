@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/peace_2.ogg-aa2113cf7654b7947c0a84e2acf9b87a.oggstr"
+path="res://.import/peace_2.ogg-bfac243ec5fd31c5ad9872aaeec169f2.oggstr"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/Music/peace_2.ogg"
-dest_files=[ "res://.import/peace_2.ogg-aa2113cf7654b7947c0a84e2acf9b87a.oggstr" ]
+source_file="res://assets/soundtrack/music/peace_2.ogg"
+dest_files=[ "res://.import/peace_2.ogg-bfac243ec5fd31c5ad9872aaeec169f2.oggstr" ]
 
 [params]
 

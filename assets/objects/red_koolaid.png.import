@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_koolaid.png-9998958cc91b2eae7670d42382eec4be.stex"
+path="res://.import/red_koolaid.png-c56abc4caa78cbc9a4a8c020ad26c673.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/red_koolaid.png"
-dest_files=[ "res://.import/red_koolaid.png-9998958cc91b2eae7670d42382eec4be.stex" ]
+source_file="res://assets/objects/red_koolaid.png"
+dest_files=[ "res://.import/red_koolaid.png-c56abc4caa78cbc9a4a8c020ad26c673.stex" ]
 
 [params]
 

@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/machine_room_muffled.mp3-17b3c3b4d6a001102329c061d62e3e0e.mp3str"
+path="res://.import/machine_room_muffled.mp3-2eab4fc1f4f1e20f03977543799fa732.mp3str"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/ambience/machine_room_muffled.mp3"
-dest_files=[ "res://.import/machine_room_muffled.mp3-17b3c3b4d6a001102329c061d62e3e0e.mp3str" ]
+source_file="res://assets/soundtrack/ambience/machine_room_muffled.mp3"
+dest_files=[ "res://.import/machine_room_muffled.mp3-2eab4fc1f4f1e20f03977543799fa732.mp3str" ]
 
 [params]
 

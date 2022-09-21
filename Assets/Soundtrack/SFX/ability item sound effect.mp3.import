@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/ability item sound effect.mp3-7382ae8567ecd96a907efe6debe1f55c.mp3str"
+path="res://.import/ability item sound effect.mp3-ff7920f12bd1e2b80b55068c6279a066.mp3str"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/SFX/ability item sound effect.mp3"
-dest_files=[ "res://.import/ability item sound effect.mp3-7382ae8567ecd96a907efe6debe1f55c.mp3str" ]
+source_file="res://assets/soundtrack/sfx/ability item sound effect.mp3"
+dest_files=[ "res://.import/ability item sound effect.mp3-ff7920f12bd1e2b80b55068c6279a066.mp3str" ]
 
 [params]
 

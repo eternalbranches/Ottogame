@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OTTO.png-9781729f2d56b5da0d83ba6028aca042.stex"
+path="res://.import/OTTO.png-fe2d101faff96804fc61792585afc233.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/outdated/OTTO.png"
-dest_files=[ "res://.import/OTTO.png-9781729f2d56b5da0d83ba6028aca042.stex" ]
+source_file="res://assets/outdated/OTTO.png"
+dest_files=[ "res://.import/OTTO.png-fe2d101faff96804fc61792585afc233.stex" ]
 
 [params]
 

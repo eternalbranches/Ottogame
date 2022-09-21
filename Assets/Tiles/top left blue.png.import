@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/top left blue.png-7c0873d7f1221d0fe2aae53bfc9aea72.stex"
+path="res://.import/top left blue.png-e1344f4fc6f2ed38b48864e5a513fcd6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/top left blue.png"
-dest_files=[ "res://.import/top left blue.png-7c0873d7f1221d0fe2aae53bfc9aea72.stex" ]
+source_file="res://assets/tiles/top left blue.png"
+dest_files=[ "res://.import/top left blue.png-e1344f4fc6f2ed38b48864e5a513fcd6.stex" ]
 
 [params]
 

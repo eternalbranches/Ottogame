@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/right_arm.png-e5c4b90bfe59d83ba230ba7bb3779b27.stex"
+path="res://.import/right_arm.png-8f3affc038be681a203e2a6bb5b9cb66.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/scientist_rig/right_arm.png"
-dest_files=[ "res://.import/right_arm.png-e5c4b90bfe59d83ba230ba7bb3779b27.stex" ]
+source_file="res://assets/characters/scientist_rig/right_arm.png"
+dest_files=[ "res://.import/right_arm.png-8f3affc038be681a203e2a6bb5b9cb66.stex" ]
 
 [params]
 

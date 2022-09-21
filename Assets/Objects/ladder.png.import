@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ladder.png-ab7e29aa424a90ac3ae75cefbd2af9c7.stex"
+path="res://.import/ladder.png-6faab1c92f4cfedaf0fc5c943a981442.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/ladder.png"
-dest_files=[ "res://.import/ladder.png-ab7e29aa424a90ac3ae75cefbd2af9c7.stex" ]
+source_file="res://assets/objects/ladder.png"
+dest_files=[ "res://.import/ladder.png-6faab1c92f4cfedaf0fc5c943a981442.stex" ]
 
 [params]
 

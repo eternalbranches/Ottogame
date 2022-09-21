@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Turret_Activate.mp3-1db2256772ce4e999a3db25602657067.mp3str"
+path="res://.import/turret_activate.mp3-4834c4781d6665a7f392d14499ab1b5f.mp3str"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/SFX/Turret/Turret_Activate.mp3"
-dest_files=[ "res://.import/Turret_Activate.mp3-1db2256772ce4e999a3db25602657067.mp3str" ]
+source_file="res://assets/soundtrack/sfx/turret/turret_activate.mp3"
+dest_files=[ "res://.import/turret_activate.mp3-4834c4781d6665a7f392d14499ab1b5f.mp3str" ]
 
 [params]
 

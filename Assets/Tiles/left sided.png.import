@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/left sided.png-5d36d9820905f7ca170450973f098e82.stex"
+path="res://.import/left sided.png-2d81806733f5c1780dd4515f3a51a9af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/left sided.png"
-dest_files=[ "res://.import/left sided.png-5d36d9820905f7ca170450973f098e82.stex" ]
+source_file="res://assets/tiles/left sided.png"
+dest_files=[ "res://.import/left sided.png-2d81806733f5c1780dd4515f3a51a9af.stex" ]
 
 [params]
 

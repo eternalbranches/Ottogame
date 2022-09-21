@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/turrettower.png-4fb23ff964c0b59426200d2bc06e7184.stex"
+path="res://.import/turrettower.png-9a6956ede12a3373247daef5ccdc2f81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/turrettower.png"
-dest_files=[ "res://.import/turrettower.png-4fb23ff964c0b59426200d2bc06e7184.stex" ]
+source_file="res://assets/objects/turrettower.png"
+dest_files=[ "res://.import/turrettower.png-9a6956ede12a3373247daef5ccdc2f81.stex" ]
 
 [params]
 

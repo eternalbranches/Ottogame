@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_sniff.mp3-5a2e3491f214199358dc94a701798f59.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/mutantdog/barney_sniff.mp3"
+dest_files=[ "res://.import/barney_sniff.mp3-5a2e3491f214199358dc94a701798f59.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

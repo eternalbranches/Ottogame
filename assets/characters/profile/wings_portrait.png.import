@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wings_portrait.png-27907ad3d376c07fed3985bb8966d6ba.stex"
+path="res://.import/wings_portrait.png-ca448acabfd153b35d7668a412fdd3b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Profile/wings_portrait.png"
-dest_files=[ "res://.import/wings_portrait.png-27907ad3d376c07fed3985bb8966d6ba.stex" ]
+source_file="res://assets/characters/profile/wings_portrait.png"
+dest_files=[ "res://.import/wings_portrait.png-ca448acabfd153b35d7668a412fdd3b2.stex" ]
 
 [params]
 

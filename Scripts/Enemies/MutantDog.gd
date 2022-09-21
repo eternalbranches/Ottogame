@@ -20,6 +20,7 @@ export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
 export (int) var speed := 200
 export (int) var touch_damage := 1
+export (int) var tail_damage := 1
 #var initialized := false
 var knockback := false
 var last_seen := Vector2.ZERO
@@ -29,6 +30,7 @@ var can_tramplejump := true
 var reset_started := false
 var can_walk_E := false
 var can_walk_W := false
+var random_walk_x : float
 
 var rng = RandomNumberGenerator.new()
 
@@ -50,6 +52,11 @@ func _physics_process(delta) -> void:
 			velocity.x = lerp(velocity.x, 0, friction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
+			if target:
+				change_state("combat")
+			elif $Idle_Walk.is_stopped():
+				$Idle_Walk.start()
+			$AnimationPlayer.play("Idle_" + current_direction)
 			
 		"alert":
 			if current_direction == "E" and can_walk_E == true:
@@ -60,44 +67,59 @@ func _physics_process(delta) -> void:
 				#print("")
 			else:
 				velocity.x = 0
-			
+
 			velocity.x = lerp(velocity.x, 0, friction)
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
-			
-		#	sightcheck()
+
+			if velocity != Vector2(0,0):
+				$AnimationPlayer.play("Walk_"+ current_direction)
+			else:
+				$AnimationPlayer.play("Idle_" + current_direction)
+#
+			if target:
+				change_state("combat")
 			
 			
 		"combat":
+			sightcheck()
 			if target == null:
-				state = "alert"
+				change_state("alert")
 				return
-			var remaining_distance = get_global_position().x - new_random_xpos
+			var remaining_distance = get_global_position().x - target.get_global_position().x
 			if target.position.x > position.x:
 				current_direction = "E"
+				
 			elif target.position.x < position.x:
 				current_direction = "W"
-			if remaining_distance > -5 and remaining_distance < 5:
+				
+			if remaining_distance > -40 and remaining_distance < 40:
 				velocity.x = 0
-			elif remaining_distance < -5:
+				change_state("tailattack")
+			elif remaining_distance < -40:
 				if can_walk_E == true:
 					velocity.x = speed
 				else:
 					velocity.x = 0
+					#change_state("tailattack")
 			else:
 				if can_walk_W == true:
 					velocity.x = -speed
 				else: 
 					velocity.x = 0
+					#change_state("tailattack")
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
+			
+			if $AnimationPlayer.is_playing() == false:
+				$AnimationPlayer.play("Run_" + current_direction)
 			
 			
 		"tailattack":
 			if current_direction == "E":
-				if get_global_position().distance_to(target) > 30:
-					$AnimationPlayer.play("overhead_tail_attack"+current_direction)
-			
+				$AnimationPlayer.play("Tailattack_Overhead_"+current_direction)
+			else:
+				$AnimationPlayer.play("Tailattack_Overhead_"+current_direction)
 		"death":
 			velocity.x = 0
 			velocity.y += gravity * delta
@@ -152,11 +174,59 @@ func _physics_process(delta) -> void:
 				velocity.x = -speed
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
-		"reposition":
-			pass
 			
+		"walk":
+			#print(random_walk_x, "random_walk_x", get_global_position().x, "global_pos")
+			var remaining_distance = get_global_position().x - random_walk_x
+				
+#			if remaining_distance > -40 and remaining_distance < 40:
+#				velocity.x = 0
+#			elif remaining_distance < -40:
+#				if can_walk_E == true:
+#					velocity.x = speed
+#				else:
+#					velocity.x = 0
+#			else:
+#				if can_walk_W == true:
+#					velocity.x = -speed
+#				else: 
+#					velocity.x = 0
+#			velocity.y += gravity * delta
+#			velocity = move_and_slide(velocity, Vector2.UP)
+#
+#			if $AnimationPlayer.is_playing() == false:
+#				$AnimationPlayer.play("Run_" + current_direction)
+			#print (remaining_distance)
+			if remaining_distance > 20:
+				if can_walk_E == true:
+					velocity.x = speed /2.0
+					current_direction = "E"
+				else:
+					velocity.x = 0
+			elif remaining_distance < -20: 
+				#print("E")
+				if can_walk_W == true:
+					velocity.x = -speed/2.0
+					current_direction = "W"
+				else:
+					velocity.x = 0
+				#print("")
+			else:
+				velocity.x = 0
+
+			velocity.x = lerp(velocity.x, 0, friction)
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+
+			if velocity != Vector2(0,0):
+				$AnimationPlayer.play("Walk_"+ current_direction)
+			else:
+				$AnimationPlayer.play("Idle_" + current_direction)
 			
-func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
+			if $Idle_Walk.is_stopped():
+				$Idle_Walk.start()
+			
+func on_hit(damage, _origin, enemy_pos) -> void:
 	print("hit", damage)
 	if state != "death":
 		current_hp -= damage
@@ -170,7 +240,7 @@ func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
 	#state = "knockback"
 	if investigate_pos == Vector2(0, 0):
 		investigate_pos = Vector2(enemy_pos.x, 0)
-		current_direction = direction_hit
+		#current_direction = direction_hit
 		#investigate(direction_hit)
 	alert = true
 	change_state("alert")
@@ -189,9 +259,12 @@ func on_death() -> void:
 	#	child.enabled = false
 	
 	
-#func sightcheck():
-#	var space_state = get_world_2d().direct_space_state
-#	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
+func sightcheck():
+	if target.state == "death":
+		target = null
+		return
+	var space_state = get_world_2d().direct_space_state
+	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
 #	if sight_check:
 #		if sight_check.collider.name == "Player":
 #			last_seen = target.position
@@ -199,6 +272,9 @@ func on_death() -> void:
 #				state = "combat"
 #		else:
 #			state = "return"
+	if sight_check:
+		if sight_check.collider != target:
+			target = null
 
 
 
@@ -245,16 +321,23 @@ func change_state(new_state) -> void:
 		"alert":
 			$Floorcheck_E.enabled = true
 			$Floorcheck_W.enabled = true
+			randomize()
+			$Idle_Walk.wait_time = rand_range(1, 8)
+			$Idle_Walk.start()
+		"combat":
+			$Floorcheck_E.enabled = true
+			$Floorcheck_W.enabled = true
+			
+			
+			
 			
 			
 func player_enters_range(in_range):
 	if in_range == true:
 		player_in_range = true
-		$SightTimer.set_wait_time(0.3)
 		print("activate")
 	else:
 		player_in_range = false
-		$SightTimer.set_wait_time(10)
 		
 
 	
@@ -270,3 +353,37 @@ func floorcheck() -> void:
 			#print($Floorcheck_W.get_collider())
 		else:
 			can_walk_W = false
+
+
+func _on_Vision_body_entered(body):
+	if target == null and body.is_in_group("Dog") == false:
+		target = body
+		print(target)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	print(anim_name)
+	match anim_name:
+		"Tailattack_Overhead_W", "Tailattack_Overhead_E":
+			change_state("combat")
+			
+
+
+
+func _on_Tailswipe_body_entered(body):
+	if body.is_in_group("Dog") == false:
+		body.on_hit(tail_damage, "dog", get_global_position().x)
+		
+
+func play_sfx(sfx : String) -> void:
+	$SFX.stream = load(sfx)
+	$SFX.play()
+
+
+func _on_Idle_Walk_timeout():
+	
+	random_walk_x = (get_global_position().x - rand_range(-200, 200))
+	if state == "alert" or state == "idle":
+		change_state("walk")
+	elif state == "walk":
+		change_state("idle")

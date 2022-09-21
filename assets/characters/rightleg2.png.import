@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rightleg2.png-43fe4ac24b984fc4fedf48c02f0900f8.stex"
+path="res://.import/rightleg2.png-27d3e9bdd57e27fbafc06501f730bcc7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/rightleg2.png"
-dest_files=[ "res://.import/rightleg2.png-43fe4ac24b984fc4fedf48c02f0900f8.stex" ]
+source_file="res://assets/characters/rightleg2.png"
+dest_files=[ "res://.import/rightleg2.png-27d3e9bdd57e27fbafc06501f730bcc7.stex" ]
 
 [params]
 

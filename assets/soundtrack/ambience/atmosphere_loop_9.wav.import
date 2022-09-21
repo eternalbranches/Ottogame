@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/atmosphere_loop_9.wav-fb89e733509407acfd98e2a689bfd1fb.sample"
+path="res://.import/atmosphere_loop_9.wav-42dfaf58a3b22d139a10dd7d67dc7d72.sample"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/ambience/atmosphere_loop_9.wav"
-dest_files=[ "res://.import/atmosphere_loop_9.wav-fb89e733509407acfd98e2a689bfd1fb.sample" ]
+source_file="res://assets/soundtrack/ambience/atmosphere_loop_9.wav"
+dest_files=[ "res://.import/atmosphere_loop_9.wav-42dfaf58a3b22d139a10dd7d67dc7d72.sample" ]
 
 [params]
 

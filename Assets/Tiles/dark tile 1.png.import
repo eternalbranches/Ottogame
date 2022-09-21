@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dark tile 1.png-fed963eb72228a03ea2c18ef25cdacb9.stex"
+path="res://.import/dark tile 1.png-44204e5cd06958241e806c5077d5e50e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/dark tile 1.png"
-dest_files=[ "res://.import/dark tile 1.png-fed963eb72228a03ea2c18ef25cdacb9.stex" ]
+source_file="res://assets/tiles/dark tile 1.png"
+dest_files=[ "res://.import/dark tile 1.png-44204e5cd06958241e806c5077d5e50e.stex" ]
 
 [params]
 

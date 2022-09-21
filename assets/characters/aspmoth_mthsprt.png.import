@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/aspmoth_mthsprt.png-a4427f509dd2b8c38dbe72241f30d66e.stex"
+path="res://.import/aspmoth_mthsprt.png-49c1a12ce0b41c092aab8c3bb8d2ff68.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/aspmoth_mthsprt.png"
-dest_files=[ "res://.import/aspmoth_mthsprt.png-a4427f509dd2b8c38dbe72241f30d66e.stex" ]
+source_file="res://assets/characters/aspmoth_mthsprt.png"
+dest_files=[ "res://.import/aspmoth_mthsprt.png-49c1a12ce0b41c092aab8c3bb8d2ff68.stex" ]
 
 [params]
 

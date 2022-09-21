@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/moth_gal.png-73d354ba23e7ba1ce966d31fdfbd2ade.stex"
+path="res://.import/moth_gal.png-6c87810db7296722a98cee742d48638e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Profile/moth_gal.png"
-dest_files=[ "res://.import/moth_gal.png-73d354ba23e7ba1ce966d31fdfbd2ade.stex" ]
+source_file="res://assets/characters/profile/moth_gal.png"
+dest_files=[ "res://.import/moth_gal.png-6c87810db7296722a98cee742d48638e.stex" ]
 
 [params]
 

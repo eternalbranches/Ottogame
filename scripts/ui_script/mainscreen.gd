@@ -11,6 +11,7 @@ var clicked := false
 
 
 func _ready():
+	Engine.set_target_fps(60)
 	CharacterSave.ingame = false
 	load_volume()
 	$NinePatchRect/VBoxContainer/PlayButton.grab_focus()

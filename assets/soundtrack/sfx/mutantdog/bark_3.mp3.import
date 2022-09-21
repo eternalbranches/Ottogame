@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bark_3.mp3-c0bb989a45d5fe15992b716a5cc2a745.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/mutantdog/bark_3.mp3"
+dest_files=[ "res://.import/bark_3.mp3-c0bb989a45d5fe15992b716a5cc2a745.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

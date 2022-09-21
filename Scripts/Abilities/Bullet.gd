@@ -21,6 +21,8 @@ func _ready():
 		$Area2D.set_collision_mask_bit(8, true)
 	elif origin == "Enemy":
 		$Area2D.set_collision_mask_bit(1, true)
+		$Area2D.set_collision_mask_bit(2, true)
+		
 	SelfDestruct()
 
 	
@@ -39,10 +41,7 @@ func SelfDestruct():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Enemy"):
-		var direction_hit = "W"
-		if get_global_position().x > body.get_global_position().x:
-			direction_hit = "E"
-		body.on_hit(damage, origin, get_global_position(), direction_hit)
+		body.on_hit(damage, origin, get_global_position())
 	elif body.is_in_group("Player"):
 		body.on_hit(damage, origin, enemyposx)
 	elif body.is_in_group("Destructable"):

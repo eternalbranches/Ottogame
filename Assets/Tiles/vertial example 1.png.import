@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vertial example 1.png-99986de3dbece8f26cfe7a496c7bcc0d.stex"
+path="res://.import/vertial example 1.png-ee508c7ed2f81229b48e4cc78854698f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/vertial example 1.png"
-dest_files=[ "res://.import/vertial example 1.png-99986de3dbece8f26cfe7a496c7bcc0d.stex" ]
+source_file="res://assets/tiles/vertial example 1.png"
+dest_files=[ "res://.import/vertial example 1.png-ee508c7ed2f81229b48e4cc78854698f.stex" ]
 
 [params]
 

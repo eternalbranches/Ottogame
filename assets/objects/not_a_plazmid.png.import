@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/not_a_plazmid.png-d9908c3d4f19b628e4140658fdefd34c.stex"
+path="res://.import/not_a_plazmid.png-0d9681e223cb2f269d31723bbebec1db.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/not_a_plazmid.png"
-dest_files=[ "res://.import/not_a_plazmid.png-d9908c3d4f19b628e4140658fdefd34c.stex" ]
+source_file="res://assets/objects/not_a_plazmid.png"
+dest_files=[ "res://.import/not_a_plazmid.png-0d9681e223cb2f269d31723bbebec1db.stex" ]
 
 [params]
 

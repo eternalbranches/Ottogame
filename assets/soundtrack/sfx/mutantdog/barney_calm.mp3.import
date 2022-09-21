@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_calm.mp3-8e088932eba9f01ae017d9190c5eaf5a.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/mutantdog/barney_calm.mp3"
+dest_files=[ "res://.import/barney_calm.mp3-8e088932eba9f01ae017d9190c5eaf5a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -2,12 +2,12 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bullet hitting wall.mp3-d9fac37fccd67ae948843f81f15f8e12.mp3str"
+path="res://.import/bullet hitting wall.mp3-f9e851cd91cbe02b9645152d3a8799a4.mp3str"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/SFX/bullet hitting wall.mp3"
-dest_files=[ "res://.import/bullet hitting wall.mp3-d9fac37fccd67ae948843f81f15f8e12.mp3str" ]
+source_file="res://assets/soundtrack/sfx/bullet hitting wall.mp3"
+dest_files=[ "res://.import/bullet hitting wall.mp3-f9e851cd91cbe02b9645152d3a8799a4.mp3str" ]
 
 [params]
 

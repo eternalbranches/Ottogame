@@ -269,7 +269,7 @@ func get_input_running(delta):
 		set_collision_mask_bit(7,0)
 		$PlatformTimer.start()
 
-func dash_state(delta)-> void:
+func dash_state(_delta)-> void:
 	if dash_side == false: 
 		velocity.x = 0
 	if dash_up == false:
@@ -446,7 +446,7 @@ func midair_run_state(delta):
 		state = "running"
 		run_released = true
 
-func climbing_state(delta) -> void:
+func climbing_state(_delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	animation_mode.travel("Climbing")

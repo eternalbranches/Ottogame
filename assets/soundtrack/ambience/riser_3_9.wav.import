@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/riser_3_9.wav-9e9266568bef0f2275252dfff65782ea.sample"
+path="res://.import/riser_3_9.wav-257609970cf145437384e2ea0277c89a.sample"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/ambience/riser_3_9.wav"
-dest_files=[ "res://.import/riser_3_9.wav-9e9266568bef0f2275252dfff65782ea.sample" ]
+source_file="res://assets/soundtrack/ambience/riser_3_9.wav"
+dest_files=[ "res://.import/riser_3_9.wav-257609970cf145437384e2ea0277c89a.sample" ]
 
 [params]
 

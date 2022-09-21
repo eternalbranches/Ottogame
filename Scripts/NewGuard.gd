@@ -224,7 +224,7 @@ func suprised_state(_delta):
 	pass
 
 
-func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
+func on_hit(damage, _origin, enemy_pos) -> void:
 	if state != "death":
 		current_hp -= damage
 		flash()
@@ -236,8 +236,7 @@ func on_hit(damage, _origin, enemy_pos, direction_hit) -> void:
 	#velocity.y -= 200
 	#state = "knockback"
 	if investigate_pos == Vector2(0, 0):
-		investigate_pos = Vector2(enemy_pos.x, 0)
-		current_direction = direction_hit
+		investigate_pos = Vector2(enemy_pos, 0)
 		#investigate(direction_hit)
 	alert = true
 	change_state("alert", "on_hit")

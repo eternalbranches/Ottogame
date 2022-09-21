@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/luna_concerned.png-f9a995fcf6c88dcca2dc001daf3d5e50.stex"
+path="res://.import/luna_concerned.png-7737938b90e80994ebac8426744da397.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Profile/luna_concerned.png"
-dest_files=[ "res://.import/luna_concerned.png-f9a995fcf6c88dcca2dc001daf3d5e50.stex" ]
+source_file="res://assets/characters/profile/luna_concerned.png"
+dest_files=[ "res://.import/luna_concerned.png-7737938b90e80994ebac8426744da397.stex" ]
 
 [params]
 

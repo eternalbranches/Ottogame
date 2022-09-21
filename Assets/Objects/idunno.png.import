@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idunno.png-1618c3d3304ee92c54e3df4314053f1f.stex"
+path="res://.import/idunno.png-74faf8c683279ff0012e9ae49bd51e77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/idunno.png"
-dest_files=[ "res://.import/idunno.png-1618c3d3304ee92c54e3df4314053f1f.stex" ]
+source_file="res://assets/objects/idunno.png"
+dest_files=[ "res://.import/idunno.png-74faf8c683279ff0012e9ae49bd51e77.stex" ]
 
 [params]
 

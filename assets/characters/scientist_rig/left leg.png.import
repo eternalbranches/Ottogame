@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/left leg.png-ef58b71b392857860e970553f24fa1c9.stex"
+path="res://.import/left leg.png-f2e9bb7cb08355aad9a5f3b498054391.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/scientist_rig/left leg.png"
-dest_files=[ "res://.import/left leg.png-ef58b71b392857860e970553f24fa1c9.stex" ]
+source_file="res://assets/characters/scientist_rig/left leg.png"
+dest_files=[ "res://.import/left leg.png-f2e9bb7cb08355aad9a5f3b498054391.stex" ]
 
 [params]
 

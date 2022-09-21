@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/Cyberspace.ogg-00aba292dd84ce78a120327e5507de27.oggstr"
+path="res://.import/Cyberspace.ogg-d6259f6ad59fc7d42d94e692a30e833c.oggstr"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/Music/Cyberspace.ogg"
-dest_files=[ "res://.import/Cyberspace.ogg-00aba292dd84ce78a120327e5507de27.oggstr" ]
+source_file="res://assets/soundtrack/music/Cyberspace.ogg"
+dest_files=[ "res://.import/Cyberspace.ogg-d6259f6ad59fc7d42d94e692a30e833c.oggstr" ]
 
 [params]
 

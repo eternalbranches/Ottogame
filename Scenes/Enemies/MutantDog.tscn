@@ -1,13 +1,13 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://scripts/enemies/mutantdog.gd" type="Script" id=1]
-[ext_resource path="res://assets/characters/barney_spritesheet.png" type="Texture" id=2]
-[ext_resource path="res://assets/characters/barney_idle_n.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Shader/flash.gdshader" type="Shader" id=4]
+[ext_resource path="res://scripts/shader/flash.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/characters/barney_idle_n.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/barney_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://scripts/enemies/mutantdog.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
-shader = ExtResource( 4 )
+shader = ExtResource( 1 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
@@ -98,6 +98,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "Idle_W"
@@ -126,6 +138,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -156,6 +180,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "Jump_W"
@@ -184,6 +220,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=17]
@@ -251,11 +299,22 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( -13, 24 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Vision/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "Run_E"
 length = 0.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -280,11 +339,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=13]
 resource_name = "Run_W"
 length = 0.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -308,6 +378,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -338,6 +420,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "Tailattack_Behind_W"
@@ -367,11 +461,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "Tailattack_Overhead_E"
 length = 1.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -432,11 +537,22 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 7, 25 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Vision/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "Tailattack_Overhead_W"
 length = 1.8
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -497,6 +613,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ SubResource( 17 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Vision/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "Walk_E"
@@ -525,6 +653,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 136, 21 ) ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -555,15 +695,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Vision/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -136, 21 ) ]
+}
 
-[node name="MutantDog" type="KinematicBody2D" groups=["Enemy", "Mutant"]]
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 106, 26 )
+
+[node name="MutantDog" type="KinematicBody2D" groups=["Dog", "Enemy", "Mutant"]]
 collision_layer = 4
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 18 )
-texture = ExtResource( 2 )
-normal_map = ExtResource( 3 )
+texture = ExtResource( 3 )
+normal_map = ExtResource( 2 )
 hframes = 12
 vframes = 13
 
@@ -598,6 +753,8 @@ margin_right = 40.0
 margin_bottom = 14.0
 
 [node name="Tailswipe" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 262
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tailswipe"]
 position = Vector2( -13, 24 )
@@ -608,14 +765,31 @@ disabled = true
 wait_time = 0.1
 one_shot = true
 
+[node name="Idle_Walk" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Floorcheck_W" type="RayCast2D" parent="."]
-position = Vector2( -12, 48 )
-cast_to = Vector2( 0, 2 )
+position = Vector2( -12, 47 )
+cast_to = Vector2( 0, 5 )
 
 [node name="Floorcheck_E" type="RayCast2D" parent="."]
-position = Vector2( 9, 48 )
-cast_to = Vector2( 0, 2 )
+position = Vector2( 9, 47 )
+cast_to = Vector2( 0, 5 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Vision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 262
+monitorable = false
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+position = Vector2( 136, 21 )
+shape = SubResource( 19 )
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="Tailswipe" to="." method="_on_Tailswipe_body_entered"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="timeout" from="Idle_Walk" to="." method="_on_Idle_Walk_timeout"]
+[connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]

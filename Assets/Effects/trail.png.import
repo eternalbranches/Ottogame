@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/trail.png-7974bf823c7bed8f0a301726591fd86e.stex"
+path="res://.import/trail.png-0f9364517547fbcb592282ba5590e97e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Effects/trail.png"
-dest_files=[ "res://.import/trail.png-7974bf823c7bed8f0a301726591fd86e.stex" ]
+source_file="res://assets/effects/trail.png"
+dest_files=[ "res://.import/trail.png-0f9364517547fbcb592282ba5590e97e.stex" ]
 
 [params]
 

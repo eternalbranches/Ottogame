@@ -2,12 +2,12 @@
 
 importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
-path="res://.import/City.ogg-7e7bd39095a265827d11f1b0b9a5b05d.oggstr"
+path="res://.import/City.ogg-a91c8719f2e7b0377f41b304b1e5c90e.oggstr"
 
 [deps]
 
-source_file="res://Assets/Soundtrack/Music/City.ogg"
-dest_files=[ "res://.import/City.ogg-7e7bd39095a265827d11f1b0b9a5b05d.oggstr" ]
+source_file="res://assets/soundtrack/music/City.ogg"
+dest_files=[ "res://.import/City.ogg-a91c8719f2e7b0377f41b304b1e5c90e.oggstr" ]
 
 [params]
 

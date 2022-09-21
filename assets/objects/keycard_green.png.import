@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/keycard_green.png-b37ad95482ae208db72e5d51a57bfc83.stex"
+path="res://.import/keycard_green.png-e4c19ae89b29537bd02845422f835497.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Objects/keycard_green.png"
-dest_files=[ "res://.import/keycard_green.png-b37ad95482ae208db72e5d51a57bfc83.stex" ]
+source_file="res://assets/objects/keycard_green.png"
+dest_files=[ "res://.import/keycard_green.png-e4c19ae89b29537bd02845422f835497.stex" ]
 
 [params]
 

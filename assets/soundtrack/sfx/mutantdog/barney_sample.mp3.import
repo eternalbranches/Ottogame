@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/barney_sample.mp3-c970290d162d5a299ce99a1e741c140a.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/mutantdog/barney_sample.mp3"
+dest_files=[ "res://.import/barney_sample.mp3-c970290d162d5a299ce99a1e741c140a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
