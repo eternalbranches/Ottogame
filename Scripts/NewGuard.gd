@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 onready var animation_tree = get_node("AnimationTree")
-onready var animation_mode = animation_tree.get("parameters/playback")
+#onready var animation_mode = animation_tree.get("parameters/playback")
 
 var state := "idle"
 var max_hp := 15
@@ -13,13 +13,12 @@ var jumppower := 1000
 var can_jump := true
 var new_random_xpos := 0.0
 var dead := false
-var in_sight := {"Mutants": [], "Projectiles": []}
 var in_memory := {"Guards": [], "Mutants": [], "Projectiles": []}
-var target_visible := false
 var morale := 100
 var threat := 0
 var alert := false
 var combat := false
+var ammo := 3
 var target
 var investigate_pos: Vector2
 var player_in_range := false
@@ -49,101 +48,41 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	spawn_guardposition = get_global_position().x
 	add_to_group("guard_" + str(group))
-	#rng.randi_range(0, 5)
-#rng.randf_range(-10.0, 10.0)
+	
+	
 func _process(_delta):
-	if state != "idle":
-		pass
-
-func _physics_process(delta):
 	$Label.text = state
+	
+	
+func _physics_process(delta):
 	state_manager(delta)
 
 
 func state_manager(delta) -> void:
 	call(state+"_state", delta)
 
+
 func idle_state(delta):
-	animation_mode.travel("Idle_"+ current_direction)
+
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-func patrol_state(delta) -> void:
-	if current_direction == "E":
-		if new_random_xpos < get_global_position().x :
-			velocity.x = 0
-			if $PatrolPause.is_stopped():
-				$PatrolPause.start()
-		else:
-			velocity.x = speed
-	else:
-		if new_random_xpos > get_global_position().x :
-			velocity.x = 0
-			if $PatrolPause.is_stopped():
-				$PatrolPause.start()
-		else:
-			velocity.x = -speed
-			
-			
-	animation_mode.travel("Idle_"+ current_direction)
-	velocity.x = lerp(velocity.x, 0, friction)
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2.UP)
+	$AnimationPlayer.play("Idle_" + current_direction)
+#	animation_mode.travel("Idle_"+ current_direction)
+	if target:
+		change_state("combat", "idle_state")
 	
 	
 func alert_state(delta) -> void:
-	floorcheck()
-	if current_direction == "E" and can_walk_E == true:
-		velocity.x = speed
-		animation_mode.travel("Walk_"+ current_direction)
-	elif current_direction == "W" and can_walk_W == true:
-		velocity.x = -speed
-		animation_mode.travel("Walk_"+ current_direction)
-	else:
-		velocity.x = 0.0
-		animation_mode.travel("Idle_"+ current_direction)
-		if $PatrolTimer.is_stopped():
-			$PatrolTimer.start()
-			
 	velocity.x = lerp(velocity.x, 0, friction)
 	velocity.y += gravity * delta
-	
-	if current_direction == "E":
-		if $Wallcheck_E.is_colliding():
-			if $Wallcheck_E.get_collider().is_in_group("Obstruction"):
-				if target != null:
-					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
-						jump("E")
-						change_state("jump", "alert_state")
-					else: 
-						velocity.x = 0
-				else:
-					velocity.x = 0
-					
-	elif current_direction == "W":
-		if $Wallcheck_W.is_colliding():
-			
-			if $Wallcheck_W.get_collider().is_in_group("Obstruction"):
-				if target:
-					if can_jump == true and target.get_global_position().y -20 < get_global_position().y:
-						jump("W")
-						change_state("jump", "alert_state")
-					else: 
-						velocity.x = 0
-				else:
-					if can_jump == true and investigate_pos.y -20 < get_global_position().y:
-						jump("W")
-						change_state("jump", "alert_state")
-					else: 
-						velocity.x = 0
-						
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-	#if sightcheck() == false:
-	#	pass
-	#	print("lost track")     #needs new state
-
+	floorcheck()
+	$AnimationPlayer.play("Idle_" + current_direction)
+	#animation_mode.travel("Idle_"+ current_direction)
+	if target:
+		$AnimationPlayer.play("Prepare_Shoot_" + current_direction)
+		change_state("combat", "idle_state")
 	
 func jump_state(delta) -> void:
 	if current_direction == "E":
@@ -155,50 +94,66 @@ func jump_state(delta) -> void:
 	if is_on_floor() == true:
 		change_state("alert", "jump_state")
 	
+	
 func combat_state(delta) -> void:
+	sightcheck()
+	floorcheck()
 	if target == null:
 		change_state("alert", "combat_state")
 		return
-	var remaining_distance = get_global_position().x - new_random_xpos
-	if target.position.x > position.x:
+		
+	if target.get_global_position().x > get_global_position().x:
 		current_direction = "E"
-	elif target.position.x < position.x:
-		current_direction = "W"
-	if remaining_distance > -5 and remaining_distance < 5:
-		velocity.x = 0
-	elif remaining_distance < -5:
-		if can_walk_E == true:
-			velocity.x = speed
+		#print(can_walk_E, can_walk_W, get_global_position().distance_to(target.get_global_position()))
+		if can_walk_W and get_global_position().distance_to(target.get_global_position()) < 200:
+			velocity.x = -50
+			
+		elif can_walk_E and get_global_position().distance_to(target.get_global_position()) > 350:
+			velocity.x = 50
 		else:
-			velocity.x = 0
+			velocity.x = lerp(velocity.x, 0, friction)
 	else:
-		if can_walk_W == true:
-			velocity.x = -speed
-		else: 
-			velocity.x = 0
-	animation_mode.travel("Walk_"+ current_direction)
+		current_direction = "W"
+		if can_walk_E and get_global_position().distance_to(target.get_global_position()) < 200:
+			velocity.x = 50
+		elif can_walk_W and get_global_position().distance_to(target.get_global_position()) > 350:
+			velocity.x = -50
+		else:
+			velocity.x = lerp(velocity.x, 0, friction)
+	#print(velocity)
+	if velocity > Vector2(1,0) or velocity < Vector2(-1,0):
+		$AnimationPlayer.play("Walk_" + current_direction)
+		#animation_mode.travel("Walk_"+ current_direction)
+	else:
+		$AnimationPlayer.play("Idle_" + current_direction)
+		#animation_mode.travel("Idle_"+ current_direction)
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
-	if in_sight["Mutants"].empty() == false:
-		if can_shoot == true:
-			change_state("shoot", "combat_state")
-	else:
-		change_state("alert", "combat_state")
-
-func shoot_state(_delta) -> void:
-	if can_shoot == true:
+	if can_shoot:
+		change_state("shoot", "combat_state")
+		$AnimationPlayer.play("Prepare_Shoot_"+ current_direction)
 		can_shoot = false
-		#rng.randomize()
-		#var numberanimation = rng.randi_range(1, 2)
-		animation_mode.travel("Shoot_"+current_direction + str(1))
-		$ShootCD.start()
-		$ShootAnim.start()
+	
+
+func shoot_state(delta) -> void:
+	velocity.x = 0
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+#	if can_shoot == true:
+#		can_shoot = false
+#		#rng.randomize()
+#		#var numberanimation = rng.randi_range(1, 2)
+#		$AnimationPlayer.play("Shoot_" + current_direction + str(1))
+#		#animation_mode.travel("Shoot_"+current_direction + str(1))
+#
+#		$ShootAnim.start()
 		
 func death_state(delta) -> void:
 	velocity.x = 0
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
 	
 func knockback_state(delta) -> void:
 	velocity.y += gravity * delta
@@ -209,7 +164,8 @@ func knockback_state(delta) -> void:
 		knockback = false
 		change_state("alert", "knockback_state")
 		
-func return_state(delta) -> void:
+		
+func return_state(delta : float) -> void:
 	var remaining_distance = get_global_position().x - spawn_guardposition
 	if remaining_distance > -10 and remaining_distance < 10:
 		change_state("idle", "return_state")
@@ -236,10 +192,15 @@ func on_hit(damage, _origin, enemy_pos) -> void:
 	#velocity.y -= 200
 	#state = "knockback"
 	if investigate_pos == Vector2(0, 0):
-		investigate_pos = Vector2(enemy_pos, 0)
+		investigate_pos = enemy_pos
 		#investigate(direction_hit)
 	alert = true
 	change_state("alert", "on_hit")
+	if target == null:
+		if enemy_pos > get_global_position():
+			current_direction = "E"
+		else:
+			current_direction = "W"
 	
 	if current_hp <= 0:
 			on_death()
@@ -247,12 +208,11 @@ func on_hit(damage, _origin, enemy_pos) -> void:
 func on_death() -> void:
 	change_state("death", "on_death")
 	dead = true
-	animation_mode.travel("Death_" + current_direction)
+	$AnimationPlayer.play("Death_" + current_direction)
+	#animation_mode.travel("Death_" + current_direction)
 	set_collision_layer_bit(8, 0)
 	set_collision_mask_bit(1,0)
 	$RemoveTimer.start()
-	for child in $Eyesight.get_children():
-		child.enabled = false
 	
 func _on_ShootCD_timeout() -> void:
 	can_shoot = true
@@ -299,6 +259,8 @@ func create_bullet() -> void:
 	$SFXPLayer.play()
 	get_parent().add_child(skill_instance)
 	create_noise("medium")
+	ammo -= 1
+
 	
 func create_noise(volume) -> void:
 	var noise = load("res://scenes/abstract/"+volume+"noise.tscn")
@@ -306,26 +268,6 @@ func create_noise(volume) -> void:
 	noise_instance.position = get_global_position()
 	get_parent().add_child(noise_instance)
 
-
-func _on_SightTimer_timeout() -> void:
-	for key in in_sight:
-		in_sight[key].resize(0)
-	for child in $Eyesight.get_children():
-		#child as RayCast2D
-	#	child.enabled = true
-		if child.is_colliding():
-			if child.get_collider().is_in_group("Mutant") and in_sight["Mutants"].has(child.get_collider()) == false:
-				in_sight["Mutants"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Mutants", true)
-				if alert == false:
-					alert = true
-					investigate_pos = child.get_global_position()
-					_on_AI_Timer_timeout()
-			elif child.get_collider().is_in_group("Projectiles") and in_sight["Projectiles"].has(child.get_collider()) == false:
-				in_sight["Projectiles"].push_back(child.get_collider())
-				add_memory(child.get_collider(), "Projectiles", true)
-				if alert == false:
-					alert = true
 				
 		
 func jump(direction) -> void:
@@ -353,31 +295,15 @@ func hear_ally(memory, category) -> void:
 	add_memory(memory, category, false)
 	if alert == false:
 		alert = true
-	_on_AI_Timer_timeout()
 	
-	
-func _on_AI_Timer_timeout() -> void:
-	if alert == true and dead == false:
-		if in_memory["Mutants"].empty() == false:
-			combat = true
-			target = in_memory["Mutants"][0]
-			if in_sight["Mutants"].has(target) == false:
-				investigate_pos = target.get_global_position()
-			if state == "idle":
-				change_state("alert", "AI_timer")
-		elif in_memory["Projectiles"].empty() == false and state == "idle":
-			change_state("alert", "AI_timer")
-		elif investigate_pos != null and state == "idle":
-			change_state("alert", "AI_timer")
-		if combat == true and state != "shoot" and in_sight["Mutants"].has(target):
-			change_state("combat", "Ai_timer")
 			
 func investigate(direction_hit) -> void:
 	current_direction = direction_hit
 		
+		
 func change_state(new_state, caller) -> void:
-	if debug == true:
-		print(caller)
+	#if debug == true:
+		#print(caller)
 	if state != "death":
 		state = new_state
 	match new_state:
@@ -414,11 +340,9 @@ func heard_sound(volume : String, sound_position : Vector2) -> void:
 		"loud":
 			alert = true
 			investigate_pos = sound_position
-			_on_AI_Timer_timeout()
 		"medium":
 			alert = true
 			investigate_pos = sound_position
-			_on_AI_Timer_timeout()
 		"small":
 			if alert == false: 
 				if sound_position.x > get_global_position().x:
@@ -434,39 +358,53 @@ func new_random_position() -> void:
 	
 
 func sightcheck():
+	if target.state == "death":
+		target = null
+		return
 	var space_state = get_world_2d().direct_space_state
 	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
 	if sight_check:
-		return true
-	else:
-		return false
+		if sight_check.collider != target:
+			target = null
 		
 
 func _on_JumpCD_timeout() -> void:
 	can_jump = true
 
 
-func _on_PatrolTimer_timeout() -> void:
-	if state == "alert":
-		new_random_position()
-		change_state("patrol", "Patrol_timer")
-		if get_global_position().x < new_random_xpos:
-			current_direction = "E"
-		else:
-			current_direction = "W"
+func _on_Vision_body_entered(body):
+	if target == null and body.is_in_group("Guard") == false:
+		target = body
+		#print(target)
 
 
-func _on_PatrolPause_timeout() -> void:
-	if state == "patrol":
-		change_state("alert", "patrol_pause")
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	match anim_name:
+		"Prepare_Shoot_E", "Prepare_Shoot_W":
+			if target.get_global_position().x > get_global_position().x:
+				current_direction = "E"
+			else:
+				current_direction = "W"
+			$AnimationPlayer.play("Shoot_"+current_direction)
+		"Shoot_E" , "Shoot_W":
+			if ammo > 0:
+				if target.get_global_position().x > get_global_position().x:
+					current_direction = "E"
+				else:
+					current_direction = "W"
+				$AnimationPlayer.play("Shoot_" +current_direction)
+			elif state == "shoot":
+				change_state("alert", "create_bullet")
+				ammo = 3
+				$ShootCD.start()
+				
+				
 
-func _on_Detect_body_entered(body):
-	print(body)
-	if body.is_in_group("Mutant") and in_sight["Mutants"].has(body) == false:
-		in_sight["Mutants"].push_back(body)
-		add_memory(body, "Mutants", true)
-	if alert == false:
-		alert = true
-		investigate_pos = body.get_global_position()
-		_on_AI_Timer_timeout()
+			
+			
+			
+#	if ammo == 0:
+#		if state == "shoot":
+#			change_state("alert", "create_bullet")
+#			ammo = 3

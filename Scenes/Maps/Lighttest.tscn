@@ -2045,6 +2045,7 @@ scale = Vector2( 100.708, 72.448 )
 texture = ExtResource( 55 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0, 0, 0, 1 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -2485,7 +2486,7 @@ position = Vector2( 3616, -952 )
 position = Vector2( 3480, -1592 )
 
 [node name="NewGuard" parent="YSort/Enemy" instance=ExtResource( 45 )]
-position = Vector2( 1158, 257 )
+position = Vector2( 1165, 270 )
 
 [node name="NewGuard2" parent="YSort/Enemy" instance=ExtResource( 45 )]
 position = Vector2( 444.968, -1511.13 )
@@ -2497,7 +2498,10 @@ position = Vector2( 254.72, -1285.6 )
 position = Vector2( 45.5733, -1310.8 )
 
 [node name="MutantDog" parent="YSort/Enemy" instance=ExtResource( 31 )]
-position = Vector2( 1296, 240 )
+position = Vector2( 1285, 244 )
+
+[node name="MutantDog3" parent="YSort/Enemy" instance=ExtResource( 31 )]
+position = Vector2( 1761, -503 )
 
 [node name="MutantDog2" parent="YSort/Enemy" instance=ExtResource( 31 )]
 position = Vector2( 3160, -2112 )

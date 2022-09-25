@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export (int) var max_speed := 150
-export (int) var speed_change := 100
+export (int) var speed_change := 150
 export (int) var run_speed_change := 300
 export (int) var max_run_speed := 500
 export(int) var dash_speed := 700
@@ -276,7 +276,9 @@ func dash_state(_delta)-> void:
 		velocity.y = 0
 	if $Dash_Timer.is_stopped() == true:
 		$Dash_Timer.start()
+		
 	velocity = velocity.normalized()* dash_speed
+	print(velocity, dash_speed)
 	#print(velocity * dash_speed *10 * delta)
 	move_and_slide(velocity)
 	
@@ -342,7 +344,7 @@ func get_input_midair(delta):
 	elif velocity.x <0:
 		animation_mode.travel("Jumping_W")
 		last_direction = "W"
-
+	doublejump()
 			
 func dash() -> void:
 	if CharacterSave.save_dict["dash"] == true and can_doublejump == true:
@@ -378,14 +380,15 @@ func dash() -> void:
 			dash_side = true
 			animation_mode.travel("Dash_E")
 
-		
-		
-	elif CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
-		if Input.is_action_just_pressed("Dash"):
-			velocity = Vector2(0, -dash_speed)
+
+func doublejump ()-> void:
+	if CharacterSave.save_dict["doublejump"] == true and can_doublejump == true:
+		if Input.is_action_just_pressed("Jump"):
+			velocity.y = jump_strenght
+			print(velocity, "dash")
 			max_jump_speed = max_speed
 			can_doublejump = false
-			state = "dash"
+
 
 func get_input_midair_run(delta):
 	if Input.is_action_pressed("Right"):
@@ -402,6 +405,7 @@ func get_input_midair_run(delta):
 			
 	#if velocity.x > 0 :
 	animation_mode.travel("Jumping_" + last_direction)
+	doublejump()
 		#last_direction = "E"
 	#elif velocity.x <0:
 	#	animation_mode.travel("Jumping_" + last_direction)
@@ -506,9 +510,9 @@ func walljump_state(delta) -> void:
 			animation_mode.travel("Jumping_W")
 		started = true
 		yield(get_tree().create_timer(0.28), "timeout")
+		started = false
 		if state == "walljump":
-			started = false
-			state = "midair_run"
+			change_state("midair")
 	shooting()
 	
 func wallslide_state(delta):
@@ -722,11 +726,11 @@ func _on_Dashtimer_timeout() -> void:
 	run_l = 0
 	run_r = 0
 
-func on_hit(damage, _origin, enemy_posx) -> void:
+func on_hit(damage, _origin, enemy_pos) -> void:
 	if state != "death" and invulnerable == false:
 		current_hp -= damage
 		GameEvents.emit_signal_hp_change(current_hp, max_hp)
-	if position.x < enemy_posx:
+	if position.x < enemy_pos.x:
 		velocity.x = -200
 	else:
 		velocity.x = +200
@@ -815,7 +819,4 @@ func attack_finished()-> void:
 func _on_Hitbox_body_entered(body):
 	print(body)
 	if body.is_in_group("Enemy"):
-		var direction_hit = "W"
-		if get_global_position().x > body.get_global_position().x:
-			direction_hit = "E"
-		body.on_hit(sword_damage, "player", get_global_position(), direction_hit)
+		body.on_hit(sword_damage, "player", get_global_position())

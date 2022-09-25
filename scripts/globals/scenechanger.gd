@@ -35,4 +35,4 @@ func goto_scene(path, current_scene):
 		else: 
 			print("Error while loading file")
 			break
-		yield(get_tree(), "idle_frame")
+		#yield(get_tree(), "idle_frame")

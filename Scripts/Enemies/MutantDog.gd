@@ -20,7 +20,7 @@ export (int) var gravity := 3000
 export (float, 0, 1.0) var friction = 0.3
 export (int) var speed := 200
 export (int) var touch_damage := 1
-export (int) var tail_damage := 1
+export (int) var tail_damage := 5
 #var initialized := false
 var knockback := false
 var last_seen := Vector2.ZERO
@@ -227,7 +227,7 @@ func _physics_process(delta) -> void:
 				$Idle_Walk.start()
 			
 func on_hit(damage, _origin, enemy_pos) -> void:
-	print("hit", damage)
+#	print("hit", damage)
 	if state != "death":
 		current_hp -= damage
 		flash()
@@ -261,21 +261,17 @@ func on_death() -> void:
 	
 func sightcheck():
 	if target.state == "death":
-		target = null
-		return
+		check_for_targets()
+		print("Target died")
+		if target == null:
+			return
 	var space_state = get_world_2d().direct_space_state
 	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
-#	if sight_check:
-#		if sight_check.collider.name == "Player":
-#			last_seen = target.position
-#			if state == "sight" or "return":
-#				state = "combat"
-#		else:
-#			state = "return"
 	if sight_check:
 		if sight_check.collider != target:
 			target = null
-
+	#else:
+	#	target = null
 
 
 
@@ -335,7 +331,7 @@ func change_state(new_state) -> void:
 func player_enters_range(in_range):
 	if in_range == true:
 		player_in_range = true
-		print("activate")
+		#print("activate")
 	else:
 		player_in_range = false
 		
@@ -358,11 +354,11 @@ func floorcheck() -> void:
 func _on_Vision_body_entered(body):
 	if target == null and body.is_in_group("Dog") == false:
 		target = body
-		print(target)
+	#	print(target)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print(anim_name)
+#	print(anim_name)
 	match anim_name:
 		"Tailattack_Overhead_W", "Tailattack_Overhead_E":
 			change_state("combat")
@@ -372,13 +368,23 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_Tailswipe_body_entered(body):
 	if body.is_in_group("Dog") == false:
-		body.on_hit(tail_damage, "dog", get_global_position().x)
+		body.on_hit(tail_damage, "dog", get_global_position())
 		
 
 func play_sfx(sfx : String) -> void:
 	$SFX.stream = load(sfx)
 	$SFX.play()
 
+func check_for_targets() -> void:
+	var possible_targets: Array = $Vision.get_overlapping_bodies()
+	for body in possible_targets:
+		if body.is_in_group("Dog"):
+			possible_targets.erase(body)
+	if possible_targets.size() > 0:
+		target = possible_targets[0]
+	else:
+		target = null
+	print(possible_targets, target)
 
 func _on_Idle_Walk_timeout():
 	
