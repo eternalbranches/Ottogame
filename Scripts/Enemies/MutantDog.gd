@@ -31,6 +31,7 @@ var reset_started := false
 var can_walk_E := false
 var can_walk_W := false
 var random_walk_x : float
+var jumped := false
 
 var rng = RandomNumberGenerator.new()
 
@@ -86,17 +87,33 @@ func _physics_process(delta) -> void:
 			if target == null:
 				change_state("alert")
 				return
-			var remaining_distance = get_global_position().x - target.get_global_position().x
+			var remaining_distance_x = get_global_position().x - target.get_global_position().x
+			var remaining_distance_y = get_global_position().y - target.get_global_position().y
 			if target.position.x > position.x:
 				current_direction = "E"
 				
 			elif target.position.x < position.x:
 				current_direction = "W"
+			
+			if can_tramplejump:
+				#print(remaining_distance)
+				if remaining_distance_x > -180 and remaining_distance_x < -100:
+					velocity.x = 0
+					change_state("jump")
+					can_tramplejump = false
+					$AnimationPlayer.play("Jump_E")
+					return
+				elif remaining_distance_x < 180 and remaining_distance_x > 100:
+					velocity.x = 0
+					change_state("jump")
+					can_tramplejump = false
+					$AnimationPlayer.play("Jump_W")
+					return
+			if remaining_distance_x > -40 and remaining_distance_x < 40 and remaining_distance_y > -100 and remaining_distance_y < 100:
 				
-			if remaining_distance > -40 and remaining_distance < 40:
 				velocity.x = 0
 				change_state("tailattack")
-			elif remaining_distance < -40:
+			elif remaining_distance_x < -40:
 				if can_walk_E == true:
 					velocity.x = speed
 				else:
@@ -111,8 +128,18 @@ func _physics_process(delta) -> void:
 			velocity.y += gravity * delta
 			velocity = move_and_slide(velocity, Vector2.UP)
 			
-			if $AnimationPlayer.is_playing() == false:
-				$AnimationPlayer.play("Run_" + current_direction)
+			if velocity != Vector2(0,0):
+				$AnimationPlayer.play("Run_"+ current_direction)
+			else:
+				$AnimationPlayer.play("Idle_" + current_direction)
+			
+		"jump":
+			velocity.y += gravity * delta
+			velocity = move_and_slide(velocity, Vector2.UP)
+			if is_on_floor() and jumped == true:
+				change_state("combat")
+				jumped = false
+				$JumpTimer.start()
 			
 			
 		"tailattack":
@@ -393,3 +420,11 @@ func _on_Idle_Walk_timeout():
 		change_state("walk")
 	elif state == "walk":
 		change_state("idle")
+
+func velocity_change(change : Vector2):
+	jumped = true
+	velocity = change
+
+
+func _on_JumpTimer_timeout():
+	can_tramplejump = true

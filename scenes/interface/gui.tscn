@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/ui_script/gui.gd" type="Script" id=1]
 [ext_resource path="res://scripts/ui_script/monitorperformance.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui/fonts/color_basic.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/effects/background.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/buttons/pause_button3.png" type="Texture" id=4]
 [ext_resource path="res://scenes/interface/options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ui/gui/healthbar/redbar.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/gui/healthbar/bluebar.png" type="Texture" id=7]
@@ -13,6 +13,15 @@
 [ext_resource path="res://scripts/ui_script/energybar.gd" type="Script" id=11]
 [ext_resource path="res://scripts/ui_script/hplabel.gd" type="Script" id=12]
 [ext_resource path="res://scripts/ui_script/avatar.gd" type="Script" id=13]
+[ext_resource path="res://assets/ui/buttons/check.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/buttons/x.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/buttons/pause_button2.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/background/pause_UI.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/buttons/button_normal.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/buttons/pause_button1.png" type="Texture" id=19]
+[ext_resource path="res://assets/ui/buttons/pause_button1highlighted.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/buttons/pause_button2highlighted.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/buttons/pause_button3_highlighted.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
@@ -73,32 +82,31 @@ text = "CPU"
 
 [node name="Pausemenu" type="NinePatchRect" parent="."]
 pause_mode = 2
-visible = false
 margin_left = 384.238
 margin_top = 196.539
 margin_right = 633.238
 margin_bottom = 424.539
-texture = ExtResource( 4 )
+texture = ExtResource( 17 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Pausemenu"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -43.5
-margin_right = 43.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = -70.738
+margin_top = 0.460999
+margin_right = 69.262
+margin_bottom = 0.460999
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pausemenu/HBoxContainer"]
-margin_right = 83.0
+margin_right = 142.0
 margin_bottom = 228.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_right = 83.0
+visible = false
+margin_right = 120.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 bbcode_enabled = true
@@ -106,72 +114,69 @@ bbcode_text = "[center]Pause Menu[center]"
 text = "Pause Menu"
 
 [node name="MarginContainer" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 83.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 0, 10 )
+margin_right = 142.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 35 )
 
-[node name="MainMenuButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 48.0
-margin_right = 83.0
-margin_bottom = 68.0
-text = "Main Menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BackButton" type="TextureButton" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 39.0
+margin_right = 142.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 142, 36 )
+texture_normal = ExtResource( 19 )
+texture_hover = ExtResource( 20 )
+texture_focused = ExtResource( 20 )
+expand = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 72.0
-margin_right = 83.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 40, 40 )
+margin_top = 79.0
+margin_right = 142.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 40, 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OptionsButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 116.0
-margin_right = 83.0
-margin_bottom = 136.0
-text = "Options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="OptionsButton" type="TextureButton" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 98.0
+margin_right = 142.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 142, 36 )
+texture_normal = ExtResource( 16 )
+texture_hover = ExtResource( 21 )
+texture_focused = ExtResource( 21 )
+expand = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 140.0
-margin_right = 83.0
-margin_bottom = 180.0
-rect_min_size = Vector2( 40, 40 )
+margin_top = 138.0
+margin_right = 142.0
+margin_bottom = 153.0
+rect_min_size = Vector2( 40, 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="Button" parent="Pausemenu/HBoxContainer/VBoxContainer"]
-margin_top = 184.0
-margin_right = 83.0
-margin_bottom = 204.0
-text = "Back"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="MainMenuButton" type="TextureButton" parent="Pausemenu/HBoxContainer/VBoxContainer"]
+margin_top = 157.0
+margin_right = 142.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 142, 36 )
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 22 )
+texture_focused = ExtResource( 22 )
+expand = true
 
 [node name="Popup" type="NinePatchRect" parent="Pausemenu"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 100 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 18 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pausemenu/Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="Pausemenu/Popup/VBoxContainer"]
 margin_right = 248.0
@@ -194,12 +199,13 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 0 )
 
-[node name="YesButton" type="Button" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+[node name="YesButton" type="TextureButton" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
-text = "Yes"
+texture_normal = ExtResource( 14 )
+expand = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 88.0
@@ -207,12 +213,13 @@ margin_right = 153.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 65, 0 )
 
-[node name="NoButton" type="Button" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
+[node name="NoButton" type="TextureButton" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 157.0
 margin_right = 197.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
-text = "No"
+texture_normal = ExtResource( 15 )
+expand = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="Pausemenu/Popup/VBoxContainer/HBoxContainer"]
 margin_left = 201.0
@@ -261,8 +268,8 @@ align = 1
 valign = 1
 script = ExtResource( 12 )
 
-[connection signal="pressed" from="Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
-[connection signal="pressed" from="Pausemenu/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="Pausemenu/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Pausemenu/HBoxContainer/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="Pausemenu/HBoxContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="pressed" from="Pausemenu/Popup/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_YesButton_pressed"]
 [connection signal="pressed" from="Pausemenu/Popup/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_NoButton_pressed"]

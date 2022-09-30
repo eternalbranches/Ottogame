@@ -429,7 +429,8 @@ margin_left = 194.435
 margin_top = 123.083
 margin_right = 289.435
 margin_bottom = 197.083
-text = "Version 0.1.5
+text = "Version 0.1.6
+
 "
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
