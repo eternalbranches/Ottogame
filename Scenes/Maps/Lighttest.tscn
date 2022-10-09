@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=2]
+[gd_scene load_steps=238 format=2]
 
 [ext_resource path="res://assets/tiles/dark tile 1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/maps/lighttest.gd" type="Script" id=2]
@@ -58,6 +58,7 @@
 [ext_resource path="res://assets/effects/floaty_64.png" type="Texture" id=56]
 [ext_resource path="res://assets/effects/light.png" type="Texture" id=57]
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=58]
+[ext_resource path="res://scenes/characters/mechaboss.tscn" type="PackedScene" id=59]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -2045,7 +2046,7 @@ scale = Vector2( 100.708, 72.448 )
 texture = ExtResource( 55 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.580392, 0.580392, 0.580392, 1 )
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -2144,7 +2145,8 @@ position = Vector2( 752, 48 )
 position = Vector2( 2112, -1648 )
 
 [node name="Lamp17" parent="." instance=ExtResource( 51 )]
-position = Vector2( 1696, -1648 )
+position = Vector2( 1672, -1653 )
+energy = 1.0
 
 [node name="Lamp30" parent="." instance=ExtResource( 51 )]
 position = Vector2( 1376, -1648 )
@@ -2444,9 +2446,9 @@ texture = ExtResource( 19 )
 
 [node name="GUI" parent="." instance=ExtResource( 52 )]
 
-[node name="YSort" type="YSort" parent="."]
+[node name="YSort" type="Node2D" parent="."]
 
-[node name="Player" type="YSort" parent="YSort"]
+[node name="Player" type="Node2D" parent="YSort"]
 
 [node name="Player" parent="YSort/Player" instance=ExtResource( 47 )]
 position = Vector2( 738.052, -437.019 )
@@ -2454,7 +2456,7 @@ position = Vector2( 738.052, -437.019 )
 [node name="Mothgirl" parent="YSort/Player" instance=ExtResource( 49 )]
 position = Vector2( 3925.58, 920.496 )
 
-[node name="Enemy" type="YSort" parent="YSort"]
+[node name="Enemy" type="Node2D" parent="YSort"]
 
 [node name="Guard" parent="YSort/Enemy" instance=ExtResource( 44 )]
 position = Vector2( 1975.88, -2945.56 )
@@ -2508,6 +2510,9 @@ position = Vector2( 3160, -2112 )
 
 [node name="Scientist" parent="YSort/Enemy" instance=ExtResource( 24 )]
 position = Vector2( 2009.7, -2660.92 )
+
+[node name="Mechaboss" parent="YSort/Enemy" instance=ExtResource( 59 )]
+position = Vector2( 1659, -1575 )
 
 [node name="Checkpoints" type="Node" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/characters/scientist_rig/right_arm.png" type="Texture" id=1]
 [ext_resource path="res://assets/characters/scientist_rig/torso.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/characters/scientist_rig/head.png" type="Texture" id=5]
 [ext_resource path="res://assets/characters/scientist_rig/left leg.png" type="Texture" id=6]
 [ext_resource path="res://scripts/characters/scientist.gd" type="Script" id=7]
-[ext_resource path="res://assets/tiles/tile 64 (2).png" type="Texture" id=8]
 [ext_resource path="res://scripts/enemies/hitbox.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=1]
@@ -423,11 +422,6 @@ extents = Vector2( 5.17072, 20.1967 )
 [node name="Scientist" type="KinematicBody2D"]
 script = ExtResource( 7 )
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-position = Vector2( 0.835483, 51.6106 )
-texture = ExtResource( 8 )
-
 [node name="BodyBones" type="Node2D" parent="."]
 
 [node name="Sprite" type="Node2D" parent="BodyBones"]
@@ -543,7 +537,6 @@ default_length = 4.0
 [node name="Leg_Right" type="Bone2D" parent="BodyBones/Skeleton2D/Hip"]
 position = Vector2( 1.89253, 0.581834 )
 rotation = 1.56018
-scale = Vector2( 1, 1 )
 rest = Transform2D( 0.0106162, 0.999944, -0.999944, 0.0106162, 1.89253, 0.581834 )
 default_length = 13.0
 
@@ -554,14 +547,12 @@ rest = Transform2D( 1, 0, 0, 1, 8.01141, 0.308184 )
 [node name="Feet_Right" type="Bone2D" parent="BodyBones/Skeleton2D/Hip/Leg_Right/Knee_Right"]
 position = Vector2( 5.26007, 0.431847 )
 rotation = -1.46608
-scale = Vector2( 1, 1 )
 rest = Transform2D( 0.104525, -0.994522, 0.994522, 0.104525, 5.26007, 0.431847 )
 default_length = 3.0
 
 [node name="Leg_Left" type="Bone2D" parent="BodyBones/Skeleton2D/Hip"]
 position = Vector2( -3.2214, 0.771694 )
 rotation = 1.61264
-scale = Vector2( 1, 1 )
 rest = Transform2D( -0.0418315, 0.999125, -0.999125, -0.0418315, -3.2214, 0.771694 )
 default_length = 13.0
 

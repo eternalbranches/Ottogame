@@ -3,32 +3,31 @@
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=1]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0855019, 0.126394, 0.312268, 0.579926, 0.665428, 0.788104, 1 )
-colors = PoolColorArray( 1, 0.375, 0, 1, 1, 0.115364, 0.0078125, 1, 0, 0, 0, 1, 0.209269, 0.209269, 0.209269, 1, 0.347656, 0.347656, 0.347656, 1, 0.5625, 0.5625, 0.5625, 1, 0.894118, 0.894118, 0.894118, 0 )
+offsets = PoolRealArray( 0.0387097, 0.277419, 0.503226, 0.6 )
+colors = PoolColorArray( 1, 0.785156, 0.65625, 1, 1, 0.714844, 0, 1, 1, 0.550781, 0, 1, 0.0761719, 0.0761719, 0.0761719, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
 max_value = 10.0
-_data = [ Vector2( 0, 0.996591 ), 0.0, 0.0, 0, 0, Vector2( 1, 5.76136 ), -12.9981, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1.04545 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1.40909 ), 1.79798, 1.79798, 0, 0, Vector2( 1, 0 ), -0.809094, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
-emission_sphere_radius = 37.1
+emission_sphere_radius = 5.0
 flag_disable_z = true
-gravity = Vector3( 0, -30, 0 )
+gravity = Vector3( 0, 120, 0 )
 initial_velocity_random = 1.0
 angular_velocity = 27.69
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-tangential_accel = 20.51
-tangential_accel_random = 0.5
-scale_random = 0.37
+scale = 0.3
+scale_random = 0.18
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
