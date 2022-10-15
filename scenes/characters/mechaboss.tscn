@@ -1,40 +1,30 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/enemies/mechaboss.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/mech_arm.png" type="Texture" id=2]
 [ext_resource path="res://assets/characters/mech_body.png" type="Texture" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://scenes/effects/propulsion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=6]
 [ext_resource path="res://assets/effects/light.png" type="Texture" id=7]
 [ext_resource path="res://assets/characters/gun_arm.png" type="Texture" id=8]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.0387097, 0.277419, 0.503226, 0.6 )
-colors = PoolColorArray( 1, 0.785156, 0.65625, 1, 1, 0.714844, 0, 1, 1, 0.550781, 0, 1, 0.0761719, 0.0761719, 0.0761719, 1 )
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0.245902, 0.406557, 0.67541, 1 )
+colors = PoolColorArray( 1, 0.95871, 0.519531, 1, 1, 0.445313, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
 
-[sub_resource type="Curve" id=3]
-max_value = 10.0
-_data = [ Vector2( 0, 1.59091 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 1.40909 ), 1.79798, 1.79798, 0, 0, Vector2( 1, 0 ), -0.809094, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 1
-emission_sphere_radius = 5.0
+emission_sphere_radius = 4.0
 flag_disable_z = true
-direction = Vector3( 0, 2, 0 )
-spread = 32.52
-gravity = Vector3( -30, 120, 0 )
+gravity = Vector3( 0, 200, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 0.01
-scale_random = 0.18
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
+scale = 0.1
+color_ramp = SubResource( 15 )
 
 [sub_resource type="Animation" id=7]
 length = 0.001
@@ -641,8 +631,7 @@ default_length = 40.0
 
 [node name="Gun" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder"]
 position = Vector2( -8, -2 )
-rotation = 2.33585
-scale = Vector2( 1, 1 )
+rotation = 2.33586
 rest = Transform2D( 0.0796894, 0.99682, -0.99682, 0.0796894, -8, -2 )
 default_length = 30.0
 __meta__ = {
@@ -652,8 +641,7 @@ __meta__ = {
 
 [node name="Gunlow" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder/Gun"]
 position = Vector2( 29.0672, 0.317353 )
-rotation = 0.537639
-scale = Vector2( 1, 1 )
+rotation = 0.537638
 rest = Transform2D( 0.85892, 0.512109, -0.512109, 0.85892, 29.0672, 0.317353 )
 default_length = 50.0
 __meta__ = {
@@ -662,7 +650,7 @@ __meta__ = {
 
 [node name="Gun" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder/Gun/Gunlow"]
 position = Vector2( 26.3774, 1.49423 )
-rotation = -0.0526104
+rotation = -0.0526105
 rest = Transform2D( 0.998616, -0.0525862, 0.0525862, 0.998616, 26.3774, 1.49423 )
 default_length = 24.0
 __meta__ = {
@@ -672,7 +660,6 @@ __meta__ = {
 [node name="Arm" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder"]
 position = Vector2( 45, -5 )
 rotation = 1.51592
-scale = Vector2( 1, 1 )
 rest = Transform2D( 0.0548451, 0.998495, -0.998495, 0.0548451, 45, -5 )
 default_length = 36.0
 __meta__ = {
@@ -682,8 +669,7 @@ __meta__ = {
 
 [node name="Armlow" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder/Arm"]
 position = Vector2( 42.211, -2.68898 )
-rotation = 0.522961
-scale = Vector2( 1, 1 )
+rotation = 0.52296
 rest = Transform2D( 0.866344, 0.499447, -0.499447, 0.866344, 42.211, -2.68898 )
 default_length = 50.0
 __meta__ = {
@@ -693,7 +679,6 @@ __meta__ = {
 [node name="Hand" type="Bone2D" parent="Sprite/Skeleton2D/Shoulder/Arm/Armlow"]
 position = Vector2( 31.7658, 2.98946 )
 rotation = 0.119534
-scale = Vector2( 1, 1 )
 rest = Transform2D( 0.992864, 0.11925, -0.11925, 0.992864, 31.7658, 2.98946 )
 default_length = 20.0
 __meta__ = {
@@ -709,22 +694,28 @@ modulate = Color( 1, 1, 1, 0.298039 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 4 )
 
-[node name="Particles2D" type="Particles2D" parent="Sprite/Skeleton2D/Shoulder"]
+[node name="Particles2D" parent="Sprite/Skeleton2D/Shoulder" instance=ExtResource( 5 )]
+visible = false
+scale = Vector2( 1, 1 )
+
+[node name="Particles2D2" type="Particles2D" parent="Sprite/Skeleton2D/Shoulder"]
 unique_name_in_owner = true
 position = Vector2( 9, 64 )
-scale = Vector2( 0.1, 0.1 )
 amount = 50
+lifetime = 0.6
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 13 )
 texture = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Light2D" type="Light2D" parent="Sprite/Skeleton2D/Shoulder/Particles2D"]
+[node name="Light2D" type="Light2D" parent="Sprite/Skeleton2D/Shoulder/Particles2D2"]
 position = Vector2( 0, -1.52588e-05 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
+texture_scale = 0.3
+energy = 0.8
 
 [node name="Gun" type="Polygon2D" parent="Sprite"]
 position = Vector2( -21, 20 )
