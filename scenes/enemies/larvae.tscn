@@ -1,6 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/characters/larvae_spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/enemies/larvae.gd" type="Script" id=2]
+[ext_resource path="res://scripts/shader/flash.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 3 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "Crawl_L"
@@ -30,6 +37,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Floorcheck:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, 0 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Crawl_R"
@@ -58,6 +77,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Floorcheck:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 16, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -142,10 +173,33 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Floorcheck:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, 0 ) ]
+}
 
-[node name="Larvae" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 13.5, 7 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 44.5, 81.5 )
+
+[node name="Larvae" type="KinematicBody2D" groups=["Enemy", "Insect", "Mutant"]]
+position = Vector2( 161, 61 )
+collision_layer = 4
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 7 )
+position = Vector2( 0, -32 )
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 6
@@ -157,3 +211,37 @@ anims/Crawl_R = SubResource( 2 )
 anims/Hatch_L = SubResource( 3 )
 anims/Hatch_R = SubResource( 4 )
 anims/RESET = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -7 )
+shape = SubResource( 6 )
+
+[node name="Detect" type="Area2D" parent="." groups=["Enemy", "Insect", "Mutant"]]
+collision_layer = 0
+collision_mask = 262
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+position = Vector2( 0.5, 71.5 )
+shape = SubResource( 8 )
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = -24.0
+margin_top = -42.0
+margin_right = 16.0
+margin_bottom = -28.0
+
+[node name="Floor" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Floorcheck" type="RayCast2D" parent="."]
+position = Vector2( -16, 0 )
+enabled = true
+cast_to = Vector2( 0, 13 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="timeout" from="Floor" to="." method="_on_Floor_timeout"]

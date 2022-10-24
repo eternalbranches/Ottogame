@@ -1,4 +1,4 @@
-[gd_scene load_steps=238 format=2]
+[gd_scene load_steps=239 format=2]
 
 [ext_resource path="res://assets/tiles/dark tile 1.png" type="Texture" id=1]
 [ext_resource path="res://scenes/maps/lighttest.gd" type="Script" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://assets/effects/light.png" type="Texture" id=57]
 [ext_resource path="res://assets/effects/spot.png" type="Texture" id=58]
 [ext_resource path="res://scenes/characters/mechaboss.tscn" type="PackedScene" id=59]
+[ext_resource path="res://scenes/enemies/larvae.tscn" type="PackedScene" id=60]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -30.7214, -30.5767, -30.0142, 30.9415, 32.2112, 30.9415, 30.4434, -30.5767 )
@@ -2513,6 +2514,9 @@ position = Vector2( 2009.7, -2660.92 )
 
 [node name="Mechaboss" parent="YSort/Enemy" instance=ExtResource( 59 )]
 position = Vector2( 1659, -1575 )
+
+[node name="Larvae" parent="YSort/Enemy" instance=ExtResource( 60 )]
+position = Vector2( 1323, -1635 )
 
 [node name="Checkpoints" type="Node" parent="."]
 

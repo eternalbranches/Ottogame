@@ -253,7 +253,7 @@ func create_bullet() -> void:
 	var skill_instance = skill.instance()
 	skill_instance.rotation = get_angle_to(target.get_global_position() + random_vector)
 	skill_instance.position = $Bulletpoint.get_global_position()                  #get_node("TurnAxis/CastPoint").get_global_position()
-	skill_instance.enemyposx = position.x
+	#skill_instance.enemyposx = position.x
 	skill_instance.origin = "Enemy"
 	#skill_instance.node_reference = get_path()
 	$SFXPLayer.play()

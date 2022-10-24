@@ -333,13 +333,14 @@ func _on_AI_Timer_timeout():
 	pass
 	
 			
-func investigate(direction_hit) -> void:
+func investigate(direction_hit : String) -> void:
 	current_direction = direction_hit
 		
-func change_state(new_state) -> void:
+func change_state(new_state : String) -> void:
 	#print( state, new_state)
 	if state != "death":
 		state = new_state
+		
 	match new_state:
 		"alert":
 			$Floorcheck_E.enabled = true
@@ -350,6 +351,9 @@ func change_state(new_state) -> void:
 		"combat":
 			$Floorcheck_E.enabled = true
 			$Floorcheck_W.enabled = true
+		"death":
+			$Tailswipe/CollisionShape2D.disabled = true
+			
 			
 			
 			
