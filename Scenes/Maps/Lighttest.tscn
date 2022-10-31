@@ -2239,7 +2239,8 @@ position = Vector2( 3459.89, -799.702 )
 position = Vector2( 3256, -616 )
 
 [node name="Lamp11" parent="." instance=ExtResource( 51 )]
-position = Vector2( 1374.67, -566.007 )
+position = Vector2( 1373, -563 )
+energy = 0.7
 
 [node name="Lamp34" parent="." instance=ExtResource( 51 )]
 position = Vector2( -891.919, -436.82 )

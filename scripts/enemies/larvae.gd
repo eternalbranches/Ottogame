@@ -76,7 +76,6 @@ func _on_Detect_body_entered(body):
 		if body.is_in_group("Insect") == false:
 			if state == "idle":
 				$AnimationPlayer.play("Hatch_" + current_direction)
-				$Floorcheck.enabled
 				$Floor.start()
 			
 func player_enters_range(activate : bool) -> void:
@@ -88,6 +87,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"Hatch_R", "Hatch_L":
 			change_state("crawl")
+			$Floorcheck.enabled
 
 
 func _on_Timer_timeout():
