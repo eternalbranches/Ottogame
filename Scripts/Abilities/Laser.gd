@@ -66,7 +66,7 @@ func cast_beam() -> void:
 
 	if is_colliding():
 		if get_collider().is_in_group("Player"):
-			get_collider().on_hit(1, "origin", position.x)
+			get_collider().on_hit(1, "origin", position)
 		
 		cast_point = to_local(get_collision_point())
 		collision_particles.global_rotation = get_collision_normal().angle()

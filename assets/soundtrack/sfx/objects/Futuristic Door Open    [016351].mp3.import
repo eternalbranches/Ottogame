@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Futuristic Door Open    [016351].mp3-9ec03104f6849a3669e2d295013a9955.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/objects/Futuristic Door Open    [016351].mp3"
+dest_files=[ "res://.import/Futuristic Door Open    [016351].mp3-9ec03104f6849a3669e2d295013a9955.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

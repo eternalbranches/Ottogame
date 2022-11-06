@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Futuristic Door Close    [016350].mp3-4458ebf30d6e9ca0cce80518d2883bad.mp3str"
+
+[deps]
+
+source_file="res://assets/soundtrack/sfx/objects/Futuristic Door Close    [016350].mp3"
+dest_files=[ "res://.import/Futuristic Door Close    [016350].mp3-4458ebf30d6e9ca0cce80518d2883bad.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
