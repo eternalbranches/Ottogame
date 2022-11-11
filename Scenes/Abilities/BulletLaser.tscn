@@ -12,12 +12,14 @@ extents = Vector2( 15.9663, 0.936443 )
 extents = Vector2( 15.9897, 0.994969 )
 
 [node name="BulletLaser" type="RigidBody2D" groups=["Projectiles"]]
-position = Vector2( 1.26135, 43.3062 )
 collision_layer = 8
 collision_mask = 0
 gravity_scale = 0.0
 contact_monitor = true
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.0183433, -0.0103264 )
@@ -49,7 +51,7 @@ gravity = Vector2( 0, 0 )
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -1.02654, -0.0630493 )
+position = Vector2( -0.26135, -0.306198 )
 texture = ExtResource( 4 )
 color = Color( 0.945098, 1, 0, 1 )
 energy = 0.4

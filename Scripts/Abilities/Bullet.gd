@@ -6,6 +6,7 @@ var origin
 #var direction
 var life_time = 20
 var dead := false
+var knockback := Vector2(50, 50)
 #var enemyposx
 #var node_reference
 
@@ -41,9 +42,9 @@ func SelfDestruct():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Enemy"):
-		body.on_hit(damage, origin, get_global_position())
+		body.on_hit(damage, origin, get_global_position(), knockback)
 	elif body.is_in_group("Player"):
-		body.on_hit(damage, origin, get_global_position())
+		body.on_hit(damage, origin, get_global_position(), knockback)
 	elif body.is_in_group("Destructable"):
 		body.on_hit(damage)
 	get_node("AudioStreamPlayer2D").stream = SFX_Impact

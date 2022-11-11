@@ -23,6 +23,8 @@ onready var beam_particles := $BeamParticle
 
 onready var line_width: float = fill.width
 
+var knockback := Vector2(100,100)
+
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -66,7 +68,7 @@ func cast_beam() -> void:
 
 	if is_colliding():
 		if get_collider().is_in_group("Player"):
-			get_collider().on_hit(1, "origin", position)
+			get_collider().on_hit(1, "laser", position, knockback)
 		
 		cast_point = to_local(get_collision_point())
 		collision_particles.global_rotation = get_collision_normal().angle()

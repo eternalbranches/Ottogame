@@ -13,7 +13,6 @@ export (int) var gravity := 1000
 export (int) var walljump_height := -250
 export (int) var walljump_power := 150
 export (int) var second_jump_power := -400
-export (int) var knockback_power := 300
 export (int, 0, 200) var push = 400
 
 
@@ -54,9 +53,11 @@ var started := false
 var can_wallslide := true
 var can_shoot := true
 var can_shield := true
-var run_released = true
+var run_released := true
 
-var possible_targets = []
+var knockback_sword := Vector2(200,200)
+
+var possible_targets := []
 var current_target = null
 
 signal death
@@ -128,7 +129,7 @@ func sfx_manager(audio : AudioStreamMP3) -> void:
 
 func idle_state(delta) -> void:
 	get_input(delta)
-	shooting()
+	#shooting()
 	shield()
 	action()
 	call_deferred("sword_attack")
@@ -163,7 +164,7 @@ func idle_state(delta) -> void:
 		
 func running_state(delta) -> void:
 	get_input_running(delta)
-	shooting()
+	#shooting()
 	action()
 	shield()
 	call_deferred("sword_attack")
@@ -190,7 +191,7 @@ func running_state(delta) -> void:
 		
 func moving_state(delta) -> void:
 	get_input(delta)
-	shooting()
+	#shooting()
 	action()
 	shield()
 	call_deferred("sword_attack")
@@ -294,7 +295,7 @@ func crawling_state(delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	get_input_crawl()
-	shooting()
+	#shooting()
 	action()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity /2, Vector2.UP,
@@ -419,7 +420,7 @@ func midair_state(delta):
 	#else:
 	#	animation_mode.travel("Jumping_W")
 	get_input_midair(delta)
-	shooting()
+	#shooting()
 	action()
 	shield()
 	dash()
@@ -438,7 +439,7 @@ func midair_run_state(delta):
 	#else:
 	#	animation_mode.travel("Jumping_W")
 	get_input_midair_run(delta)
-	shooting()
+	#shooting()
 	action()
 	shield()
 	dash()
@@ -454,7 +455,7 @@ func climbing_state(_delta) -> void:
 	if $SFX.stream != null:
 		$SFX.stream = null
 	animation_mode.travel("Climbing")
-	shooting()
+	#shooting()
 	velocity = move_and_slide_with_snap(velocity, Vector2(0, 0))
 	if Input.is_action_just_pressed("ActionButton"):
 			velocity.y = jump_strenght
@@ -513,14 +514,14 @@ func walljump_state(delta) -> void:
 		started = false
 		if state == "walljump":
 			change_state("midair")
-	shooting()
+	#shooting()
 	
 func wallslide_state(delta):
 	if $SFX.stream != null:
 		$SFX.stream = null
 	if velocity.y <= 0:
 		velocity.y = 0
-	shooting()
+	#shooting()
 	if $Wallcheck_E.is_colliding() == false and $Wallcheck_W.is_colliding() == false:
 		state = "midair"
 	if is_on_floor():
@@ -592,6 +593,7 @@ func _physics_process(delta):
 
 func _process(_delta):
 	$DebugState.text = state
+	$Invincible.text = "Invincible " + str(invulnerable)
 	
 func change_crawling():
 	$CollisionStanding.disabled = true
@@ -624,44 +626,43 @@ func check_wallslide():
 				velocity = Vector2.ZERO
 				last_direction = "E"
 				animation_mode.travel("Wallslide_E")
-func shooting():
-	if CharacterSave.controller == true:
-		if Input.is_action_just_pressed("Aim_assist"):
-			possible_targets = $Aim_Assist.get_overlapping_bodies()
-			if possible_targets.empty() == false:
-				current_target = possible_targets[0]
-				possible_targets.push_back(current_target)
-				possible_targets.erase(current_target)
-			else:
-				current_target = null
-	if CharacterSave.save_dict["gun"] == true and can_shoot == true:
-		if Input.is_action_just_pressed("Shoot"):
-			var skill = load("res://scenes/abilities/bullet.tscn")
-			var skill_instance = skill.instance()
-			if CharacterSave.controller == false:
-				skill_instance.rotation = get_angle_to(get_global_mouse_position())
-			else:
-				if current_target != null:
-					if $Aim_Assist.get_overlapping_bodies().has(current_target):
-						skill_instance.rotation = get_angle_to(current_target.get_global_position())
-					else:
-						current_target = null
-				else:
-					if Input.is_action_pressed("Up"):
-						skill_instance.rotation = -1.55
-					elif last_direction == "E":
-						skill_instance.rotation = 0
-					elif last_direction == "W":
-						#skill_instance.rotation = get_angle_to($AimPosition.get_global_position())
-						skill_instance.rotation = -3.14
-						#print(get_angle_to($AimPosition.get_global_position()))
-			skill_instance.position = get_position()                   #get_node("TurnAxis/CastPoint").get_global_position()
-			skill_instance.origin = "Player"
-			$SFXPLayer.play()
-			can_shoot = false
-			$GunTimer.start()
-			#skill_instance.node_reference = get_path()
-			get_parent().add_child(skill_instance)
+#func shooting():
+#	if CharacterSave.controller == true:
+#		if Input.is_action_just_pressed("Aim_assist"):
+#			possible_targets = $Aim_Assist.get_overlapping_bodies()
+#			if possible_targets.empty() == false:
+#				current_target = possible_targets[0]
+#				possible_targets.push_back(current_target)
+#				possible_targets.erase(current_target)
+#			else:
+#				current_target = null
+#	if CharacterSave.save_dict["gun"] == true and can_shoot == true:
+#		if Input.is_action_just_pressed("Shoot"):
+#			var skill = load("res://scenes/abilities/bullet.tscn")
+#			var skill_instance = skill.instance()
+#			if CharacterSave.controller == false:
+#				skill_instance.rotation = get_angle_to(get_global_mouse_position())
+#			else:
+#				if current_target != null:
+#					if $Aim_Assist.get_overlapping_bodies().has(current_target):
+#						skill_instance.rotation = get_angle_to(current_target.get_global_position())
+#					else:
+#						current_target = null
+#				else:
+#					if Input.is_action_pressed("Up"):
+#						skill_instance.rotation = -1.55
+#					elif last_direction == "E":
+#						skill_instance.rotation = 0
+#					elif last_direction == "W":
+#
+#						skill_instance.rotation = -3.14
+#
+#			skill_instance.position = get_position()
+#			skill_instance.origin = "Player"
+#			$SFXPLayer.play()
+#			can_shoot = false
+#			$GunTimer.start()
+#			get_parent().add_child(skill_instance)
 		
 
 func shield():
@@ -726,16 +727,20 @@ func _on_Dashtimer_timeout() -> void:
 	run_l = 0
 	run_r = 0
 
-func on_hit(damage, _origin, enemy_pos) -> void:
-	if state != "death" and invulnerable == false:
+func on_hit(damage : float, _origin : String, enemy_pos : Vector2, knockback : Vector2) -> void:
+	if state != "death" or invulnerable == false:
 		current_hp -= damage
 		GameEvents.emit_signal_hp_change(current_hp, max_hp)
 	if position.x < enemy_pos.x:
-		velocity.x = -200
+		velocity.x = knockback.x
 	else:
-		velocity.x = +200
-	velocity.y = 0
-	velocity.y -= knockback_power
+		velocity.x = -knockback.x
+	if position.y < enemy_pos.x:
+		velocity.y = knockback.y
+	else:
+		velocity.y = -knockback.y
+#	velocity.y = 0
+#	velocity.y -= knockback_power
 	
 	if state != "death":
 		state = "knockback"
@@ -819,4 +824,8 @@ func attack_finished()-> void:
 func _on_Hitbox_body_entered(body):
 	print(body)
 	if body.is_in_group("Enemy"):
-		body.on_hit(sword_damage, "player", get_global_position())
+		body.on_hit(sword_damage, "player", get_global_position(), knockback_sword)
+
+
+func _on_Invincible_Timer_timeout():
+	pass # Replace with function body.

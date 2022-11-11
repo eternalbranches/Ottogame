@@ -9,6 +9,9 @@ var active := false
 var gravity := 500
 var surface := "floor"
 var surface_changed := false
+var damage := 5.0
+var knockback := Vector2(150, 150)
+var invulnerable := false
 
 
 func _ready() -> void:
@@ -17,11 +20,11 @@ func _ready() -> void:
 func _physics_process(delta : float) -> void:
 	state_manager(delta)
 
-func _process(delta):
+func _process(_delta):
 	$Label.text = state
 	$Label2.text = $AnimationPlayer.current_animation
 
-func gravity(delta)-> void:
+func gravity_calc(delta)-> void:
 	match surface:
 		"floor":
 			velocity.y += gravity * delta
@@ -32,7 +35,7 @@ func gravity(delta)-> void:
 		"ceiling":
 			velocity.y -= gravity * delta
 			
-func crawl_direction(delta)-> void:
+func crawl_direction(_delta)-> void:
 	match surface:
 		"floor":
 			if current_direction == "L":
@@ -41,9 +44,9 @@ func crawl_direction(delta)-> void:
 				velocity.x = 50
 		"wall_L":
 			if current_direction == "L":
-				velocity.y = 50
-			else:
 				velocity.y = -50
+			else:
+				velocity.y = 50
 		"wall_R":
 			if current_direction == "L":
 				velocity.y = 50
@@ -71,7 +74,7 @@ func floor_check():
 	else:
 		return false
 	
-func idle_state(delta) -> void:
+func idle_state(_delta) -> void:
 	pass
 	
 func death_state(delta) -> void:
@@ -103,7 +106,7 @@ func crawl_state(delta) -> void:
 			"ceiling":
 				$AnimationPlayer.play("Ceiling_Climb_"+current_direction)
 		return
-	gravity(delta)
+	gravity_calc(delta)
 	
 	if floor_check() == true:
 		crawl_direction(delta)
@@ -137,10 +140,10 @@ func crawl_state(delta) -> void:
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 		
-func crawl_wall_R_state(delta) -> void:
+func crawl_wall_R_state(_delta) -> void:
 	pass
 		
-func climbing_state(delta)-> void:
+func climbing_state(_delta)-> void:
 	pass
 	
 func change_state(new_state : String) -> void:
@@ -148,13 +151,20 @@ func change_state(new_state : String) -> void:
 	if state != "death":
 		state = new_state
 		
-func on_hit(damage, _origin, enemy_pos) -> void:
-	if state != "death":
+func on_hit(damage : float, _origin : String, enemy_pos : Vector2, knockback : Vector2) -> void:
+	if state != "death" or invulnerable == false:
 		current_hp -= damage
-		flash()
-	
+	if position.x < enemy_pos.x:
+		velocity.x = knockback.x
+	else:
+		velocity.x = -knockback.x
+	if position.y < enemy_pos.x:
+		velocity.y = knockback.y
+	else:
+		velocity.y = -knockback.y
 	if current_hp <= 0:
-			on_death()
+		on_death()
+	flash()
 		
 	
 func on_death() -> void:
@@ -162,6 +172,7 @@ func on_death() -> void:
 	dead = true
 	set_collision_layer_bit(2, 0)
 	set_collision_mask_bit(1,0)
+	
 	$AnimationPlayer.play("Death_" + current_direction)
 	#$Floor.stop()
 	
@@ -222,7 +233,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"Wall_ClimbL_L":
 			surface_change("ceiling")
 			change_state("crawl")
-			$AnimationPlayer.play("Ceiling_Crawl_L")
+			$AnimationPlayer.play("Ceiling_Crawl_R")
 			$Wallcheck.enabled = false
 			surface_changed = true
 			$Wall.start()
@@ -258,6 +269,9 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			$Wallcheck.enabled = false
 			surface_changed = true	
 			$Wall.start()
+			
+		"Death_R", "Death_L":
+			queue_free()
 	
 func surface_change(new_surface : String)->void:
 	surface = new_surface
@@ -282,3 +296,8 @@ func _on_Wall_timeout():
 	$Wallcheck.enabled = true
 	surface_changed = false
 	
+
+
+func _on_Hurtbox_body_entered(body):
+	if body.is_in_group("Insect") == false:
+		body.on_hit(damage, "larvae", get_global_position(), knockback)

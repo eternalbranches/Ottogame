@@ -29,6 +29,7 @@ var can_walk_E := false
 var can_walk_W := false
 var near_wall_E := false
 var near_wall_W := false
+var invulnerable := false
 
 export var group := 1
 export (int) var gravity := 3000
@@ -180,17 +181,21 @@ func suprised_state(_delta):
 	pass
 
 
-func on_hit(damage, _origin, enemy_pos) -> void:
-	if state != "death":
+func on_hit(damage : float, _origin : String, enemy_pos : Vector2, knockback : Vector2) -> void:
+	if state != "death" or invulnerable == false:
 		current_hp -= damage
-		flash()
-			
-	#if position.x < enemy_posx:
-	#	velocity.x += 200
-	#else:
-	#	velocity.x -= 200
-	#velocity.y -= 200
-	#state = "knockback"
+	if position.x < enemy_pos.x:
+		velocity.x = knockback.x
+	else:
+		velocity.x = -knockback.x
+	if position.y < enemy_pos.x:
+		velocity.y = knockback.y
+	else:
+		velocity.y = -knockback.y
+	if current_hp <= 0:
+		on_death()
+		
+	flash()
 	if investigate_pos == Vector2(0, 0):
 		investigate_pos = enemy_pos
 		#investigate(direction_hit)
@@ -201,9 +206,6 @@ func on_hit(damage, _origin, enemy_pos) -> void:
 			current_direction = "E"
 		else:
 			current_direction = "W"
-	
-	if current_hp <= 0:
-			on_death()
 		
 func on_death() -> void:
 	change_state("death", "on_death")
@@ -301,7 +303,7 @@ func investigate(direction_hit) -> void:
 	current_direction = direction_hit
 		
 		
-func change_state(new_state, caller) -> void:
+func change_state(new_state, _caller) -> void:
 	#if debug == true:
 		#print(caller)
 	if state != "death":

@@ -1243,6 +1243,13 @@ margin_top = -45.6652
 margin_right = -4.70699
 margin_bottom = -29.6652
 
+[node name="Invincible" type="Label" parent="."]
+margin_left = 24.0
+margin_top = -55.0
+margin_right = 86.0
+margin_bottom = -41.0
+text = "invincible"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -0.0329895, -13.2366 )
 current = true
@@ -1309,6 +1316,10 @@ wait_time = 0.1
 
 [node name="Dash_Timer" type="Timer" parent="."]
 wait_time = 0.25
+one_shot = true
+
+[node name="Invincible_Timer" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="Wallcheck_E" type="RayCast2D" parent="."]
@@ -1426,6 +1437,7 @@ process_material = SubResource( 153 )
 [connection signal="timeout" from="ShieldTimer" to="." method="_on_ShieldTimer_timeout"]
 [connection signal="timeout" from="PlatformTimer" to="." method="_on_PlatformTimer_timeout"]
 [connection signal="timeout" from="Dash_Timer" to="." method="_on_Dash_Timer_timeout"]
+[connection signal="timeout" from="Invincible_Timer" to="." method="_on_Invincible_Timer_timeout"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_Shield2_body_entered"]
 [connection signal="timeout" from="Shield/Selfdestruct" to="Shield" method="_on_Selfdestruct_timeout"]
 [connection signal="body_entered" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_entered"]

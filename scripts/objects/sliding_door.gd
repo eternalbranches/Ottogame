@@ -30,8 +30,8 @@ func _on_Area2D_body_exited(_body):
 		$AnimationPlayer.play("Close")
 		
 		
-func _process(delta):
-	if close == false:
-		$Label.text = "close"
-	else:
-		$Label.text = "open"
+#func _process(_delta):
+#	if close == false:
+#		$Label.text = "close"
+#	else:
+#		$Label.text = "open"

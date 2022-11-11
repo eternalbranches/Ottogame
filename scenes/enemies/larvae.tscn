@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/characters/larvae_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemies/larvae.gd" type="Script" id=2]
@@ -9,97 +9,9 @@ shader = ExtResource( 3 )
 shader_param/flash_color = Color( 1, 1, 1, 1 )
 shader_param/flash_modifier = 0.0
 
-[sub_resource type="Animation" id=25]
-resource_name = "Ceiling_Climb_L"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 19, 20 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -18.4615 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:rotation_degrees")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite:flip_v")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Sprite:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -9.23077, -16.9231 ) ]
-}
-
 [sub_resource type="Animation" id=26]
-resource_name = "Ceiling_Climb_R"
-length = 0.2
+resource_name = "Ceiling_Climb_L"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -107,7 +19,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19, 20 ]
@@ -185,6 +97,94 @@ tracks/6/keys = {
 "values": [ Vector2( 9.23077, -16.9231 ) ]
 }
 
+[sub_resource type="Animation" id=25]
+resource_name = "Ceiling_Climb_R"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -4.76837e-07, -32.3077 ), Vector2( -6.92308, -25.3846 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.0, 90.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 180.0, 90.0, 90.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:flip_v")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, false, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -34.6154 ), Vector2( -9.23077, -30.7692 ), Vector2( -9.23077, -31.5385 ), Vector2( -9.23077, -25.3846 ) ]
+}
+
 [sub_resource type="Animation" id=21]
 resource_name = "Ceiling_Crawl_L"
 length = 0.5
@@ -223,7 +223,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -12.3077, -22.3077 ) ]
+"values": [ Vector2( -12.3077, -36.1538 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -235,7 +235,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 4.33681e-19, -18.4615 ) ]
+"values": [ Vector2( -4.76837e-07, -32.3077 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("CollisionShape2D:rotation_degrees")
@@ -295,7 +295,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -8.46154, -20 ) ]
+"values": [ Vector2( -11.5385, -34.6154 ) ]
 }
 tracks/9/type = "value"
 tracks/9/path = NodePath("Wallcheck:rotation_degrees")
@@ -319,7 +319,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 1.19209e-07, -20.7692 ) ]
+"values": [ Vector2( 0, -34.6154 ) ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -732,6 +732,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [ 6 ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9.53674e-07, -16.1538 ) ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "Death_L"
@@ -1088,7 +1100,7 @@ tracks/11/keys = {
 
 [sub_resource type="Animation" id=23]
 resource_name = "Wall_ClimbL_L"
-length = 0.3
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1096,7 +1108,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19, 20 ]
@@ -1224,7 +1236,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id=19]
 resource_name = "Wall_ClimbL_R"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1232,10 +1244,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19, 20 ]
+"values": [ 18, 19, 20, 18 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:flip_h")
@@ -1244,10 +1256,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true, false, true ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CollisionShape2D:position")
@@ -1256,10 +1268,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -25.3846 ) ]
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -6.92308, -25.3846 ), Vector2( 0, -18.4615 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
@@ -1268,10 +1280,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 90.0, 0.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:rotation_degrees")
@@ -1280,10 +1292,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1.03526 ),
+"update": 1,
+"values": [ 90.0, 0.0, 0.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite:flip_v")
@@ -1292,10 +1304,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ false, false, false ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite:position")
@@ -1304,15 +1316,15 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1.53846, -16.1538 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -9.23077, -25.3846 ), Vector2( -5.38462, -16.1538 ), Vector2( -6.15385, -16.1538 ), Vector2( 0, -16.1538 ) ]
 }
 
 [sub_resource type="Animation" id=20]
 resource_name = "Wall_ClimbR_L"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1320,7 +1332,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19, 20 ]
@@ -1400,7 +1412,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id=24]
 resource_name = "Wall_ClimbR_R"
-length = 0.3
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1408,10 +1420,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19, 20 ]
+"values": [ 18, 19, 20, 18 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:flip_h")
@@ -1420,10 +1432,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false, true, false ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CollisionShape2D:position")
@@ -1432,10 +1444,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -9.53674e-07, -25.3846 ) ]
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7.69231, -25.3846 ), Vector2( -4.76837e-07, -32.3077 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
@@ -1444,10 +1456,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 90.0, 0.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:rotation_degrees")
@@ -1456,10 +1468,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 90.0, 0.0, 0.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite:flip_v")
@@ -1468,10 +1480,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, true, true ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite:position")
@@ -1480,10 +1492,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -1.53846, -34.6154 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 10, -25.3846 ), Vector2( 6.15385, -34.6154 ), Vector2( 6.92308, -34.6154 ), Vector2( -9.53674e-07, -34.6154 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Floorcheck:rotation_degrees")
@@ -1536,7 +1548,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id=10]
 resource_name = "Wall_Climb_L"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1544,7 +1556,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 19, 20 ]
@@ -1624,7 +1636,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id=14]
 resource_name = "Wall_Climb_R"
-length = 0.2
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1632,10 +1644,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 19, 20 ]
+"values": [ 18, 19, 20, 21 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:flip_h")
@@ -1656,10 +1668,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, -25.3846 ) ]
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -18.462 ), Vector2( 7.69231, -25.3846 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
@@ -1668,10 +1680,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 90.0 ]
+"values": [ 0.0, 90.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:rotation_degrees")
@@ -1680,10 +1692,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 90.0 ]
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0.0, 90.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Sprite:flip_v")
@@ -1692,10 +1704,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ false, true ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Sprite:position")
@@ -1704,10 +1716,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 2.30769, -20 ) ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -16.1538 ), Vector2( 10, -20 ), Vector2( 10, -19.2308 ), Vector2( 10, -24.6154 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("Wallcheck:position")
@@ -1796,7 +1808,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.84616, -13.0769 ) ]
+"values": [ Vector2( -10.7692, -13.0769 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:rotation_degrees")
@@ -1832,7 +1844,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -25.3846 ) ]
+"values": [ Vector2( -6.92308, -25.3846 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Floorcheck:rotation_degrees")
@@ -1868,7 +1880,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3.07692, -16.9231 ) ]
+"values": [ Vector2( -8.46154, -13.0769 ) ]
 }
 tracks/9/type = "value"
 tracks/9/path = NodePath("Wallcheck:rotation_degrees")
@@ -1892,7 +1904,7 @@ tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -2.30769, -25.3846 ) ]
+"values": [ Vector2( -9.23077, -25.3846 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -2207,7 +2219,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 3.84615, -37.6923 ) ]
+"values": [ Vector2( 11.5385, -37.6923 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite:rotation_degrees")
@@ -2243,7 +2255,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, -25.3846 ) ]
+"values": [ Vector2( 7.69231, -25.3846 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("Floorcheck:rotation_degrees")
@@ -2279,7 +2291,7 @@ tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 3.07692, -33.8462 ) ]
+"values": [ Vector2( 10, -37.6923 ) ]
 }
 tracks/9/type = "value"
 tracks/9/path = NodePath("Wallcheck:rotation_degrees")
@@ -2303,11 +2315,14 @@ tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2.30769, -25.3846 ) ]
+"values": [ Vector2( 10, -25.3846 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12.3077, 5.42308 )
+extents = Vector2( 12.2115, 5.28846 )
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 10, 3.07692 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 44.5, 81.5 )
@@ -2326,8 +2341,8 @@ hframes = 6
 vframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Ceiling_Climb_L = SubResource( 25 )
-anims/Ceiling_Climb_R = SubResource( 26 )
+anims/Ceiling_Climb_L = SubResource( 26 )
+anims/Ceiling_Climb_R = SubResource( 25 )
 anims/Ceiling_Crawl_L = SubResource( 21 )
 anims/Ceiling_Crawl_R = SubResource( 22 )
 anims/Crawl_L = SubResource( 1 )
@@ -2352,6 +2367,14 @@ anims/Wall_Crawl_UP_R = SubResource( 12 )
 position = Vector2( 0.769234, -26.1538 )
 rotation = 1.5708
 shape = SubResource( 6 )
+
+[node name="Hurtbox" type="Area2D" parent="CollisionShape2D"]
+collision_layer = 0
+collision_mask = 262
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Hurtbox"]
+position = Vector2( -2.28882e-05, 4.1008e-05 )
+shape = SubResource( 27 )
 
 [node name="Detect" type="Area2D" parent="." groups=["Enemy", "Insect", "Mutant"]]
 collision_layer = 0
@@ -2390,6 +2413,7 @@ margin_right = -23.0769
 margin_bottom = -12.9231
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="CollisionShape2D/Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Detect" to="." method="_on_Detect_body_entered"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
 [connection signal="timeout" from="Wall" to="." method="_on_Wall_timeout"]

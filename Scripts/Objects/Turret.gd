@@ -139,7 +139,7 @@ func _on_ChangeState_timeout():
 func _on_ShootCD_timeout():
 	can_shoot = true
 	
-func on_hit(damage, _origin, _enemypos, _direction_hit):
+func on_hit(damage, _origin, _enemypos, _direction_hit, _knockback):
 	if state != "death":
 		current_hp -= damage
 	if current_hp <= 0:

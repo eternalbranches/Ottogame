@@ -32,6 +32,8 @@ var can_walk_E := false
 var can_walk_W := false
 var random_walk_x : float
 var jumped := false
+var invulnerable := false
+var tail_knockback := Vector2(300,300)
 
 var rng = RandomNumberGenerator.new()
 
@@ -253,27 +255,26 @@ func _physics_process(delta) -> void:
 			if $Idle_Walk.is_stopped():
 				$Idle_Walk.start()
 			
-func on_hit(damage, _origin, enemy_pos) -> void:
-#	print("hit", damage)
-	if state != "death":
+func on_hit(damage : float, _origin : String, enemy_pos : Vector2, knockback : Vector2) -> void:
+	if state != "death" or invulnerable == false:
 		current_hp -= damage
-		flash()
-			
-	#if position.x < enemy_posx:
-	#	velocity.x += 200
-	#else:
-	#	velocity.x -= 200
-	#velocity.y -= 200
-	#state = "knockback"
+	if position.x < enemy_pos.x:
+		velocity.x = knockback.x
+	else:
+		velocity.x = -knockback.x
+	if position.y < enemy_pos.x:
+		velocity.y = knockback.y
+	else:
+		velocity.y = -knockback.y
+	if current_hp <= 0:
+		on_death()
+	flash()
 	if investigate_pos == Vector2(0, 0):
 		investigate_pos = Vector2(enemy_pos.x, 0)
 		#current_direction = direction_hit
 		#investigate(direction_hit)
 	alert = true
 	change_state("alert")
-	
-	if current_hp <= 0:
-			on_death()
 		
 func on_death() -> void:
 	change_state("death")
@@ -399,7 +400,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_Tailswipe_body_entered(body):
 	if body.is_in_group("Dog") == false:
-		body.on_hit(tail_damage, "dog", get_global_position())
+		body.on_hit(tail_damage, "dog", get_global_position(), tail_knockback)
 		
 
 func play_sfx(sfx : String) -> void:

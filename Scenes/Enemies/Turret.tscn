@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/objects/turret.gd" type="Script" id=1]
 [ext_resource path="res://assets/objects/turretdiamondsphere_sheet.png" type="Texture" id=2]
-[ext_resource path="res://assets/soundtrack/sfx/Turret/Turret_Activate.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/soundtrack/sfx/turret/turret_activate.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/objects/turrettower.png" type="Texture" id=4]
 [ext_resource path="res://assets/effects/background.png" type="Texture" id=5]
 [ext_resource path="res://assets/effects/spotlight_7.png" type="Texture" id=6]
