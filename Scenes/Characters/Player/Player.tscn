@@ -1413,15 +1413,14 @@ texture = ExtResource( 8 )
 [node name="ActivateEnemies" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 4
+collision_mask = 260
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateEnemies"]
 shape = SubResource( 104 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 260
-monitorable = false
+collision_mask = 261
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -16.9358, -10.2616 )
@@ -1440,6 +1439,8 @@ process_material = SubResource( 153 )
 [connection signal="timeout" from="Invincible_Timer" to="." method="_on_Invincible_Timer_timeout"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_Shield2_body_entered"]
 [connection signal="timeout" from="Shield/Selfdestruct" to="Shield" method="_on_Selfdestruct_timeout"]
+[connection signal="area_entered" from="ActivateEnemies" to="." method="_on_ActivateEnemies_area_entered"]
+[connection signal="area_exited" from="ActivateEnemies" to="." method="_on_ActivateEnemies_area_exited"]
 [connection signal="body_entered" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_entered"]
 [connection signal="body_exited" from="ActivateEnemies" to="." method="_on_ActivateEnemies_body_exited"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

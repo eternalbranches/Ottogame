@@ -801,11 +801,19 @@ func _on_ShieldTimer_timeout():
 func _on_ActivateEnemies_body_entered(body):
 	body.player_enters_range(true)
 
-
 func _on_ActivateEnemies_body_exited(body):
 	body.player_enters_range(false)
 
+func _on_ActivateEnemies_area_entered(area):
+	if area.is_in_group("Paused"):
+		print(area)
+		area.player_enters_range(true)
 
+func _on_ActivateEnemies_area_exited(area):
+	if area.is_in_group("Paused"):
+		area.player_enters_range(false)
+	
+	
 func _on_Dash_Timer_timeout():
 	dash_side = false
 	dash_up = false
@@ -816,7 +824,9 @@ func _on_Hitbox_area_entered(area):
 	print(area)
 	if area.is_in_group("Enemy"):
 		area.on_hit(sword_damage)
-		
+	elif area.is_in_group("Destructable"):
+		area.on_hit(2)
+
 func attack_finished()-> void:
 	change_state("idle")
 
@@ -825,7 +835,12 @@ func _on_Hitbox_body_entered(body):
 	print(body)
 	if body.is_in_group("Enemy"):
 		body.on_hit(sword_damage, "player", get_global_position(), knockback_sword)
+	elif body.is_in_group("Destructable"):
+		body.on_hit(2)
 
 
 func _on_Invincible_Timer_timeout():
 	pass # Replace with function body.
+
+
+

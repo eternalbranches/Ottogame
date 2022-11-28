@@ -16,6 +16,7 @@ var invulnerable := false
 
 func _ready() -> void:
 	$Label.text = state
+	$AnimationPlayer.play("Idle_"+current_direction)
 	
 func _physics_process(delta : float) -> void:
 	state_manager(delta)
@@ -150,6 +151,7 @@ func change_state(new_state : String) -> void:
 	#print( state, new_state)
 	if state != "death":
 		state = new_state
+		$CollisionShape2D/Hurtbox.state = new_state
 		
 func on_hit(damage : float, _origin : String, enemy_pos : Vector2, knockback : Vector2) -> void:
 	if state != "death" or invulnerable == false:
@@ -172,7 +174,7 @@ func on_death() -> void:
 	dead = true
 	set_collision_layer_bit(2, 0)
 	set_collision_mask_bit(1,0)
-	
+	$CollisionShape2D/Hurtbox.state = "death"
 	$AnimationPlayer.play("Death_" + current_direction)
 	#$Floor.stop()
 	
@@ -187,14 +189,17 @@ func _on_FlashTimer_timeout() -> void:
 
 func _on_Detect_body_entered(body):
 	if active == true:
+		print(body, "active")
 		if body.is_in_group("Insect") == false:
+			print(state)
 			if state == "idle":
 				$AnimationPlayer.play("Hatch_" + current_direction)
+				print("hatch")
 				#$Floor.start()
 			
-func player_enters_range(activate : bool) -> void:
-	if activate == true:
-		active = true
+			
+
+	
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
@@ -300,4 +305,5 @@ func _on_Wall_timeout():
 
 func _on_Hurtbox_body_entered(body):
 	if body.is_in_group("Insect") == false:
-		body.on_hit(damage, "larvae", get_global_position(), knockback)
+		if body.is_in_group("Enemy") or body.is_in_group("Player"):
+			body.on_hit(damage, "larvae", get_global_position(), knockback)

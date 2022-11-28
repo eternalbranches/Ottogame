@@ -54,11 +54,22 @@ func _on_Area2D_body_entered(body):
 	$Light2D.enabled = false
 	dead = true
 	
-
-
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("Enemy"):
+		area.on_hit(damage, origin, get_global_position(), knockback)
+		
+		get_node("AudioStreamPlayer2D").stream = SFX_Impact
+		$AudioStreamPlayer2D.play()
+		get_node("Area2D/CollisionShape2D").set_deferred("disabled", true)
+		self.hide()
+		$Light2D.enabled = false
+		dead = true
 func _on_Smoketrail_dead():
 	dead = true
 
 
 func _on_DestructTimer_timeout():
 	queue_free()
+
+
+

@@ -316,13 +316,13 @@ func change_state(new_state, _caller) -> void:
 			$Wallcheck_W.enabled = true
 			
 			
-func player_enters_range(in_range) -> void:
+func player_enters_range(in_range : bool) -> void:
 	if in_range == true:
 		player_in_range = true
-		$SightTimer.set_wait_time(0.3)
+		#$SightTimer.set_wait_time(0.3)
 	else:
 		player_in_range = false
-		$SightTimer.set_wait_time(10)
+		#$SightTimer.set_wait_time(10)
 		
 
 func floorcheck() -> void:
@@ -360,15 +360,21 @@ func new_random_position() -> void:
 	
 
 func sightcheck():
+#	if get_node_or_null(get_path_to(target)):
 	if target.state == "death":
 		target = null
 		return
+	print(target)
 	var space_state = get_world_2d().direct_space_state
-	var sight_check = space_state.intersect_ray(position, target.position, [self], collision_mask)
+	var sight_check = space_state.intersect_ray(position, target.get_global_position(), [self], collision_mask, true, true)
+	#$Line2D.add_point(position)
+	#$Line2D.add_point(target.get_global_position())
 	if sight_check:
+		print(sight_check.collider)
 		if sight_check.collider != target:
 			target = null
-		
+	#intersect_ray(from: Vector2, to: Vector2, exclude: Array = [  ], collision_layer: int = 0x7FFFFFFF, collide_with_bodies: bool = true, collide_with_areas: bool = false)
+
 
 func _on_JumpCD_timeout() -> void:
 	can_jump = true
@@ -377,8 +383,9 @@ func _on_JumpCD_timeout() -> void:
 func _on_Vision_body_entered(body):
 	if target == null and body.is_in_group("Guard") == false:
 		target = body
-		#print(target)
-
+func _on_Vision_area_entered(area):
+	if target == null and area.is_in_group("Guard") == false:
+		target = area
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
@@ -391,10 +398,11 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			$AnimationPlayer.play("Shoot_"+current_direction)
 		"Shoot_E" , "Shoot_W":
 			if ammo > 0:
-				if target.get_global_position().x > get_global_position().x:
-					current_direction = "E"
-				else:
-					current_direction = "W"
+				if target != null:
+					if target.get_global_position().x > get_global_position().x:
+						current_direction = "E"
+					else:
+						current_direction = "W"
 				$AnimationPlayer.play("Shoot_" +current_direction)
 			elif state == "shoot":
 				change_state("alert", "create_bullet")
@@ -410,3 +418,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 #		if state == "shoot":
 #			change_state("alert", "create_bullet")
 #			ammo = 3
+
+
+

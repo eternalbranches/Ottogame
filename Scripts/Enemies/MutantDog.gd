@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var state := "idle"
-var max_hp := 50
-var current_hp := 50
+var max_hp := 100
+var current_hp := 100
 var current_direction := "W"
 var spawn_position := 5.0
 var velocity := Vector2.ZERO

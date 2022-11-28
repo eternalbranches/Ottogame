@@ -558,7 +558,7 @@ start_node = "Idle_W"
 extents = Vector2( 9.45, 20.085 )
 
 [sub_resource type="RectangleShape2D" id=56]
-extents = Vector2( 128, 36.5 )
+extents = Vector2( 128, 38 )
 
 [node name="NewGuard" type="KinematicBody2D" groups=["Can_Hear", "Enemy", "Guard"]]
 collision_layer = 256
@@ -676,6 +676,8 @@ monitorable = false
 position = Vector2( -139, -13.5 )
 shape = SubResource( 56 )
 
+[node name="Line2D" type="Line2D" parent="."]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="ShootCD" to="." method="_on_ShootCD_timeout"]
 [connection signal="timeout" from="ChangeState" to="." method="_on_ChangeState_timeout"]
@@ -684,4 +686,5 @@ shape = SubResource( 56 )
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FashTimer_timeout"]
 [connection signal="timeout" from="JumpCD" to="." method="_on_JumpCD_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="area_entered" from="Vision" to="." method="_on_Vision_area_entered"]
 [connection signal="body_entered" from="Vision" to="." method="_on_Vision_body_entered"]
